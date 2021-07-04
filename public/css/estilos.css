@@ -1,0 +1,16 @@
+  .tamanoModal{
+
+       width:130%;
+      /* height: 70%;*/
+
+     }
+
+  .switche{
+    background: #8a8fa1;
+    border-radius: 1000px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    outline: none;
+}
