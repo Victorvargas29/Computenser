@@ -1,30 +1,16 @@
 <html>
 
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
+   
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
                 <div class="ml-auto text-right">
-                    <!--
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Library</li>
-                        </ol>
-                    </nav>
-                    -->
+                    
                 </div>
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
+    
     <div class="container-fluid">
         <h4>Presentacion de los productos</h4>
     <div class="container">
@@ -93,13 +79,7 @@
 </div>  
 </div>  <!-- container-fluid-->
       
-    <!-- jQuery, Popper.js, Bootstrap JS -->
-    <!-- <script src="jquery/jquery-3.3.1.min.js"></script>
-    <script src="popper/popper.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-      
-    <datatables JS 
-    <script type="text/javascript" src="datatables/datatables.min.js"></script>     -->
+    
          <script type="text/javascript" src="js/presentacionP.js"></script> 
   
 </html>
