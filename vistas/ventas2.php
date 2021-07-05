@@ -191,9 +191,9 @@ $cli = $clientes->get_Cliente();
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="detalles" class="table table-striped">
+              <table id="detalles" class="table table-striped table-condensed table-bordered nowrap">
                 <thead>
-                 <tr class="bg-success">
+                 <tr>
                   
                   <th class="all">Item</th>
                   <th class="all text-center" width="35%">Concepto o Descripcion</th>

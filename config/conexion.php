@@ -25,7 +25,7 @@ session_start();
 		}
 		public function ruta(){
 
-			return "http://proyecto_pv1-3.test/";
+			return "http://computenser.test/computenser/";
 		}
 	}//cierre class conectar
  ?>

@@ -4,18 +4,47 @@
   require_once("../config/conexion.php");
 
   //llamo al modelo Venta
-  require_once("../modelos/Ventas.php");
+  require_once("../modelos/ventas.php");
 
-  $ventas = new Ventas();
+  $venta = new Ventas();
 
  
  
 
   switch($_GET["op"]){
 
+	case 'listar':
+
+		$datos = $venta->get_venta();
+			$data = array();
+			foreach ($datos as $row) {
+				$sub_array = array();
+
+				$sub_array[] = $row["1"];
+				 $sub_array[] = $row["idfactura"];
+				 $sub_array[] = $row["idServicio"];
+				 $sub_array[] = $row["precio"];
+				 $sub_array[] = $row["tasa"];
+
+				
+
+			$sub_array[] = '<button type="button" onClick="eliminar_venta('.$row["cedula"].');"  id="'.$row["cedula"].'" class="btn btn-danger btn-md" title="Eliminar venta"><i class="fas fa-trash-alt"></i></button>';
+
+				$data[]=$sub_array;
+			}
+			$results=array(
+				"sEcho"=>1,
+				"iTotalRecords"=>count($data),
+				"iTotalDisplayRecords"=>count($data),
+				"aaData"=>$data
+				);
+
+			echo json_encode($results);
+		break;
+
     case "buscar_ventas":
 
-     $datos=$ventas->get_ventas();
+     $datos=$ventas->get_venta();
 
      //Vamos a declarar un array
  	 $data= Array();
@@ -26,28 +55,13 @@
 
 				$est = '';
 				//$atrib = 'activo';
-				 $atrib = "btn btn-danger btn-md estado";
-				if($row["estado"] == 1){
-					$est = 'PAGADO';
-					$atrib = "btn btn-success btn-md estado";
-				}
-				else{
-					if($row["estado"] == 0){
-						$est = 'ANULADO';
-						//$atrib = '';
-					}	
-				}
-
-				
-
-				 $sub_array[] = '<button class="btn btn-warning detalle" id="'.$row["numero_venta"].'"  data-toggle="modal" data-target="#detalle_venta"><i class="fa fa-eye"></i></button>';
-	             $sub_array[] = date("d-m-Y",strtotime($row["fecha_venta"]));
-				 $sub_array[] = $row["numero_venta"];
-				 $sub_array[] = $row["cliente"];
-				 $sub_array[] = $row["cedula_cliente"];
-				 $sub_array[] = $row["vendedor"];
-				 $sub_array[] = $row["tipo_pago"];
-				 $sub_array[] = $row["moneda"]." ".$row["total"];
+					
+				 $sub_array[] = $row["1"];
+				 $sub_array[] = $row["idfactura"];
+				 $sub_array[] = $row["idServicio"];
+				 $sub_array[] = $row["precio"];
+				 $sub_array[] = $row["tasa"];
+				 
 
 				
            /*IMPORTANTE: poner \' cuando no sea numero, sino no imprime*/
@@ -68,10 +82,10 @@
 
      break;
 
-     case "ver_detalle_cliente_venta":
+     case "ver_detalle_venta_venta":
 
 
-   $datos= $ventas->get_detalle_cliente($_POST["numero_venta"]);	
+   $datos= $ventas->get_detalle_venta($_POST["numero_venta"]);	
 
             // si existe el proveedor entonces recorre el array
 	      if(is_array($datos)==true and count($datos)>0){
@@ -79,10 +93,10 @@
 				foreach($datos as $row)
 				{
 					
-					$output["cliente"] = $row["cliente"];
+					$output["venta"] = $row["venta"];
 					$output["numero_venta"] = $row["numero_venta"];
-					$output["cedula_cliente"] = $row["cedula_cliente"];
-					$output["direccion"] = $row["direccion_cliente"];
+					$output["cedula_venta"] = $row["cedula_venta"];
+					$output["direccion"] = $row["direccion_venta"];
 					$output["fecha_venta"] = date("d-m-Y", strtotime($row["fecha_venta"]));
 									
 				}
@@ -123,7 +137,7 @@
 
   	 case "ver_detalle_venta":
 
-  	   $datos= $ventas->get_detalle_ventas_cliente($_POST["numero_venta"]);	
+  	   $datos= $ventas->get_detalle_ventas_venta($_POST["numero_venta"]);	
 
 
   	 break;
@@ -255,8 +269,8 @@
          $sub_array[] = '<button class="btn btn-warning detalle" id="'.$row["numero_venta"].'"  data-toggle="modal" data-target="#detalle_venta"><i class="fa fa-eye"></i></button>';
                $sub_array[] = date("d-m-Y",strtotime($row["fecha_venta"]));
          $sub_array[] = $row["numero_venta"];
-         $sub_array[] = $row["cliente"];
-         $sub_array[] = $row["cedula_cliente"];
+         $sub_array[] = $row["venta"];
+         $sub_array[] = $row["cedula_venta"];
          $sub_array[] = $row["vendedor"];
          $sub_array[] = $row["tipo_pago"];
          $sub_array[] = $row["moneda"]." ".$row["total"];
@@ -313,8 +327,8 @@
       $sub_array[] = '<button class="btn btn-warning detalle" id="'.$row["numero_venta"].'"  data-toggle="modal" data-target="#detalle_venta"><i class="fa fa-eye"></i></button>';
          $sub_array[] = date("d-m-Y", strtotime($row["fecha_venta"]));
          $sub_array[] = $row["numero_venta"];
-         $sub_array[] = $row["cliente"];
-         $sub_array[] = $row["cedula_cliente"];
+         $sub_array[] = $row["venta"];
+         $sub_array[] = $row["cedula_venta"];
          $sub_array[] = $row["vendedor"];
          $sub_array[] = $row["tipo_pago"];
          $sub_array[] = $row["total"];
@@ -337,7 +351,11 @@
 
 
      break;
-
+	 case 'guardar':
+		
+            $venta->registrar_venta($idfactura,$idServicio,$precio,$tasa);
+			   	echo "se registro";
+      break;
 
 
 }
