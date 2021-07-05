@@ -112,18 +112,20 @@ function cargarlistaS(){
 			contentType: false,
 			processData: false,
 
-			success: function(datos){
+			success: function(data){
 
-				console.log(datos); //muestre los valores en la consola
+				console.log(data); //muestre los valores en la consola
 
 				$('#form_compra')[0].reset();
 				//$('#empleadaModal').modal('hide');
 				
-				$('#resultados_ajax').html(datos);
-				$('#detalles').DataTable().ajax.reload();
+				$('#resultados_ajax').html(data);
+			//	$('#detalles').DataTable().ajax.reload();
 				limpiar();
+				console.log(datos);
 			}
 		});
+		console.log("formData");
 
 }//fin guardar y editar
 function cargarlista(cedula){

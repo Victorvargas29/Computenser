@@ -21,17 +21,18 @@
    	    	return $resultado=$sql->fetchAll();
    	    }
 
-   	    public function registrar_venta($idfactura,$idServicio,$precio,$tasa){
+   	    public function registrar_venta($idFactura,$idServicio,$precio,$tasa){
 
              $conectar=parent::conectar();
              //parent::set_names();
              $sql="insert into detallesfacturatemporal values(null,?,?,?,?);";
              $sql=$conectar->prepare($sql);
-             $sql->bindValue(1, $_POST["idfactura"]); 
+             $sql->bindValue(1, $_POST["idFactura"]); 
              $sql->bindValue(2, $_POST["idServicio"]); 
              $sql->bindValue(3, $_POST["precio"]); 
              $sql->bindValue(4, $_POST["tasa"]); 
              $sql->execute();
+             echo "se registro";
             // print_r($_POST);
    	    }
 

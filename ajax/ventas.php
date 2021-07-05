@@ -6,8 +6,12 @@
   //llamo al modelo Venta
   require_once("../modelos/ventas.php");
 
-  $venta = new Ventas();
-
+	$venta = new Ventas();
+	$idFactura = isset($_POST["idFactura"]);
+	$idServicio = isset($_POST["idServicio "]);
+	$precio = isset($_POST["precio"]);
+	$tasa= isset($_POST["tasa"]);
+ 
  
  
 
@@ -20,9 +24,10 @@
 			foreach ($datos as $row) {
 				$sub_array = array();
 
-				$sub_array[] = $row["1"];
-				 $sub_array[] = $row["idfactura"];
+				$sub_array[] = $row["idFactura"];
+				 $sub_array[] = $row["idFactura"];
 				 $sub_array[] = $row["idServicio"];
+				 $sub_array[] = $row["precio"];
 				 $sub_array[] = $row["precio"];
 				 $sub_array[] = $row["tasa"];
 
@@ -57,7 +62,7 @@
 				//$atrib = 'activo';
 					
 				 $sub_array[] = $row["1"];
-				 $sub_array[] = $row["idfactura"];
+				 $sub_array[] = $row["idFactura"];
 				 $sub_array[] = $row["idServicio"];
 				 $sub_array[] = $row["precio"];
 				 $sub_array[] = $row["tasa"];
@@ -353,8 +358,8 @@
      break;
 	 case 'guardar':
 		
-            $venta->registrar_venta($idfactura,$idServicio,$precio,$tasa);
-			   	echo "se registro";
+            $venta->registrar_venta($idFactura,$idServicio,$precio,$tasa);
+			   	
       break;
 
 

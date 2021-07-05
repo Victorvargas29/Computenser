@@ -33,35 +33,7 @@ $cli = $clientes->get_Cliente();
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-   
- 
-    <!-- Content Header (Page header) -->
-    
-      <div class="row pb-1 pt-3">
-        <div class="col-lg-6">
-
-          <h1 class="col-lg-6 ml-3">
-          Facturación
-        </h1>
-
-        </div>
-        <div class="col-lg-3">
-          
-          
-          
-        </div>
-        <div class="col-lg-3">
-            <label>Tasa del dia</label>
-            <input type="text" name="tasa" id="tasa" placeholder="Tasa del dia" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
-            <br/>
-          
-          
-        </div>
-      </div>
-      
-   
-
-    <!-- Main content -->
+      <!-- Main content -->
     <section class="content">
 
     <div class="panel panel-default">
@@ -80,6 +52,33 @@ $cli = $clientes->get_Cliente();
     <section class="formulario-compra">
 
     <form class="form-horizontal" id="form_compra">
+    <div class="row pb-1 pt-3">
+        <div class="col-lg-6">
+
+          <h1 class="col-lg-6 ml-3">
+          Facturación
+        </h1>
+
+        </div>
+        <div class="col-lg-3">
+          
+        <div class="col-lg-3">
+            <label>N Control</label>
+            <input type="text" name="idFactura" id="idFactura" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
+            <br/>
+          
+          
+        </div>
+          
+        </div>
+        <div class="col-lg-3">
+            <label>Tasa del dia</label>
+            <input type="text" name="tasa" id="tasa" placeholder="Tasa del dia" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
+            <br/>
+          
+          
+        </div>
+      </div>
     
     <!--FILA CLIENTE - COMPROBANTE DE PAGO-->
      <div class="row pb-1 pt-3">

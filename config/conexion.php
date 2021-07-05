@@ -8,7 +8,7 @@ session_start();
 
 			try {
 
-				$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=mydb","root","");
+				$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=mydb","root","root");
 				return $conectar;
 
 			}catch (Exception $e) {
