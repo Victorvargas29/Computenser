@@ -12,45 +12,20 @@
 <html>
 
 
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
+    
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
                  <h4 class="page-title">Listado de Usuarios</h4>
                 <div class="ml-auto text-right">
-                    <!--
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Library</li>
-                        </ol>
-                    </nav>
-                    -->
+                   
                 </div>
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
+   
     <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-        <!--Contenido-->
-        <!-- Content Wrapper. Contains page content -->
-      <!--  <div class="content-wrapper">        
-         Main content 
-            <section class="content">    -->
-
-            <!-- resultados 
-                <div id="resultados_ajax">
-                </div>     -->
+                
                
 
                 <div class="row">
@@ -96,28 +71,9 @@
                         </div><!-- /.box -->
                     </div><!-- /.col -->
                 </div><!-- /.row -->
-        <!--    </section> /.content -->
-
-     <!--   </div> /.content-wrapper -->
-  <!--Fin-Contenido-->
-
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+      
         </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
+           
 <?php 
 //ventana modal usuario
     require_once("modal/modal-usuario.php");
@@ -129,11 +85,6 @@
 <!--
  <?php 
  
-  //  }//fin de la condicion de sesion
-  //  else{
-   //     header("Location:".Conexion::ruta()."vistas/index.php");
-    //    exit();
- //   }
-
+ 
 ?>
 -->
