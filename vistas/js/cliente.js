@@ -5,7 +5,7 @@ function init(){
 
 	listar();
 
-	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
+	
 	$("#cliente_form").on("submit", function(e){
 		guardaryeditar(e);
 	});
@@ -16,11 +16,7 @@ function init(){
 		$(".modal-header").css("background-color", "#0e9670");
 	});
 	
-/*
-	$("#btnGuardar").click(function(){
 
-	});
-*/
 }
 
 //funcion q limpia los campos del formulario
@@ -103,12 +99,9 @@ function mostrar(cedula){
 		data = JSON.parse(data);
 
 		$("#clienteModal").modal("show");
-		//document.getElementById("cedula").disabled = true;
-		//$("#cedula").
-		//$("#cedula").val(cedula);
+		
 		$("#nombre").val(data.nombre);  // $("#cedula") esto es el id del campo del formulario
-		   //data.nombre el nombre que se coloca en el lado derecho es
-		 //el que se coloco en el ajax en $output["nombre"]
+		   
 		$("#apellido").val(data.apellido);
 		$("#direccion").val(data.direccion);
 		$("#telefono").val(data.telefono);
