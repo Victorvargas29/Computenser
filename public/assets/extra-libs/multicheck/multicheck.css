@@ -61,3 +61,22 @@
 .check-1 {
   margin-top: 12px;
   margin-left: 14px; }
+
+header.topbar, thead, thead tr.bg-success{
+  background-color: #47535f !important;
+  color: #fff;
+}
+.btn-primary, .btn-success {
+  background-color: #47535f !important;
+  color: #fff;
+  border-color: #47535f !important;
+}
+.topbar .navbar-collapse[data-navbarbg=skin5], #main-wrapper .topbar[data-navbarbg=skin5] {
+  background: #47535f !important;
+}
+.navbar .navbar-header[data-logobg=skin5] {
+  background: #47535f !important;
+}
+#main-wrapper .left-sidebar[data-sidebarbg=skin5], #main-wrapper .left-sidebar[data-sidebarbg=skin5] ul {
+  background: #47535f !important;
+}
