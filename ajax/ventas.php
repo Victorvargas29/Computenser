@@ -24,7 +24,7 @@
 			foreach ($datos as $row) {
 				$sub_array = array();
 
-				$sub_array[] = $row["idFactura"];
+				 $sub_array[] = $row["idFactura"];
 				 $sub_array[] = $row["idFactura"];
 				 $sub_array[] = $row["idServicio"];
 				 $sub_array[] = $row["precio"];
