@@ -155,7 +155,7 @@ $cli = $clientes->get_Cliente();
                 <div class="col-lg-4">
                     <div class="">
                     <div class="btn-group text-center">
-                    <button id="btnAgregar" type="button" onClick="cargarlistaS()" class="btn btn-success" data-toggle="modal">Agregar</button>
+                    <button id="btnAgregar" type="button" onClick="cargarlistaS()" class="btn btn-primary" data-toggle="modal">Agregar</button>
                     </div>
                    <!--  <h4 class="text-center"><strong>Tipo de Pago</strong></h4>
                     <select name="tipo_pago" class="col-lg-offset-3 col-xs-offset-2" id="tipo_pago" class="select" maxlength="10" >
