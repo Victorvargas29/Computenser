@@ -51,6 +51,7 @@
                      			<th>Apellido</th>
                                 <th>Direccion</th>
                                 <th>Telefono</th>
+                                <th>Correo</th>
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
                             </tr>
@@ -94,6 +95,9 @@
 
                     <label class="col-form-label">Telefono:</label>
                     <input type="text" class="form-control" name="telefono" id="telefono">
+
+                    <label class="col-form-label">Correo:</label>
+                    <input type="text" class="form-control" name="correo" id="correo">
 
                     </div>         
                 </div>

@@ -16,12 +16,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/images/favicon.png">
-    <title>SPA VALESKA</title>
+    <link rel="icon" type="image/png" sizes="20x20" href="../public/assets/images/m.png">
+    <title>MERILARA</title>
     <!-- Custom CSS -->
     <link href="../public/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -103,14 +104,14 @@
                     <!-- Logo -->
                     <!-- ============================================================== -->
                     <a id="logo-home" class="navbar-brand" >
-                        <!-- Logo icon 
-                        <b class="logo-icon p-l-10">   -->
+                        <!-- Logo icon  -->
+                        <b class="logo-icon p-l-8">  
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon 
-                            <img src="../public/assets/images/logo-icon.png" alt="homepage" class="light-logo" /> -->
+                            <!-- Dark Logo icon-->
+                            <img src="../public/assets/images/logo-min.png" alt="homepage" class="light-logo" /> 
                            
-                     <!--   </b>
-                        End Logo icon -->
+                       </b> 
+                     <!--    End Logo icon -->
                          <!-- Logo text -->
                         <span class="logo-text">
                              <!-- dark Logo text -->
@@ -259,7 +260,7 @@
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../public/images/<?php echo $_SESSION["avatar"]?> " alt="user" class="rounded-circle" width="45" height="45">   <span class="hidden-xs"><?php echo $_SESSION["nombre"]
                             ?> </span></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item sidebar-link waves-effect waves-dark sidebar-link btn btn-primary" id="myprofile" onClick="mostrar_perfil('<?php echo $_SESSION["idUsuario"]?>')" data-toggle="modal" data-target="#perfilModal"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <a style="color: #fff;" class="dropdown-item sidebar-link waves-effect waves-dark sidebar-link btn btn-primary" id="myprofile" onClick="mostrar_perfil('<?php echo $_SESSION["idUsuario"]?>')" data-toggle="modal" data-target="#perfilModal"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
                                 <div class="dropdown-divider"></div>

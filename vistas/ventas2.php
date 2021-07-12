@@ -54,30 +54,25 @@ $cli = $clientes->get_Cliente();
     <form class="form-horizontal" id="form_compra">
     <div class="row pb-1 pt-3">
         <div class="col-lg-6">
-
           <h1 class="col-lg-6 ml-3">
           Facturación
-        </h1>
+          </h1>
+        </div>
+    </div>
 
-        </div>
-        <div class="col-lg-3">
-          
-        <div class="col-lg-3">
-            <label>N Control</label>
-            <input type="text" name="idFactura" id="idFactura" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
-            <br/>
-          
-          
-        </div>
-          
-        </div>
-        <div class="col-lg-3">
-            <label>Tasa del dia</label>
-            <input type="text" name="tasa" id="tasa" placeholder="Tasa del dia" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
-            <br/>
-          
-          
-        </div>
+      <div class="row pt-3 pb-3"> 
+          <div class="col-lg-1">
+              <label>N° Control</label>
+              <input type="text" name="idFactura" id="idFactura" required pattern = "[0-9]{0,15}" class="form-control"></input>
+              <br/>
+          </div>
+          <div class="col-lg-3">
+            <div class="float-right">
+                <label>Tasa del dia</label>
+                <input type="text" name="tasa" id="tasa" placeholder="Tasa del dia" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
+                <br/>
+              </div>
+          </div>
       </div>
     
     <!--FILA CLIENTE - COMPROBANTE DE PAGO-->

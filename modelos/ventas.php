@@ -30,7 +30,7 @@
              $sql->bindValue(1, $_POST["idFactura"]); 
              $sql->bindValue(2, $_POST["idServicio"]); 
              $sql->bindValue(3, $_POST["precio"]); 
-             $sql->bindValue(4, $_POST["tasa"]);
+             $sql->bindValue(4, $_POST["tasa"]);                   
              $sql->execute();
              echo "se registro";
             // print_r($_POST);

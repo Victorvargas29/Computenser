@@ -150,6 +150,7 @@ function cargarlista(cedula){
 			$("#direccion").val(data.direccion);
 
 			$("#telefono").val(data.telefono);
+			$("#correo").val(data.correo);
 			console.log($("#telefono").val(data.telefono));
 			//$("#email").val(data.email);
 			

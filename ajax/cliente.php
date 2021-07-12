@@ -9,6 +9,7 @@ require_once("../modelos/Clientes.php");
 	$apellido = isset($_POST["apellido"]);
   $direccion = isset($_POST["direccion"]);
 	$telefono = isset($_POST["telefono"]);
+  $correo = isset($_POST["correo"]);
 
    	switch ($_GET["op"]) {
 
@@ -18,14 +19,14 @@ require_once("../modelos/Clientes.php");
             
           if(is_array($datos)==true and count($datos)==0){
               
-            $cliente->registrar_cliente($cedula,$nombre,$apellido,$direccion,$telefono);
+            $cliente->registrar_cliente($cedula,$nombre,$apellido,$direccion,$telefono,$correo);
 			  
 			   	echo "se registro";
            
             }else{
 
              	echo "el cliente ya existe";
-              	$cliente->editar_cliente($cedula, $nombre, $apellido, $direccion,$telefono);
+              	$cliente->editar_cliente($cedula, $nombre, $apellido, $direccion,$telefono,$correo);
            		echo "se edito";
 
             }
@@ -44,6 +45,7 @@ require_once("../modelos/Clientes.php");
    					$output["apellido"] = $row["apellido"];
             $output["direccion"] = $row["direccion"];
    					$output["telefono"] = $row["telefono"];
+            $output["correo"] = $row["correo"];
    				}
    				echo json_encode($output);
    			}else{
@@ -81,7 +83,7 @@ require_once("../modelos/Clientes.php");
    					$sub_array[]=$row["apellido"];
             $sub_array[]=$row["direccion"];
    					$sub_array[]=$row["telefono"];
-
+            $sub_array[]=$row["correo"];
    					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["cedula"].');"  id="'.$row["cedula"].'" class="btn btn-warning btn-md update" title="Editar cliente"><i class="fas fa-edit"></i></button>';
 
 
@@ -141,6 +143,7 @@ require_once("../modelos/Clientes.php");
          
         $sub_array[] = $row["direccion"];
         $sub_array[] = $row["telefono"];
+        $sub_array[] = $row["correo"];
                 /* $sub_array[] = '<button type="button"  name="estado" id="'.$row["id_cliente"].'" class="'.$atrib.'">'.$est.'</button>';*/
 
 
@@ -176,7 +179,7 @@ case "buscar_cliente":
           $output["apellido"] = $row["apellido"];
           $output["direccion"] = $row["direccion"];
           $output["telefono"] = $row["telefono"];
-      
+          $output["correo"] = $row["correo"];
 
         //  $output["estado"] = $row["estado"];
           

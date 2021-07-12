@@ -3,7 +3,7 @@
 <div id="perfilModal" class="modal fade"> <!--El id sera el mismo q colocamos en el data-target del boton q llama al modal-->
     <div class="modal-dialog">
         <form method="post" id="perfil_form">
-            <div class="modal-content">
+            <div class="modal-content tamanoModal-perfil">
                 <div class="modal-header">
                     <h4 class="modal-title">Perfil de Usuario</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>

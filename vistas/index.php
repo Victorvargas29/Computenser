@@ -26,7 +26,7 @@ require_once("../config/conexion.php");
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/images/favicon.png">
-    <title>SPA VALESKA - Login</title>
+    <title>Computenser - Login</title>
     <!-- Custom CSS -->
     <link href="../public/dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -126,9 +126,9 @@ require_once("../config/conexion.php");
             <div class="auth-box bg-dark border-top border-secondary">
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
-                        <span class="db"><img width="200" height="200" src="../public/assets/images/logo.png" alt="logo" /></span>
-                    </div>
-                    <!-- Form -->
+                        <span class="db"><img src="../public/assets/images/logo.png" alt="logo" /></span>
+                    </div> 
+                    <!-- Form  class="float-center" -->
                     <form class="form-horizontal m-t-20" id="loginform" action="" method="post">
                         <div class="row p-b-30">
                             <div class="col-12">

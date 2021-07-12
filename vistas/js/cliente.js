@@ -27,7 +27,7 @@ function limpiar(){
 	$("#apellido").val("");
 	$("#direccion").val("");
 	$("#telefono").val("");
-
+	$("#correo").val("");
 }
 
 //funcion listar
@@ -105,6 +105,7 @@ function mostrar(cedula){
 		$("#apellido").val(data.apellido);
 		$("#direccion").val(data.direccion);
 		$("#telefono").val(data.telefono);
+		$("#correo").val(data.correo);	
 		$("#cedula").val(data.cedula);
 		//console.log($("#telefono").val(data.telefono));
 		$('.modal-title').text("Editar Cliente");
