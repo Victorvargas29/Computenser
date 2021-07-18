@@ -4,7 +4,7 @@ var tabla;
 //funcion q se ejecuta al inicio
 function init(){
 
-	listar();
+	//listar();
 
 	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
 /*	$("#form_compra").on("button", function(e){
@@ -18,69 +18,16 @@ function init(){
 	$("#btnGuardar").click(function(){
 
 	});
+
+
+
+$("form_compra").on("submit", function(){
+	cargarlistaS();
+
+});
 */
 }
-//funcion listar
-function listar(){
 
-	tabla=$('#detalles').dataTable({  //#usuario_data este es el id de la tabla
-		"aProcessing":true,//Activamos el procesamiento del datatables
-		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
-		
-		dom:'Bfrtilp',//Definimos los elementos del control de tabla
-		buttons:[
-	    	//Botón para PDF
-	    	{
-	        extend: 'pdfHtml5',
-	        //footer: true,
-	       	text:'<i class="fas fa-file-pdf"></i>',
-	        titleAttr: 'Exportar a PDF',
-	        //filename: 'Export_File_pdf',
-	        className: 'btn btn-danger'
-	      	}
-		],
-		"ajax":
-		{
-			url:'../ajax/ventas.php?op=listar',
-			type: "get",
-			datatype: "json",
-			error: function(e){
-				console.log(e.responseText);
-			}
-		},
-		"bDestroy":true,
-		"responsive":true,
-		"bInfo":true,
-		"iDisplayLength":10,//por cada 10 reg hace una paginacion
-		"order":[[0,"desc"]],//Ordenar(Columna, Orden)
-
-		"language":{
-			"sProcessing": "Procesando...",
-			"sLengthMenu": "Mostrar _MENU_ registro",
-			"sZeroRecords": "No se encontraron resultados",
-			"sEmptyTable": "Ningun dato disponible en esta tabla",
-			"sInfo": "Mostrando un total de _TOTAL_ registros",
-			"sInfoEmpty": "Mostrando un total de 0 registros",
-			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix": "",
-			"sSearch": "Buscar",
-			"sUrl": "",
-			"sInfoThousands": "",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate":{
-				"sFirst": "Primero",
-				"sLast": "Ultimo",
-				"sNext": "Siguiente",
-				"sPrevious": "Anterior"
-			},
-			"oAria":{
-				"sSortAscending": ": Activar para ordenar la columna",
-				"sSortDescending": ": Activar para ordenar la columna"
-			}
-		}//cierra language
-
-	}).DataTable();
-}//fin funcion listar
 /*=============================================
 AGREGANDO PRODUCTOS A LA VENTA DESDE LA TABLA
 =============================================*/
@@ -109,23 +56,24 @@ function cargarlistaS(){
 			url: "../ajax/ventas.php?op=guardar",
 			type: "POST",
 			data: formData,
+			cache:false,
 			contentType: false,
 			processData: false,
 
-			success: function(data){
+			success: function(datos){
 
-				console.log(data); //muestre los valores en la consola
+			///	console.log(formData); //muestre los valores en la consola
+				console.log(datos); //muestre los valores en la consola
+				//$('#detalles').DataTable().ajax.reload();
 
 				$('#form_compra')[0].reset();
-				//$('#empleadaModal').modal('hide');
 				
-				$('#resultados_ajax').html(data);
-			//	$('#detalles').DataTable().ajax.reload();
-				limpiar();
-				console.log(datos);
+			//	limpiar();
+				///console.log(datos); 
+				  
 			}
 		});
-		console.log("formData");
+		//console.log("formData");
 
 }//fin guardar y editar
 function cargarlista(cedula){
@@ -207,7 +155,12 @@ function cargarServicio(idServicio){
 	
 
 }
+function listar(){
 
+
+
+
+}
 
 
 
