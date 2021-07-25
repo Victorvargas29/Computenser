@@ -6,8 +6,8 @@ require_once("../modelos/ventas.php");
 require_once("../modelos/Empleadas.php");
 
 $empleadas = new Empleadas();
-$venta = new Ventas();
-$venMax= $venta->Max();
+//$venta = new Ventas();
+///$venMax= $venta->Max();
 
 $emp = $empleadas->get_empleada();
 
@@ -56,17 +56,9 @@ $cli = $clientes->get_Cliente();
             
             <div class="col-lg-2">
               <label>N° Control</label>
-              <?php
-                        // $num=0;
-                        for($i=0; $i<sizeof($venMax);$i++){
-                          // $num++;
-                          ?>
-                           
-                      
-                          <?php
-                        }
-                      ?>
-              <input type="text" name="idFactura" id="idFactura" disabled value="<?php  echo intval($venMax)+1?>" required pattern = "[0-9]{0,15}" class="form-control"></input>
+             
+                       
+              <input type="text" name="idFactura" id="idFactura" disabled value="<?php  //echo intval($venMax)+1?>" required pattern = "[0-9]{0,15}" class="form-control"></input>
               <br/>
             </div>
             
@@ -254,7 +246,7 @@ $cli = $clientes->get_Cliente();
                     </tbody>
                   </table>
                   <div class="boton_registrar">
-                    <button type="button" onClick="" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Venta</button>
+                    <button type="button" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Venta</button>
                   </div>
                 </div> <!-- /.box-body -->
               </div> <!-- /.box -->            

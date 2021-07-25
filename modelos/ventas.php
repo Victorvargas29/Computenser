@@ -92,6 +92,19 @@
           return $resultado=$sql->fetchAll();
 
         }
+        public function venta(){
+         
+          $conectar=parent::conectar();
+   	    	
+
+          $sql="select * from factura"; 
+
+          $sql=$conectar->prepare($sql);
+          $sql->execute();
+
+          return $resultado=$sql->fetchAll();
+
+        }
 
         public function eliminar_item($idTemporal){
           $conectar=parent::conectar();
@@ -109,13 +122,29 @@
           $conectar=parent::conectar();
         //	parent::set_names();
 
-          $sql="select MAX(idFactura) FROM factura";
+          $sql="select idFactura from factura order by idFactura asc";
 
           $sql=$conectar->prepare($sql);
           $sql->execute();
+         // echo intval($sql);
 
-          return $resultado=$sql->fetch();
+          return $resultado=$sql->fetchAll();
         }
+
+        public function detallesDetalles(){
+
+          $conectar=parent::conectar();
+        //	parent::set_names();
+
+          $sql="insert into detallefactura (idFactura, idServicio,precio) select idFactura, idServicio,precioTemp from detallesfacturatemporal";
+
+          $sql=$conectar->prepare($sql);
+          $sql->execute();
+         // echo intval($sql);
+
+          return $resultado=$sql->fetchAll();
+        }
+        
 
 
 

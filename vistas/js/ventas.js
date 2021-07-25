@@ -1,11 +1,12 @@
 
 
-var tabla;
+var tablfa;
+
 //funcion q se ejecuta al inicio
 function init(){
 	tasa_dia();
 	listar();
-
+	idfactura();
 	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
 /*	$("#form_compra").on("button", function(e){
 		cargarlistaS(e);
@@ -209,6 +210,23 @@ function cargarServicio(idServicio){
 	////var seltex= sel.options[getElementIndex("idServicio").text]
 	///$("nombre_ser").val($seltex);
 }
+function idfactura(){
+	var idFf=1;
+	$.post("../ajax/ventas.php?op=mostrar", function(data, status)
+	{	idFf=1;
+		console.log(data);			
+		data =JSON.parse(data);	 
+		idF =data.idFactura;
+		 $("#idFactura").val(idF);
+		// console.log(idF);
+		//// $("#nombre_ser").val(data.nombre);
+	});
+	///$("#idFactura").val($("#idFactura").val()+1);
+	//var sel =document.getElementById("idServicio");
+////var seltex= sel.options[getElementIndex("idServicio").text]
+///$("nombre_ser").val($seltex);
+}
+
 function eliminar_item(iddetallesFT){
 	
 	$.ajax({

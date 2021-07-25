@@ -53,6 +53,22 @@
           );
         echo json_encode($results);
     break;
+    case 'mostrar':
+   			
+      $datos = $venta->Max();
+      
+      if(is_array($datos)==true and count($datos)>0){
+        foreach ($datos as $row) {
+
+        //	$output["idDepartamento"] = $row["idDepartamento"];
+          $output["idFactura"] = $row["idFactura"]+1;
+        }
+        echo json_encode($output);
+      }else{
+        $errors[]="El Servicio no existe";
+      }
+
+      break;
 
     case "eliminar_item":
       $venta->eliminar_item($_POST["iddetallesFT"]);   
