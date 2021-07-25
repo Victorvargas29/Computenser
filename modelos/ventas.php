@@ -21,15 +21,18 @@
    	    	return $resultado=$sql->fetchAll();
    	    }
 
-   	    public function registrar_venta($idFactura,$idServicio,$precio){
+   	    public function registrar_venta($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$cantidad){
 
              $conectar=parent::conectar();
              //parent::set_names();
-             $sql="insert into detallesfacturatemporal values(null,?,?,?);";
+             $sql="insert into detallesfacturatemporal values(null,?,?,?,?,?,?);";
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1, $_POST["idFactura"]); 
              $sql->bindValue(2, $_POST["idServicio"]); 
-             $sql->bindValue(3, $_POST["precio"]); 
+             $sql->bindValue(3, $_POST["nombre_ser"]);
+             $sql->bindValue(4, $_POST["precio"]);
+             $sql->bindValue(5, $_POST["tasa"]);
+             $sql->bindValue(6, $_POST["cantidad"]); 
             // $sql->bindValue(4, $_POST["tasa"]);                   
              $sql->execute();
              //echo "se registro";
@@ -75,6 +78,48 @@
           $sql->execute();
           return $resultado=$sql->fetch();
         }
+
+        public function detalles_venta(){
+         
+          $conectar=parent::conectar();
+   	    	
+
+          $sql="select * from detallesfacturatemporal"; 
+
+          $sql=$conectar->prepare($sql);
+          $sql->execute();
+
+          return $resultado=$sql->fetchAll();
+
+        }
+
+        public function eliminar_item($idTemporal){
+          $conectar=parent::conectar();
+
+          $sql="delete from detallesfacturatemporal where iddetallesFT=?";
+
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$idTemporal);
+          $sql->execute();
+
+          return $resultado=$sql->fetch();
+        }
+        public function Max(){
+
+          $conectar=parent::conectar();
+        //	parent::set_names();
+
+          $sql="select MAX(idFactura) FROM factura";
+
+          $sql=$conectar->prepare($sql);
+          $sql->execute();
+
+          return $resultado=$sql->fetch();
+        }
+
+
+
+
    }
    
 ?>

@@ -76,6 +76,19 @@
 	        return $resultado=$sql->fetch();
         }
 
+
+        public function get_nombre_servicio_por_id($idServicio){
+
+        	$conectar=parent::conectar();
+          //parent::set_names();
+          $sql="select nombre from servicio where idServicio=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $idServicio);
+          ;
+          $sql->execute();
+          return $resultado=$sql->fetchAll();
+        }
+
 	}// fin class Categoria
 
 
