@@ -38,6 +38,34 @@
              //echo "se registro";
             // print_r($_POST);
    	    }
+         public function registrar($cedula){
+
+          $conectar=parent::conectar();
+          //parent::set_names();
+          $sql="insert into factura values(null,now(),?);";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $_POST["cedula"]); 
+         // $sql->bindValue(2, $_POST["idServicio"]); 
+          ; 
+         // $sql->bindValue(4, $_POST["tasa"]);                   
+          $sql->execute();
+          //echo detallesDetalles();
+          //eliminar_temporal();
+          echo "se registro";
+         // print_r($_POST);
+      }
+
+          
+          public function eliminar_temporal(){
+            $conectar=parent::conectar();
+
+          $sql="delete from detallesfacturatemporal";
+          $sql=$conectar->prepare($sql);
+          
+          $sql->execute();
+          return $resultado=$sql->fetch();
+
+          }
 
    	    public function editar_venta($cedula, $nombre, $apellido,$direccion,$telefono){
 

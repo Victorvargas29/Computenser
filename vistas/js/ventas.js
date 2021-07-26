@@ -218,6 +218,7 @@ function idfactura(){
 		data =JSON.parse(data);	 
 		idF =data.idFactura;
 		 $("#idFactura").val(idF);
+		 $("#idFacturas").val(idF);
 		// console.log(idF);
 		//// $("#nombre_ser").val(data.nombre);
 	});
@@ -238,6 +239,33 @@ function eliminar_item(iddetallesFT){
 			$("#detalles_ventas").DataTable().ajax.reload();
 		}
 	});
+}
+
+function registrar(){
+	//e.preventDefault(); //No se activará la acción predeterminada del evento
+	var formData = new FormData($("#form_compra")[0]);
+
+		$.ajax({
+			url: "../ajax/ventas.php?op=guardarVenta",
+			type: "POST",
+			data: formData,
+			contentType: false,
+			processData: false,
+
+			success: function(datos){
+
+				console.log(datos); //muestre los valores en la consola
+
+				$('#form_compra')[0].reset();
+				//$('#servicioModal').modal('hide');
+				$("#detalles_ventas").DataTable().ajax.reload();
+				idfactura();
+				//$('#resultados_ajax').html(datos);
+				//$('#servicio_data').DataTable().ajax.reload();
+				//limpiar();
+			}
+		});
+	
 }
 
 init();

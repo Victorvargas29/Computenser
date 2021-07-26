@@ -8,7 +8,7 @@
 
 	$venta = new Ventas();
   $servicio = new Servicio();
-
+  $cedula = isset($_POST["cedula"]);
 	$idFactura = isset($_POST["idFactura"]);
 	$idServicio = isset($_POST["idServicio "]);
 	$precio = isset($_POST["precio"]);
@@ -73,5 +73,24 @@
     case "eliminar_item":
       $venta->eliminar_item($_POST["iddetallesFT"]);   
     break;
+    case 'guardarVenta':
+  
+      
+        
+          
+             $venta->registrar($cedula);
+             $venta->detallesDetalles();
+             sleep(2);
+             $venta->eliminar_temporal();
+            
+             echo "se registro";
+             
+          
 
+           
+            
+          
+      
+         
+    break;
 }
