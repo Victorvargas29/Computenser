@@ -224,38 +224,59 @@ $cli = $clientes->get_Cliente();
                     <table class="table table-striped">
                       <thead>
                         <tr class="bg-success">
-                          <th class="col-lg-4">SUBTOTAL</th>           
-                          <th class="col-lg-4">I.V.A%</th>
-                          <th class="col-lg-4">TOTAL</th>     
+                        <th class="col-lg-3">Monedas</th>
+                          <th class="col-lg-3">SUBTOTAL</th>           
+                          <th class="col-lg-3">I.V.A%</th>
+                          <th class="col-lg-3">TOTAL</th>     
                         </tr>
                       </thead>
                       <tbody>
                       <?php
-                          $total=0;
+                          $total1=0;
+                          $totalBs=0;
+                          $iva=0;
+                          $ivaBs=0;
+                          $pagototal;
+                          $pagototalBS;
                           for($i=0; $i<sizeof($ven);$i++){
                             // $num++;
                             ?>
                             <?php
-                              $total= $total + $ven[$i]["precioTemp"];
-                                
-                                  // echo $num;
-                                    echo "• ";
-                                    echo $total;
+                              $total1= $total1 + ($ven[$i]["precioTemp"]*$ven[$i]["cantidad"]);
+                              $totalBs= $totalBs + (($ven[$i]["precioTemp"]*$ven[$i]["cantidad"])*$ven[$i]["cantidad"]);
+                                  
                                 ?>
                               </option>
                         
                             <?php
                           }
+                          $iva= $total1*0.16;
+                          $ivaBs=$totalBs*0.16;
+                          $pagototalBs=$ivaBs+$totalBs;
+                          $pagototal=$iva+$total1;
                         ?>
                         <tr class="bg-gray">
                           <!--<td></td>
                           <td></td>
                           <td></td>-->
-                          <td class="col-lg-4" value="$total"><h4 id="subtotal"> </h4><input type="hidden" name="subtotal_compra" id="subtotal_compra"></td>
-                          <td class="col-lg-4"><h4>16%</h4><input type="hidden"></td>
+                          <td class="col-lg-4"><h4 id="subtotal">Dolares $$</h4><input type="hidden" name="subtotal_compra" id="subtotal_compra"></td>
+                          <td class="col-lg-4"><h4 id="subtotal"><?php echo $total1;?>$</h4><input type="hidden" name="subtotal_compra" id="subtotal_compra"></td>
+                          <td class="col-lg-4"><h4><?php echo $iva;?>$</h4><input type="hidden"></td>
                           <!--<td></td>-->
                           <!--IMPORTANTE: hay que poner el name=total en el h4 para que lo pueda enviar, NO se envia si lo pones en el input hidden-->
-                          <td class="col-lg-4"><h4 id="total" name="total"> 0.00</h4><input type="hidden" name="total_compra" id="total_compra"></td>
+                          <td class="col-lg-4"><h4 id="total" name="total"> <?php echo $pagototal;?>$</h4><input type="hidden" name="total_compra" id="total_compra"></td>
+                          <!--<td></td>-->
+                        </tr>
+                        <tr class="bg-gray">
+                          <!--<td></td>
+                          <td></td>
+                          <td></td>-->
+                          <td class="col-lg-4"><h4 id="subtotal">Bolivares BsS</h4><input type="hidden" name="subtotal_compra" id="subtotal_compra"></td>
+                          <td class="col-lg-4"><h4 id="subtotal"><?php echo $totalBs;?>BsS</h4><input type="hidden" name="subtotal_compra" id="subtotal_compra"></td>
+                          <td class="col-lg-4"><h4><?php echo $ivaBs;?>BsS</h4><input type="hidden"></td>
+                          <!--<td></td>-->
+                          <!--IMPORTANTE: hay que poner el name=total en el h4 para que lo pueda enviar, NO se envia si lo pones en el input hidden-->
+                          <td class="col-lg-4"><h4 id="total" name="total"> <?php echo $pagototalBs;?>BsS</h4><input type="hidden" name="total_compra" id="total_compra"></td>
                           <!--<td></td>-->
                         </tr>
                         <tr>
