@@ -260,6 +260,7 @@ function registrar(){
 				//$('#servicioModal').modal('hide');
 				$("#detalles_ventas").DataTable().ajax.reload();
 				idfactura();
+				tasa_dia();
 				//$('#resultados_ajax').html(datos);
 				//$('#servicio_data').DataTable().ajax.reload();
 				//limpiar();
