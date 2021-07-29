@@ -7,6 +7,7 @@ function init(){
 	tasa_dia();
 	listar();
 	idfactura();
+	listarSubTortales();
 	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
 /*	$("#form_compra").on("button", function(e){
 		cargarlistaS(e);
@@ -120,6 +121,65 @@ function listar(){
 
 	}).DataTable();
 
+}function listarSubTortales(){
+	tabla=$('#sub').dataTable({ 
+		"aProcessing":true,//Activamos el procesamiento del datatables
+		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
+		
+		dom:'Bfrtilp',//Definimos los elementos del control de tabla
+		buttons:[
+	    	//Botón para PDF
+	    	{
+	        extend: 'pdfHtml5',
+	        //footer: true,
+	       	text:'<i class="fas fa-file-pdf"></i>',
+	        titleAttr: 'Exportar a PDF',
+	        //filename: 'Export_File_pdf',
+	        className: 'btn btn-warning'
+	      	}
+		],
+		"ajax":
+		{
+			url:'../ajax/ventas.php?op=listarSubtotales',
+			type: "get",
+			datatype: "json",
+			error: function(e){
+				console.log(e.responseText);
+			}
+		},
+		"bDestroy":true,
+		"responsive":true,
+		"bInfo":true,
+		"iDisplayLength":10,//por cada 10 reg hace una paginacion
+		"order":[[0,"desc"]],//Ordenar(Columna, Orden)
+
+		"language":{
+			"sProcessing": "Procesando...",
+			"sLengthMenu": "Mostrar _MENU_ registro",
+			"sZeroRecords": "No se encontraron resultados",
+			"sEmptyTable": "Ningun dato disponible en esta tabla",
+			"sInfo": "Mostrando un total de _TOTAL_ registros",
+			"sInfoEmpty": "Mostrando un total de 0 registros",
+			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix": "",
+			"sSearch": "Buscar",
+			"sUrl": "",
+			"sInfoThousands": "",
+			"sLoadingRecords": "Cargando...",
+			"oPaginate":{
+				"sFirst": "Primero",
+				"sLast": "Ultimo",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior"
+			},
+			"oAria":{
+				"sSortAscending": ": Activar para ordenar la columna",
+				"sSortDescending": ": Activar para ordenar la columna"
+			}
+		}//cierra language
+
+	}).DataTable();
+
 }
 function cargarlistaS(){
 
@@ -139,7 +199,8 @@ function cargarlistaS(){
 			///	console.log(formData); //muestre los valores en la consola
 				console.log(datos); //muestre los valores en la consola
 				$('#detalles_ventas').DataTable().ajax.reload();
-
+				$("#sub").DataTable().ajax.reload();
+				listarSubTortales();
 			//	$('#form_compra')[0].reset();
 				
 			//	limpiar();
