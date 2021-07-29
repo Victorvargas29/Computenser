@@ -298,6 +298,7 @@ function eliminar_item(iddetallesFT){
 
 		success:function(data){
 			$("#detalles_ventas").DataTable().ajax.reload();
+			$("#sub").DataTable().ajax.reload();
 		}
 	});
 }
