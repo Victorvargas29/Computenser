@@ -26,8 +26,6 @@
   switch($_GET["op"]){
 	  case "guardar":
 
-
-
     //  $datos = $servicio->get_nombre_servicio_por_id($idServicio);
 
 
@@ -115,23 +113,13 @@
       $venta->eliminar_item($_POST["iddetallesFT"]);   
     break;
     case 'guardarVenta':
-  
       
-        
-          
              $venta->registrar($cedula);
              $venta->detallesDetalles();
              sleep(2);
              $venta->eliminar_temporal();
             
              echo "se registro";
-             
-          
-
-           
-            
-          
-      
-         
+    
     break;
 }
