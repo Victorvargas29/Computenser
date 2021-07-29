@@ -107,9 +107,9 @@
                         <!-- Logo icon  -->
                         <b class="logo-icon p-l-8">  
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon-->
+                            <!-- Dark Logo icon
                             <img src="../public/assets/images/logo-min.png" alt="homepage" class="light-logo" /> 
-                           
+                           -->
                        </b> 
                      <!--    End Logo icon -->
                          <!-- Logo text -->
@@ -291,10 +291,9 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a id="home" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Inicio</span></a></li>
-                        <li class="sidebar-item"> <a id="servi_prestado1" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Servicio Prestado</span></a></li>
-                       
                         <li class="sidebar-item"> <a id="servi_prestado2" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Facturacion</span></a></li>
-                        
+                        <li class="sidebar-item"> <a id="servi_prestado1" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Servicio Prestado</span></a></li>
+                                               
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Servicios </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"> <a id="depa" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-sitemap"></i><span class="hide-menu">Departamentos</span></a></li>

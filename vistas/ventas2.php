@@ -82,12 +82,12 @@ $cli = $clientes->get_Cliente();
             
             <div class="row"> 
                   <div class="col-lg-3">
-                    <label>Cedula</label>
+                    <label>Cedula / RIF</label>
                     <input type="text" name="cedula" id="listaC" placeholder="Cédula" required pattern = "[0-9]{0,15}" class="form-control"></input>
                   </div>
                   
                   <div class="col-lg-3">
-                    <label>Nombres y Apellidos</label>
+                    <label>Nombres o Razón Social</label>
                     <input type="text" name="nombre" id="nombre" placeholder="Nombres" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
                   </div>
 
@@ -224,11 +224,11 @@ $cli = $clientes->get_Cliente();
                     <table class="table table-striped nowrap" width="100%" id="sub">
                       <thead>
                         <tr class="bg-success">
-                          <th class="col-lg-1">SUBTOTAL$$</th>
+                          <th class="col-lg-1">SUBTOTAL $</th>
                           <th class="col-lg-3">SUBTOTAL BsS</th>           
-                          <th class="col-lg-2">I.V.A% $$</th>
+                          <th class="col-lg-2">I.V.A%  $</th>
                           <th class="col-lg-2">I.V.A% BsS</th> 
-                          <th class="col-lg-2">TOTAL $$</th>
+                          <th class="col-lg-2">TOTAL $</th>
                           <th class="col-lg-2">TOTAL BsS</th>     
                         </tr>
                       </thead>
@@ -241,7 +241,11 @@ $cli = $clientes->get_Cliente();
                     </table>
                     <div class="boton_registrar">
                       <button type="button" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " onClick="registrar()"  id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Venta</button>
+                      <button type="button" onClick="" value="Add" 
+                      class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
+                    </i>Cancelar</button>
                     </div>
+                
                   </div> <!-- /.box-body -->
                 </div> <!-- /.box -->            
               </div> <!-- /.col -->
