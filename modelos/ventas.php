@@ -21,18 +21,19 @@
    	    	return $resultado=$sql->fetchAll();
    	    }
 
-   	    public function registrar_venta($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$cantidad){
+   	    public function registrar_venta($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$cantidad,$idUsuario){
 
              $conectar=parent::conectar();
              //parent::set_names();
-             $sql="insert into detallesfacturatemporal values(null,?,?,?,?,?,?);";
+             $sql="insert into detallesfacturatemporal values(null,?,?,?,?,?,?,?);";
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1, $_POST["idFactura"]); 
              $sql->bindValue(2, $_POST["idServicio"]); 
              $sql->bindValue(3, $_POST["nombre_ser"]);
              $sql->bindValue(4, $_POST["precio"]);
              $sql->bindValue(5, $_POST["tasa"]);
-             $sql->bindValue(6, $_POST["cantidad"]); 
+             $sql->bindValue(6, $_POST["cantidad"]);
+             $sql->bindValue(7, $idUsuario); 
             // $sql->bindValue(4, $_POST["tasa"]);                   
              $sql->execute();
              //echo "se registro";
@@ -164,7 +165,7 @@
           $conectar=parent::conectar();
         //	parent::set_names();
 
-          $sql="insert into detallefactura (idFactura, idServicio,precio) select idFactura, idServicio,precioTemp from detallesfacturatemporal";
+          $sql="insert into detallefactura (idFactura, idServicio,precio,tasa) select idFactura, idServicio,precioTemp,tasa from detallesfacturatemporal";
 
           $sql=$conectar->prepare($sql);
           $sql->execute();
@@ -173,10 +174,30 @@
           return $resultado=$sql->fetchAll();
         }
         
+        public function get_venta_idfactura($idFactura){
+          
+          $conectar=parent::conectar();
+          //parent::set_names();
+          $sql="select * from factura where idFactura=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $idFactura);
+          $sql->execute();
+          return $resultado=$sql->fetchAll();
 
+   	    }
 
+        public function get_detalles_factura($idFactura){
 
-
+          $conectar = parent::conectar();      
+  
+          $sql = "select f.idFactura, s.Nombre, df.precio, df.tasa, c.nombre from factura as f, servicio as s, detallefactura as df, cliente as c where f.cedula=c.cedula and df.idFactura=f.idFactura and s.idServicio=df.idServicio and f.idFactura=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $idFactura);
+          $sql->execute();
+          //print_r($_POST);
+          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+         
    }
    
 ?>

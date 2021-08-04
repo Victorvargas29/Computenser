@@ -13,8 +13,10 @@
 	$idServicio = isset($_POST["idServicio "]);
 	$precio = isset($_POST["precio"]);
 	$nombre_ser = isset($_POST["nombre_ser"]);
- 
-	$tasa = isset($_POST["tasa"]);
+
+  $idUsuario = $_SESSION["idUsuario"];
+	
+  $tasa = isset($_POST["tasa"]);
   $cantidad = isset($_POST["cantidad"]);
   $precio=0;
   $precioBs=0;
@@ -29,7 +31,7 @@
     //  $datos = $servicio->get_nombre_servicio_por_id($idServicio);
 
 
-      $venta->registrar_venta($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$cantidad);
+      $venta->registrar_venta($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$cantidad,$idUsuario);
     break;
 
     case "listar":
@@ -112,6 +114,7 @@
     case "eliminar_item":
       $venta->eliminar_item($_POST["iddetallesFT"]);   
     break;
+    
     case 'guardarVenta':
       
              $venta->registrar($cedula);
@@ -121,5 +124,8 @@
             
              echo "se registro";
     
+    break;
+    case "borrar_temp":
+      $venta->eliminar_temporal();
     break;
 }

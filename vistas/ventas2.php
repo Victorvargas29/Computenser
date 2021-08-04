@@ -55,14 +55,13 @@ $cli = $clientes->get_Cliente();
             <div class="row"> 
               
               <div class="col-lg-2">
-                <label>N° Control</label>
-              
-                        
-                <input type="text" name="idFacturas" id="idFacturas"  disabled required pattern = "[0-9]{0,15}" class="form-control"></input>
+                <label>N° Factura</label>
+                 <h3 id="idFacturas"></h3>       
+           <!--   <input type="text" name="idFacturas" id="idFacturas"  disabled required pattern = "[0-9]{0,15}" class="form-control"></input>
+                -->
                 <br/>
               </div>
               
-          
               <div class="col-lg-2"> 
                 <label>Tasa del dia - DolarToday</label>
                 <input type="text" name="tasa" id="tasa" placeholder="Tasa del dia" required pattern = "[0-9]{0,15}" class="form-control"></input>
@@ -240,8 +239,9 @@ $cli = $clientes->get_Cliente();
                       </tbody>
                     </table>
                     <div class="boton_registrar">
-                      <button type="button" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " onClick="registrar()"  id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Venta</button>
-                      <button type="button" onClick="" value="Add" 
+                    <button type="button" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " onClick="registrar()"  id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>Registrar Venta</button>
+                      <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "href="http://computenser.test/computenser/report/crearPdf.php" target="_blank"  id="bt"><i class="fa fa-save" aria-hidden="true"></i></a>
+                      <button type="button" onClick="borrar_temporal()" value="Add" 
                       class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
                     </i>Cancelar</button>
                     </div>

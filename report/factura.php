@@ -1,54 +1,99 @@
+
 <?php
-require('../public/report/fpdf.php');
 
-class PDF extends FPDF
-{
-// Cabecera de página
-function Header()
-{
-    // Logo
-    $this->Image('../public/images/victor.jpg',10,8,33);
-    // Arial bold 15
-    $this->SetFont('Arial','B',15);
-    // Movernos a la derecha
-    $this->Cell(40);
-    // Título
-    $this->Cell(30,10,'Factura',0,0,'C');
-    // Salto de línea
-    $this->Ln(20);
-}
-
-// Pie de página
-function Footer()
-{
-    // Posición: a 1,5 cm del final
-    $this->SetY(-15);
-    // Arial italic 8
-    $this->SetFont('Arial','I',8);
-    // Número de página
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-}
-}
 require_once("../modelos/ventas.php");
+require_once("../modelos/Clientes.php");
+
+$client = new CLientes();
+$sold = new Ventas();
 
 
-$venta = new Ventas();
-//$venta = new Ventas();
-///$venMax= $venta->Max();
+//$venta=$sold->get_venta_por_fecha($_POST["cedula"],$_POST["datepicker"],$_POST["datepicker2"]);
+//$cliente=$client->get_cliente_por_id($_POST["cedula"]);
 
-$factura = $venta->venta();
-
-$pdf = new PDF();
-$pdf->AliasNbPages();
-$pdf->AddPage();
-$pdf->SetFont('Times','',12);
-
-for($i=0; $i<sizeof($factura);$i++){
-    // $num++;
-    $pdf->Cell(20,10,$factura[$i]['fecha'],1,0,'C',0);
-  }
-
-  $pdf->Output();
-
-
+$venta=$sold->get_detalles_factura(12);
+$cliente=$client->get_cliente_por_id(20323878);
 ?>
+
+<style type="text/css">
+
+    
+.Estilo1{
+  font-size: 13px;
+  font-weight: bold;
+}
+.Estilo2{font-size: 13px}
+.Estilo3{font-size: 13px; font-weight: bold;}
+.Estilo4{color: #FFFFFF}
+.Estilo_prueba{
+  background-color: #878e96;
+}
+
+</style>
+
+<table width="101%" class="change_order_items">
+
+  <tr>
+    <th colspan="5" style="font-size:15pt">DATOS PERSONALES DEL CLIENTE </th>
+    </tr>
+  <tr>
+    <th width="5%" bgcolor="#317eac"><span class="Estilo11">CEDULA</span></th>
+    <th width="15%" bgcolor="#317eac"><span class="Estilo11">NOMBRES</span></th>
+    <th width="12%" bgcolor="#317eac"><span class="Estilo11">TELEFONO</span></th>
+    <th width="38%" bgcolor="#317eac"><span class="Estilo11">DIRECCIÓN</span></th>
+    <th width="30%" bgcolor="#317eac"><span class="Estilo11">CORREO</span></th>
+  </tr>
+
+    <?php
+      
+      for($i=0;$i<sizeof($cliente);$i++){
+
+    ?>
+
+    <tr style="font-size:10pt" class="even_row">
+    <td><div><span class=""><?php echo $cliente[$i]["cedula"];?></span></div></td>
+    <td style="text-align: center"><div><span class=""><?php echo $cliente[$i]["nombre"]." ".$cliente[$i]["apellido"];?></span></div></td>
+    <td style="text-align: center"><div><span class=""><?php echo $cliente[$i]["telefono"];?></span></div></td>
+    <td style="text-align: right"><div><span class=""><?php echo $cliente[$i]["direccion"];?></span></div></td>
+    <td style="text-align:center"><div><span class=""><?php echo $cliente[$i]["correo"];?></span></div></td>
+    </tr>
+
+    <?php
+      }
+    ?>
+
+    </table>
+</div>
+
+<table class="" width="100%" id="">
+                      <thead>
+                        <tr class="Estilo_prueba">
+                          <th class="all text-center">Concepto o Descripcion</th>
+                          <th class="min-desktop">USD $</th>
+                           <th class="all">Precio Venta Bs.</th>
+                          <th class="min-desktop">IVA 16%</th>
+                          <th class="all">Cantidad</th>
+                         <!-- <th class="all">Total Bs</th>
+                          <th class="all">Total $</th>    -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                      
+                      for($i=0;$i<sizeof($venta);$i++){
+
+                    ?>
+
+                    <tr style="font-size:10pt" class="even_row">
+                    <td><div><span class=""><?php echo $venta[$i]["idFactura"];?></span></div></td>
+                    <td style="text-align: center"><div><span class=""><?php echo $venta[$i]["Nombre"];?></span></div></td>
+                     <td style="text-align: center"><div ><span class=""><?php echo $venta[$i]["precio"];?></span></div></td>
+                    <td style="text-align: right"><div ><span class=""><?php echo $venta[$i]["tasa"];?></span></div></td>
+                    <td style="text-align:center"><div ><span class=""><?php echo $venta[$i]["nombre"];?></span></div></td> 
+                    </tr>
+
+                    <?php
+                      }
+                    ?>
+                      </tbody>
+                    </table>

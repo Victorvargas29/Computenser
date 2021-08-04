@@ -67,18 +67,8 @@ function listar(){
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		
-		dom:'Bfrtilp',//Definimos los elementos del control de tabla
-		buttons:[
-	    	//Botón para PDF
-	    	{
-	        extend: 'pdfHtml5',
-	        //footer: true,
-	       	text:'<i class="fas fa-file-pdf"></i>',
-	        titleAttr: 'Exportar a PDF',
-	        //filename: 'Export_File_pdf',
-	        className: 'btn btn-warning'
-	      	}
-		],
+		dom:'frtilp',//Definimos los elementos del control de tabla
+		
 		"ajax":
 		{
 			url:'../ajax/ventas.php?op=listar',
@@ -126,18 +116,8 @@ function listar(){
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		
-		dom:'Bfrtilp',//Definimos los elementos del control de tabla
-		buttons:[
-	    	//Botón para PDF
-	    	{
-	        extend: 'pdfHtml5',
-	        //footer: true,
-	       	text:'<i class="fas fa-file-pdf"></i>',
-	        titleAttr: 'Exportar a PDF',
-	        //filename: 'Export_File_pdf',
-	        className: 'btn btn-warning'
-	      	}
-		],
+		//dom:'Bfrtilp',//Definimos los elementos del control de tabla
+		
 		"ajax":
 		{
 			url:'../ajax/ventas.php?op=listarSubtotales',
@@ -278,9 +258,10 @@ function idfactura(){
 		console.log(data);			
 		data =JSON.parse(data);	 
 		idF =data.idFactura;
+		$('#idFacturas').html(idF);
 		 $("#idFactura").val(idF);
-		 $("#idFacturas").val(idF);
-		// console.log(idF);
+	//	 $("#idFacturas").val(idF);
+		// console.log(idF); 
 		//// $("#nombre_ser").val(data.nombre);
 	});
 	///$("#idFactura").val($("#idFactura").val()+1);
@@ -321,14 +302,40 @@ function registrar(){
 				$('#form_compra')[0].reset();
 				//$('#servicioModal').modal('hide');
 				$("#detalles_ventas").DataTable().ajax.reload();
+				$("#sub").DataTable().ajax.reload();
 				idfactura();
 				tasa_dia();
+				
 				//$('#resultados_ajax').html(datos);
 				//$('#servicio_data').DataTable().ajax.reload();
 				//limpiar();
 			}
 		});
 	
+}
+
+function borrar_temporal(){
+	var formData = new FormData($("#form_compra")[0]);
+	$.ajax({
+		url: "../ajax/ventas.php?op=borrar_temp",
+		type: "POST",
+		data: formData,
+		contentType: false,
+		processData: false,
+
+		success: function(datos){
+
+			console.log(datos); //muestre los valores en la consola
+			$('#form_compra')[0].reset();
+			$("#detalles_ventas").DataTable().ajax.reload();
+			$("#sub").DataTable().ajax.reload();
+			idfactura();
+			tasa_dia();
+		}
+	});
+}
+function reportePdf(idFactura){
+
 }
 
 init();
