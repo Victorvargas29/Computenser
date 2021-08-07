@@ -6,8 +6,6 @@ use Dompdf\Options;
 use Dompdf\FontMetrics;
 // Introducimos HTML de prueba
 
-
-
  $html=file_get_contents_curl("http://computenser.test/computenser/report/factura.php");
 
 $options = new Options();
@@ -20,12 +18,7 @@ $pdf = new DOMPDF($options);
 $pdf->set_paper("letter", "portrait");
 //$pdf->set_paper(array(0,0,104,250));
  
-// Cargamos el contenido HTML.
-$pdf->load_html($html);;
- 
-// Renderizamos el documento PDF.
-$pdf->render();
-
+//Fondo o Marca de agua
 $canvas = $pdf->getCanvas();
 
 $w = $canvas->get_width();
@@ -36,19 +29,26 @@ $imagenUrl = 'formato.jpg';
 $imgwidth = 612;
 $imgHeight = 792;
 
-$canvas->set_opacity(.5);
+//$canvas->set_opacity(.5);
 
 $x=(($w-$imgwidth)/2);
 $y=(($h-$imgHeight)/2);
 
 $canvas->image($imagenUrl,$x,$y,$imgwidth,$imgHeight);
+//fin de fondo o marca de agua
+
+
+// Cargamos el contenido HTML.
+$pdf->load_html($html);;
  
+// Renderizamos el documento PDF.
+$pdf->render();
+
 // Enviamos el fichero PDF al navegador.
 $pdf->stream('ePdf.pdf',array("Attachment"=>0));
 //$pdf->loadView('f', compact('values'));
 //return $pdf->stream();
 ///echo '<script>window.open("crearPdf.php", "_blank");</script>';
-
 
 
 function file_get_contents_curl($url) {

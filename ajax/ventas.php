@@ -35,7 +35,7 @@
     break;
 
     case "listar":
-      $datos = $venta->detalles_venta();
+      $datos = $venta->detalles_venta($idUsuario);
       $data = array();
       foreach ($datos as $row) {
         $sub_array = array();
@@ -61,7 +61,7 @@
     break;
 
     case "listarSubtotales":
-      $datos = $venta->detalles_venta();
+      $datos = $venta->detalles_venta($idUsuario);
       $data = array();
       foreach ($datos as $row) {
         $sub_array = array();
@@ -95,19 +95,50 @@
     break;
 
     case 'mostrar':
-   			
+   		
+      
+    
       $datos = $venta->Max();
       
-      if(is_array($datos)==true and count($datos)>0){
-        foreach ($datos as $row) {
+      $datos2 = $venta->datos_en_temporal();
+      $datos1 = $venta->datos_en_temporal_idUsuario($idUsuario);
+      if(is_array($datos2)==true and count($datos2)>0){
 
-        //	$output["idDepartamento"] = $row["idDepartamento"];
-          $output["idFactura"] = $row["idFactura"]+1;
+        if(is_array($datos1)==true and count($datos1)>0){
+
+          foreach ($datos1 as $row) {
+
+            //	$output["idDepartamento"] = $row["idDepartamento"];
+              $output["idFactura"] = $row["idFactura"];
+            }
+            echo json_encode($output);
+
+
+        }else{
+
+          foreach ($datos2 as $row) {
+
+            //	$output["idDepartamento"] = $row["idDepartamento"];
+              $output["idFactura"] = $row["idFactura"]+1;
+            }
+            echo json_encode($output);
+
         }
-        echo json_encode($output);
+
       }else{
-        $errors[]="El Servicio no existe";
+          if(is_array($datos)==true and count($datos)>0){
+            foreach ($datos as $row) {
+
+            //	$output["idDepartamento"] = $row["idDepartamento"];
+              $output["idFactura"] = $row["idFactura"]+1;
+            }
+            echo json_encode($output);
+        }else{
+          $errors[]="El Servicio no existe";
+        }
       }
+
+      
 
       break;
 

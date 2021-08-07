@@ -7,7 +7,7 @@ require_once("../modelos/Empleadas.php");
 
 $empleadas = new Empleadas();
 $venta = new Ventas();
-$ven= $venta->detalles_venta();
+//$ven= $venta->detalles_venta($_SESSION["idUsuario"]);
 
 $emp = $empleadas->get_empleada();
 

@@ -119,14 +119,12 @@
           return $resultado=$sql->fetch();
         }
 
-        public function detalles_venta(){
+        public function detalles_venta($idUsuario){
          
           $conectar=parent::conectar();
-   	    	
-
-          $sql="select * from detallesfacturatemporal"; 
-
+          $sql="select * from detallesfacturatemporal where idUsuario=?"; 
           $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $idUsuario);
           $sql->execute();
 
           return $resultado=$sql->fetchAll();
@@ -157,17 +155,40 @@
 
           return $resultado=$sql->fetch();
         }
+
+
+        public function datos_en_temporal(){
+          $conectar=parent::conectar();
+          //	parent::set_names();
+        
+            $sql="select idFactura from detallesfacturatemporal";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+
+        }
+
+        public function datos_en_temporal_idUsuario($idUsuario){
+          $conectar=parent::conectar();
+          //	parent::set_names();
+        
+            $sql="select idFactura from detallesfacturatemporal where idUsuario=?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $idUsuario);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+
+        }
+
         public function Max(){
 
           $conectar=parent::conectar();
         //	parent::set_names();
-
+  
           $sql="select idFactura from factura order by idFactura asc";
-
           $sql=$conectar->prepare($sql);
           $sql->execute();
          // echo intval($sql);
-
           return $resultado=$sql->fetchAll();
         }
 
