@@ -93,11 +93,16 @@ $cli = $clientes->get_Cliente();
                   <!-- <div class="col-lg-3">
                     <label>Apellidos</label>
                     <input type="text" name="apellido" id="apellido" placeholder="Apellidos" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
-                  </div>
+                  </div>    -->
                   <div class="col-lg-3">
                     <label>Telefono</label>
                     <input type="text" name="telefono" id="telefono" placeholder="Teléfono" required class="form-control"></input>
-                  </div> -->
+                  </div>
+
+                  <div class="col-lg-3">          
+                    <label>Direccion</label>
+                    <input type="text" name="direccion" id="direccion" placeholder="Direccion"  class="form-control"></input>  
+                  </div>
       
                 </div>  <!--fin row pb-1 pt-6-->
                 <br/>
@@ -244,7 +249,9 @@ $cli = $clientes->get_Cliente();
                       <button type="button" onClick="borrar_temporal()" value="Add" 
                       class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
                     </i>Cancelar</button>
-                    </div>
+                    <!-- <input type="hidden" name="idUser" id="idUser" value="" required pattern = "[0-9]{0,15}" class="form-control"><?php echo $_SESSION["idUsuario"]
+                            ?></input>  -->
+                  </div>
                 
                   </div> <!-- /.box-body -->
                 </div> <!-- /.box -->            

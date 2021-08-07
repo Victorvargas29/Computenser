@@ -14,8 +14,8 @@
 	$precio = isset($_POST["precio"]);
 	$nombre_ser = isset($_POST["nombre_ser"]);
 
-  $idUsuario = $_SESSION["idUsuario"];
-	
+  //$idUsuario = isset($_POST["idUser"]);
+	$idUsuario = $_SESSION["idUsuario"];
   $tasa = isset($_POST["tasa"]);
   $cantidad = isset($_POST["cantidad"]);
   $precio=0;
@@ -118,14 +118,14 @@
     case 'guardarVenta':
       
              $venta->registrar($cedula);
-             $venta->detallesDetalles();
+             $venta->detallesDetalles($idUsuario);
              sleep(2);
-             $venta->eliminar_temporal();
+             $venta->eliminar_temp_condicion($idUsuario);
             
              echo "se registro";
     
     break;
     case "borrar_temp":
-      $venta->eliminar_temporal();
+      $venta->eliminar_temp_condicion($idUsuario);
     break;
 }

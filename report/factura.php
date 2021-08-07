@@ -22,6 +22,9 @@ $cliente=$client->get_cliente_por_id(20323878);
   font-size: 13px;
   font-weight: bold;
 }
+table{
+  margin-top: 20%;
+}
 .Estilo2{font-size: 13px}
 .Estilo3{font-size: 13px; font-weight: bold;}
 .Estilo4{color: #FFFFFF}
@@ -30,12 +33,9 @@ $cliente=$client->get_cliente_por_id(20323878);
 }
 
 </style>
-
+   
 <table width="101%" class="change_order_items">
 
-  <tr>
-    <th colspan="5" style="font-size:15pt">DATOS PERSONALES DEL CLIENTE </th>
-    </tr>
   <tr>
     <th width="5%" bgcolor="#317eac"><span class="Estilo11">CEDULA</span></th>
     <th width="15%" bgcolor="#317eac"><span class="Estilo11">NOMBRES</span></th>

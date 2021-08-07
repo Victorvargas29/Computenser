@@ -56,9 +56,9 @@ $("#listaE").keyup(function(){
 
 });
 $("#idServicio").change(function(){
+	
 	cargarServicio($("#idServicio").val());
-	
-	
+
 //console.log($("#idServicio").val($("#idServicio").val()));
 });
 
@@ -246,6 +246,7 @@ function cargarServicio(idServicio){
 			data =JSON.parse(data);	  
 			 $("#precio").val(data.precio);
 			 $("#nombre_ser").val(data.nombre);
+			 
 		});
 		//var sel =document.getElementById("idServicio");
 	////var seltex= sel.options[getElementIndex("idServicio").text]

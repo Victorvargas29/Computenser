@@ -68,6 +68,17 @@
 
           }
 
+          public function eliminar_temp_condicion($idUsuario){
+            $conectar=parent::conectar();
+
+          $sql="delete from detallesfacturatemporal where idUsuario=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $idUsuario);
+          $sql->execute();
+          return $resultado=$sql->fetch();
+
+          }
+
    	    public function editar_venta($cedula, $nombre, $apellido,$direccion,$telefono){
 
              $conectar=parent::conectar();
@@ -160,14 +171,15 @@
           return $resultado=$sql->fetchAll();
         }
 
-        public function detallesDetalles(){
+        public function detallesDetalles($idUsuario){
 
           $conectar=parent::conectar();
         //	parent::set_names();
 
-          $sql="insert into detallefactura (idFactura, idServicio,precio,tasa) select idFactura, idServicio,precioTemp,tasa from detallesfacturatemporal";
+          $sql="insert into detallefactura (idFactura, idServicio,precio,tasa) select idFactura, idServicio,precioTemp,tasa from detallesfacturatemporal where idUsuario=?";
 
           $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $idUsuario);
           $sql->execute();
          // echo intval($sql);
 
