@@ -172,7 +172,7 @@
           $conectar=parent::conectar();
           //	parent::set_names();
         
-            $sql="select idFactura from detallesfacturatemporal where idUsuario=?";
+            $sql="select idFactura, idUsuario from detallesfacturatemporal where idUsuario=?";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $idUsuario);
             $sql->execute();
@@ -180,11 +180,19 @@
 
         }
 
-        public function Max(){
+        public function Max2(){
+          $conectar=parent::conectar();
+          //	parent::set_names();
+            $sql="select MAX(idFactura) from factura";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+          // echo intval($sql);
+            return $resultado=$sql->fetchAll();
+        }
 
+        public function Max(){
           $conectar=parent::conectar();
         //	parent::set_names();
-  
           $sql="select idFactura from factura order by idFactura asc";
           $sql=$conectar->prepare($sql);
           $sql->execute();
@@ -197,7 +205,7 @@
           $conectar=parent::conectar();
         //	parent::set_names();
 
-          $sql="insert into detallefactura (idFactura, idServicio,precio,tasa) select idFactura, idServicio,precioTemp,tasa from detallesfacturatemporal where idUsuario=?";
+          $sql="insert into detallefactura (idFactura, idServicio,precio,tasa,cantidad) select idFactura, idServicio,precioTemp,tasa,cantidad from detallesfacturatemporal where idUsuario=?";
 
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idUsuario);

@@ -98,15 +98,17 @@
    		
       
     
-      $datos = $venta->Max();
+      $facturaMax = $venta->Max();
       
-      $datos2 = $venta->datos_en_temporal();
-      $datos1 = $venta->datos_en_temporal_idUsuario($idUsuario);
-      if(is_array($datos2)==true and count($datos2)>0){
+      $temporalMax = $venta->datos_en_temporal();
+      $TemporalUsuario = $venta->datos_en_temporal_idUsuario($idUsuario);
 
-        if(is_array($datos1)==true and count($datos1)>0){
+      
+      if(is_array($temporalMax)==true and count($temporalMax)>0){
 
-          foreach ($datos1 as $row) {
+        if(is_array($TemporalUsuario)==true and count($TemporalUsuario)>0){
+
+          foreach ($TemporalUsuario as $row) {
 
             //	$output["idDepartamento"] = $row["idDepartamento"];
               $output["idFactura"] = $row["idFactura"];
@@ -115,8 +117,10 @@
 
 
         }else{
+          
 
-          foreach ($datos2 as $row) {
+
+          foreach ($temporalMax as $row) {
 
             //	$output["idDepartamento"] = $row["idDepartamento"];
               $output["idFactura"] = $row["idFactura"]+1;
@@ -126,8 +130,8 @@
         }
 
       }else{
-          if(is_array($datos)==true and count($datos)>0){
-            foreach ($datos as $row) {
+          if(is_array($facturaMax)==true and count($facturaMax)>0){
+            foreach ($facturaMax as $row) {
 
             //	$output["idDepartamento"] = $row["idDepartamento"];
               $output["idFactura"] = $row["idFactura"]+1;

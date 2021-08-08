@@ -1,4 +1,6 @@
 <?php
+
+
 // Cargamos la librería dompdf que hemos instalado en la carpeta dompdf
 require_once 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
