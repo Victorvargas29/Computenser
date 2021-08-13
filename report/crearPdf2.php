@@ -1,20 +1,23 @@
-
 <?php
-// if(S_SERVER["REQUEST_METHOD"=="POST"]){
-// 	echo 'factura'.S_POST['idFactura'];
-// }
-require_once("../modelos/ventas.php");
+
 require_once("../modelos/Clientes.php");
+require_once("../modelos/ventas.php");
+require_once("../modelos/Servicios.php");
+
 
 $client = new CLientes();
 $sold = new Ventas();
 
-//$venta=$sold->get_venta_por_fecha($_POST["cedula"],$_POST["datepicker"],$_POST["datepicker2"]);
-//$cliente=$client->get_cliente_por_id($_POST["cedula"]);
-$idfact=$sold->Max2();
-$venta=$sold->get_detalles_factura(12);
-$cliente=$client->get_cliente_por_id(25135123);
+$venta=$sold->get_detalles_factura($_POST["idFactura"]);
+$cliente=$client->get_cliente_por_id($_POST["cedula"]);
+
+ob_start();
+
 ?>
+
+<link type="text/css" rel="stylesheet" href="dompdf/css/print_static.css"/>
+
+
 
 <style type="text/css">
 .text-center{
@@ -57,7 +60,7 @@ th,td{
   <div > 
             <div class="margen">
               <label>Factura:</label>
-              <label id="idFactura">001654</label>
+              <label id="idFactura"><?php echo "00".$_POST["idFactura"];?></label>
             </div>
             <div style="display: inline-block">
               <label style="margin-top: 50%">Nombre o Razon Social:</label>
@@ -65,15 +68,15 @@ th,td{
             </div>
             <div style="display: inline-block">
             <label style="margin-left: 15%">RIF / CI:</label>
-              <label id="idCliente"></label>
+              <label id="idCliente"><?php echo $cliente[0]["cedula"]?></label>
             </div>
             <div>
               <label>Domicilio Fiscal:</label>
-              <label id="direccion"></label>
+              <label id="direccion"><?php echo $cliente[0]["direccion"]?></label>
             </div>
             <div style="display: inline-block">
                 <label style="margin-left: 15%">Telefono:</label>
-                <label id="telefono"></label>
+                <label id="telefono"><?php echo $cliente[0]["telefono"]?></label>
                 <br/>
             </div>
     </div>
@@ -134,3 +137,74 @@ th,td{
                     ?>
                       </tbody>
                     </table>
+
+
+<?php
+
+$salida_html = ob_get_contents();
+ob_end_clean();
+
+// Cargamos la librería dompdf que hemos instalado en la carpeta dompdf
+require_once("dompdf/autoload.inc.php");
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Dompdf\FontMetrics;
+// Introducimos HTML de prueba
+  
+ //$html=file_get_contents_curl("http://computenser.test/computenser/report/factura.php");
+
+$options = new Options();
+$options->set('isPhpEnable','true');
+ 
+// Instanciamos un objeto de la clase DOMPDF.
+$pdf = new DOMPDF($options);
+ 
+// Definimos el tamaño y orientación del papel que queremos.
+$pdf->set_paper("letter", "portrait");
+//$pdf->set_paper(array(0,0,104,250));
+ 
+//Fondo o Marca de agua
+$canvas = $pdf->getCanvas();
+
+$w = $canvas->get_width();
+$h = $canvas->get_height();
+
+//$imagenUrl = '../public/images/perfil-avatar-mujer-icono-redondo_24640-14042.jpg';
+$imagenUrl = 'formato.jpg';
+$imgwidth = 612;
+$imgHeight = 792;
+
+//$canvas->set_opacity(.5);
+
+$x=(($w-$imgwidth)/2);
+$y=(($h-$imgHeight)/2);
+
+$canvas->image($imagenUrl,$x,$y,$imgwidth,$imgHeight);
+//fin de fondo o marca de agua
+
+
+// Cargamos el contenido HTML.
+$pdf->load_html($salida_html);;
+ 
+// Renderizamos el documento PDF.
+$pdf->render();
+
+// Enviamos el fichero PDF al navegador.
+$pdf->stream('ePdf.pdf',array("Attachment"=>0));
+//$pdf->loadView('f', compact('values'));
+//return $pdf->stream();
+///echo '<script>window.open("crearPdf.php", "_blank");</script>';
+
+/* 
+function file_get_contents_curl($url) {
+	$crl = curl_init();
+	$timeout = 5;
+	curl_setopt($crl, CURLOPT_URL, $url);
+	curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, $timeout);
+	$ret = curl_exec($crl);
+	curl_close($crl);
+	return $ret;
+} */
+
+?>

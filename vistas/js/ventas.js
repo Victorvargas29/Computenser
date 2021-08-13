@@ -5,7 +5,7 @@ var tablfa;
 //funcion q se ejecuta al inicio
 function init(){
 	tasa_dia();
-	listar();
+	listar();	
 	idfactura();
 	listarSubTortales();
 	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
@@ -28,6 +28,11 @@ $("form_compra").on("submit", function(){
 
 });
 */
+$("#form_compra").on("submit", function(){
+	registrar();
+
+});
+
 }
 
 
