@@ -7,7 +7,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Dompdf\FontMetrics;
 // Introducimos HTML de prueba
-
+  
  $html=file_get_contents_curl("http://computenser.test/computenser/report/factura.php");
 
 $options = new Options();
@@ -63,3 +63,4 @@ function file_get_contents_curl($url) {
 	curl_close($crl);
 	return $ret;
 }
+?>

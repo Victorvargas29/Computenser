@@ -9,33 +9,46 @@ require_once("../modelos/Clientes.php");
 $client = new CLientes();
 $sold = new Ventas();
 
-
 //$venta=$sold->get_venta_por_fecha($_POST["cedula"],$_POST["datepicker"],$_POST["datepicker2"]);
 //$cliente=$client->get_cliente_por_id($_POST["cedula"]);
 $idfact=$sold->Max2();
-$venta=$sold->get_detalles_factura($idfact);
+$venta=$sold->get_detalles_factura(12);
 $cliente=$client->get_cliente_por_id(25135123);
 ?>
 
 <style type="text/css">
+.text-center{
+  text-align: center;
 
+}
     
 .Estilo1{
   font-size: 13px;
   font-weight: bold;
 }
 .margen {
-  margin-top: 12%;
+  margin-top:  12%;
   margin-left: 80%
 }
 table{
   margin-top: 4%;
+  border-collapse: collapse;
 }
+
+table, th, td{
+  border: 1px solid black;
+}
+
+th,td{
+  padding: 5px;
+}
+
 .Estilo2{font-size: 13px}
 .Estilo3{font-size: 13px; font-weight: bold;}
 .Estilo4{color: #FFFFFF}
 .Estilo_prueba{
-  background-color: #878e96;
+  /*background-color: #878e96; */
+  background-color: #748290;
 }
 
 </style>
@@ -50,7 +63,7 @@ table{
               <label style="margin-top: 50%">Nombre o Razon Social:</label>
               <label id="nombre_c"><?php echo $cliente[0]["nombre"]." ".$cliente[0]["apellido"];?></label>
             </div>
-            <div  style="display: inline-block">
+            <div style="display: inline-block">
             <label style="margin-left: 15%">RIF / CI:</label>
               <label id="idCliente"></label>
             </div>
@@ -58,8 +71,8 @@ table{
               <label>Domicilio Fiscal:</label>
               <label id="direccion"></label>
             </div>
-            <div>
-                <label>Telefono:</label>
+            <div style="display: inline-block">
+                <label style="margin-left: 15%">Telefono:</label>
                 <label id="telefono"></label>
                 <br/>
             </div>
@@ -89,14 +102,14 @@ table{
     </table>
 </div> -->
 
-<table class="" width="100%" id="">
+<table  class="" width="100%" id="">
                       <thead>
                         <tr class="Estilo_prueba">
-                          <th class="all text-center">Cant</th>
-                          <th class="all text-center">Concepto o Descripcion</th>
-                          <th class="min-desktop">USD $</th>
-                           <th class="all">Precio Venta Bs.</th>
-                          <th class="all">Total</th>
+                          <th class="text-center">Cant</th>
+                          <th class="text-center">Concepto o Descripcion</th>
+                          <!-- <th class="text-center">USD $</th> -->
+                           <th class="text-center">Precio Venta Bs.</th>
+                          <th class="text-center">Total</th>
                          <!-- <th class="all">Total Bs</th>
                           <th class="all">Total $</th>    -->
                         </tr>
@@ -109,11 +122,11 @@ table{
                     ?>
 
                     <tr style="font-size:10pt" class="even_row">
-                    <td style="text-align:center"><div><span class=""><?php echo $venta[$i]["idFactura"];?></span></div></td>
+                    <td style="text-align:center"><div><span class=""><?php echo $venta[$i]["cantidad"];?></span></div></td>
                     <td style="text-align:left"><div><span class=""><?php echo $venta[$i]["Nombre"];?></span></div></td>
-                    <td style="text-align:center"><div ><span class=""><?php echo $venta[$i]["precio"];?></span></div></td>
+                    <!-- <td style="text-align:center"><div ><span class=""><?php echo $venta[$i]["precio"];?></span></div></td> -->
                     <td style="text-align:right"><div ><span class=""><?php echo $venta[$i]["tasa"]*$venta[$i]["precio"];?></span></div></td>
-                    <td style="text-align:right"><div ><span class=""><?php echo $venta[$i]["tasa"]*$venta[$i]["precio"]*2;?></span></div></td> 
+                    <td style="text-align:right"><div ><span class=""><?php echo $venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"];?></span></div></td> 
                     </tr>
 
                     <?php

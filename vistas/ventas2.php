@@ -45,7 +45,7 @@ $cli = $clientes->get_Cliente();
         <!--VISTA MODAL PARA AGREGAR PRODUCTO -->    
         <?php // require_once("modal/lista_productos_ventas_modal.php");?>
     <section class="formulario-compra">
-      <form method="post" class="form-horizontal" id="form_compra">
+      <form action="http://computenser.test/computenser/report/crearPdf2.php" method="post" class="form-horizontal" id="form_compra">
         <div class="container"> <!--container-->
             <div class="row pb-1 pt-3">
               <div class="col-lg-6">
@@ -238,14 +238,17 @@ $cli = $clientes->get_Cliente();
                       </thead>
                       <tbody>
                      
-                        
+                        <?php
+                          // ?variable=<?php urldecode('')
+                        ?>
                         
                         
                       </tbody>
                     </table>
                     <div class="boton_registrar">
-                    <button type="button" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " onClick="registrar()"  id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>Registrar Venta</button>
-                      <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "href="http://computenser.test/computenser/report/crearPdf.php?variable=<?php urldecode('')" target="_blank"  id="bt"><i class="fa fa-save" aria-hidden="true"></i></a>
+                    <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " onClick="
+                    "  id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>Registrar Venta</button>
+                      <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3" href="http://computenser.test/computenser/report/crearPdf2.php" target="_blank"  id="bt"><i class="fa fa-save" aria-hidden="true"></i></a>
                       <button type="button" onClick="borrar_temporal()" value="Add" 
                       class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
                     </i>Cancelar</button>

@@ -231,7 +231,7 @@
 
           $conectar = parent::conectar();      
   
-          $sql = "select f.idFactura, s.Nombre, df.precio, df.tasa, c.nombre from factura as f, servicio as s, detallefactura as df, cliente as c where f.cedula=c.cedula and df.idFactura=f.idFactura and s.idServicio=df.idServicio and f.idFactura=?";
+          $sql = "select f.idFactura, s.Nombre, df.precio, df.tasa, df.cantidad, c.nombre from factura as f, servicio as s, detallefactura as df, cliente as c where f.cedula=c.cedula and df.idFactura=f.idFactura and s.idServicio=df.idServicio and f.idFactura=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idFactura);
           $sql->execute();
