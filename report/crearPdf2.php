@@ -11,6 +11,9 @@ $sold = new Ventas();
 $venta=$sold->get_detalles_factura($_POST["idFactura"]);
 $cliente=$client->get_cliente_por_id($_POST["cedula"]);
 
+/* $venta=$sold->get_detalles_factura(12);
+$cliente=$client->get_cliente_por_id(25135123); */
+
 ob_start();
 
 ?>
@@ -81,30 +84,32 @@ th,td{
             </div>
     </div>
    
-<!-- <table width="101%" class="change_order_items">
-  <tr>
-    <th width="5%" bgcolor="#317eac"><span class="Estilo11">CEDULA</span></th>
-    <th width="15%" bgcolor="#317eac"><span class="Estilo11">NOMBRES</span></th>
-    <th width="12%" bgcolor="#317eac"><span class="Estilo11">TELEFONO</span></th>
-    <th width="38%" bgcolor="#317eac"><span class="Estilo11">DIRECCIÓN</span></th>
-    <th width="30%" bgcolor="#317eac"><span class="Estilo11">CORREO</span></th>
-  </tr>
+<!-- 
+<div>  
+  <table style="margin-top: 12%" width="101%" class="change_order_items">
+    <tr>
+      <th width="5%" bgcolor="#317eac"><span class="Estilo11">CEDULA</span></th>
+      <th width="15%" bgcolor="#317eac"><span class="Estilo11">NOMBRES</span></th>
+      <th width="12%" bgcolor="#317eac"><span class="Estilo11">TELEFONO</span></th>
+      <th width="38%" bgcolor="#317eac"><span class="Estilo11">DIRECCIÓN</span></th>
+      <th width="30%" bgcolor="#317eac"><span class="Estilo11">CORREO</span></th>
+    </tr>
     <?php
       for($i=0;$i<sizeof($cliente);$i++){
     ?>
-    <tr style="font-size:10pt" class="even_row">
-    <td><div><span class=""><?php echo $cliente[$i]["cedula"];?></span></div></td>
-    <td style="text-align: center"><div><span class=""><?php echo $cliente[$i]["nombre"]." ".$cliente[$i]["apellido"];?></span></div></td>
-    <td style="text-align: center"><div><span class=""><?php echo $cliente[$i]["telefono"];?></span></div></td>
-    <td style="text-align: right"><div><span class=""><?php echo $cliente[$i]["direccion"];?></span></div></td>
-    <td style="text-align:center"><div><span class=""><?php echo $cliente[$i]["correo"];?></span></div></td>
-    </tr>
+      <tr style="font-size:10pt" class="even_row">
+        <td><div><span class=""><?php echo $cliente[$i]["cedula"];?></span></div></td>
+        <td style="text-align: center"><div><span class=""><?php echo $cliente[$i]["nombre"]." ".$cliente[$i]["apellido"];?></span></div></td>
+        <td style="text-align: center"><div><span class=""><?php echo $cliente[$i]["telefono"];?></span></div></td>
+        <td style="text-align: right"><div><span class=""><?php echo $cliente[$i]["direccion"];?></span></div></td>
+        <td style="text-align:center"><div><span class=""><?php echo $cliente[$i]["correo"];?></span></div></td>
+      </tr>
     <?php
       }
     ?>
-    </table>
-</div> -->
-
+  </table>
+</div>
+ -->
 <table  class="" width="100%" id="">
                       <thead>
                         <tr class="Estilo_prueba">
