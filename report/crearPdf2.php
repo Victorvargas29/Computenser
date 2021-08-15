@@ -28,9 +28,10 @@ ob_start();
 
 }
     
-.Estilo1{
-  font-size: 13px;
+.EstiloFactura{
+  font-size: 14px;
   font-weight: bold;
+  color: #ea1717
 }
 .margen {
   margin-top:  12%;
@@ -49,7 +50,7 @@ th,td{
   padding: 5px;
 }
 
-.Estilo2{font-size: 13px}
+.Estilo2{font-size: 12px}
 .Estilo3{font-size: 13px; font-weight: bold;}
 .Estilo4{color: #FFFFFF}
 .Estilo_prueba{
@@ -62,10 +63,10 @@ th,td{
 
   <div > 
             <div class="margen">
-              <label>Factura:</label>
-              <label id="idFactura"><?php echo "00".$_POST["idFactura"];?></label>
+              <label class="Estilo2">Factura:</label>
+              <label class="EstiloFactura" id="idFactura"><?php echo "00".$_POST["idFactura"];?></label>
             </div>
-            <div style="display: inline-block">
+            <div class="" style="display: inline-block">
               <label style="margin-top: 50%">Nombre o Razon Social:</label>
               <label id="nombre_c"><?php echo $cliente[0]["nombre"]." ".$cliente[0]["apellido"];?></label>
             </div>
@@ -73,15 +74,18 @@ th,td{
             <label style="margin-left: 15%">RIF / CI:</label>
               <label id="idCliente"><?php echo $cliente[0]["cedula"]?></label>
             </div>
-            <div>
-              <label>Domicilio Fiscal:</label>
-              <label id="direccion"><?php echo $cliente[0]["direccion"]?></label>
+            <div style="margin-top: 2%">
+              <div style="display: inline-block">
+                <label>Domicilio Fiscal:</label>
+                <label id="direccion"><?php echo $cliente[0]["direccion"]?></label>
+              </div>
+              <div style="display: inline-block">
+                  <label style="margin-left: 25%">Telefono:</label>
+                  <label id="telefono"><?php echo $cliente[0]["telefono"]?></label>
+                  <br/>
+              </div>
             </div>
-            <div style="display: inline-block">
-                <label style="margin-left: 15%">Telefono:</label>
-                <label id="telefono"><?php echo $cliente[0]["telefono"]?></label>
-                <br/>
-            </div>
+            
     </div>
    
 <!-- 

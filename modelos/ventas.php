@@ -39,13 +39,14 @@
              //echo "se registro";
             // print_r($_POST);
    	    }
-         public function registrar($cedula){
+         public function registrar($idFactura,$cedula){
 
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="insert into factura values(null,now(),?);";
+          $sql="insert into factura values(?,now(),?);";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $_POST["cedula"]); 
+          $sql->bindValue(1, $_POST["idFactura"]); 
+          $sql->bindValue(2, $_POST["cedula"]); 
          // $sql->bindValue(2, $_POST["idServicio"]); 
           ; 
          // $sql->bindValue(4, $_POST["tasa"]);                   
@@ -222,6 +223,17 @@
           $sql="select * from factura where idFactura=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idFactura);
+          $sql->execute();
+          return $resultado=$sql->fetchAll();
+
+   	    }
+
+         public function get_facturas(){
+          
+          $conectar=parent::conectar();
+          //parent::set_names();
+          $sql = "select * from factura AS f inner join cliente AS c ON f.cedula= c.cedula";
+          $sql=$conectar->prepare($sql);
           $sql->execute();
           return $resultado=$sql->fetchAll();
 

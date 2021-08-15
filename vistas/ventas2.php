@@ -64,14 +64,15 @@ $cli = $clientes->get_Cliente();
               
               <div class="col-lg-2"> 
                 <label>Tasa del dia - DolarToday</label>
-                <input type="text" name="tasa" id="tasa" placeholder="Tasa del dia" required pattern = "[0-9]{0,15}" class="form-control"></input>
+                <input type="text" name="tasa" id="tasa" placeholder="Tasa del dia" required pattern = "^[0-9]+([.][0-99]+)?$" class="form-control"></input>
                 <br/>
               </div>
               <div class="col-lg-4">   
               <input type="hidden" name="idFactura" id="idFactura" required pattern = "[0-9]{0,15}" class="form-control"></input>
       
               </div>
-              <div class="col-lg-4">        
+              <div class="col-lg-4">  
+              <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3" id="bt"><i class="fa fa-save" aria-hidden="true"></i></a>      
               </div>
 
             </div><!-- /.row -->

@@ -8,6 +8,7 @@ function init(){
 	listar();	
 	idfactura();
 	listarSubTortales();
+	listarfacturas();
 	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
 /*	$("#form_compra").on("button", function(e){
 		cargarlistaS(e);
@@ -35,7 +36,16 @@ $("#form_compra").on("submit", function(){
 
 }
 
-
+$(document).ready(function(){
+	$("#bt").click(function(){
+		$.ajax({
+		url:'lista_facturas.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html(err);}
+		});
+	});
+});
 
 function tasa_dia(){
 $.getJSON("https://s3.amazonaws.com/dolartoday/data.json",function(data){
@@ -340,8 +350,66 @@ function borrar_temporal(){
 		}
 	});
 }
-function reportePdf(idFactura){
 
-}
+function listarfacturas(){
+
+	tabla=$('#factura_data').dataTable({  //#usuario_data este es el id de la tabla
+		"aProcessing":true,//Activamos el procesamiento del datatables
+		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
+		
+		dom:'Bfrtilp',//Definimos los elementos del control de tabla
+		buttons:[
+	    	//Botón para PDF
+	    	{
+	        extend: 'pdfHtml5',
+	        //footer: true,
+	       	text:'<i class="fas fa-file-pdf"></i>',
+	        titleAttr: 'Exportar a PDF',
+	        //filename: 'Export_File_pdf',
+	        className: 'btn btn-danger'
+	      	}
+		],
+		"ajax":
+		{
+			url:'../ajax/ventas.php?op=listarfacturas',
+			type: "get",
+			datatype: "json",
+			error: function(e){
+				console.log(e.responseText);
+			}
+		},
+		"bDestroy":true,
+		"responsive":true,
+		"bInfo":true,
+		"iDisplayLength":10,//por cada 10 reg hace una paginacion
+		"order":[[0,"desc"]],//Ordenar(Columna, Orden)
+
+		"language":{
+			"sProcessing": "Procesando...",
+			"sLengthMenu": "Mostrar _MENU_ registro",
+			"sZeroRecords": "No se encontraron resultados",
+			"sEmptyTable": "Ningun dato disponible en esta tabla",
+			"sInfo": "Mostrando un total de _TOTAL_ registros",
+			"sInfoEmpty": "Mostrando un total de 0 registros",
+			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix": "",
+			"sSearch": "Buscar",
+			"sUrl": "",
+			"sInfoThousands": "",
+			"sLoadingRecords": "Cargando...",
+			"oPaginate":{
+				"sFirst": "Primero",
+				"sLast": "Ultimo",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior"
+			},
+			"oAria":{
+				"sSortAscending": ": Activar para ordenar la columna",
+				"sSortDescending": ": Activar para ordenar la columna"
+			}
+		}//cierra language
+
+	}).DataTable();
+}//fin funcion listar
 
 init();

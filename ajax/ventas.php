@@ -14,6 +14,7 @@
 	$precio = isset($_POST["precio"]);
 	$nombre_ser = isset($_POST["nombre_ser"]);
 
+  $NroFactura = isset($_POST["NroFactura"]);
   //$idUsuario = isset($_POST["idUser"]);
 	$idUsuario = $_SESSION["idUsuario"];
   $tasa = isset($_POST["tasa"]);
@@ -95,44 +96,50 @@
     break;
 
     case 'mostrar':
-   		
-      
-    
+
       $facturaMax = $venta->Max();
-      
       $temporalMax = $venta->datos_en_temporal();
       $TemporalUsuario = $venta->datos_en_temporal_idUsuario($idUsuario);
-
-      
+ 
       if(is_array($temporalMax)==true and count($temporalMax)>0){
 
         if(is_array($TemporalUsuario)==true and count($TemporalUsuario)>0){
-
           foreach ($TemporalUsuario as $row) {
 
             //	$output["idDepartamento"] = $row["idDepartamento"];
               $output["idFactura"] = $row["idFactura"];
             }
             echo json_encode($output);
-
-
         }else{
-          
 
-
-          foreach ($temporalMax as $row) {
-
+            foreach ($temporalMax as $row) {
             //	$output["idDepartamento"] = $row["idDepartamento"];
-              $output["idFactura"] = $row["idFactura"]+1;
+             $temp= $row["idFactura"];
             }
+            foreach ($facturaMax as $facturaMaxima) {
+              //	$output["idDepartamento"] = $row["idDepartamento"];
+                $fact = $facturaMaxima["idFactura"];
+            }
+              if ($fact>$temp) {
+                foreach ($facturaMax as $row) {
+                  //	$output["idDepartamento"] = $row["idDepartamento"];
+                  $output["idFactura"]= $row["idFactura"]+1;
+                  }
+
+              }
+              else{
+                foreach ($temporalMax as $row) {
+                  //	$output["idDepartamento"] = $row["idDepartamento"];
+                  $output["idFactura"]= $row["idFactura"]+1;
+                  }
+
+              }
             echo json_encode($output);
-
         }
-
       }else{
+
           if(is_array($facturaMax)==true and count($facturaMax)>0){
             foreach ($facturaMax as $row) {
-
             //	$output["idDepartamento"] = $row["idDepartamento"];
               $output["idFactura"] = $row["idFactura"]+1;
             }
@@ -152,7 +159,7 @@
     
     case 'guardarVenta':
       
-             $venta->registrar($cedula);
+             $venta->registrar($idFactura,$cedula);
              $venta->detallesDetalles($idUsuario);
              sleep(2);
              $venta->eliminar_temp_condicion($idUsuario);
@@ -163,4 +170,30 @@
     case "borrar_temp":
       $venta->eliminar_temp_condicion($idUsuario);
     break;
+
+    case "listarfacturas":
+      
+      $datos = $venta->get_facturas();
+      $data = array();
+      foreach ($datos as $row) {
+        $sub_array = array();
+
+       
+        $sub_array[] = $row["idFactura"];
+        $sub_array[] = $row["nombre"];
+        $sub_array[] = $row["cedula"];
+        $sub_array[] = '<button title="Ver" type="button" onClick="mostrarFactura('.$row["idFactura"].');"   id="'.$row["idFactura"];.'" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
+        $sub_array[] = '<button title="Anular" type="button" onClick=""  id="" class="btn btn-warning btn-md"><i class="fas fa-minus" aria-hidden="true"></i></button>';
+        
+        $data[]=$sub_array;
+      }
+        $results=array(
+          "sEcho"=>1,
+          "iTotalRecords"=>count($data),
+          "iTotalDisplayRecords"=>count($data),
+          "aaData"=>$data
+          );
+        echo json_encode($results);
+    break;
+
 }
