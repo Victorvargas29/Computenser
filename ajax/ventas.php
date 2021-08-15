@@ -181,8 +181,8 @@
        
         $sub_array[] = $row["idFactura"];
         $sub_array[] = $row["nombre"];
-        $sub_array[] = $row["cedula"];
-        $sub_array[] = '<button title="Ver" type="button" onClick="mostrarFactura('.$row["idFactura"].');"   id="'.$row["idFactura"];.'" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
+        $sub_array[] = $row["cedula"];  //mostrarFactura('.$row["idFactura"].');   '.$row["idFactura"];.'
+        $sub_array[] = '<button title="Ver" type="button" onClick="" id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
         $sub_array[] = '<button title="Anular" type="button" onClick=""  id="" class="btn btn-warning btn-md"><i class="fas fa-minus" aria-hidden="true"></i></button>';
         
         $data[]=$sub_array;
