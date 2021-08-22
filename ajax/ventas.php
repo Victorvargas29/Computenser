@@ -45,7 +45,7 @@
         $sub_array[] = $row["nombre_serv"];
         $sub_array[] = $row["precioTemp"];
         $sub_array[] = $row["precioTemp"] * $row["tasa"];
-        $sub_array[] = $row["precioTemp"] * $row["tasa"] * 0.16; 
+        // $sub_array[] = $row["precioTemp"] * $row["tasa"] * 0.16; 
         $sub_array[] = $row["cantidad"];
         $sub_array[] = $row["precioTemp"] * $row["tasa"] * $row["cantidad"];
         $sub_array[] = $row["precioTemp"] * $row["cantidad"];
@@ -66,8 +66,6 @@
       $data = array();
       foreach ($datos as $row) {
         $sub_array = array();
-
-       // $sub_array[] = '<button title="Eliminar" type="button" onClick="eliminar_item('.$row["iddetallesFT"].');"  id="'.$row["iddetallesFT"].'" class="btn btn-danger btn-md"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>';
        
         $precio= ($row["precioTemp"]*$row["cantidad"])+$precio;
         $precioBs = ($row["precioTemp"] * $row["tasa"]*$row["cantidad"])+$precioBs;
@@ -76,13 +74,12 @@
         $precioTBs = ($row["precioTemp"] * $row["tasa"] * $row["cantidad"]*1.16)+$precioTBs;
         $precioT = ($row["precioTemp"] * $row["cantidad"]*1.16)+$precioT;
         
-        //$data[]=$sub_array;
       }
-      $sub_array[] = $precio;
+    //   $sub_array[] = $precio;
       $sub_array[] = $precioBs;
-      $sub_array[] = $iva;
+    //   $sub_array[] = $iva;
       $sub_array[] = $ivaBs;
-      $sub_array[] = $precioT;
+    //   $sub_array[] = $precioT;
       $sub_array[] = $precioTBs;
       
       $data[]=$sub_array;
@@ -176,16 +173,19 @@
       $datos = $venta->get_facturas();
       $data = array();
       foreach ($datos as $row) {
-        $sub_array = array();
+        if ($row["idFactura"]>1) {
+          $sub_array = array();
 
        
-        $sub_array[] = $row["idFactura"];
+        $sub_array[] = '<span>'.$row["idFactura"].'</span> ';
         $sub_array[] = $row["nombre"];
         $sub_array[] = $row["cedula"];  //mostrarFactura('.$row["idFactura"].');   '.$row["idFactura"];.'
-        $sub_array[] = '<button title="Ver" type="button" onClick="" id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
-        $sub_array[] = '<button title="Anular" type="button" onClick=""  id="" class="btn btn-warning btn-md"><i class="fas fa-minus" aria-hidden="true"></i></button>';
+        $sub_array[] = '<button title="Ver" type="button" onClick=mostrarFactura('.$row["idFactura"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
+        $sub_array[] = '<button title="Anular" type="button" onClick=""  id="'.$row["idFactura"].'" class="btn btn-warning btn-md"><i class="fas fa-minus" aria-hidden="true"></i></button>';
         
         $data[]=$sub_array;
+        }
+        
       }
         $results=array(
           "sEcho"=>1,
@@ -195,5 +195,6 @@
           );
         echo json_encode($results);
     break;
+ 
 
 }

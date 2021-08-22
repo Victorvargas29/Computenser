@@ -37,7 +37,7 @@ $("#form_compra").on("submit", function(){
 }
 
 $(document).ready(function(){
-	$("#bt").click(function(){
+	$("#listafact").click(function(){
 		$.ajax({
 		url:'lista_facturas.php',
 		method: "POST",
@@ -131,7 +131,7 @@ function listar(){
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		
-		//dom:'Bfrtilp',//Definimos los elementos del control de tabla
+		dom:'r',//Definimos los elementos del control de tabla  Bfrtilp' t=mostra reg.
 		
 		"ajax":
 		{
@@ -166,7 +166,7 @@ function listar(){
 				"sLast": "Ultimo",
 				"sNext": "Siguiente",
 				"sPrevious": "Anterior"
-			},
+			}, 
 			"oAria":{
 				"sSortAscending": ": Activar para ordenar la columna",
 				"sSortDescending": ": Activar para ordenar la columna"
@@ -412,4 +412,17 @@ function listarfacturas(){
 	}).DataTable();
 }//fin funcion listar
 
+
+function mostrarFactura(idFactura){
+	$.ajax({
+		
+
+		success:function(data){
+			console.log(idFactura);
+			window.open("http://computenser.test/computenser/report/crearPdf2.php?idFactura="+idFactura);
+		}
+	});
+
+	$.post("../report/crearPdf2.php",{idFactura : idFactura});
+}//fin funcion mostrar
 init();

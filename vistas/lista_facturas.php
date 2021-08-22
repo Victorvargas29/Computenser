@@ -27,13 +27,13 @@
     <!-- ============================================================== -->
     <div class="container-fluid">
         <h4>Consultar Facturas</h4>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">            
-            <button id="btnReporte" type="button" onClick="" class="btn btn-success" data-toggle="modal" data-target="#ConsultaReporteModal">Buscar Factura</button>    
+<!--         <div class="container">
+            <div class="row">
+                <div class="col-lg-12">            
+                <button id="btnReporte" type="button" onClick="" class="btn btn-success" data-toggle="modal" data-target="#ConsultaReporteModal">Buscar Factura</button>    
+                </div>    
             </div>    
-        </div>    
-    </div>    
+        </div>   -->  
     <br>  
     <div class="content-wrapper">        
         <!-- Main content -->
@@ -42,7 +42,8 @@
         <div class="row">
                 <div class="col-md-12">
                     <div class="box">
-                    <div class="panel-body table-responsive">        
+                    <div class="panel-body table-responsive">   
+                    <form action="http://computenser.test/computenser/report/crearPdf2.php" target="_blank" method="post" class="form-horizontal" id="form_lista">     
                         <table id="factura_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
                         <thead class="text-light" style="background-color: #0e9670;">
                             <tr>
@@ -55,8 +56,9 @@
                         </thead>
                         <tbody >
                               
-                        </tbody>        
-                       </table>                    
+                        </tbody>      
+                       </table> 
+                    </form>                     
                     </div>
                 </div>
                 </div>
@@ -64,35 +66,32 @@
     </section>
     </div>    
       
-<!--Modal para CRUD-->
-<div id="ConsultaReporteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form method="post" id="reporte_form">   
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Consulta de Factura</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                    </button>
+    <!--Modal para CRUD-->
+    <div id="ConsultaReporteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="post" id="reporte_form">   
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Consulta de Factura</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-form-label">Nro de Factura:</label>
+                            <input type="text" class="form-control" name="NroFactura" id="NroFactura">
+                        </div>         
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
+                        <button type="submit" name="action" id="ConsultaReporte" value="Add" aria-hidden="true" class="btn btn-dark">Consultar</button>
+                    </div>
                 </div>
-             
-                <div class="modal-body">
-
-                    <div class="form-group">
-                    <label class="col-form-label">Nro de Factura:</label>
-                    <input type="text" class="form-control" name="NroFactura" id="NroFactura">
-
-                    </div>         
-                </div>
-                <div class="modal-footer">
-                    
-                    <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
-                    <button type="submit" name="action" id="ConsultaReporte" value="Add" aria-hidden="true" class="btn btn-dark">Consultar</button>
-                    
-                </div>
-            </div>
-        </form>
-    </div>
-</div>  
+            </form>
+        </div>
+    </div>  
 </div>  <!-- container-fluid-->
       
     <!-- jQuery, Popper.js, Bootstrap JS -->

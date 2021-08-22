@@ -1,15 +1,25 @@
 <?php
 
-require_once("../modelos/Clientes.php");
+//require_once("../modelos/Clientes.php");
 require_once("../modelos/ventas.php");
 require_once("../modelos/Servicios.php");
 
 
-$client = new CLientes();
+//$client = new CLientes();
 $sold = new Ventas();
+if(isset($_POST['idFactura'])){
+  $venta=$sold->get_detalles_factura($_POST["idFactura"]);
+  $idFacturas=$_POST["idFactura"];
+}else{
+  $venta=$sold->get_detalles_factura($_GET["idFactura"]);
+  $idFacturas=$_GET["idFactura"];
+}
+//$cliente=$client->get_cliente_por_id($_POST["cedula"]);
 
-$venta=$sold->get_detalles_factura($_POST["idFactura"]);
-$cliente=$client->get_cliente_por_id($_POST["cedula"]);
+
+$subtotal=0;
+$iva=0;
+$total=0;
 
 /* $venta=$sold->get_detalles_factura(12);
 $cliente=$client->get_cliente_por_id(25135123); */
@@ -37,21 +47,30 @@ ob_start();
   margin-top:  12%;
   margin-left: 80%
 }
+.totales {
+ /* margin-top:  12%;  */
+  margin-left: 80%
+}
 table{
   margin-top: 4%;
   border-collapse: collapse;
 }
 
 table, th, td{
-  border: 1px solid black;
+  border: 0.5px solid black;
 }
 
 th,td{
   padding: 5px;
+  height: 15px;
+}
+
+label{
+  font-size: 12px;
 }
 
 .Estilo2{font-size: 12px}
-.Estilo3{font-size: 13px; font-weight: bold;}
+.Estilo3{font-size: 14px; font-weight: bold;}
 .Estilo4{color: #FFFFFF}
 .Estilo_prueba{
   /*background-color: #878e96; */
@@ -64,24 +83,24 @@ th,td{
   <div > 
             <div class="margen">
               <label class="Estilo2">Factura:</label>
-              <label class="EstiloFactura" id="idFactura"><?php echo "00".$_POST["idFactura"];?></label>
+              <label class="EstiloFactura" id="i"><?php echo "00".$idFacturas;?></label>
             </div>
             <div class="" style="display: inline-block">
               <label style="margin-top: 50%">Nombre o Razon Social:</label>
-              <label id="nombre_c"><?php echo $cliente[0]["nombre"]." ".$cliente[0]["apellido"];?></label>
+              <label id=""><?php echo $venta[0]["nombre"]." ".$venta[0]["apellido"];?></label>
             </div>
             <div style="display: inline-block">
             <label style="margin-left: 15%">RIF / CI:</label>
-              <label id="idCliente"><?php echo $cliente[0]["cedula"]?></label>
+              <label id=""><?php echo $venta[0]["cedula"]?></label>
             </div>
             <div style="margin-top: 2%">
               <div style="display: inline-block">
                 <label>Domicilio Fiscal:</label>
-                <label id="direccion"><?php echo $cliente[0]["direccion"]?></label>
+                <label id=""><?php echo $venta[0]["direccion"]?></label>
               </div>
               <div style="display: inline-block">
                   <label style="margin-left: 25%">Telefono:</label>
-                  <label id="telefono"><?php echo $cliente[0]["telefono"]?></label>
+                  <label id=""><?php echo $venta[0]["telefono"]?></label>
                   <br/>
               </div>
             </div>
@@ -99,17 +118,17 @@ th,td{
       <th width="30%" bgcolor="#317eac"><span class="Estilo11">CORREO</span></th>
     </tr>
     <?php
-      for($i=0;$i<sizeof($cliente);$i++){
+     // for($i=0;$i<sizeof($cliente);$i++){
     ?>
       <tr style="font-size:10pt" class="even_row">
-        <td><div><span class=""><?php echo $cliente[$i]["cedula"];?></span></div></td>
-        <td style="text-align: center"><div><span class=""><?php echo $cliente[$i]["nombre"]." ".$cliente[$i]["apellido"];?></span></div></td>
-        <td style="text-align: center"><div><span class=""><?php echo $cliente[$i]["telefono"];?></span></div></td>
-        <td style="text-align: right"><div><span class=""><?php echo $cliente[$i]["direccion"];?></span></div></td>
-        <td style="text-align:center"><div><span class=""><?php echo $cliente[$i]["correo"];?></span></div></td>
+        <td><div><span class=""><?php //echo $cliente[$i]["cedula"];?></span></div></td>
+        <td style="text-align: center"><div><span class=""><?php //echo $cliente[$i]["nombre"]." ".$cliente[$i]["apellido"];?></span></div></td>
+        <td style="text-align: center"><div><span class=""><?php //echo $cliente[$i]["telefono"];?></span></div></td>
+        <td style="text-align: right"><div><span class=""><?php //echo $cliente[$i]["direccion"];?></span></div></td>
+        <td style="text-align:center"><div><span class=""><?php //echo $cliente[$i]["correo"];?></span></div></td>
       </tr>
     <?php
-      }
+     // }
     ?>
   </table>
 </div>
@@ -134,18 +153,75 @@ th,td{
                     ?>
 
                     <tr style="font-size:10pt" class="even_row">
-                    <td style="text-align:center"><div><span class=""><?php echo $venta[$i]["cantidad"];?></span></div></td>
-                    <td style="text-align:left"><div><span class=""><?php echo $venta[$i]["Nombre"];?></span></div></td>
-                    <!-- <td style="text-align:center"><div ><span class=""><?php echo $venta[$i]["precio"];?></span></div></td> -->
-                    <td style="text-align:right"><div ><span class=""><?php echo $venta[$i]["tasa"]*$venta[$i]["precio"];?></span></div></td>
-                    <td style="text-align:right"><div ><span class=""><?php echo $venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"];?></span></div></td> 
+                      <td style="text-align:center"><div><span class=""><?php echo $venta[$i]["cantidad"];?></span></div></td>
+                      <td style="text-align:left"><div><span class=""><?php echo $venta[$i]["Nombre"];?></span></div></td>
+                      <!-- <td style="text-align:center"><div ><span class=""><?php echo $venta[$i]["precio"];?></span></div></td> -->
+                      <td style="text-align:right"><div ><span class=""><?php echo $venta[$i]["tasa"]*$venta[$i]["precio"];?></span></div></td>
+                      <td style="text-align:right"><div ><span class=""><?php echo $venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"];?></span></div></td> 
+                    
                     </tr>
 
                     <?php
                       }
-                    ?>
+                   for($i=0;$i<20-sizeof($venta);$i++){
+                   ?>
+
+                    <tr style="" >
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                    </tr>
+                <?php
+                   }
+                ?>
                       </tbody>
-                    </table>
+            </table>
+         <!--    <table class="table table-striped nowrap" width="40%" id="sub">
+                      <thead>
+                        <tr class="Estilo3" class="bg-success">
+                          <th class="col-lg-1">SUBTOTAL $</th> -->
+                         <!--  <th class="col-lg-3">SUBTOTAL BsS</th>           
+                          <th class="col-lg-2">I.V.A%  $</th>
+                          <th class="col-lg-2">I.V.A% BsS</th>  -->
+                          <!-- <th class="col-lg-2">TOTAL $</th> 
+                          <th class="col-lg-2">TOTAL BsS</th>     
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      <?php
+                        for($i=0;$i<sizeof($venta);$i++){
+
+                          $subtotal=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"])+$subtotal;
+                          $iva=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"]* 0.16)+$iva;
+                          $total=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"]* 1.16)+$total;
+                    
+                        }
+                    
+                    ?>
+                       
+                        <tr style="font-size:10pt" class="even_row">
+                          <td style="text-align:center"><div ><span class=""><?php echo $subtotal;?></span></div></td>
+                          <td style="text-align:right"><div ><span class=""><?php echo $iva;?></span></div></td>
+                          <td style="text-align:right"><div ><span class=""><?php echo $total;?></span></div></td> 
+                        </tr>
+    
+                      </tbody>
+              </table>-->
+
+              <div class="totales">
+              <label class="Estilo2">SUBTOTAL:</label>
+              <label class="Estilo2" id="subtotal"><?php echo $subtotal;?></label>
+            </div>
+            <div class="totales">
+              <label class="Estilo2">IVA 16%:</label>
+              <label class="Estilo2" id="iva"><?php echo $iva;?></label>
+            </div>
+            <div class="totales">
+              <label class="Estilo2">TOTAL:</label>
+              <label class="Estilo2" id="total"><?php echo $total;?></label>
+            </div>
 
 
 <?php

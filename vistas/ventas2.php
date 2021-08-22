@@ -72,7 +72,7 @@ $cli = $clientes->get_Cliente();
       
               </div>
               <div class="col-lg-4">  
-              <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3" id="bt"><i class="fa fa-save" aria-hidden="true"></i></a>      
+              <button type="button" class="btn btn-primary" id="listafact"><i class="" aria-hidden="true"></i> Ver Facturas</button>      
               </div>
 
             </div><!-- /.row -->
@@ -193,7 +193,7 @@ $cli = $clientes->get_Cliente();
                                         <th class="all text-center">Concepto o Descripcion</th>
                                         <th class="min-desktop">USD $</th>
                                         <th class="all">Precio Venta Bs.</th>
-                                        <th class="min-desktop">IVA 16%</th>
+                                        <!-- <th class="min-desktop">IVA 16%</th> -->
                                         <th class="all">Cantidad</th>
                                         <th class="all">Total Bs</th>
                                         <th class="all">Total $</th>
@@ -218,22 +218,22 @@ $cli = $clientes->get_Cliente();
 
             <div class="row">
           
-            <div class="col-lg-1">            
+            <div class="col-lg-4">            
             </div>
-            <div class="col-lg-2">            
+            <div class="col-lg-3">            
             </div> 
             
-            <div class="col-lg-9">
+            <div class="col-lg-4">
                 <div class="box ml-5">
                   <div class="box-body">
                     <table class="table table-striped nowrap" width="100%" id="sub">
                       <thead>
                         <tr class="bg-success">
-                          <th class="col-lg-1">SUBTOTAL $</th>
+                          <!-- <th class="col-lg-1">SUBTOTAL $</th> -->
                           <th class="col-lg-3">SUBTOTAL BsS</th>           
-                          <th class="col-lg-2">I.V.A%  $</th>
+                          <!-- <th class="col-lg-2">I.V.A%  $</th> -->
                           <th class="col-lg-2">I.V.A% BsS</th> 
-                          <th class="col-lg-2">TOTAL $</th>
+                          <!-- <th class="col-lg-2">TOTAL $</th> -->
                           <th class="col-lg-2">TOTAL BsS</th>     
                         </tr>
                       </thead>
@@ -247,9 +247,8 @@ $cli = $clientes->get_Cliente();
                       </tbody>
                     </table>
                     <div class="boton_registrar">
-                    <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " onClick="
-                    "  id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>Registrar Venta</button>
-                      <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3" href="http://computenser.test/computenser/report/crearPdf2.php" target="_blank"  id="bt"><i class="fa fa-save" aria-hidden="true"></i></a>
+                    <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " onClick=""  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Venta</button>
+                      <!-- <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3" href="http://computenser.test/computenser/report/crearPdf2.php" target="_blank"  id="bt"><i class="fa fa-save" aria-hidden="true"></i></a> -->
                       <button type="button" onClick="borrar_temporal()" value="Add" 
                       class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
                     </i>Cancelar</button>
@@ -260,6 +259,8 @@ $cli = $clientes->get_Cliente();
                   </div> <!-- /.box-body -->
                 </div> <!-- /.box -->            
               </div> <!-- /.col -->
+              <div class="col-lg-1">            
+            </div> 
           </div>
         </form>
       </section>
