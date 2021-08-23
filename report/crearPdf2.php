@@ -210,17 +210,17 @@ label{
                       </tbody>
               </table>-->
 
-              <div class="totales">
-              <label class="Estilo2">SUBTOTAL:</label>
-              <label class="Estilo2" id="subtotal"><?php echo $subtotal;?></label>
+            <div class="totales">
+              <label style="text-align:left" class="Estilo2">SUBTOTAL:</label>
+              <label style="text-align:right" class="Estilo2" id="subtotal"><?php echo $subtotal;?></label>
             </div>
             <div class="totales">
-              <label class="Estilo2">IVA 16%:</label>
-              <label class="Estilo2" id="iva"><?php echo $iva;?></label>
+              <label  style="text-align:left" class="Estilo2">IVA 16%:</label>
+              <label  style="text-align:right" class="Estilo2" id="iva"><?php echo $iva;?></label>
             </div>
             <div class="totales">
-              <label class="Estilo2">TOTAL:</label>
-              <label class="Estilo2" id="total"><?php echo $total;?></label>
+              <label style="text-align:left"  class="Estilo2">TOTAL:</label>
+              <label style="text-align:right" class="Estilo2" id="total"><?php echo $total;?></label>
             </div>
 
 
