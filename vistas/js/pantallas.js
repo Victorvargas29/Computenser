@@ -1,10 +1,19 @@
 $(document).ready(function(){
 
 	$.ajax({
-		url:'../vistas/home.php',
+		url:'../vistas/home2.php',
 		method: "POST",
 		success: function(res){ $("#seccion1").html(res); },
 		error: function(err){ $("#seccion1").html(err);}
+	});
+
+	$("#home").click(function(){
+		$.ajax({
+		url:'../vistas/home2.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
+		});
 	});
 
 	$("#usuarios_p").click(function(){
@@ -38,15 +47,6 @@ $(document).ready(function(){
 	$("#empleadas_p").click(function(){
 		$.ajax({
 		url:'../vistas/empleada.php',
-		method: "POST",
-		success: function(res){ $("#seccion1").html(res); },
-		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
-		});
-	});
-
-	$("#home").click(function(){
-		$.ajax({
-		url:'../vistas/home.php',
 		method: "POST",
 		success: function(res){ $("#seccion1").html(res); },
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
@@ -148,7 +148,14 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
 		});
 	});
-
+	$("#reportes_p").click(function(){
+		$.ajax({
+		url:'../vistas/lista_facturas.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
+		});
+	});
 	
 
 

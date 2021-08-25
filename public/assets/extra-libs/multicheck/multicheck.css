@@ -80,3 +80,7 @@ header.topbar, thead, thead tr.bg-success{
 #main-wrapper .left-sidebar[data-sidebarbg=skin5], #main-wrapper .left-sidebar[data-sidebarbg=skin5] ul {
   background: #47535f !important;
 }
+.modal-header{
+  background: #47535f !important;
+  color: #fff;
+}

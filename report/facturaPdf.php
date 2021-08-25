@@ -37,7 +37,17 @@ ob_start();
   text-align: center;
 
 }
-    
+
+.text-derecha{
+ text-align: right;
+ /* direction: rtl; */
+}
+
+.text-izquierda{
+ text-align: left;
+  /* direction: ltr; */
+}
+
 .EstiloFactura{
   font-size: 14px;
   font-weight: bold;
@@ -49,7 +59,7 @@ ob_start();
 }
 .totales {
  /* margin-top:  12%;  */
-  margin-left: 80%
+  margin-left: 75%
 }
 table{
   margin-top: 4%;
@@ -58,6 +68,11 @@ table{
 
 table, th, td{
   border: 0.5px solid black;
+}
+
+span, label{
+  text-align: right;
+  direction: rtl;
 }
 
 th,td{
@@ -72,9 +87,8 @@ label{
 .Estilo2{font-size: 12px}
 .Estilo3{font-size: 14px; font-weight: bold;}
 .Estilo4{color: #FFFFFF}
-.Estilo_prueba{
-  /*background-color: #878e96; */
-  background-color: #748290;
+.Estilo_color{
+  background-color: #a4a7a9;
 }
 
 </style>
@@ -102,6 +116,16 @@ label{
                   <label style="margin-left: 25%">Telefono:</label>
                   <label id=""><?php echo $venta[0]["telefono"]?></label>
                   <br/>
+              </div>
+              <div style="display: inline-block">
+                <label style="margin-left: 40%">Fecha:
+                </label>
+                <label id="">
+                  <?php
+                    $date = new DateTime($venta[0]["fecha"]);
+                    echo $date->format('d-m-Y H:i:s');
+                  ?>
+                </label>
               </div>
             </div>
             
@@ -135,7 +159,7 @@ label{
  -->
 <table  class="" width="100%" id="">
                       <thead>
-                        <tr class="Estilo_prueba">
+                        <tr class="Estilo_color Estilo2">
                           <th class="text-center">Cant</th>
                           <th class="text-center">Concepto o Descripcion</th>
                           <!-- <th class="text-center">USD $</th> -->
@@ -155,9 +179,9 @@ label{
                     <tr style="font-size:10pt" class="even_row">
                       <td style="text-align:center"><div><span class=""><?php echo $venta[$i]["cantidad"];?></span></div></td>
                       <td style="text-align:left"><div><span class=""><?php echo $venta[$i]["Nombre"];?></span></div></td>
-                      <!-- <td style="text-align:center"><div ><span class=""><?php echo $venta[$i]["precio"];?></span></div></td> -->
-                      <td style="text-align:right"><div ><span class=""><?php echo $venta[$i]["tasa"]*$venta[$i]["precio"];?></span></div></td>
-                      <td style="text-align:right"><div ><span class=""><?php echo $venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"];?></span></div></td> 
+                      <!-- <td style="text-align:center"><div ><span class=""><?php echo number_format($venta[$i]["precio"],2);?></span></div></td> -->
+                      <td style="text-align:right"><div ><span class=""><?php echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);?></span></div></td>
+                      <td style="text-align:right"><div ><span class=""><?php echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);?></span></div></td> 
                     
                     </tr>
 
@@ -209,20 +233,22 @@ label{
     
                       </tbody>
               </table>-->
+          <div class="">  
+              <div class="totales">
+                  <label style="text-align:left" class="Estilo2">SUBTOTAL:</label>
+                  <label style="float:right; margin-top: 2%" class="" id="subtotal"><?php echo number_format($subtotal,2);?></label>
+              </div>
+              
+              <div class="totales">
+                <label style="text-align:left" class="Estilo2">IVA 16%:</label>
+                <label style="float:right; margin-top: 3%" class="" id="iva"><?php echo number_format($iva,2);?>
+              </div>
 
               <div class="totales">
-              <label class="Estilo2">SUBTOTAL:</label>
-              <label class="Estilo2" id="subtotal"><?php echo $subtotal;?></label>
-            </div>
-            <div class="totales">
-              <label class="Estilo2">IVA 16%:</label>
-              <label class="Estilo2" id="iva"><?php echo $iva;?></label>
-            </div>
-            <div class="totales">
-              <label class="Estilo2">TOTAL:</label>
-              <label class="Estilo2" id="total"><?php echo $total;?></label>
-            </div>
-
+                <label style="text-align:left" class="Estilo2">TOTAL:</label>
+                <label style="float:right; margin-top: 4%" class="" id="total"><?php echo number_format($total,2);?></label>
+              </div>
+          </div>
 
 <?php
 
@@ -275,7 +301,7 @@ $pdf->load_html($salida_html);;
 $pdf->render();
 
 // Enviamos el fichero PDF al navegador.
-$pdf->stream('ePdf.pdf',array("Attachment"=>0));
+$pdf->stream('factura00'.$idFacturas.'.pdf',array("Attachment"=>0));
 //$pdf->loadView('f', compact('values'));
 //return $pdf->stream();
 ///echo '<script>window.open("crearPdf.php", "_blank");</script>';

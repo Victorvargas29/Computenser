@@ -10,7 +10,7 @@
   $servicio = new Servicio();
   $cedula = isset($_POST["cedula"]);
 	$idFactura = isset($_POST["idFactura"]);
-	$idServicio = isset($_POST["idServicio "]);
+	$idServicio = isset($_POST["idServicio"]);
 	$precio = isset($_POST["precio"]);
 	$nombre_ser = isset($_POST["nombre_ser"]);
 
@@ -27,12 +27,17 @@
   $precioTBs=0;
   $precioTBs=0;
   switch($_GET["op"]){
-	  case "guardar":
+	  case "agregar_detalle":
 
-    //  $datos = $servicio->get_nombre_servicio_por_id($idServicio);
+      if($_POST["idServicio"] != 0){
 
+        $venta->agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$cantidad,$idUsuario);
 
-      $venta->registrar_venta($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$cantidad,$idUsuario);
+      }else {
+        echo "debe selecionar un servicio";
+      }
+     
+
     break;
 
     case "listar":
@@ -44,11 +49,11 @@
         $sub_array[] = '<button title="Eliminar" type="button" onClick="eliminar_item('.$row["iddetallesFT"].');"  id="'.$row["iddetallesFT"].'" class="btn btn-danger btn-md"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>';
         $sub_array[] = $row["nombre_serv"];
         $sub_array[] = $row["precioTemp"];
-        $sub_array[] = $row["precioTemp"] * $row["tasa"];
+        $sub_array[] = number_format($row["precioTemp"] * $row["tasa"],2);
         // $sub_array[] = $row["precioTemp"] * $row["tasa"] * 0.16; 
         $sub_array[] = $row["cantidad"];
-        $sub_array[] = $row["precioTemp"] * $row["tasa"] * $row["cantidad"];
-        $sub_array[] = $row["precioTemp"] * $row["cantidad"];
+        $sub_array[] = number_format($row["precioTemp"] * $row["tasa"] * $row["cantidad"],2);
+        $sub_array[] = number_format($row["precioTemp"] * $row["cantidad"],2);
         
         $data[]=$sub_array;
       }
@@ -76,11 +81,11 @@
         
       }
     //   $sub_array[] = $precio;
-      $sub_array[] = $precioBs;
+      $sub_array[] = number_format($precioBs,2);
     //   $sub_array[] = $iva;
-      $sub_array[] = $ivaBs;
+      $sub_array[] = number_format($ivaBs,2);
     //   $sub_array[] = $precioT;
-      $sub_array[] = $precioTBs;
+      $sub_array[] = number_format($precioTBs,2);
       
       $data[]=$sub_array;
         $results=array(

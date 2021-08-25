@@ -176,13 +176,13 @@ function listar(){
 	}).DataTable();
 
 }
-function cargarlistaS(){
+function agregar_detalles(){
 
 	// e.preventDefault();//No se activará la acción predeterminada del evento
 	var formData = new FormData($("#form_compra")[0]);
 
 		$.ajax({
-			url: "../ajax/ventas.php?op=guardar",
+			url: "../ajax/ventas.php?op=agregar_detalle",
 			type: "POST",
 			data: formData,
 			cache:false,
@@ -419,10 +419,10 @@ function mostrarFactura(idFactura){
 
 		success:function(data){
 			console.log(idFactura);
-			window.open("http://computenser.test/computenser/report/crearPdf2.php?idFactura="+idFactura);
+			window.open("http://computenser.test/computenser/report/facturaPdf.php?idFactura="+idFactura);
 		}
 	});
 
-	$.post("../report/crearPdf2.php",{idFactura : idFactura});
+	$.post("../report/facturaPdf.php",{idFactura : idFactura});
 }//fin funcion mostrar
 init();

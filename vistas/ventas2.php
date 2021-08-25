@@ -45,7 +45,7 @@ $cli = $clientes->get_Cliente();
         <!--VISTA MODAL PARA AGREGAR PRODUCTO -->    
         <?php // require_once("modal/lista_productos_ventas_modal.php");?>
     <section class="formulario-compra">
-      <form action="http://computenser.test/computenser/report/crearPdf2.php" target="_blank" method="post" class="form-horizontal" id="form_compra">
+      <form action="http://computenser.test/computenser/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">
         <div class="container"> <!--container-->
             <div class="row pb-1 pt-3">
               <div class="col-lg-6">
@@ -122,7 +122,7 @@ $cli = $clientes->get_Cliente();
                 <div class="row pt-3 pb-3">
                     <div class="col-lg-5">
                       <label for="" class="col-lg-1 control-label">Servicio</label>
-                        <select class="form-control font-weight-bold" id="idServicio" name="idServicio">
+                        <select class="form-control font-weight-bold" id="idServicio" name="idServicio" required>
                             <option class="font-weight-bold" value="0">Seleccione</option>
                             <?php
                           // $num=0;
@@ -147,7 +147,7 @@ $cli = $clientes->get_Cliente();
                     <label>Cantidad</label>          
                     <input type="text" name="cantidad" id="cantidad" placeholder="Cantidad" required pattern = "[0-9]" class="form-control"></input>
                     
-                    <input type="hidden" name="nombre_ser" id="nombre_ser" placeholder="Cantidad" required pattern = "[0-9]" class="form-control"></input>
+                    <input type="hidden" name="nombre_ser" id="nombre_ser" placeholder="nombre servicio" required pattern = "[0-9]" class="form-control"></input>
                     </div>
                     <div class="col-lg-2">
                       <label>Precio</label>
@@ -157,7 +157,7 @@ $cli = $clientes->get_Cliente();
                 
                     <div class="col-lg-3">
                           <div class="btn-group text-center pt-4">
-                            <button id="btnAgregar" type="button" onClick="cargarlistaS()" class="btn btn-primary " data-toggle="modal">Agregar</button>
+                            <button id="btnAgregar" type="button" onClick="agregar_detalles()" class="btn btn-primary " data-toggle="modal">Agregar</button>
                             <input type="hidden" name="iddetallesFT" id="iddetallesFT"/>
                           </div>
                       <!--  <h4 class="text-center"><strong>Tipo de Pago</strong></h4>
@@ -220,12 +220,13 @@ $cli = $clientes->get_Cliente();
           
             <div class="col-lg-4">            
             </div>
-            <div class="col-lg-3">            
+            <div class="col-lg-2">            
             </div> 
             
-            <div class="col-lg-4">
-                <div class="box ml-5">
-                  <div class="box-body">
+            <div class="col-lg-5">
+                <div class="box lg-6">
+                  <div class="panel-body table-responsive">
+                    
                     <table class="table table-striped nowrap" width="100%" id="sub">
                       <thead>
                         <tr class="bg-success">
@@ -238,20 +239,14 @@ $cli = $clientes->get_Cliente();
                         </tr>
                       </thead>
                       <tbody>
-                     
-                        <?php
-                          // ?variable=<?php urldecode('')
-                        ?>
-                        
                         
                       </tbody>
                     </table>
                     <div class="boton_registrar">
                     <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " onClick=""  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Venta</button>
                       <!-- <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3" href="http://computenser.test/computenser/report/crearPdf2.php" target="_blank"  id="bt"><i class="fa fa-save" aria-hidden="true"></i></a> -->
-                      <button type="button" onClick="borrar_temporal()" value="Add" 
-                      class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
-                    </i>Cancelar</button>
+                   <!--   <button type="button" onClick="borrar_temporal()" value="Add" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
+                    </i>Cancelar</button> -->
                     <!-- <input type="hidden" name="idUser" id="idUser" value="" required pattern = "[0-9]{0,15}" class="form-control"><?php echo $_SESSION["idUsuario"]
                             ?></input>  -->
                   </div>
