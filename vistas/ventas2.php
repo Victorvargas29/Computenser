@@ -170,9 +170,26 @@ $cli = $clientes->get_Cliente();
                         
                     </div>
                     
-                </div>     
-            </div>  <!--fin container--> 
-          
+                </div>      
+                
+                
+                
+              <div class="row pt-2 pb-2">
+                <div class="col-lg-3">
+                  <label>Seleccione modena:</label>      
+                </div>   
+                <div class="col-lg-2">
+                  <input type="radio" id="dol" name="moneda" value="dol" checked>
+                  <label for="dol">Reporte en $</label>
+                </div>
+                <div class="col-lg-2">
+                  <input type="radio" id="bs" name="moneda" value="bs">
+                  <label for="bs">Reporte en Bs.</label>
+                </div>
+              </div>   
+
+          </div>  <!--fin container--> 
+
             <!--formulario-pedido-->
             <div class="row">
             <div class="col-md-12">

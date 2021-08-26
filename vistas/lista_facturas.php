@@ -38,31 +38,47 @@
     <div class="content-wrapper">        
         <!-- Main content -->
             <section class="content">
-   
-        <div class="row">
+      
+        
+        <!--
+        <div class="row pt-2 pb-2">
+            <div class="col-lg-3">
+                <label>Seleccione modena:</label>      
+            </div>   
+            <div class="col-lg-2">
+                <input type="radio" id="dol" name="moneda" value="dol" checked>
+                <label for="dol">Reporte en $</label>
+            </div>
+            <div class="col-lg-2">
+               <input type="radio" id="bs" name="moneda" value="bs">
+                <label for="bs">Reporte en Bs.</label>
+            </div>
+        </div>   -->
+        
+            <div class="row">
                 <div class="col-md-12">
                     <div class="box">
-                    <div class="panel-body table-responsive">   
-                    <form action="http://computenser.test/computenser/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_lista">     
-                        <table id="factura_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
-                        <thead class="text-light" style="background-color: #0e9670;">
-                            <tr>
-                                <th>Nro Factura</th>
-                                <th>Cliente</th>
-                     			<th>Cedula</th>
-                                <th width="10%">Ver Factura</th>
-                                <th width="10%">Anular</th>
-                            </tr>
-                        </thead>
-                        <tbody >
-                              
-                        </tbody>      
-                       </table> 
-                    </form>                     
+                        <div class="panel-body table-responsive">   
+                        <form action="http://computenser.test/computenser/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_lista">     
+                            <table id="factura_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
+                                <thead class="text-light" style="background-color: #0e9670;">
+                                    <tr>
+                                        <th>Nro Factura</th>
+                                        <th>Cliente</th>
+                                        <th>Cedula</th>
+                                        <th width="10%">Ver Factura</th>
+                                        <th width="10%">Anular</th>
+                                    </tr>
+                                </thead>
+                                <tbody >       
+                                </tbody>      
+                            </table>  
+                          </form>              
+                        </div>
                     </div>
                 </div>
-                </div>
-        </div>  
+            </div>  
+       
     </section>
     </div>    
       

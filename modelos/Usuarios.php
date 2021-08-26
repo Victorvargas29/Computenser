@@ -105,12 +105,12 @@
         /*poner la ruta vistas/upload*/
          public function upload_image() {
 
-            if(isset($_FILES["avatar_perfil"]))
+            if(isset($_FILES["avatar"]))
             {
-              $extension = explode('.', $_FILES['avatar_perfil']['name']);
+              $extension = explode('.', $_FILES['avatar']['name']);
               $new_name = rand() . '.' . $extension[1];
               $destination = '../public/images/' . $new_name;
-              move_uploaded_file($_FILES['avatar_perfil']['tmp_name'], $destination);
+              move_uploaded_file($_FILES['avatar']['tmp_name'], $destination);
               return $new_name;
             }
 

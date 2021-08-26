@@ -7,12 +7,15 @@ require_once("../modelos/Servicios.php");
 
 //$client = new CLientes();
 $sold = new Ventas();
+
 if(isset($_POST['idFactura'])){
   $venta=$sold->get_detalles_factura($_POST["idFactura"]);
   $idFacturas=$_POST["idFactura"];
+  $moneda=$_POST["moneda"];
 }else{
   $venta=$sold->get_detalles_factura($_GET["idFactura"]);
   $idFacturas=$_GET["idFactura"];
+  //$moneda=$_GET["moneda"];
 }
 //$cliente=$client->get_cliente_por_id($_POST["cedula"]);
 
@@ -33,6 +36,11 @@ ob_start();
 
 
 <style type="text/css">
+
+html{
+  font-family: "Helvetica", normal;
+  font-size: 150%;
+}
 .text-center{
   text-align: center;
 
@@ -54,20 +62,20 @@ ob_start();
   color: #ea1717
 }
 .margen {
-  margin-top:  12%;
+  margin-top:  11%;
   margin-left: 80%
 }
 .totales {
  /* margin-top:  12%;  */
-  margin-left: 75%
+  margin-left: 70%
 }
 table{
   margin-top: 4%;
   border-collapse: collapse;
 }
 
-table, th, td{
-  border: 0.5px solid black;
+table{
+ /* border: 0.5px solid black; */
 }
 
 span, label{
@@ -85,7 +93,7 @@ label{
 }
 
 .Estilo2{font-size: 12px}
-.Estilo3{font-size: 14px; font-weight: bold;}
+.Estilo3{font-weight: bold;}
 .Estilo4{color: #FFFFFF}
 .Estilo_color{
   background-color: #a4a7a9;
@@ -96,29 +104,29 @@ label{
 
   <div > 
             <div class="margen">
-              <label class="Estilo2">Factura:</label>
-              <label class="EstiloFactura" id="i"><?php echo "00".$idFacturas;?></label>
+              <label class="Estilo2">FACTURA N°:</label>
+              <label class="EstiloFactura" id="i"><?php echo "000".$idFacturas;?></label>
             </div>
             <div class="" style="display: inline-block">
-              <label style="margin-top: 50%">Nombre o Razon Social:</label>
+              <label class="Estilo3" style="margin-top: 50%">Nombre o Razon Social:</label>
               <label id=""><?php echo $venta[0]["nombre"]." ".$venta[0]["apellido"];?></label>
             </div>
             <div style="display: inline-block">
-            <label style="margin-left: 15%">RIF / CI:</label>
+            <label class="Estilo3" style="margin-left: 15%">RIF / CI:</label>
               <label id=""><?php echo $venta[0]["cedula"]?></label>
             </div>
-            <div style="margin-top: 2%">
+            <div>
               <div style="display: inline-block">
-                <label>Domicilio Fiscal:</label>
+                <label class="Estilo3">Domicilio Fiscal:</label>
                 <label id=""><?php echo $venta[0]["direccion"]?></label>
               </div>
               <div style="display: inline-block">
-                  <label style="margin-left: 25%">Telefono:</label>
+                  <label class="Estilo3" style="margin-left: 25%">Telefono:</label>
                   <label id=""><?php echo $venta[0]["telefono"]?></label>
                   <br/>
               </div>
               <div style="display: inline-block">
-                <label style="margin-left: 40%">Fecha:
+                <label class="Estilo3" style="margin-left: 40%">Fecha:
                 </label>
                 <label id="">
                   <?php
@@ -159,12 +167,14 @@ label{
  -->
 <table  class="" width="100%" id="">
                       <thead>
-                        <tr class="Estilo_color Estilo2">
-                          <th class="text-center">Cant</th>
+                        <tr class="Estilo2">
+                          
                           <th class="text-center">Concepto o Descripcion</th>
+                          
+                          <th class="text-center">Cant</th>
                           <!-- <th class="text-center">USD $</th> -->
-                           <th class="text-center">Precio Venta Bs.</th>
-                          <th class="text-center">Total</th>
+                           <th class="text-center">Precio Unitario</th>
+                          <th class="text-center">Monto</th>
                          <!-- <th class="all">Total Bs</th>
                           <th class="all">Total $</th>    -->
                         </tr>
@@ -177,11 +187,34 @@ label{
                     ?>
 
                     <tr style="font-size:10pt" class="even_row">
-                      <td style="text-align:center"><div><span class=""><?php echo $venta[$i]["cantidad"];?></span></div></td>
                       <td style="text-align:left"><div><span class=""><?php echo $venta[$i]["Nombre"];?></span></div></td>
+                      <td style="text-align:center"><div><span class=""><?php echo $venta[$i]["cantidad"];?></span></div></td>
                       <!-- <td style="text-align:center"><div ><span class=""><?php echo number_format($venta[$i]["precio"],2);?></span></div></td> -->
-                      <td style="text-align:right"><div ><span class=""><?php echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);?></span></div></td>
-                      <td style="text-align:right"><div ><span class=""><?php echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);?></span></div></td> 
+                      <td style="text-align:right"><div ><span class=""><?php 
+                      if(isset($moneda)){
+                        if($moneda=="bs"){
+                          echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);
+                         }else if($moneda=="dol"){
+                          echo number_format($venta[$i]["precio"],2);
+                        }
+                      }else{
+                        echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);
+                      }
+                          
+                     ?></span></div></td>
+                      
+                      <td style="text-align:right"><div ><span class=""><?php 
+                    if(isset($moneda)){
+                      if($moneda=="bs"){
+                        echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                      }else{
+                        echo number_format($venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                      }
+                    
+                    }else{
+                      echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                    } ?></span></div></td>
+                       
                     
                     </tr>
 
@@ -220,7 +253,10 @@ label{
                           $subtotal=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"])+$subtotal;
                           $iva=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"]* 0.16)+$iva;
                           $total=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"]* 1.16)+$total;
-                    
+                          
+                          $sub_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"])+$sub_dolar;
+                          $iva_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"]* 0.16)+$iva_dolar;
+                          $total_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"]* 1.16)+$total_dolar;
                         }
                     
                     ?>
@@ -236,17 +272,45 @@ label{
           <div class="">  
               <div class="totales">
                   <label style="text-align:left" class="Estilo2">SUBTOTAL:</label>
-                  <label style="float:right; margin-top: 2%" class="" id="subtotal"><?php echo number_format($subtotal,2);?></label>
+                  <label style="float:right; margin-top: 7%" class="" id="subtotal"><?php
+                    if(isset($moneda)){
+                      if($moneda=="bs"){
+                        echo number_format($subtotal,2);
+                       }else if($moneda=="dol"){
+                        echo number_format($sub_dolar,2);
+                      }
+                    }else{
+                      echo number_format($subtotal,2);
+                    } ?></label>
               </div>
               
               <div class="totales">
                 <label style="text-align:left" class="Estilo2">IVA 16%:</label>
-                <label style="float:right; margin-top: 3%" class="" id="iva"><?php echo number_format($iva,2);?>
+                <label style="float:right; margin-top: 8%" class="" id="iva"><?php 
+                    if(isset($moneda)){
+                      if($moneda=="bs"){
+                        echo number_format($iva,2);
+                       }else if($moneda=="dol"){
+                        echo number_format($iva_dolar,2);
+                      }
+                    }else{
+                      echo number_format($iva,2);
+                    }?>
               </div>
 
               <div class="totales">
-                <label style="text-align:left" class="Estilo2">TOTAL:</label>
-                <label style="float:right; margin-top: 4%" class="" id="total"><?php echo number_format($total,2);?></label>
+                <label style="text-align:left" class="Estilo2 Estilo3">TOTAL A PAGAR:</label>
+                <label style="float:right; margin-top: 9%" class="" id="total"><?php 
+                 if(isset($moneda)){
+                  if($moneda=="bs"){
+                    echo number_format($total,2);
+                   }else if($moneda=="dol"){
+                    echo number_format($total_dolar,2);
+                  }
+                }else{
+                  echo number_format($total,2);
+                }
+                ?></label>
               </div>
           </div>
 

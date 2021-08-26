@@ -14,6 +14,8 @@
 	$precio = isset($_POST["precio"]);
 	$nombre_ser = isset($_POST["nombre_ser"]);
 
+  $moneda = isset($_POST["moneda"]);
+
   $NroFactura = isset($_POST["NroFactura"]);
   //$idUsuario = isset($_POST["idUser"]);
 	$idUsuario = $_SESSION["idUsuario"];
@@ -184,7 +186,7 @@
        
         $sub_array[] = '<span>'.$row["idFactura"].'</span> ';
         $sub_array[] = $row["nombre"];
-        $sub_array[] = $row["cedula"];  //mostrarFactura('.$row["idFactura"].');   '.$row["idFactura"];.'
+        $sub_array[] = $row["cedula"];  //onClick=mostrarFactura('.$row["idFactura"].','.$moneda.')
         $sub_array[] = '<button title="Ver" type="button" onClick=mostrarFactura('.$row["idFactura"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
         $sub_array[] = '<button title="Anular" type="button" onClick=""  id="'.$row["idFactura"].'" class="btn btn-warning btn-md"><i class="fas fa-minus" aria-hidden="true"></i></button>';
         
