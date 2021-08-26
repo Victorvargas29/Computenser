@@ -25,7 +25,7 @@ require_once("../config/conexion.php");
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/images/logo-min.png">
     <title>Computenser - Login</title>
     <!-- Custom CSS -->
     <link href="../public/dist/css/style.min.css" rel="stylesheet">

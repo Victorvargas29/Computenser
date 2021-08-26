@@ -126,7 +126,7 @@ label{
                   <br/>
               </div>
               <div style="display: inline-block">
-                <label class="Estilo3" style="margin-left: 40%">Fecha:
+                <label class="Estilo3" style="margin-left: 30%">Fecha:
                 </label>
                 <label id="">
                   <?php
