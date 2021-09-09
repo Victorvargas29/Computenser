@@ -59,7 +59,7 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="panel-body table-responsive">   
-                        <form action="http://computenser.test/computenser/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_lista">     
+                        <form action="" target="" method="post" class="form-horizontal" id="form_lista">     
                             <table id="factura_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
                                 <thead class="text-light" style="background-color: #0e9670;">
                                     <tr>

@@ -23,6 +23,9 @@ if(isset($_POST['idFactura'])){
 $subtotal=0;
 $iva=0;
 $total=0;
+$sub_dolar=0;
+$iva_dolar=0;
+$total_dolar=0;
 
 /* $venta=$sold->get_detalles_factura(12);
 $cliente=$client->get_cliente_por_id(25135123); */
@@ -57,6 +60,7 @@ html{
 }
 
 .EstiloFactura{
+  font-family: "Courier", bold;
   font-size: 14px;
   font-weight: bold;
   color: #ea1717
@@ -126,8 +130,7 @@ label{
                   <br/>
               </div>
               <div style="display: inline-block">
-                <label class="Estilo3" style="margin-left: 30%">Fecha:
-                </label>
+                <label class="Estilo3" style="margin-left: 30%">Fecha / Hr:</label>
                 <label id="">
                   <?php
                     $date = new DateTime($venta[0]["fecha"]);
@@ -169,12 +172,12 @@ label{
                       <thead>
                         <tr class="Estilo2">
                           
-                          <th class="text-center">Concepto o Descripcion</th>
+                          <th class="text-izquierda">Concepto o Descripcion</th>
                           
                           <th class="text-center">Cant</th>
                           <!-- <th class="text-center">USD $</th> -->
-                           <th class="text-center">Precio Unitario</th>
-                          <th class="text-center">Monto</th>
+                           <th class="text-derecha">Precio Unitario</th>
+                          <th class="text-derecha">Monto</th>
                          <!-- <th class="all">Total Bs</th>
                           <th class="all">Total $</th>    -->
                         </tr>
@@ -199,23 +202,18 @@ label{
                         }
                       }else{
                         echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);
-                      }
-                          
-                     ?></span></div></td>
+                      }?></span></div></td>
                       
                       <td style="text-align:right"><div ><span class=""><?php 
-                    if(isset($moneda)){
-                      if($moneda=="bs"){
-                        echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
-                      }else{
-                        echo number_format($venta[$i]["precio"]*$venta[$i]["cantidad"],2);
-                      }
-                    
-                    }else{
-                      echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
-                    } ?></span></div></td>
-                       
-                    
+                        if(isset($moneda)){
+                          if($moneda=="bs"){
+                            echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                          }else{
+                            echo number_format($venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                          }
+                        }else{
+                          echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                        }?></span></div></td>
                     </tr>
 
                     <?php
@@ -234,18 +232,7 @@ label{
                 ?>
                       </tbody>
             </table>
-         <!--    <table class="table table-striped nowrap" width="40%" id="sub">
-                      <thead>
-                        <tr class="Estilo3" class="bg-success">
-                          <th class="col-lg-1">SUBTOTAL $</th> -->
-                         <!--  <th class="col-lg-3">SUBTOTAL BsS</th>           
-                          <th class="col-lg-2">I.V.A%  $</th>
-                          <th class="col-lg-2">I.V.A% BsS</th>  -->
-                          <!-- <th class="col-lg-2">TOTAL $</th> 
-                          <th class="col-lg-2">TOTAL BsS</th>     
-                        </tr>
-                      </thead>
-                      <tbody>
+   
 
                       <?php
                         for($i=0;$i<sizeof($venta);$i++){
@@ -258,17 +245,23 @@ label{
                           $iva_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"]* 0.16)+$iva_dolar;
                           $total_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"]* 1.16)+$total_dolar;
                         }
-                    
+          if(isset($moneda)){
+            if($moneda=="dol"){
                     ?>
+          
                        
-                        <tr style="font-size:10pt" class="even_row">
-                          <td style="text-align:center"><div ><span class=""><?php echo $subtotal;?></span></div></td>
-                          <td style="text-align:right"><div ><span class=""><?php echo $iva;?></span></div></td>
-                          <td style="text-align:right"><div ><span class=""><?php echo $total;?></span></div></td> 
-                        </tr>
-    
-                      </tbody>
-              </table>-->
+          <div style="float:left">
+            <label >A SOLO EFECTO DE LO PREVISTO EN EL ARTICULO 25<BR>
+              DE LA LEY DE IMPUESTO DE VALOR AGREGADO SE<BR>
+            EXPRESAN LOS MONTOS DE LA FACTURA EN BsS.<BR>
+            CALCULADO A LA TASA DE CAMBIO POR BCV DE<BR>
+          1 USD POR BsS. <?php echo number_format($venta[0]["tasa"],2);?></label>
+          </div>
+            <?php }
+                }
+             ?>
+
+
           <div class="">  
               <div class="totales">
                   <label style="text-align:left" class="Estilo2">SUBTOTAL:</label>

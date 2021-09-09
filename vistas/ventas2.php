@@ -174,7 +174,11 @@ $cli = $clientes->get_Cliente();
                 
                 
                 
-              <div class="row pt-2 pb-2">
+             
+
+          </div>  <!--fin container--> 
+            <div class="container">
+              <div class="row">
                 <div class="col-lg-3">
                   <label>Seleccione modena:</label>      
                 </div>   
@@ -186,10 +190,8 @@ $cli = $clientes->get_Cliente();
                   <input type="radio" id="bs" name="moneda" value="bs">
                   <label for="bs">Reporte en Bs.</label>
                 </div>
-              </div>   
-
-          </div>  <!--fin container--> 
-
+              </div>
+            </div>
             <!--formulario-pedido-->
             <div class="row">
             <div class="col-md-12">
@@ -249,10 +251,10 @@ $cli = $clientes->get_Cliente();
                         <tr class="bg-success">
                           <!-- <th class="col-lg-1">SUBTOTAL $</th> -->
                           <th class="col-lg-3">SUBTOTAL BsS</th>           
-                          <!-- <th class="col-lg-2">I.V.A%  $</th> -->
-                          <th class="col-lg-2">I.V.A% BsS</th> 
+                          <!-- <th class="col-lg-2">DESCUENTO %</th> -->
+                          <th class="col-lg-2">I.V.A 16%</th> 
                           <!-- <th class="col-lg-2">TOTAL $</th> -->
-                          <th class="col-lg-2">TOTAL BsS</th>     
+                          <th class="col-lg-2">TOTAL</th>     
                         </tr>
                       </thead>
                       <tbody>
