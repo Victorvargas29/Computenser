@@ -13,12 +13,10 @@
 
 
 -- Dumping database structure for mydb
-DROP DATABASE IF EXISTS `mydb`;
 CREATE DATABASE IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `mydb`;
 
 -- Dumping structure for table mydb.categoria
-DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE IF NOT EXISTS `categoria` (
   `idCategoria` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de categorias',
   `nombre` varchar(30) NOT NULL COMMENT 'Nombre de categoria',
@@ -26,11 +24,10 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   PRIMARY KEY (`idCategoria`),
   KEY `fk_Categoria_Departamento_idx` (`idDepartamento`),
   CONSTRAINT `fk_Categoria_Departamento` FOREIGN KEY (`idDepartamento`) REFERENCES `departamento` (`idDepartamento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.cliente
-DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE IF NOT EXISTS `cliente` (
   `cedula` varchar(15) NOT NULL COMMENT 'Cedula de identidad del cliente',
   `nombre` varchar(25) NOT NULL COMMENT 'Nombre de Cliente',
@@ -43,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.departamento
-DROP TABLE IF EXISTS `departamento`;
 CREATE TABLE IF NOT EXISTS `departamento` (
   `idDepartamento` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de los departamentos',
   `nombre` varchar(15) DEFAULT NULL COMMENT 'Nombre de departamentos',
@@ -52,22 +48,22 @@ CREATE TABLE IF NOT EXISTS `departamento` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.detallefactura
-DROP TABLE IF EXISTS `detallefactura`;
 CREATE TABLE IF NOT EXISTS `detallefactura` (
   `IddetalleF` int(11) NOT NULL AUTO_INCREMENT,
   `idFactura` int(11) DEFAULT NULL,
   `idServicio` int(11) DEFAULT NULL,
-  `precio` float DEFAULT NULL,
+  `precio` double DEFAULT NULL,
+  `tasa` double DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`IddetalleF`),
   KEY `idFactura` (`idFactura`),
   KEY `idServicio` (`idServicio`),
-  CONSTRAINT `FK1Factura_Detalle` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK2Factura` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK2Servicio_Detallef` FOREIGN KEY (`idServicio`) REFERENCES `servicio` (`idServicio`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.detallesempleada_servicio
-DROP TABLE IF EXISTS `detallesempleada_servicio`;
 CREATE TABLE IF NOT EXISTS `detallesempleada_servicio` (
   `id_detalles` int(11) NOT NULL AUTO_INCREMENT,
   `precio_dia` float NOT NULL COMMENT 'precio del servicio al momento de asignar el servicio a la empleada',
@@ -85,21 +81,20 @@ CREATE TABLE IF NOT EXISTS `detallesempleada_servicio` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.detallesfacturatemporal
-DROP TABLE IF EXISTS `detallesfacturatemporal`;
 CREATE TABLE IF NOT EXISTS `detallesfacturatemporal` (
   `iddetallesFT` int(11) NOT NULL AUTO_INCREMENT,
   `idFactura` int(11) DEFAULT NULL,
   `idServicio` int(11) DEFAULT NULL,
   `nombre_serv` varchar(50) DEFAULT NULL,
-  `precioTemp` float DEFAULT NULL,
-  `tasa` float DEFAULT NULL,
+  `precioTemp` double DEFAULT NULL,
+  `tasa` double DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`iddetallesFT`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.detallesinventario
-DROP TABLE IF EXISTS `detallesinventario`;
 CREATE TABLE IF NOT EXISTS `detallesinventario` (
   `idDetalles` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` datetime NOT NULL COMMENT 'Fecha en que se modifico mercancia',
@@ -114,7 +109,6 @@ CREATE TABLE IF NOT EXISTS `detallesinventario` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.empleada
-DROP TABLE IF EXISTS `empleada`;
 CREATE TABLE IF NOT EXISTS `empleada` (
   `cedula` varchar(15) NOT NULL COMMENT 'Cedula de identidad de la empleada',
   `nombre` varchar(45) NOT NULL COMMENT 'Nombre de la empleada',
@@ -131,19 +125,19 @@ CREATE TABLE IF NOT EXISTS `empleada` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.factura
-DROP TABLE IF EXISTS `factura`;
 CREATE TABLE IF NOT EXISTS `factura` (
-  `idFactura` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de la tabla Factura',
+  `idFactura` int(11) NOT NULL COMMENT 'identificador de la tabla Factura',
   `fecha` datetime DEFAULT NULL COMMENT 'Fecha de Facturacion',
   `cedula` varchar(15) NOT NULL,
+  `tipo_moneda` enum('0','1') NOT NULL,
+  `anulado` enum('1','0') DEFAULT NULL,
   PRIMARY KEY (`idFactura`),
   KEY `fk_Servicio_Categoria` (`cedula`),
   CONSTRAINT `fk_Cliente_Factura` FOREIGN KEY (`cedula`) REFERENCES `cliente` (`cedula`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.inventario
-DROP TABLE IF EXISTS `inventario`;
 CREATE TABLE IF NOT EXISTS `inventario` (
   `idInventario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de inventario',
   `cantidad` int(11) NOT NULL COMMENT 'Cantidad de productos (stock)',
@@ -155,7 +149,6 @@ CREATE TABLE IF NOT EXISTS `inventario` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.inventario_departamento
-DROP TABLE IF EXISTS `inventario_departamento`;
 CREATE TABLE IF NOT EXISTS `inventario_departamento` (
   `idInventarioDepa` int(11) NOT NULL AUTO_INCREMENT,
   `idInventario` int(11) NOT NULL COMMENT 'Clave foranea que identifica la tabla Inventario',
@@ -170,32 +163,41 @@ CREATE TABLE IF NOT EXISTS `inventario_departamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
--- Dumping structure for table mydb.pedido_servicio
-DROP TABLE IF EXISTS `pedido_servicio`;
-CREATE TABLE IF NOT EXISTS `pedido_servicio` (
-  `idPedido_Servicio` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de table Empleada_Servicio',
-  `Fecha_Servicio` date NOT NULL COMMENT 'Fecha en que se realizo el servicio',
-  `Cliente_cedula` varchar(15) NOT NULL,
-  `idFactura` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idPedido_Servicio`),
-  KEY `fk_Empleada_Servicio_Cliente1_idx` (`Cliente_cedula`),
-  KEY `fk_pedido_Servicio_factura1_idx` (`idFactura`),
-  CONSTRAINT `fk_Empleada_Servicio_Cliente1` FOREIGN KEY (`Cliente_cedula`) REFERENCES `cliente` (`cedula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pedido_Servicio_factura1` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- Dumping structure for table mydb.marca
+CREATE TABLE IF NOT EXISTS `marca` (
+  `idMarca` int(11) NOT NULL AUTO_INCREMENT,
+  `name_marca` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idMarca`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+-- Dumping structure for table mydb.modelo
+CREATE TABLE IF NOT EXISTS `modelo` (
+  `idModelo` int(11) NOT NULL AUTO_INCREMENT,
+  `name_mode` varchar(50) DEFAULT NULL,
+  `idMarca` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idModelo`),
+  KEY `fk_idMarca` (`idMarca`),
+  CONSTRAINT `fk_idMarca` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`idMarca`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+-- Dumping structure for table mydb.moneda
+CREATE TABLE IF NOT EXISTS `moneda` (
+  `idMoneda` int(11) DEFAULT NULL,
+  `tipo` enum('0','1') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.presentacionproducto
-DROP TABLE IF EXISTS `presentacionproducto`;
 CREATE TABLE IF NOT EXISTS `presentacionproducto` (
   `idPresentacionP` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de esta tabla.',
   `nombre` varchar(10) NOT NULL COMMENT 'nombre de la presentacion',
   PRIMARY KEY (`idPresentacionP`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.producto
-DROP TABLE IF EXISTS `producto`;
 CREATE TABLE IF NOT EXISTS `producto` (
   `idProducto` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de producto',
   `nombre` varchar(25) NOT NULL COMMENT 'Nombre del Producto',
@@ -211,20 +213,18 @@ CREATE TABLE IF NOT EXISTS `producto` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.servicio
-DROP TABLE IF EXISTS `servicio`;
 CREATE TABLE IF NOT EXISTS `servicio` (
   `idServicio` int(11) NOT NULL AUTO_INCREMENT COMMENT 'indentificador de servicios',
   `Nombre` varchar(15) NOT NULL COMMENT 'nombre de servicio',
-  `Precio` float NOT NULL COMMENT 'precio del servicio',
+  `Precio` double NOT NULL COMMENT 'precio del servicio',
   `idCategoria` int(11) NOT NULL COMMENT 'clave foranea que indentifica la tabla categoria',
   PRIMARY KEY (`idServicio`),
   KEY `fk_Servicio_Categoria1_idx` (`idCategoria`),
   CONSTRAINT `fk_Servicio_Categoria1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`idCategoria`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table mydb.usuario
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificado de Usuario',
   `nombre` varchar(45) NOT NULL COMMENT 'Nombre de Usuario',
@@ -235,7 +235,28 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `estado` enum('0','1') NOT NULL COMMENT 'estado activo/inactivo',
   `avatar` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table mydb.vehiculo
+CREATE TABLE IF NOT EXISTS `vehiculo` (
+  `idVehiculo` int(11) NOT NULL AUTO_INCREMENT,
+  `cedula` varchar(15) DEFAULT NULL,
+  `serial` int(11) DEFAULT NULL,
+  `placa` varchar(50) DEFAULT NULL,
+  `idModelo` int(11) DEFAULT NULL,
+  `año` int(11) DEFAULT NULL,
+  `color` varchar(50) DEFAULT NULL,
+  `kms` int(11) DEFAULT NULL,
+  `traccion` int(11) DEFAULT NULL,
+  `cilindros` int(11) DEFAULT NULL,
+  `gasolina` varchar(50) DEFAULT NULL,
+  `name_chofer` varchar(50) DEFAULT NULL,
+  `carnet_circula` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idVehiculo`),
+  KEY `fk_client_vehic_indx` (`cedula`),
+  CONSTRAINT `fk_client_vehic` FOREIGN KEY (`cedula`) REFERENCES `cliente` (`cedula`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
