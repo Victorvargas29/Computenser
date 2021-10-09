@@ -46,6 +46,17 @@ $(document).ready(function(){
 		});
 	});
 });
+$(document).ready(function(){
+	$("#newclient").click(function(){
+		$.ajax({
+		url:'cliente.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html(err);}
+		});
+	});
+});
+
 
 function tasa_dia(){
 $.getJSON("https://s3.amazonaws.com/dolartoday/data.json",function(data){
@@ -425,4 +436,88 @@ function mostrarFactura(idFactura){
 
 	$.post("../report/facturaPdf.php",{idFactura : idFactura});
 }//fin funcion mostrar
+
+
+function tipomoneda(idFactura, tipo_moneda){
+		var coin = "";
+		if(tipo_moneda==1){
+			coin="Bolivares"		
+			}else{
+				coin="Dolares";
+			}
+	swal.fire({
+		
+		title: "¿Desea cambiar el tipo de moneda a "+coin+"?",
+		type: "question",
+		showCancelButton: true,
+		confirmButtonText: "Cambiar",
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#ca5939"
+	})
+	.then(result => {
+		 if (result.value) {
+			   $.ajax({
+				url:"../ajax/ventas.php?op=activarydesactivar",
+				method:"POST",
+				data:{idFactura:idFactura, tipo_moneda:tipo_moneda},
+
+				success:function(data){
+			//		$("#resultados_ajax").html(data);
+					$("#factura_data").DataTable().ajax.reload();
+				}
+			});
+			if(tipo_moneda==0){
+				  tipo_moneda="Dolares"
+			  }else{
+				  tipo_moneda="Bolivares"
+			  }
+		swal.fire(
+		  "Se cambio el tipo de moneda a: "+tipo_moneda,
+
+		  "¡Aviso!",
+		  "success"
+		);
+	  }
+	});
+
+
+}//fin tipomoneda
+
+function anulacion(idFactura, anulado){
+if(anulado!=1){
+	swal.fire({
+		title: "¿Esta seguro(a) de anular la factura N°: 00"+idFactura+" ...? ¡esta acción es irreversible!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonText: "Anular",
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#ca5939"
+	})
+	.then(result => {
+		 if (result.value) {
+			   $.ajax({
+				url:"../ajax/ventas.php?op=anular",
+				method:"POST",
+				data:{idFactura:idFactura,anulado:anulado},
+
+				success:function(data){
+			//		$("#resultados_ajax").html(data);
+					$("#factura_data").DataTable().ajax.reload();
+				}
+			});
+
+		swal.fire(
+		  "Se ha anulado la factura N°: "+idFactura,
+
+		  "¡Aviso!",
+		  "success"
+		);
+	  }
+	});
+}else{
+
+}
+}//fin cambiar estado
+
+
 init();

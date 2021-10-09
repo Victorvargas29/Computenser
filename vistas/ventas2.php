@@ -69,16 +69,17 @@ $cli = $clientes->get_Cliente();
               </div>
               <div class="col-lg-4">   
               <input type="hidden" name="idFactura" id="idFactura" required pattern = "[0-9]{0,15}" class="form-control"></input>
-      
+              <div class="col-lg-2">
               </div>
-              <div class="col-lg-4">  
+              </div>
+              <div class="col-lg-2 pt-4">  
               <button type="button" class="btn btn-primary" id="listafact"><i class="" aria-hidden="true"></i> Ver Facturas</button>      
               </div>
 
             </div><!-- /.row -->
-                
+                <hr>
                 <!--FILA CLIENTE - COMPROBANTE DE PAGO pb-1 pt-3-->
-            <h4><label for="" class="col-lg-1 control-label">Cliente</label></h4>
+            <h5><label for="" class="col-lg-1 control-label">Cliente</label></h5>
             
             <div class="row"> 
                   <div class="col-lg-3">
@@ -86,7 +87,7 @@ $cli = $clientes->get_Cliente();
                     <input type="text" name="cedula" id="listaC" placeholder="Cédula" required pattern = "[0-9]{0,15}" class="form-control"></input>
                   </div>
                   
-                  <div class="col-lg-3">
+                  <div class="col-lg-4">
                     <label>Nombres o Razón Social</label>
                     <input type="text" name="nombre" id="nombre" placeholder="Nombres" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
                   </div>
@@ -95,18 +96,23 @@ $cli = $clientes->get_Cliente();
                     <label>Apellidos</label>
                     <input type="text" name="apellido" id="apellido" placeholder="Apellidos" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
                   </div>    -->
-                  <div class="col-lg-3">
+                  <div class="col-lg-2">
                     <label>Telefono</label>
                     <input type="text" name="telefono" id="telefono" placeholder="Teléfono" required class="form-control"></input>
                   </div>
-
-                  <div class="col-lg-3">          
-                    <label>Direccion</label>
-                    <input type="text" name="direccion" id="direccion" placeholder="Direccion"  class="form-control"></input>  
+              
+                  <div class="col-lg-2 pt-4">  
+                    <button type="button" class="btn btn-primary" id="newclient"><i class="" aria-hidden="true"></i>Ir a Cliente</button>      
                   </div>
       
-                </div>  <!--fin row pb-1 pt-6-->
-                <br/>
+            </div>  <!--fin row pb-1 pt-6-->
+              <br/>
+            <div class="row">
+                <div class="col-lg-8">          
+                    <label>Direccion</label>
+                    <textarea name="direccion" id="direccion" class="form-control" rows="1"></textarea>  
+                </div>
+            </div>
             <!--   <div class="row">   
                   <div class="col-lg-6">          
                     <label>Direccion</label>
@@ -118,10 +124,13 @@ $cli = $clientes->get_Cliente();
                   </div>    
                 </div>  fin row 2 -->
                 <br/>
+
+                <hr>
                 <!--FILA- PRODUCTO-->
+                <h5><label for="" class="col-lg-4 control-label">Servicios y Productos</label></h5>
                 <div class="row pt-3 pb-3">
-                    <div class="col-lg-5">
-                      <label for="" class="col-lg-1 control-label">Servicio</label>
+                    <div class="col-lg-5 pt-4">
+                      
                         <select class="form-control font-weight-bold" id="idServicio" name="idServicio" required>
                             <option class="font-weight-bold" value="0">Seleccione</option>
                             <?php
@@ -150,14 +159,14 @@ $cli = $clientes->get_Cliente();
                     <input type="hidden" name="nombre_ser" id="nombre_ser" placeholder="nombre servicio" required pattern = "[0-9]" class="form-control"></input>
                     </div>
                     <div class="col-lg-2">
-                      <label>Precio</label>
+                      <label>Precio $</label>
                               
-                          <input type="text" name="precio" id="precio" placeholder="Precio" required pattern = "[0-9]{0,15}" class="form-control"></input>
+                          <input type="text" name="precio" id="precio" placeholder="Precio" required pattern = "[0-9]{0.99}" class="form-control"></input>
                     </div>
                 
                     <div class="col-lg-3">
                           <div class="btn-group text-center pt-4">
-                            <button id="btnAgregar" type="button" onClick="agregar_detalles()" class="btn btn-primary " data-toggle="modal">Agregar</button>
+                            <button id="btnAgregar" type="button" onClick="agregar_detalles()" class="btn btn-primary " data-toggle="modal">Agregar detalle</i></button>
                             <input type="hidden" name="iddetallesFT" id="iddetallesFT"/>
                           </div>
                       <!--  <h4 class="text-center"><strong>Tipo de Pago</strong></h4>
@@ -167,27 +176,27 @@ $cli = $clientes->get_Cliente();
                                 <option value="EFECTIVO">PAGAR CON EFECTIVO</option>
                                 <option value="TRANSFERENCIA">PAGAR CON TRANSFERENCIA</option>
                               </select>-->
-                        
+                        <!-- <i class="fas fa-cart-plus">  -->
                     </div>
                     
                 </div>      
                 
                 
                 
-             
+             <hr>
 
           </div>  <!--fin container--> 
             <div class="container">
               <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 pt-4">
                   <label>Seleccione modena:</label>      
                 </div>   
-                <div class="col-lg-2">
-                  <input type="radio" id="dol" name="moneda" value="dol" checked>
+                <div class="col-lg-2 pt-4">
+                  <input type="radio" id="dol" name="moneda" value="1" checked>
                   <label for="dol">Reporte en $</label>
                 </div>
-                <div class="col-lg-2">
-                  <input type="radio" id="bs" name="moneda" value="bs">
+                <div class="col-lg-2 pt-4">
+                  <input type="radio" id="bs" name="moneda" value="0">
                   <label for="bs">Reporte en Bs.</label>
                 </div>
               </div>

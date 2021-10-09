@@ -91,7 +91,7 @@
                     <input type="text" class="form-control" name="apellido" id="apellido">
                     
                     <label class="col-form-label">Direcccion:</label>
-                    <input type="text" class="form-control" name="direccion" id="direccion">
+                    <textarea class="form-control" name="direccion" id="direccion" rows="2"></textarea>
 
                     <label class="col-form-label">Telefono:</label>
                     <input type="text" class="form-control" name="telefono" id="telefono">

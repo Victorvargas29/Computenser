@@ -43,11 +43,11 @@
 
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="insert into factura values(?,now(),?);";
+          $sql="insert into factura values(?,now(),?,?,'0');";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $_POST["idFactura"]); 
           $sql->bindValue(2, $_POST["cedula"]); 
-         // $sql->bindValue(2, $_POST["idServicio"]); 
+          $sql->bindValue(3, $_POST["moneda"]); 
           ; 
          // $sql->bindValue(4, $_POST["tasa"]);                   
           $sql->execute();
@@ -243,14 +243,53 @@
 
           $conectar = parent::conectar();      
   
-          $sql = "select f.idFactura, f.fecha, s.Nombre, df.precio, df.tasa, df.cantidad,c.cedula,c.apellido, c.nombre, c.direccion,c.telefono from factura AS f INNER JOIN cliente AS c ON f.cedula=c.cedula INNER JOIN detallefactura df ON f.idFactura=df.idFactura JOIN servicio AS s on df.idServicio=s.idServicio WHERE f.idFactura=?";
+          $sql = "select f.idFactura, f.tipo_moneda, f.fecha, s.Nombre, df.precio, df.tasa, df.cantidad,c.cedula,c.apellido, c.nombre, c.direccion,c.telefono from factura AS f INNER JOIN cliente AS c ON f.cedula=c.cedula INNER JOIN detallefactura df ON f.idFactura=df.idFactura JOIN servicio AS s on df.idServicio=s.idServicio WHERE f.idFactura=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idFactura);
           $sql->execute();
           //print_r($_POST);
           return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }
-         
+
+        public function cambiar_moneda($idFactura,$tipo
+        ){
+          $conectar = parent::conectar(); 
+          echo $_POST["tipo_moneda"];
+            //el parametro est se envia por via ajax
+   	    	if($_POST["tipo_moneda"]==0){
+            $tipo=1;
+          } else {
+            $tipo=0;
+          }
+            $sql="update factura set tipo_moneda=? where idFactura=?";
+
+          $sql=$conectar->prepare($sql);
+
+
+         $sql->bindValue(1,$tipo);
+         $sql->bindValue(2,$idFactura);
+          $sql->execute();
+          print_r($_POST);
+
+        }
+
+        public function consulta_estado(){
+          $conectar = parent::conectar(); 
+          $sql = "select * from moneda";
+          $sql=$conectar->prepare($sql);
+
+          $sql->execute();
+          return $resultado=$sql->fetchAll();
+        }
+        
+        public function anular($idFactura){
+          $conectar = parent::conectar(); 
+
+          $sql="update factura set anulado=1 where idFactura=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$idFactura);
+          $sql->execute();
+        }
    }
    
 ?>

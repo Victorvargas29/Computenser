@@ -84,3 +84,11 @@ header.topbar, thead, thead tr.bg-success{
   background: #47535f !important;
   color: #fff;
 }
+.boton-verde{
+  background: #06e235 !important;
+  color: #fff;
+}
+.boton-bs{
+  background: #3aa0e4 !important;
+  color: #fff;
+}

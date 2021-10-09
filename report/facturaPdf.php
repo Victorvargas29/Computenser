@@ -5,17 +5,21 @@ require_once("../modelos/ventas.php");
 require_once("../modelos/Servicios.php");
 
 
+
 //$client = new CLientes();
 $sold = new Ventas();
+//$tipo = $sold->consulta_estado();
 
 if(isset($_POST['idFactura'])){
+  $Factura_anulado = $sold->get_venta_idfactura($_POST["idFactura"]);
   $venta=$sold->get_detalles_factura($_POST["idFactura"]);
   $idFacturas=$_POST["idFactura"];
   $moneda=$_POST["moneda"];
 }else{
+  $Factura_anulado = $sold->get_venta_idfactura($_GET["idFactura"]);
   $venta=$sold->get_detalles_factura($_GET["idFactura"]);
   $idFacturas=$_GET["idFactura"];
-  //$moneda=$_GET["moneda"];
+  $moneda=$venta[0]["tipo_moneda"];
 }
 //$cliente=$client->get_cliente_por_id($_POST["cedula"]);
 
@@ -71,7 +75,7 @@ html{
 }
 .totales {
  /* margin-top:  12%;  */
-  margin-left: 70%
+  margin-left: 60%
 }
 table{
   margin-top: 4%;
@@ -195,9 +199,9 @@ label{
                       <!-- <td style="text-align:center"><div ><span class=""><?php echo number_format($venta[$i]["precio"],2);?></span></div></td> -->
                       <td style="text-align:right"><div ><span class=""><?php 
                       if(isset($moneda)){
-                        if($moneda=="bs"){
+                        if($moneda==0){
                           echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);
-                         }else if($moneda=="dol"){
+                         }else if($moneda==1){
                           echo number_format($venta[$i]["precio"],2);
                         }
                       }else{
@@ -206,7 +210,7 @@ label{
                       
                       <td style="text-align:right"><div ><span class=""><?php 
                         if(isset($moneda)){
-                          if($moneda=="bs"){
+                          if($moneda==0){
                             echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
                           }else{
                             echo number_format($venta[$i]["precio"]*$venta[$i]["cantidad"],2);
@@ -240,13 +244,13 @@ label{
                           $subtotal=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"])+$subtotal;
                           $iva=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"]* 0.16)+$iva;
                           $total=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"]* 1.16)+$total;
-                          
+
                           $sub_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"])+$sub_dolar;
                           $iva_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"]* 0.16)+$iva_dolar;
                           $total_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"]* 1.16)+$total_dolar;
                         }
           if(isset($moneda)){
-            if($moneda=="dol"){
+            if($moneda==1){
                     ?>
           
                        
@@ -264,12 +268,15 @@ label{
 
           <div class="">  
               <div class="totales">
-                  <label style="text-align:left" class="Estilo2">SUBTOTAL:</label>
+                  <label style="text-align:left" class="Estilo2">SUBTOTAL<?php if($moneda==0){
+                    echo " Bs.";
+                  }else{ echo " USD";
+                  }?></label>
                   <label style="float:right; margin-top: 7%" class="" id="subtotal"><?php
                     if(isset($moneda)){
-                      if($moneda=="bs"){
+                      if($moneda==0){
                         echo number_format($subtotal,2);
-                       }else if($moneda=="dol"){
+                       }else if($moneda==1){
                         echo number_format($sub_dolar,2);
                       }
                     }else{
@@ -278,12 +285,15 @@ label{
               </div>
               
               <div class="totales">
-                <label style="text-align:left" class="Estilo2">IVA 16%:</label>
+                <label style="text-align:left" class="Estilo2">IVA 16% <?php if($moneda==0){
+                    echo " Bs.";
+                  }else{ echo " USD";
+                  }?></label>
                 <label style="float:right; margin-top: 8%" class="" id="iva"><?php 
                     if(isset($moneda)){
-                      if($moneda=="bs"){
+                      if($moneda==0){
                         echo number_format($iva,2);
-                       }else if($moneda=="dol"){
+                       }else if($moneda==1){
                         echo number_format($iva_dolar,2);
                       }
                     }else{
@@ -292,12 +302,15 @@ label{
               </div>
 
               <div class="totales">
-                <label style="text-align:left" class="Estilo2 Estilo3">TOTAL A PAGAR:</label>
+                <label style="text-align:left" class="Estilo2 Estilo3">TOTAL A PAGAR<?php if($moneda==0){
+                    echo " Bs.";
+                  }else{ echo " USD";
+                  }?></label>
                 <label style="float:right; margin-top: 9%" class="" id="total"><?php 
                  if(isset($moneda)){
-                  if($moneda=="bs"){
+                  if($moneda==0){
                     echo number_format($total,2);
-                   }else if($moneda=="dol"){
+                   }else if($moneda==1){
                     echo number_format($total_dolar,2);
                   }
                 }else{
@@ -330,7 +343,8 @@ $pdf = new DOMPDF($options);
 // Definimos el tamaño y orientación del papel que queremos.
 $pdf->set_paper("letter", "portrait");
 //$pdf->set_paper(array(0,0,104,250));
- 
+
+ if($Factura_anulado[0]["anulado"]==1){
 //Fondo o Marca de agua
 $canvas = $pdf->getCanvas();
 
@@ -338,18 +352,20 @@ $w = $canvas->get_width();
 $h = $canvas->get_height();
 
 //$imagenUrl = '../public/images/perfil-avatar-mujer-icono-redondo_24640-14042.jpg';
-$imagenUrl = 'formato.jpg';
+$imagenUrl = 'anulada.jpg';
 $imgwidth = 612;
 $imgHeight = 792;
 
-//$canvas->set_opacity(.5);
+$canvas->set_opacity(.7);
 
 $x=(($w-$imgwidth)/2);
 $y=(($h-$imgHeight)/2);
 
 $canvas->image($imagenUrl,$x,$y,$imgwidth,$imgHeight);
 //fin de fondo o marca de agua
+}else{
 
+}
 
 // Cargamos el contenido HTML.
 $pdf->load_html($salida_html);;
