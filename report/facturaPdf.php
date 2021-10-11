@@ -201,7 +201,7 @@ label{
                       if(isset($moneda)){
                         if($moneda==0){
                           echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);
-                         }else if($moneda==1){
+                         }else{
                           echo number_format($venta[$i]["precio"],2);
                         }
                       }else{
@@ -276,7 +276,7 @@ label{
                     if(isset($moneda)){
                       if($moneda==0){
                         echo number_format($subtotal,2);
-                       }else if($moneda==1){
+                       }else{
                         echo number_format($sub_dolar,2);
                       }
                     }else{
@@ -293,7 +293,7 @@ label{
                     if(isset($moneda)){
                       if($moneda==0){
                         echo number_format($iva,2);
-                       }else if($moneda==1){
+                       }else{
                         echo number_format($iva_dolar,2);
                       }
                     }else{
@@ -310,7 +310,7 @@ label{
                  if(isset($moneda)){
                   if($moneda==0){
                     echo number_format($total,2);
-                   }else if($moneda==1){
+                   }else{
                     echo number_format($total_dolar,2);
                   }
                 }else{
