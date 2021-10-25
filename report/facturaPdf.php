@@ -116,7 +116,7 @@ label{
               <label class="EstiloFactura" id="i"><?php echo "000".$idFacturas;?></label>
             </div>
             <div class="" style="display: inline-block">
-              <label class="Estilo3" style="margin-top: 50%">Nombre o Razon Social:</label>
+              <label class="Estilo3" style="margin-top: 50%">NOMBRE O RAZON SOCIAL:</label>
               <label id=""><?php echo $venta[0]["nombre"]." ".$venta[0]["apellido"];?></label>
             </div>
             <div style="display: inline-block">
@@ -125,20 +125,20 @@ label{
             </div>
             <div>
               <div style="display: inline-block">
-                <label class="Estilo3">Domicilio Fiscal:</label>
+                <label class="Estilo3">DOMICILIO FISCAL:</label>
                 <label id=""><?php echo $venta[0]["direccion"]?></label>
               </div>
               <div style="display: inline-block">
-                  <label class="Estilo3" style="margin-left: 25%">Telefono:</label>
+                  <label class="Estilo3" style="margin-left: 25%">TELEFONO:</label>
                   <label id=""><?php echo $venta[0]["telefono"]?></label>
                   <br/>
               </div>
               <div style="display: inline-block">
-                <label class="Estilo3" style="margin-left: 30%">Fecha / Hr:</label>
+                <label class="Estilo3" style="margin-left: 30%">FECHA:</label>
                 <label id="">
                   <?php
                     $date = new DateTime($venta[0]["fecha"]);
-                    echo $date->format('d-m-Y H:i:s');
+                    echo $date->format('d-m-Y');
                   ?>
                 </label>
               </div>
@@ -176,12 +176,12 @@ label{
                       <thead>
                         <tr class="Estilo2">
                           
-                          <th class="text-izquierda">Concepto o Descripcion</th>
+                          <th class="text-izquierda">CONCEPTO O DESCRIPCION</th>
                           
-                          <th class="text-center">Cant</th>
+                          <th class="text-center">CANT</th>
                           <!-- <th class="text-center">USD $</th> -->
-                           <th class="text-derecha">Precio Unitario</th>
-                          <th class="text-derecha">Monto</th>
+                           <th class="text-derecha">PRECIO UNITARIO</th>
+                          <th class="text-derecha">TOTAL</th>
                          <!-- <th class="all">Total Bs</th>
                           <th class="all">Total $</th>    -->
                         </tr>

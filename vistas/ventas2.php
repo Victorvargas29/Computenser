@@ -57,7 +57,7 @@ $cli = $clientes->get_Cliente();
               <div class="col-lg-2">
                 <label>N° Factura</label>
                  <h3 id="idFacturas"></h3>       
-           <!--   <input type="text" name="idFacturas" id="idFacturas"  disabled required pattern = "[0-9]{0,15}" class="form-control"></input>
+              <!--   <input type="text" name="idFacturas" id="idFacturas"  disabled required pattern = "[0-9]{0,15}" class="form-control"></input>
                 -->
                 <br/>
               </div>
@@ -82,7 +82,19 @@ $cli = $clientes->get_Cliente();
             <h5><label for="" class="col-lg-1 control-label">Cliente</label></h5>
             
             <div class="row"> 
-                  <div class="col-lg-3">
+                 <div class="col-lg-1 pt-2">
+                    <label></label>
+                    <select class="form-control font-weight-bold" id="comboCedula" name="comboCedula" required>
+                        <option class="font-weight-bold" value="V-">V-</option>
+                        <option class="font-weight-bold" value="J-">J-</option>
+                        <option class="font-weight-bold" value="E-">E-</option>
+                        <option class="font-weight-bold" value="C-">C-</option>
+                        <option class="font-weight-bold" value="G-">G-</option>
+                            
+                      </select>
+                  </div>
+
+                  <div class="col-lg-2">
                     <label>Cedula / RIF</label>
                     <input type="text" name="cedula" id="listaC" placeholder="Cédula" required pattern = "[0-9]{0,15}" class="form-control"></input>
                   </div>
@@ -98,21 +110,34 @@ $cli = $clientes->get_Cliente();
                   </div>    -->
                   <div class="col-lg-2">
                     <label>Telefono</label>
-                    <input type="text" name="telefono" id="telefono" placeholder="Teléfono" required class="form-control"></input>
+                    <input type="text" name="telefono" id="telefono" placeholder="Teléfono" class="form-control"></input>
                   </div>
               
                   <div class="col-lg-2 pt-4">  
                     <button type="button" class="btn btn-primary" id="newclient"><i class="" aria-hidden="true"></i>Ir a Cliente</button>      
                   </div>
       
-            </div>  <!--fin row pb-1 pt-6-->
-              <br/>
-            <div class="row">
-                <div class="col-lg-8">          
-                    <label>Direccion</label>
-                    <textarea name="direccion" id="direccion" class="form-control" rows="1"></textarea>  
+                  <br/>
+                <div class="row">
+                    <div class="col-lg-10">          
+                        <label>Direccion</label>
+                        <textarea name="direccion" id="direccion" class="form-control" rows="1"></textarea>  
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-lg-5">          
+                        <label>PLACA</label>
+                        <input type="text" name="placa" id="placa" class="form-control" placeholder="Placa" ></input>  
+                    </div>
+                    
+                    <div class="col-lg-5">          
+                        <label>O/E</label>
+                        <input type="text" name="oentrega" id="oentrega" class="form-control" placeholder="O/E"></input>  
+                    </div>
+                </div>
+            </div>  <!--fin row pb-1 pt-6-->
+
+            
             <!--   <div class="row">   
                   <div class="col-lg-6">          
                     <label>Direccion</label>
@@ -154,7 +179,7 @@ $cli = $clientes->get_Cliente();
                     </div>
                     <div class="col-lg-2">
                     <label>Cantidad</label>          
-                    <input type="text" name="cantidad" id="cantidad" placeholder="Cantidad" required pattern = "[0-9]" class="form-control"></input>
+                    <input type="text" name="cantidad" id="cantidad" placeholder="Cantidad" required pattern = "[0-9]*" class="form-control"></input>
                     
                     <input type="hidden" name="nombre_ser" id="nombre_ser" placeholder="nombre servicio" required pattern = "[0-9]" class="form-control"></input>
                     </div>
@@ -163,6 +188,26 @@ $cli = $clientes->get_Cliente();
                               
                           <input type="text" name="precio" id="precio" placeholder="Precio" required pattern = "[0-9]{0.99}" class="form-control"></input>
                     </div>
+                
+                   
+
+                    
+                    
+                </div>      
+                
+                
+                
+             
+
+             <div class="row pt-3 pb-3">
+
+                    
+                    <div class="col-lg-9">
+                    <label>Descripcion</label>          
+                    <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" required  class="form-control"></input>
+                    
+                    </div>
+                    
                 
                     <div class="col-lg-3">
                           <div class="btn-group text-center pt-4">
@@ -178,14 +223,15 @@ $cli = $clientes->get_Cliente();
                               </select>-->
                         <!-- <i class="fas fa-cart-plus">  -->
                     </div>
-                    
-                </div>      
-                
-                
-                
-             <hr>
 
-          </div>  <!--fin container--> 
+                    
+                    
+                </div>  
+
+         
+
+                <hr>
+              </div>  <!--fin container--> 
             <div class="container">
               <div class="row">
                 <div class="col-lg-3 pt-4">
@@ -246,40 +292,40 @@ $cli = $clientes->get_Cliente();
 
             <div class="row">
           
-            <div class="col-lg-4">            
-            </div>
-            <div class="col-lg-2">            
-            </div> 
+              <div class="col-lg-4">            
+              </div>
+              <div class="col-lg-2">            
+              </div> 
             
-            <div class="col-lg-5">
-                <div class="box lg-6">
-                  <div class="panel-body table-responsive">
-                    
-                    <table class="table table-striped nowrap" width="100%" id="sub">
-                      <thead>
-                        <tr class="bg-success">
-                          <!-- <th class="col-lg-1">SUBTOTAL $</th> -->
-                          <th class="col-lg-3">SUBTOTAL BsS</th>           
-                          <!-- <th class="col-lg-2">DESCUENTO %</th> -->
-                          <th class="col-lg-2">I.V.A 16%</th> 
-                          <!-- <th class="col-lg-2">TOTAL $</th> -->
-                          <th class="col-lg-2">TOTAL</th>     
-                        </tr>
-                      </thead>
-                      <tbody>
-                        
-                      </tbody>
-                    </table>
-                    <div class="boton_registrar">
-                    <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 " onClick=""  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Venta</button>
-                      <!-- <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3" href="http://computenser.test/computenser/report/crearPdf2.php" target="_blank"  id="bt"><i class="fa fa-save" aria-hidden="true"></i></a> -->
-                   <!--   <button type="button" onClick="borrar_temporal()" value="Add" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
-                    </i>Cancelar</button> -->
-                    <!-- <input type="hidden" name="idUser" id="idUser" value="" required pattern = "[0-9]{0,15}" class="form-control"><?php echo $_SESSION["idUsuario"]
-                            ?></input>  -->
-                  </div>
-                
-                  </div> <!-- /.box-body -->
+              <div class="col-lg-5">
+                  <div class="box lg-6">
+                    <div class="panel-body table-responsive">
+                      
+                        <table class="table table-striped nowrap" width="100%" id="sub">
+                          <thead>
+                            <tr class="bg-success">
+                              <!-- <th class="col-lg-1">SUBTOTAL $</th> -->
+                              <th class="col-lg-3">SUBTOTAL BsS</th>           
+                              <!-- <th class="col-lg-2">DESCUENTO %</th> -->
+                              <th class="col-lg-2">I.V.A 16%</th> 
+                              <!-- <th class="col-lg-2">TOTAL $</th> -->
+                              <th class="col-lg-2">TOTAL</th>     
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                          </tbody>
+                        </table>
+                      <div class="boton_registrar">
+                      <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Venta</button>
+                        <!-- <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3" href="http://computenser.test/computenser/report/crearPdf2.php" target="_blank"  id="bt"><i class="fa fa-save" aria-hidden="true"></i></a> -->
+                    <!--   <button type="button" onClick="borrar_temporal()" value="Add" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
+                      </i>Cancelar</button> -->
+                      <!-- <input type="hidden" name="idUser" id="idUser" value="" required pattern = "[0-9]{0,15}" class="form-control"><?php echo $_SESSION["idUsuario"]
+                              ?></input>  -->
+                    </div>
+                  
+                    </div> <!-- /.box-body -->
                 </div> <!-- /.box -->            
               </div> <!-- /.col -->
               <div class="col-lg-1">            

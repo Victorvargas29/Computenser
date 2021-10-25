@@ -13,6 +13,9 @@
 	$idServicio = isset($_POST["idServicio"]);
 	$precio = isset($_POST["precio"]);
 	$nombre_ser = isset($_POST["nombre_ser"]);
+  $descripcion=isset($_POST["descripcion"]);
+	$placa = isset($_POST["placa"]);
+	$oentrega = isset($_POST["oentrega"]);
 
   $moneda = isset($_POST["moneda"]);
 
@@ -35,7 +38,7 @@
 
       if($_POST["idServicio"] != 0){
 
-        $venta->agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$cantidad,$idUsuario);
+        $venta->agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$descripcion,$cantidad,$idUsuario);
 
       }else {
         echo "debe selecionar un servicio";
@@ -51,7 +54,7 @@
         $sub_array = array();
 
         $sub_array[] = '<button title="Eliminar" type="button" onClick="eliminar_item('.$row["iddetallesFT"].');"  id="'.$row["iddetallesFT"].'" class="btn btn-danger btn-md"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>';
-        $sub_array[] = $row["nombre_serv"];
+        $sub_array[] = $row["nombre_serv"]."--".$row["descripcion"];
         $sub_array[] = $row["precioTemp"];
         $sub_array[] = number_format($row["precioTemp"] * $row["tasa"],2);
         // $sub_array[] = $row["precioTemp"] * $row["tasa"] * 0.16; 
@@ -166,13 +169,13 @@
     break;
     
     case 'guardarVenta':
-      
-             $venta->registrar($idFactura,$cedula,$moneda);
+             echo "se registro1111";
+             $venta->registrar($idFactura,$cedula,$moneda,$placa,$oentrega);
              $venta->detallesDetalles($idUsuario);
              sleep(2);
              $venta->eliminar_temp_condicion($idUsuario);
             
-             echo "se registro";
+            
     
     break;
     case "borrar_temp":

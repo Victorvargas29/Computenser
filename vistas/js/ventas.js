@@ -31,6 +31,7 @@ $("form_compra").on("submit", function(){
 */
 $("#form_compra").on("submit", function(){
 	registrar();
+	
 
 });
 
@@ -71,10 +72,20 @@ $.getJSON("https://s3.amazonaws.com/dolartoday/data.json",function(data){
 AGREGANDO PRODUCTOS A LA VENTA DESDE LA TABLA
 =============================================*/
 $("#listaC").keyup(function(){
-	cargarlista($("#listaC").val());
+	cargarlista($("#listaC").val(),$("#comboCedula").val());
+
+	if ($("#listaC").val()=" ") {
+		$("#cedula").val(cedula1);  // $("#cedula") esto es el id del campo del formulario	
+		$("#nombre").val(" ");   //data.nombre el nombre que se coloca en el lado derecho es
+	//	$("#nombre").prop('disabled', true);
+
+		$("#apellido").val(""); //el que se coloco en el ajax en $output["nombre"]
+		$("#direccion").val("");
+		$("#telefono").val("");
+		$("#correo").val("");
+		
+	}
 	
-
-
 });
 $("#listaE").keyup(function(){
 	cargarlistaE($("#listaE").val());
@@ -84,6 +95,12 @@ $("#listaE").keyup(function(){
 $("#idServicio").change(function(){
 	
 	cargarServicio($("#idServicio").val());
+
+//console.log($("#idServicio").val($("#idServicio").val()));
+});
+$("#comboCedula").change(function(){
+	
+	cargarlista($("#listaC").val(),$("#comboCedula").val());
 
 //console.log($("#idServicio").val($("#idServicio").val()));
 });
@@ -217,22 +234,37 @@ function agregar_detalles(){
 		//console.log("formData");
 
 }//fin guardar y editar
-function cargarlista(cedula){
+function cargarlista(cedula1,letra){
 
-	
+	var cedula=letra+cedula1;
+	if (cedula=='V-' || cedula=='J-' || cedula=='C-' || cedula=='G-') {
+		$("#cedula").val(cedula1);  // $("#cedula") esto es el id del campo del formulario	
+		$("#nombre").val(" ");   //data.nombre el nombre que se coloca en el lado derecho es
+	//	$("#nombre").prop('disabled', true);
+
+		$("#apellido").val(""); //el que se coloco en el ajax en $output["nombre"]
+		$("#direccion").val("");
+		$("#telefono").val("");
+		$("#correo").val("");
+		
+	}
+
+	console.log("asdfa",cedula);
 		
 		$.post("../ajax/cliente.php?op=mostrar",{cedula : cedula}, function(data, status)
 		{			
 			data = JSON.parse(data);
+			console.log("asdfa",data);				
+				$("#cedula").val(cedula1);  // $("#cedula") esto es el id del campo del formulario	
+				$("#nombre").val(data.nombre+" "+data.apellido);   //data.nombre el nombre que se coloca en el lado derecho es
+				$("#nombre").prop('disabled', true);
 
-			$("#cedula").val(cedula);  // $("#cedula") esto es el id del campo del formulario	
-			$("#nombre").val(data.nombre+" "+data.apellido);   //data.nombre el nombre que se coloca en el lado derecho es
-			$("#nombre").prop('disabled', true);
-
-			$("#apellido").val(data.apellido); //el que se coloco en el ajax en $output["nombre"]
-			$("#direccion").val(data.direccion);
-			$("#telefono").val(data.telefono);
-			$("#correo").val(data.correo);
+				$("#apellido").val(data.apellido); //el que se coloco en el ajax en $output["nombre"]
+				$("#direccion").val(data.direccion);
+				$("#telefono").val(data.telefono);
+				$("#correo").val(data.correo);
+				
+			
 
 		});	
 }
@@ -314,7 +346,7 @@ function eliminar_item(iddetallesFT){
 function registrar(){
 	//e.preventDefault(); //No se activará la acción predeterminada del evento
 	var formData = new FormData($("#form_compra")[0]);
-
+	//console.log("registrarrrrrr");
 		$.ajax({
 			url: "../ajax/ventas.php?op=guardarVenta",
 			type: "POST",

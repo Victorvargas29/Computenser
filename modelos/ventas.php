@@ -21,39 +21,42 @@
    	    	return $resultado=$sql->fetchAll();
    	    }
 
-   	    public function agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$cantidad,$idUsuario){
+   	    public function agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$descripcion,$cantidad,$idUsuario){
 
              $conectar=parent::conectar();
              //parent::set_names();
-             $sql="insert into detallesfacturatemporal values(null,?,?,?,?,?,?,?);";
+             $sql="insert into detallesfacturatemporal values(null,?,?,?,?,?,?,?,?);";
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1, $_POST["idFactura"]); 
              $sql->bindValue(2, $_POST["idServicio"]); 
              $sql->bindValue(3, $_POST["nombre_ser"]);
              $sql->bindValue(4, $_POST["precio"]);
-             $sql->bindValue(5, $_POST["tasa"]);
-             $sql->bindValue(6, $_POST["cantidad"]);
-             $sql->bindValue(7, $idUsuario); 
+             $sql->bindValue(5, $_POST["descripcion"]);
+             $sql->bindValue(6, $_POST["tasa"]);
+             $sql->bindValue(7, $_POST["cantidad"]);
+             $sql->bindValue(8, $idUsuario); 
             // $sql->bindValue(4, $_POST["tasa"]);                   
              $sql->execute();
              //echo "se registro";
             // print_r($_POST);
    	    }
-         public function registrar($idFactura,$cedula){
+         public function registrar($idFactura,$cedula,$moneda,$placa,$oentrega){
 
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="insert into factura values(?,now(),?,?,'0');";
+          $sql="insert into factura values(?,now(),?,?,'0',?,?);";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $_POST["idFactura"]); 
           $sql->bindValue(2, $_POST["cedula"]); 
           $sql->bindValue(3, $_POST["moneda"]); 
+          $sql->bindValue(4, $_POST["placa"]); 
+          $sql->bindValue(5, $_POST["oentrega"]); 
           ; 
          // $sql->bindValue(4, $_POST["tasa"]);                   
           $sql->execute();
           //echo detallesDetalles();
           //eliminar_temporal();
-          echo "se registro";
+          echo $_POST["placa"];
          // print_r($_POST);
       }
 
@@ -206,7 +209,7 @@
           $conectar=parent::conectar();
         //	parent::set_names();
 
-          $sql="insert into detallefactura (idFactura, idServicio,precio,tasa,cantidad) select idFactura, idServicio,precioTemp,tasa,cantidad from detallesfacturatemporal where idUsuario=?";
+          $sql="insert into detallefactura (idFactura, idServicio,precio,descripcion,tasa,cantidad) select idFactura, idServicio,precioTemp,descripcion,tasa,cantidad from detallesfacturatemporal where idUsuario=?";
 
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idUsuario);

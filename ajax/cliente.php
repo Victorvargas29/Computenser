@@ -5,6 +5,7 @@ require_once("../modelos/Clientes.php");
 	$cliente = new Clientes();
 
 	$cedula = isset($_POST["cedula"]);
+  $comboCedula=isset($_POST["comboCedula"]);
 	$nombre = isset($_POST["nombre"]);
 	$apellido = isset($_POST["apellido"]);
   $direccion = isset($_POST["direccion"]);
@@ -16,12 +17,12 @@ require_once("../modelos/Clientes.php");
    		case 'guardaryeditar':
 
         $datos = $cliente->get_cliente_por_id($_POST["cedula"]);
-            
+       
           if(is_array($datos)==true and count($datos)==0){
               
             $cliente->registrar_cliente($cedula,$nombre,$apellido,$direccion,$telefono,$correo);
 			  
-			   	echo "se registro";
+			   	echo "se registro", $cedula;
            
             }else{
 

@@ -72,6 +72,7 @@
     <div class="modal-dialog" role="document">
         <form method="post" id="cliente_form">   
             <div class="modal-content">
+               
                 <div class="modal-header">
                     <h5 class="modal-title">Agregar Cliente</h5>
                     <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">&times;</span>
@@ -79,10 +80,29 @@
                 </div>
              
                 <div class="modal-body">
+              
+                    <label></label>
+                    <select class="form-control font-weight-bold" id="comboCedula" name="comboCedula" required>
+                        <option class="font-weight-bold" value="V-">V-</option>
+                        <option class="font-weight-bold" value="J-">J-</option>
+                        <option class="font-weight-bold" value="E-">E-</option>
+                        <option class="font-weight-bold" value="C-">C-</option>
+                        <option class="font-weight-bold" value="G-">G-</option>   
+                    </select>
+                  
 
-                    <div class="form-group">
-                    <label class="col-form-label">Cedula:</label>
+                  
+                        <label class="col-form-label">Cedula:</label>
+                    <input type="text" class="form-control" name="cedulaS" id="cedulaS">
+                    
+                    
+                        <label class="col-form-label">Cedula:</label>
                     <input type="text" class="form-control" name="cedula" id="cedula">
+                  
+               
+      
+          
+
                     
                     <label class="col-form-label">Nombre:</label>
                     <input type="text" class="form-control" name="nombre" id="nombre">
@@ -98,13 +118,12 @@
 
                     <label class="col-form-label">Correo:</label>
                     <input type="text" class="form-control" name="correo" id="correo">
-
-                    </div>         
+        
                 </div>
                 <div class="modal-footer">
                     
                     <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
-                    <button type="submit" name="action" id="btnGuardar" value="Add" aria-hidden="true" class="btn btn-dark">Guardar</button>
+                    <button type="submit" name="action" id="btnGuardar" value="Add" aria-hidden="true" class="btn btn-dark" >Guardar</button>
                     
                 </div>
             </div>

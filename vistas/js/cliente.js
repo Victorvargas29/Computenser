@@ -18,7 +18,17 @@ function init(){
 	
 
 }
+$("#cedulaS").keyup(function(){
+	procesar($("#cedulaS").val(),$("#comboCedula").val());
+	
+});
+function procesar(cedula,comboCedula){
+	campo1=comboCedula;
+	campo2=cedula;
+	fi=campo1+campo2;
+	document.getElementById('cedula').value=fi;
 
+}
 //funcion q limpia los campos del formulario
 function limpiar(){
 
@@ -29,6 +39,7 @@ function limpiar(){
 	$("#telefono").val("");
 	$("#correo").val("");
 }
+
 
 //funcion listar
 function listar(){
@@ -93,7 +104,7 @@ function listar(){
 }//fin funcion listar
 
 function mostrar(cedula){
-
+console.log("SDF",cedula);
 	$.post("../ajax/cliente.php?op=mostrar",{cedula : cedula}, function(data, status)
 	{
 		data = JSON.parse(data);
