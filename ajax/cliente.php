@@ -85,10 +85,11 @@ require_once("../modelos/Clientes.php");
             $sub_array[]=$row["direccion"];
    					$sub_array[]=$row["telefono"];
             $sub_array[]=$row["correo"];
-   					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["cedula"].');"  id="'.$row["cedula"].'" class="btn btn-warning btn-md update" title="Editar cliente"><i class="fas fa-edit"></i></button>';
+            $cedula=$row["cedula"];
+   					 $sub_array[] = '<button type="button" onClick="mostrar('."'".$cedula."'".');"  id="'.$row["cedula"].'" class="btn btn-warning btn-md update" title="Editar cliente"><i class="fas fa-edit"></i></button>';
 
 
-                   $sub_array[] = '<button type="button" onClick="eliminar_cliente('.$row["cedula"].');"  id="'.$row["cedula"].'" class="btn btn-danger btn-md" title="Eliminar cliente"><i class="fas fa-trash-alt"></i></button>';
+                   $sub_array[] = '<button type="button" onClick="eliminar_cliente('."'".$cedula."'".');"  id="'.$cedula.'" class="btn btn-danger btn-md" title="Eliminar cliente"><i class="fas fa-trash-alt"></i></button>';
 
    					$data[]=$sub_array;
    				}

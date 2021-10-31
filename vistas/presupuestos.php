@@ -2,14 +2,11 @@
 <?php
 
 require_once("../modelos/Usuarios.php");
-require_once("../modelos/ventas.php");
-require_once("../modelos/Empleadas.php");
+require_once("../modelos/Presupuestos.php");
 
-$empleadas = new Empleadas();
-$venta = new Ventas();
+$presupuesto = new Presupuestos();
 //$ven= $venta->detalles_venta($_SESSION["idUsuario"]);
 
-$emp = $empleadas->get_empleada();
 
 require_once("../modelos/Clientes.php");
 
@@ -44,38 +41,38 @@ $cli = $clientes->get_Cliente();
         <!--VISTA MODAL PARA AGREGAR CLIENTE-->
         <!--VISTA MODAL PARA AGREGAR PRODUCTO -->    
         <?php // require_once("modal/lista_productos_ventas_modal.php");?>
-    <section class="formulario-compra">
+    <section class="formulario-presupuesto">
     
-    <form action="http://computenser.test/computenser/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">
-  <!--    <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">    -->
+    <form action="http://computenser.test/computenser/report/reportenew.php" target="_blank" method="post" class="form-horizontal" id="form_presupuesto">
+  <!--    <form action="http://merilara.computenser.com/report/presupuestoPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">    -->
         <div class="container"> <!--container-->
             <div class="row pb-1 pt-3">
               <div class="col-lg-6">
-                <h1 class="col-lg-6 ml-3">Facturación</h1>
+                <h1 class="col-lg-6 ml-3">Presupuesto</h1>
               </div>
             </div>
             <div class="row"> 
               
               <div class="col-lg-2">
-                <label>N° Factura</label>
-                 <h3 id="idFacturas"></h3>       
+                <label>N° Presupuesto</label>
+                 <h3 id="idPresupuestos"></h3>       
               <!--   <input type="text" name="idFacturas" id="idFacturas"  disabled required pattern = "[0-9]{0,15}" class="form-control"></input>
                 -->
                 <br/>
               </div>
               
               <div class="col-lg-2"> 
-                <label>Tasa del dia - DolarToday</label>
+                <label>Tasa del dia</label>
                 <input type="text" name="tasa" id="tasa" placeholder="Tasa del dia" required pattern = "^[0-9]+([.][0-99]+)?$" class="form-control"></input>
                 <br/>
               </div>
               <div class="col-lg-4">   
-              <input type="hidden" name="idFactura" id="idFactura" required pattern = "[0-9]{0,15}" class="form-control"></input>
+              <input type="hidden" name="idPresupuesto" id="idPresupuesto" required pattern = "[0-9]{0,15}" class="form-control"></input>
               <div class="col-lg-2">
               </div>
               </div>
               <div class="col-lg-2 pt-4">  
-              <button type="button" class="btn btn-primary" id="listafact"><i class="" aria-hidden="true"></i> Ver Facturas</button>      
+              <button type="button" class="btn btn-primary" id="listapresu"><i class="" aria-hidden="true"></i> Ver Presupuestos</button>      
               </div>
 
             </div><!-- /.row -->
@@ -123,7 +120,7 @@ $cli = $clientes->get_Cliente();
                 <div class="row">
                     <div class="col-lg-10">          
                         <label>Direccion</label>
-                        <textarea name="direccion" id="direccion" class="form-control" rows="1"></textarea>  
+                        <textarea name="direccion" id="direccion" class="form-control" rows="2"></textarea>  
                     </div>
                 </div>
                 <div class="row">
@@ -131,11 +128,11 @@ $cli = $clientes->get_Cliente();
                         <label>PLACA</label>
                         <input type="text" name="placa" id="placa" class="form-control" placeholder="Placa" ></input>  
                     </div>
-                    
+                  <!--
                     <div class="col-lg-5">          
                         <label>O/E</label>
                         <input type="text" name="oentrega" id="oentrega" class="form-control" placeholder="O/E"></input>  
-                    </div>
+                    </div>--> 
                 </div>
             </div>  <!--fin row pb-1 pt-6-->
 
@@ -214,7 +211,7 @@ $cli = $clientes->get_Cliente();
                     <div class="col-lg-3">
                           <div class="btn-group text-center pt-4">
                             <button id="btnAgregar" type="button" onClick="agregar_detalles()" class="btn btn-primary " data-toggle="modal">Agregar detalle</i></button>
-                            <input type="hidden" name="iddetallesFT" id="iddetallesFT"/>
+                            <input type="hidden" name="id_tdetalles" id="id_tdetalles"/>
                           </div>
                       <!--  <h4 class="text-center"><strong>Tipo de Pago</strong></h4>
                         <select name="tipo_pago" class="col-lg-offset-3 col-xs-offset-2" id="tipo_pago" class="select" maxlength="10" >
@@ -241,11 +238,11 @@ $cli = $clientes->get_Cliente();
                 </div>   
                 <div class="col-lg-2 pt-4">
                   <input type="radio" id="dol" name="moneda" value="1" checked>
-                  <label for="dol">Reporte en $</label>
+                  <label for="dol">Presupuesto en $</label>
                 </div>
                 <div class="col-lg-2 pt-4">
                   <input type="radio" id="bs" name="moneda" value="0">
-                  <label for="bs">Reporte en Bs.</label>
+                  <label for="bs">Presupuesto en Bs.</label>
                 </div>
               </div>
             </div>
@@ -262,7 +259,7 @@ $cli = $clientes->get_Cliente();
                               <!-- /.box-header -->
                               <!-- centro width="35%"-->
                               <div class="panel-body table-responsive">
-                                  <table id="detalles_ventas" class="table table-striped nowrap" width="100%">
+                                  <table id="detalles_presupuestos" class="table table-striped nowrap" width="100%">
                                     <thead>
                                       <tr>
                                         <th class="min-desktop">Eliminar</th>
@@ -346,7 +343,7 @@ $cli = $clientes->get_Cliente();
    
 
   <!--AJAX VENTAS-->
-<script type="text/javascript" src="js/ventas.js"></script>
+<script type="text/javascript" src="js/presupuestos.js"></script>
 
 
 

@@ -5,29 +5,29 @@
    require_once("../config/conexion.php");
 
 
-   Class Ventas extends Conexion {
+   Class Presupuestos extends Conexion {
 
        //listar los usuarios
-   	    public function get_venta(){
+   	    public function get_presupuesto(){
 
    	    	$conectar=parent::conectar();
    	    //	parent::set_names();
 
-   	    	$sql="select * from detallefactura d inner join servicio s  on d.idServicio=s.idServicio";
-
+   	    	$sql="select * from detallepresupuesto d inner join servicio s  on d.idServicio=s.idServicio";
+           
    	    	$sql=$conectar->prepare($sql);
    	    	$sql->execute();
 
    	    	return $resultado=$sql->fetchAll();
    	    }
 
-   	    public function agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$descripcion,$cantidad,$idUsuario){
+   	    public function agregar_detalle($idPresupuesto,$idServicio,$nombre_ser,$precio,$tasa,$descripcion,$cantidad,$idUsuario){
 
              $conectar=parent::conectar();
              //parent::set_names();
-             $sql="insert into detallesfacturatemporal values(null,?,?,?,?,?,?,?,?);";
+             $sql="insert into t_detallepresupuesto values(null,?,?,?,?,?,?,?,?);";
              $sql=$conectar->prepare($sql);
-             $sql->bindValue(1, $_POST["idFactura"]); 
+             $sql->bindValue(1, $_POST["idPresupuesto"]); 
              $sql->bindValue(2, $_POST["idServicio"]); 
              $sql->bindValue(3, $_POST["nombre_ser"]);
              $sql->bindValue(4, $_POST["precio"]);
@@ -40,17 +40,17 @@
              //echo "se registro";
             // print_r($_POST);
    	    }
-         public function registrar($idFactura,$cedula,$moneda,$placa,$oentrega){
+         public function registrar($idPresupuesto,$cedula,$moneda,$placa,$comboCedula){
 
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="insert into factura values(?,now(),?,?,'0',?,?);";
+          $sql="insert into presupuesto values(?,now(),?,'0',?);";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $_POST["idFactura"]); 
+          $sql->bindValue(1, $_POST["idPresupuesto"]); 
           $sql->bindValue(2, $_POST["comboCedula"]."".$_POST["cedula"]); 
-          $sql->bindValue(3, $_POST["moneda"]); 
-          $sql->bindValue(4, $placa); 
-          $sql->bindValue(5, $oentrega);
+         
+          $sql->bindValue(3, $_POST["placa"]); 
+         
           ; 
          // $sql->bindValue(4, $_POST["tasa"]);                   
           $sql->execute();
@@ -64,7 +64,7 @@
           public function eliminar_temporal(){
             $conectar=parent::conectar();
 
-          $sql="delete from detallesfacturatemporal";
+          $sql="delete from t_detallepresupuesto";
           $sql=$conectar->prepare($sql);
           
           $sql->execute();
@@ -75,7 +75,7 @@
           public function eliminar_temp_condicion($idUsuario){
             $conectar=parent::conectar();
 
-          $sql="delete from detallesfacturatemporal where idUsuario=?";
+          $sql="delete from t_detallepresupuesto where idUsuario=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idUsuario);
           $sql->execute();
@@ -83,11 +83,11 @@
 
           }
 
-   	    public function editar_venta($cedula, $nombre, $apellido,$direccion,$telefono){
+   	    public function editar_presupuesto($cedula, $nombre, $apellido,$direccion,$telefono){
 
              $conectar=parent::conectar();
             // parent::set_names();
-             $sql="update venta set nombre=?, apellido=?, direccion=?, telefono=? where cedula=?";
+             $sql="update presupuesto set nombre=?, apellido=?, direccion=?, telefono=? where cedula=?";
              //echo $sql;    //imprime la consulta para verificar en phpmyadmin
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1, $_POST["nombre"]);
@@ -101,11 +101,11 @@
    	    en el js debajo del success   */
    	    }
 
-   	    public function get_venta_por_id($cedula){
+   	    public function get_presupuesto_por_id($cedula){
           
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="select * from venta where cedula=?";
+          $sql="select * from presupuesto where cedula=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $cedula);
           $sql->execute();
@@ -113,20 +113,20 @@
 
    	    }
 
-        public function eliminar_venta($cedula){
+        public function eliminar_presupuesto($cedula){
           $conectar=parent::conectar();
 
-          $sql="delete from venta0 where cedula=?";
+          $sql="delete from presupuesto where cedula=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $cedula);
           $sql->execute();
           return $resultado=$sql->fetch();
         }
 
-        public function detalles_venta($idUsuario){
+        public function detalles_presupuesto($idUsuario){
          
           $conectar=parent::conectar();
-          $sql="select * from detallesfacturatemporal where idUsuario=?"; 
+          $sql="select * from t_detallepresupuesto where idUsuario=?"; 
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idUsuario);
           $sql->execute();
@@ -134,12 +134,12 @@
           return $resultado=$sql->fetchAll();
 
         }
-        public function venta(){
+        public function presupuesto(){
          
           $conectar=parent::conectar();
    	    	
 
-          $sql="select * from factura"; 
+          $sql="select * from presupuesto"; 
 
           $sql=$conectar->prepare($sql);
           $sql->execute();
@@ -148,13 +148,13 @@
 
         }
 
-        public function eliminar_item($idTemporal){
+        public function eliminar_item($id_tdetalle){
           $conectar=parent::conectar();
 
-          $sql="delete from detallesfacturatemporal where iddetallesFT=?";
+          $sql="delete from t_detallepresupuesto where id_tdetalle=?";
 
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1,$idTemporal);
+          $sql->bindValue(1,$id_tdetalle);
           $sql->execute();
 
           return $resultado=$sql->fetch();
@@ -165,7 +165,7 @@
           $conectar=parent::conectar();
           //	parent::set_names();
         
-            $sql="select idFactura from detallesfacturatemporal";
+            $sql="select idPresupuesto from t_detallepresupuesto";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
@@ -176,7 +176,7 @@
           $conectar=parent::conectar();
           //	parent::set_names();
         
-            $sql="select idFactura, idUsuario from detallesfacturatemporal where idUsuario=?";
+            $sql="select idPresupuesto, idUsuario from t_detallepresupuesto where idUsuario=?";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $idUsuario);
             $sql->execute();
@@ -187,7 +187,7 @@
         public function Max2(){
           $conectar=parent::conectar();
           //	parent::set_names();
-            $sql="select MAX(idFactura) from factura";
+            $sql="select MAX(idPresupuesto) from presupuesto";
             $sql=$conectar->prepare($sql);
             $sql->execute();
           // echo intval($sql);
@@ -197,7 +197,7 @@
         public function Max(){
           $conectar=parent::conectar();
         //	parent::set_names();
-          $sql="select idFactura from factura order by idFactura asc";
+          $sql="select idPresupuesto from presupuesto order by idPresupuesto asc";
           $sql=$conectar->prepare($sql);
           $sql->execute();
          // echo intval($sql);
@@ -209,7 +209,7 @@
           $conectar=parent::conectar();
         //	parent::set_names();
 
-          $sql="insert into detallefactura (idFactura, idServicio,precio,descripcion,tasa,cantidad) select idFactura, idServicio,precioTemp,descripcion,tasa,cantidad from detallesfacturatemporal where idUsuario=?";
+          $sql="insert into detallepresupuesto (idPresupuesto, idServicio,precio,descripcion,tasa,cantidad) select idPresupuesto, idServicio,precio,descripcion,tasa,cantidad from t_detallepresupuesto where idUsuario=?";
 
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idUsuario);
@@ -219,42 +219,42 @@
           return $resultado=$sql->fetchAll();
         }
         
-        public function get_venta_idfactura($idFactura){
+        public function get_presupuesto_idPresupuesto($idPresupuesto){
           
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="select * from factura where idFactura=?";
+          $sql="select * from presupuesto where idPresupuesto=?";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $idFactura);
+          $sql->bindValue(1, $idPresupuesto);
           $sql->execute();
           return $resultado=$sql->fetchAll();
 
    	    }
 
-         public function get_facturas(){
+         public function get_Presupuestos(){
           
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql = "select * from factura AS f inner join cliente AS c ON f.cedula= c.cedula";
+          $sql = "select * from presupuesto AS f inner join cliente AS c ON f.cedula= c.cedula";
           $sql=$conectar->prepare($sql);
           $sql->execute();
           return $resultado=$sql->fetchAll();
 
    	    }
 
-        public function get_detalles_factura($idFactura){
+        public function get_detalles_Presupuesto($idPresupuesto){
 
           $conectar = parent::conectar();      
   
-          $sql = "select f.idFactura, f.tipo_moneda, f.fecha, s.Nombre, df.precio, df.tasa, df.cantidad,c.cedula,c.apellido, c.nombre, c.direccion,c.telefono from factura AS f INNER JOIN cliente AS c ON f.cedula=c.cedula INNER JOIN detallefactura df ON f.idFactura=df.idFactura JOIN servicio AS s on df.idServicio=s.idServicio WHERE f.idFactura=?";
+          $sql = "select f.idPresupuesto, f.tipo_moneda, f.fecha, s.Nombre, df.precio, df.tasa, df.cantidad,c.cedula,c.apellido, c.nombre, c.direccion,c.telefono from presupuesto AS f INNER JOIN cliente AS c ON f.cedula=c.cedula INNER JOIN detallepresupuesto df ON f.idPresupuesto=df.idPresupuesto JOIN servicio AS s on df.idServicio=s.idServicio WHERE f.idPresupuesto=?";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $idFactura);
+          $sql->bindValue(1, $idPresupuesto);
           $sql->execute();
           //print_r($_POST);
           return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function cambiar_moneda($idFactura,$tipo
+        public function cambiar_moneda($idPresupuesto,$tipo
         ){
           $conectar = parent::conectar(); 
           echo $_POST["tipo_moneda"];
@@ -264,13 +264,13 @@
           } else {
             $tipo=0;
           }
-            $sql="update factura set tipo_moneda=? where idFactura=?";
+            $sql="update presupuesto set tipo_moneda=? where idPresupuesto=?";
 
           $sql=$conectar->prepare($sql);
 
 
          $sql->bindValue(1,$tipo);
-         $sql->bindValue(2,$idFactura);
+         $sql->bindValue(2,$idPresupuesto);
           $sql->execute();
           print_r($_POST);
 
@@ -285,12 +285,12 @@
           return $resultado=$sql->fetchAll();
         }
         
-        public function anular($idFactura){
+        public function anular($idPresupuesto){
           $conectar = parent::conectar(); 
 
-          $sql="update factura set anulado=1 where idFactura=?";
+          $sql="update presupuesto set anulado=1 where idPresupuesto=?";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1,$idFactura);
+          $sql->bindValue(1,$idPresupuesto);
           $sql->execute();
         }
    }

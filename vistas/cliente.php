@@ -80,8 +80,11 @@
                 </div>
              
                 <div class="modal-body">
-              
-                    <label></label>
+                    <label class="col-form-label">Cedula:</label>
+              <div class="row">
+                  
+                  <div class="col-lg-2">
+                    
                     <select class="form-control font-weight-bold" id="comboCedula" name="comboCedula" required>
                         <option class="font-weight-bold" value="V-">V-</option>
                         <option class="font-weight-bold" value="J-">J-</option>
@@ -89,15 +92,17 @@
                         <option class="font-weight-bold" value="C-">C-</option>
                         <option class="font-weight-bold" value="G-">G-</option>   
                     </select>
-                  
+                  </div>
 
                   
-                        <label class="col-form-label">Cedula:</label>
+                        
+                    <div class="col-lg-10">
                     <input type="text" class="form-control" name="cedulaS" id="cedulaS">
+                    </div>
+                </div> <!-- fin row -->
+
                     
-                    
-                        <label class="col-form-label">Cedula:</label>
-                    <input type="text" class="form-control" name="cedula" id="cedula">
+                    <input type="hidden" class="form-control" name="cedula" id="cedula">
                   
                
       

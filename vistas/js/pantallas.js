@@ -105,6 +105,15 @@ $(document).ready(function(){
 		});
 	});
 
+	$("#presupuesto_p").click(function(){
+		$.ajax({
+		url:'../vistas/presupuestos.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/servicioprestado.php no found");}
+		});
+	});
+
 		$("#clientess").click(function(){
 		$.ajax({
 		url:'../vistas/cliente.php',
@@ -156,7 +165,14 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
 		});
 	});
-	
+	$("#reportes_presupuestos").click(function(){
+		$.ajax({
+		url:'../vistas/lista_presupuestos.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
+		});
+	});
 
 
 });

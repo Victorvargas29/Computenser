@@ -3,19 +3,20 @@
   require_once("../config/conexion.php");
 
   //llamo al modelo Venta
-  require_once("../modelos/ventas.php");
+  require_once("../modelos/Presupuestos.php");
   require_once("../modelos/Servicios.php");
 
-	$venta = new Ventas();
+	$presupuesto = new Presupuestos();
   $servicio = new Servicio();
   $cedula = isset($_POST["cedula"]);
-	$idFactura = isset($_POST["idFactura"]);
+	$idPresupuesto = isset($_POST["idPresupuesto"]);
 	$idServicio = isset($_POST["idServicio"]);
+	$id_tdetalles = isset($_POST["id_tdetalles"]);
+  
 	$precio = isset($_POST["precio"]);
 	$nombre_ser = isset($_POST["nombre_ser"]);
   $descripcion = isset($_POST["descripcion"]);
 	$placa = isset($_POST["placa"]);
-	$oentrega = isset($_POST["oentrega"]);
   $comboCedula = isset($_POST["comboCedula"]);
 
  
@@ -24,7 +25,7 @@
 
   $estado = isset($_POST["estado"]);
 
-  $NroFactura = isset($_POST["NroFactura"]);
+  $NroPresupuesto = isset($_POST["NroPresupuesto"]);
   //$idUsuario = isset($_POST["idUser"]);
 	$idUsuario = $_SESSION["idUsuario"];
   $tasa = isset($_POST["tasa"]);
@@ -39,31 +40,28 @@
   switch($_GET["op"]){
 	  case "agregar_detalle":
 
-      if($_POST["idServicio"] != 0){
-
-        $venta->agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$descripcion,$cantidad,$idUsuario);
-
-      }else {
-        echo "debe selecionar un servicio";
-      }
      
+
+        $presupuesto->agregar_detalle($idPresupuesto,$id_tdetalles,$nombre_ser,$precio,$tasa,$descripcion,$cantidad,$idUsuario);
+
+ 
 
     break;
 
     case "listar":
-      $datos = $venta->detalles_venta($idUsuario);
+      $datos = $presupuesto->detalles_presupuesto($idUsuario);
       $data = array();
       foreach ($datos as $row) {
         $sub_array = array();
 
-        $sub_array[] = '<button title="Eliminar" type="button" onClick="eliminar_item('.$row["iddetallesFT"].');"  id="'.$row["iddetallesFT"].'" class="btn btn-danger btn-md"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>';
-        $sub_array[] = $row["nombre_serv"]." - ".$row["descripcion"];
-        $sub_array[] = $row["precioTemp"];
-        $sub_array[] = number_format($row["precioTemp"] * $row["tasa"],2);
+        $sub_array[] = '<button title="Eliminar" type="button" onClick="eliminar_item('.$row["id_tdetalle"].');"  id="'.$row["id_tdetalle"].'" class="btn btn-danger btn-md"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>';
+        $sub_array[] = $row["nomb_serv"]." - ".$row["descripcion"];
+        $sub_array[] = $row["precio"];
+        $sub_array[] = number_format($row["precio"] * $row["tasa"],2);
         // $sub_array[] = $row["precioTemp"] * $row["tasa"] * 0.16; 
         $sub_array[] = $row["cantidad"];
-        $sub_array[] = number_format($row["precioTemp"] * $row["tasa"] * $row["cantidad"],2);
-        $sub_array[] = number_format($row["precioTemp"] * $row["cantidad"],2);
+        $sub_array[] = number_format($row["precio"] * $row["tasa"] * $row["cantidad"],2);
+        $sub_array[] = number_format($row["precio"] * $row["cantidad"],2);
         
         $data[]=$sub_array;
       }
@@ -77,17 +75,17 @@
     break;
 
     case "listarSubtotales":
-      $datos = $venta->detalles_venta($idUsuario);
+      $datos = $presupuesto->detalles_presupuesto($idUsuario);
       $data = array();
       foreach ($datos as $row) {
         $sub_array = array();
        
-        $precio= ($row["precioTemp"]*$row["cantidad"])+$precio;
-        $precioBs = ($row["precioTemp"] * $row["tasa"]*$row["cantidad"])+$precioBs;
-        $ivaBs = ($row["precioTemp"] * $row["tasa"]*$row["cantidad"] * 0.16)+$ivaBs; 
-        $iva = ($row["precioTemp"] *$row["cantidad"] * 0.16)+$iva; 
-        $precioTBs = ($row["precioTemp"] * $row["tasa"] * $row["cantidad"]*1.16)+$precioTBs;
-        $precioT = ($row["precioTemp"] * $row["cantidad"]*1.16)+$precioT;
+        $precio= ($row["precio"]*$row["cantidad"])+$precio;
+        $precioBs = ($row["precio"] * $row["tasa"]*$row["cantidad"])+$precioBs;
+        $ivaBs = ($row["precio"] * $row["tasa"]*$row["cantidad"] * 0.16)+$ivaBs; 
+        $iva = ($row["precio"] *$row["cantidad"] * 0.16)+$iva; 
+        $precioTBs = ($row["precio"] * $row["tasa"] * $row["cantidad"]*1.16)+$precioTBs;
+        $precioT = ($row["precio"] * $row["cantidad"]*1.16)+$precioT;
         
       }
     //   $sub_array[] = $precio;
@@ -111,9 +109,9 @@
 
     case 'mostrar':
 
-      $facturaMax = $venta->Max();
-      $temporalMax = $venta->datos_en_temporal();
-      $TemporalUsuario = $venta->datos_en_temporal_idUsuario($idUsuario);
+      $presupuestoMax = $presupuesto->Max();
+      $temporalMax = $presupuesto->datos_en_temporal();
+      $TemporalUsuario = $presupuesto->datos_en_temporal_idUsuario($idUsuario);
  
       if(is_array($temporalMax)==true and count($temporalMax)>0){
 
@@ -121,30 +119,30 @@
           foreach ($TemporalUsuario as $row) {
 
             //	$output["idDepartamento"] = $row["idDepartamento"];
-              $output["idFactura"] = $row["idFactura"];
+              $output["idPresupuesto"] = $row["idPresupuesto"];
             }
             echo json_encode($output);
         }else{
 
             foreach ($temporalMax as $row) {
             //	$output["idDepartamento"] = $row["idDepartamento"];
-             $temp= $row["idFactura"];
+             $temp= $row["idPresupuesto"];
             }
-            foreach ($facturaMax as $facturaMaxima) {
+            foreach ($presupuestoMax as $presupuestoMaxima) {
               //	$output["idDepartamento"] = $row["idDepartamento"];
-                $fact = $facturaMaxima["idFactura"];
+                $fact = $presupuestoMaxima["idPresupuesto"];
             }
               if ($fact>$temp) {
-                foreach ($facturaMax as $row) {
+                foreach ($presupuestoMax as $row) {
                   //	$output["idDepartamento"] = $row["idDepartamento"];
-                  $output["idFactura"]= $row["idFactura"]+1;
+                  $output["idPresupuesto"]= $row["idPresupuesto"]+1;
                   }
 
               }
               else{
                 foreach ($temporalMax as $row) {
                   //	$output["idDepartamento"] = $row["idDepartamento"];
-                  $output["idFactura"]= $row["idFactura"]+1;
+                  $output["idPresupuesto"]= $row["idPresupuesto"]+1;
                   }
 
               }
@@ -152,10 +150,10 @@
         }
       }else{
 
-          if(is_array($facturaMax)==true and count($facturaMax)>0){
-            foreach ($facturaMax as $row) {
+          if(is_array($presupuestoMax)==true and count($presupuestoMax)>0){
+            foreach ($presupuestoMax as $row) {
             //	$output["idDepartamento"] = $row["idDepartamento"];
-              $output["idFactura"] = $row["idFactura"]+1;
+              $output["idPresupuesto"] = $row["idPresupuesto"]+1;
             }
             echo json_encode($output);
         }else{
@@ -168,30 +166,30 @@
       break;
 
     case "eliminar_item":
-      $venta->eliminar_item($_POST["iddetallesFT"]);   
+      $presupuesto->eliminar_item($_POST["id_tdetalle"]);   
     break;
     
     case 'guardarVenta':
             
     
-             $venta->registrar($idFactura,$cedula,$moneda,$_POST["placa"],$_POST["oentrega"]);
-             $venta->detallesDetalles($idUsuario);
+             $presupuesto->registrar($idPresupuesto,$cedula,$moneda,$placa,$comboCedula);
+             $presupuesto->detallesDetalles($idUsuario);
              sleep(2);
-             $venta->eliminar_temp_condicion($idUsuario);
+             $presupuesto->eliminar_temp_condicion($idUsuario);
             
             
     
     break;
     case "borrar_temp":
-      $venta->eliminar_temp_condicion($idUsuario);
+      $presupuesto->eliminar_temp_condicion($idUsuario);
     break;
 
-    case "listarfacturas":
+    case "listarpresupuestos":
       
-      $datos = $venta->get_facturas();
+      $datos = $presupuesto->get_presupuestos();
       $data = array();
       foreach ($datos as $row) {
-        if ($row["idFactura"]>1) {
+        if ($row["idPresupuesto"]>1) {
           $sub_array = array();
 
           $est = '';
@@ -228,12 +226,12 @@
         }
          
 
-        $sub_array[] = '<span>'.$row["idFactura"].'</span> ';
+        $sub_array[] = '<span>'.$row["idPresupuesto"].'</span> ';
         $sub_array[] = $row["nombre"];
-        $sub_array[] = $row["cedula"];  //onClick=mostrarFactura('.$row["idFactura"].','.$moneda.')
-        $sub_array[] = '<button title="'.$est.'" type="button" onClick="tipomoneda('.$row["idFactura"].','.$row["tipo_moneda"].');" name="tipo_moneda" id="'.$row["idFactura"].'" class="'.$atrib.'"><i class="'.$atrib_icon.'"></i>'.$titulo.'</button>';
-        $sub_array[] = '<button title="Ver" type="button" onClick=mostrarFactura('.$row["idFactura"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
-        $sub_array[] = '<button title="'.$tip.'" type="button" onClick="anulacion('.$row["idFactura"].','.$row["anulado"].')"  id="'.$row["idFactura"].'" class="'.$atrib_clases.'"><i class="'.$atrib_icono.'" aria-hidden="true"></i>'.$titulo2.'</button>';
+        $sub_array[] = $row["cedula"];  //onClick=mostrarPresupuesto('.$row["idPresupuesto"].','.$moneda.')
+        $sub_array[] = '<button title="'.$est.'" type="button" onClick="tipomoneda('.$row["idPresupuesto"].','.$row["tipo_moneda"].');" name="tipo_moneda" id="'.$row["idPresupuesto"].'" class="'.$atrib.'"><i class="'.$atrib_icon.'"></i>'.$titulo.'</button>';
+        $sub_array[] = '<button title="Ver" type="button" onClick=mostrarPresupuesto('.$row["idPresupuesto"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
+        $sub_array[] = '<button title="'.$tip.'" type="button" onClick="anulacion('.$row["idPresupuesto"].','.$row["anulado"].')"  id="'.$row["idPresupuesto"].'" class="'.$atrib_clases.'"><i class="'.$atrib_icono.'" aria-hidden="true"></i>'.$titulo2.'</button>';
         
         $data[]=$sub_array;
         }
@@ -254,12 +252,12 @@
         //valida el id del usuario
          // if(is_array($datos)==true and count($datos)>0){
             //edita el estado del usuario 
-            $venta->cambiar_moneda($_POST["idFactura"],$_POST["tipo_moneda"]);
+            $presupuesto->cambiar_moneda($_POST["idPresupuesto"],$_POST["tipo_moneda"]);
       //    }
       break;
       case "anular":
-  
-            $venta->anular($_POST["idFactura"]);
+        
+            $presupuesto->anular($_POST["idPresupuesto"]);
 
       break;
 }

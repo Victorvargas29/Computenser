@@ -153,6 +153,7 @@ function guardaryeditar(e){
 
 
 function eliminar_cliente (cedula){
+	console.log("cedula", cedula);
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){
 			if(result){
 				$.ajax({
@@ -163,6 +164,7 @@ function eliminar_cliente (cedula){
 					success:function(data){
 						$("#cliente_data").DataTable().ajax.reload();
 					}
+					
 				});
 			}//condicion
 		}); //bootbox

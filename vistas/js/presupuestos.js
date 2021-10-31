@@ -6,9 +6,9 @@ var tablfa;
 function init(){
 	tasa_dia();
 	listar();	
-	idfactura();
+	idPresupuesto();
 	listarSubTortales();
-	listarfacturas();
+	//listarfacturas();
 	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
 /*	$("#form_compra").on("button", function(e){
 		cargarlistaS(e);
@@ -29,18 +29,19 @@ $("form_compra").on("submit", function(){
 
 });
 */
-$("#form_compra").on("submit", function(){
+$("#form_presupuesto").on("submit", function(){
 	registrar();
-	
+	console.log("prueba registrar");
+
 
 });
 
 }
 
 $(document).ready(function(){
-	$("#listafact").click(function(){
+	$("#listapresu").click(function(){
 		$.ajax({
-		url:'lista_facturas.php',
+		url:'lista_presupuestos.php',
 		method: "POST",
 		success: function(res){ $("#seccion1").html(res); },
 		error: function(err){ $("#seccion1").html(err);}
@@ -106,7 +107,7 @@ $("#comboCedula").change(function(){
 });
 
 function listar(){
-	tabla=$('#detalles_ventas').dataTable({ 
+	tabla=$('#detalles_presupuestos').dataTable({ 
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		
@@ -114,7 +115,7 @@ function listar(){
 		
 		"ajax":
 		{
-			url:'../ajax/ventas.php?op=listar',
+			url:'../ajax/presupuestos.php?op=listar',
 			type: "get",
 			datatype: "json",
 			error: function(e){
@@ -163,7 +164,7 @@ function listar(){
 		
 		"ajax":
 		{
-			url:'../ajax/ventas.php?op=listarSubtotales',
+			url:'../ajax/presupuestos.php?op=listarSubtotales',
 			type: "get",
 			datatype: "json",
 			error: function(e){
@@ -207,10 +208,10 @@ function listar(){
 function agregar_detalles(){
 
 	// e.preventDefault();//No se activará la acción predeterminada del evento
-	var formData = new FormData($("#form_compra")[0]);
+	var formData = new FormData($("#form_presupuesto")[0]);
 
 		$.ajax({
-			url: "../ajax/ventas.php?op=agregar_detalle",
+			url: "../ajax/presupuestos.php?op=agregar_detalle",
 			type: "POST",
 			data: formData,
 			cache:false,
@@ -221,7 +222,7 @@ function agregar_detalles(){
 
 			///	console.log(formData); //muestre los valores en la consola
 				console.log(datos); //muestre los valores en la consola
-				$('#detalles_ventas').DataTable().ajax.reload();
+				$('#detalles_presupuestos').DataTable().ajax.reload();
 				$("#sub").DataTable().ajax.reload();
 				listarSubTortales();
 			//	$('#form_compra')[0].reset();
@@ -310,59 +311,61 @@ function cargarServicio(idServicio){
 	////var seltex= sel.options[getElementIndex("idServicio").text]
 	///$("nombre_ser").val($seltex);
 }
-function idfactura(){
+function idPresupuesto(){
 	var idFf=1;
-	$.post("../ajax/ventas.php?op=mostrar", function(data, status)
+	$.post("../ajax/presupuestos.php?op=mostrar", function(data, status)
 	{	idFf=1;
 		console.log(data);			
 		data =JSON.parse(data);	 
-		idF =data.idFactura;
-		$('#idFacturas').html(idF);
-		 $("#idFactura").val(idF);
-	//	 $("#idFacturas").val(idF);
+		idF =data.idPresupuesto;
+		$('#idPresupuestos').html(idF);
+		 $("#idPresupuesto").val(idF);
+	//	 $("#idPresupuestos").val(idF);
 		// console.log(idF); 
 		//// $("#nombre_ser").val(data.nombre);
 	});
-	///$("#idFactura").val($("#idFactura").val()+1);
+	///$("#idPresupuesto").val($("#idPresupuesto").val()+1);
 	//var sel =document.getElementById("idServicio");
 ////var seltex= sel.options[getElementIndex("idServicio").text]
 ///$("nombre_ser").val($seltex);
 }
 
-function eliminar_item(iddetallesFT){
+function eliminar_item(id_tdetalle){
 	
 	$.ajax({
-		url:"../ajax/ventas.php?op=eliminar_item",
+		url:"../ajax/presupuestos.php?op=eliminar_item",
 		method:"POST",
-		data:{iddetallesFT:iddetallesFT},
+		data:{id_tdetalle:id_tdetalle},
 
 		success:function(data){
-			$("#detalles_ventas").DataTable().ajax.reload();
+			$("#detalles_presupuestos").DataTable().ajax.reload();
 			$("#sub").DataTable().ajax.reload();
 		}
 	});
 }
 
 function registrar(){
+	
 	//e.preventDefault(); //No se activará la acción predeterminada del evento
-	var formData = new FormData($("#form_compra")[0]);
+	var formData = new FormData($("#form_presupuesto")[0]);
 	//console.log("registrarrrrrr");
+	
 		$.ajax({
-			url: "../ajax/ventas.php?op=guardarVenta",
+			url: "../ajax/presupuestos.php?op=guardarVenta",
 			type: "POST",
 			data: formData,
 			contentType: false,
 			processData: false,
-
+			 
 			success: function(datos){
 
 				console.log(datos); //muestre los valores en la consola
 
-				$('#form_compra')[0].reset();
+				$('#form_presupuesto')[0].reset();
 				//$('#servicioModal').modal('hide');
-				$("#detalles_ventas").DataTable().ajax.reload();
+				$("#detalles_presupuestos").DataTable().ajax.reload();
 				$("#sub").DataTable().ajax.reload();
-				idfactura();
+				idPresupuesto();
 				tasa_dia();
 				
 				//$('#resultados_ajax').html(datos);
@@ -374,7 +377,7 @@ function registrar(){
 }
 
 function borrar_temporal(){
-	var formData = new FormData($("#form_compra")[0]);
+	var formData = new FormData($("#form_presupuesto")[0]);
 	$.ajax({
 		url: "../ajax/ventas.php?op=borrar_temp",
 		type: "POST",
@@ -385,18 +388,18 @@ function borrar_temporal(){
 		success: function(datos){
 
 			console.log(datos); //muestre los valores en la consola
-			$('#form_compra')[0].reset();
-			$("#detalles_ventas").DataTable().ajax.reload();
+			$('#form_presupuesto')[0].reset();
+			$("#detalles_presupuestos").DataTable().ajax.reload();
 			$("#sub").DataTable().ajax.reload();
-			idfactura();
+			idPresupuesto();
 			tasa_dia();
 		}
 	});
 }
 
-function listarfacturas(){
+function listarpresupuestos(){
 
-	tabla=$('#factura_data').dataTable({  //#usuario_data este es el id de la tabla
+	tabla=$('#presupuestos_data').dataTable({  //#usuario_data este es el id de la tabla
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		
@@ -414,7 +417,7 @@ function listarfacturas(){
 		],
 		"ajax":
 		{
-			url:'../ajax/ventas.php?op=listarfacturas',
+			url:'../ajax/presupuestos.php?op=listarpresupuestos',
 			type: "get",
 			datatype: "json",
 			error: function(e){
@@ -456,23 +459,23 @@ function listarfacturas(){
 }//fin funcion listar
 
 
-function mostrarFactura(idFactura){
+function mostrarPresupuesto(idPresupuesto){
 	$.ajax({
 		
 
 		success:function(data){
-			console.log(idFactura);
+			console.log(idPresupuesto);
 			
-			window.open("http://computenser.test/computenser/report/facturaPdf.php");
-		//	window.open("http://merilara.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
+			window.open("http://computenser.test/computenser/report/facturaPdf.php?idPresupuesto="+idPresupuesto);
+		//	window.open("http://merilara.computenser.com/report/facturaPdf.php?idPresupuesto="+idPresupuesto);
 		}
 	});
 
-	$.post("../report/facturaPdf.php",{idFactura : idFactura});
+	$.post("../report/facturaPdf.php",{idPresupuesto : idPresupuesto});
 }//fin funcion mostrar
 
 
-function tipomoneda(idFactura, tipo_moneda){
+function tipomoneda(idPresupuesto, tipo_moneda){
 		var coin = "";
 		if(tipo_moneda==1){
 			coin="Bolivares"		
@@ -491,9 +494,9 @@ function tipomoneda(idFactura, tipo_moneda){
 	.then(result => {
 		 if (result.value) {
 			   $.ajax({
-				url:"../ajax/ventas.php?op=activarydesactivar",
+				url:"../ajax/presupuestos.php?op=activarydesactivar",
 				method:"POST",
-				data:{idFactura:idFactura, tipo_moneda:tipo_moneda},
+				data:{idPresupuesto:idPresupuesto, tipo_moneda:tipo_moneda},
 
 				success:function(data){
 			//		$("#resultados_ajax").html(data);
@@ -517,10 +520,10 @@ function tipomoneda(idFactura, tipo_moneda){
 
 }//fin tipomoneda
 
-function anulacion(idFactura, anulado){
+function anulacion(idPresupuesto, anulado){
 if(anulado!=1){
 	swal.fire({
-		title: "¿Esta seguro(a) de anular la factura N°: 00"+idFactura+" ...? ¡esta acción es irreversible!",
+		title: "¿Esta seguro(a) de anular la factura N°: 00"+idPresupuesto+" ...? ¡esta acción es irreversible!",
 		type: "warning",
 		showCancelButton: true,
 		confirmButtonText: "Anular",
@@ -530,9 +533,9 @@ if(anulado!=1){
 	.then(result => {
 		 if (result.value) {
 			   $.ajax({
-				url:"../ajax/ventas.php?op=anular",
+				url:"../ajax/presupuestos.php?op=anular",
 				method:"POST",
-				data:{idFactura:idFactura,anulado:anulado},
+				data:{idPresupuesto:idPresupuesto,anulado:anulado},
 
 				success:function(data){
 			//		$("#resultados_ajax").html(data);
@@ -541,7 +544,7 @@ if(anulado!=1){
 			});
 
 		swal.fire(
-		  "Se ha anulado la factura N°: "+idFactura,
+		  "Se ha anulado la factura N°: "+idPresupuesto,
 
 		  "¡Aviso!",
 		  "success"
