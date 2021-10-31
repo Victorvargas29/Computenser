@@ -462,8 +462,10 @@ function mostrarFactura(idFactura){
 
 		success:function(data){
 			console.log(idFactura);
+			window.open("http://demos.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
+
 			
-			window.open("http://computenser.test/computenser/report/facturaPdf.php");
+			//window.open("http://computenser.test/computenser/report/facturaPdf.php");
 		//	window.open("http://merilara.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
 		}
 	});

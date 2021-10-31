@@ -25,7 +25,7 @@ session_start();
 		}
 		public function ruta(){
 
-			return "http://computenser.test/computenser/";
+			return "http://demos.computenser.com/";
 		}
 	}//cierre class conectar
  ?>
