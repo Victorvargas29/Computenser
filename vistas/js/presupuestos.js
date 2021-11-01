@@ -465,13 +465,13 @@ function mostrarPresupuesto(idPresupuesto){
 
 		success:function(data){
 			console.log(idPresupuesto);
-			
-			window.open("http://computenser.test/computenser/report/facturaPdf.php?idPresupuesto="+idPresupuesto);
+			http://demo.computenser.com/report/presupuestoPdf.php
+			window.open("http://demo.computenser.com/report/presupuestoPdf.php?idPresupuesto="+idPresupuesto);
 		//	window.open("http://merilara.computenser.com/report/facturaPdf.php?idPresupuesto="+idPresupuesto);
 		}
 	});
 
-	$.post("../report/facturaPdf.php",{idPresupuesto : idPresupuesto});
+	$.post("../report/presupuestoPdf.php",{idPresupuesto : idPresupuesto});
 }//fin funcion mostrar
 
 
