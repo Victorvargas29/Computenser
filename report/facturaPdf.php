@@ -145,6 +145,16 @@ label{
             </div>
             
     </div>
+    <div > 
+            <div class="" style="display: inline-block">
+              <label class="Estilo3" style="margin-top: 50%">PLACA:</label>
+              <label id=""><?php echo $venta[0]["placa"];?></label>
+            </div>
+            <div style="display: inline-block">
+              <label class="Estilo3" style="margin-left: 15%"> O / E:</label>
+              <label id=""><?php echo $venta[0]["oentrega"]?></label>
+            </div>            
+    </div>
    
 <!-- 
 <div>  

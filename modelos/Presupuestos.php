@@ -246,7 +246,7 @@
 
           $conectar = parent::conectar();      
   
-          $sql = "select f.idPresupuesto, f.tipo_moneda, f.fecha, df.descripcion, s.Nombre, df.precio, df.tasa, df.cantidad,c.cedula,c.apellido, c.nombre, c.direccion,c.telefono from presupuesto AS f INNER JOIN cliente AS c ON f.cedula=c.cedula INNER JOIN detallepresupuesto df ON f.idPresupuesto=df.idPresupuesto JOIN servicio AS s on df.idServicio=s.idServicio WHERE f.idPresupuesto=?";
+          $sql = "select f.idPresupuesto, f.tipo_moneda, f.placa, f.fecha, df.descripcion, s.Nombre, df.precio, df.tasa, df.cantidad,c.cedula,c.apellido, c.nombre, c.direccion,c.telefono from presupuesto AS f INNER JOIN cliente AS c ON f.cedula=c.cedula INNER JOIN detallepresupuesto df ON f.idPresupuesto=df.idPresupuesto JOIN servicio AS s on df.idServicio=s.idServicio WHERE f.idPresupuesto=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idPresupuesto);
           $sql->execute();
