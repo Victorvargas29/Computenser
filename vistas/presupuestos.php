@@ -42,9 +42,10 @@ $cli = $clientes->get_Cliente();
         <!--VISTA MODAL PARA AGREGAR PRODUCTO -->    
         <?php // require_once("modal/lista_productos_ventas_modal.php");?>
     <section class="formulario-presupuesto">
+      <form action="http://demo.computenser.com/report/presupuestoPdf.php" target="_blank" method="post" class="form-horizontal" id="form_presupuesto">   
     
-    <form action="http://computenser.test/computenser/report/reportenew.php" target="_blank" method="post" class="form-horizontal" id="form_presupuesto">
-  <!--    <form action="http://merilara.computenser.com/report/presupuestoPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">    -->
+          <!--   <form action="http://computenser.test/computenser/report/presupuestoPdf.php" target="_blank" method="post" class="form-horizontal" id="form_presupuesto"> -->
+            <!--    <form action="http://merilara.computenser.com/report/presupuestoPdf.php" target="_blank" method="post" class="form-horizontal" id="form_presupuesto">    -->
         <div class="container"> <!--container-->
             <div class="row pb-1 pt-3">
               <div class="col-lg-6">

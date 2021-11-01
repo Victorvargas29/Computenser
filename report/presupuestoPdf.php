@@ -1,25 +1,25 @@
 <?php
 
-//require_once("../modelos/Clientes.php");
+require_once("../modelos/Presupuestos.php");
 require_once("../modelos/ventas.php");
 require_once("../modelos/Servicios.php");
 
 
 
 //$client = new CLientes();
-$sold = new Ventas();
+$sold = new Presupuestos();
 //$tipo = $sold->consulta_estado();
 
-if(isset($_POST['idFactura'])){
-  $Factura_anulado = $sold->get_venta_idfactura($_POST["idFactura"]);
-  $venta=$sold->get_detalles_factura($_POST["idFactura"]);
-  $idFacturas=$_POST["idFactura"];
+if(isset($_POST['idPresupuesto'])){
+  $Factura_anulado = $sold->get_presupuesto_idPresupuesto($_POST["idPresupuesto"]);
+  $presupuesto=$sold->get_detalles_Presupuesto($_POST["idPresupuesto"]);
+  $idPresupuestos=$_POST["idPresupuesto"];
   $moneda=$_POST["moneda"];
 }else{
-  $Factura_anulado = $sold->get_venta_idfactura($_GET["idFactura"]);
-  $venta=$sold->get_detalles_factura($_GET["idFactura"]);
-  $idFacturas=$_GET["idFactura"];
-  $moneda=$venta[0]["tipo_moneda"];
+  $Factura_anulado = $sold->get_presupuesto_idPresupuesto($_GET["idPresupuesto"]);
+  $presupuesto=$sold->get_detalles_Presupuesto($_GET["idPresupuesto"]);
+  $idPresupuestos=$_GET["idPresupuesto"];
+  $moneda=$presupuesto[0]["tipo_moneda"];
 }
 //$cliente=$client->get_cliente_por_id($_POST["cedula"]);
 
@@ -31,7 +31,7 @@ $sub_dolar=0;
 $iva_dolar=0;
 $total_dolar=0;
 
-/* $venta=$sold->get_detalles_factura(12);
+/* $presupuesto=$sold->get_detalles_factura(12);
 $cliente=$client->get_cliente_por_id(25135123); */
 
 ob_start();
@@ -112,32 +112,32 @@ label{
 
   <div > 
             <div class="margen">
-              <label class="Estilo2">FACTURA N°:</label>
-              <label class="EstiloFactura" id="i"><?php echo "000".$idFacturas;?></label>
+              <label class="Estilo2">PRESUPUESTO N°:</label>
+              <label class="EstiloFactura" id="i"><?php echo "000".$idPresupuestos;?></label>
             </div>
             <div class="" style="display: inline-block">
               <label class="Estilo3" style="margin-top: 50%">NOMBRE O RAZON SOCIAL:</label>
-              <label id=""><?php echo $venta[0]["nombre"]." ".$venta[0]["apellido"];?></label>
+              <label id=""><?php echo $presupuesto[0]["nombre"]." ".$presupuesto[0]["apellido"];?></label>
             </div>
             <div style="display: inline-block">
             <label class="Estilo3" style="margin-left: 15%">RIF / CI:</label>
-              <label id=""><?php echo $venta[0]["cedula"]?></label>
+              <label id=""><?php echo $presupuesto[0]["cedula"]?></label>
             </div>
             <div>
               <div style="display: inline-block">
                 <label class="Estilo3">DOMICILIO FISCAL:</label>
-                <label id=""><?php echo $venta[0]["direccion"]?></label>
+                <label id=""><?php echo $presupuesto[0]["direccion"]?></label>
               </div>
               <div style="display: inline-block">
                   <label class="Estilo3" style="margin-left: 25%">TELEFONO:</label>
-                  <label id=""><?php echo $venta[0]["telefono"]?></label>
+                  <label id=""><?php echo $presupuesto[0]["telefono"]?></label>
                   <br/>
               </div>
               <div style="display: inline-block">
                 <label class="Estilo3" style="margin-left: 30%">FECHA:</label>
                 <label id="">
                   <?php
-                    $date = new DateTime($venta[0]["fecha"]);
+                    $date = new DateTime($presupuesto[0]["fecha"]);
                     echo $date->format('d-m-Y');
                   ?>
                 </label>
@@ -189,40 +189,40 @@ label{
                       <tbody>
                       <?php
                       
-                      for($i=0;$i<sizeof($venta);$i++){
+                      for($i=0;$i<sizeof($presupuesto);$i++){
 
                     ?>
 
                     <tr style="font-size:10pt" class="even_row">
-                      <td style="text-align:left"><div><span class=""><?php echo $venta[$i]["Nombre"]."--".$venta[$i]["descripcion"];?></span></div></td>
-                      <td style="text-align:center"><div><span class=""><?php echo $venta[$i]["cantidad"];?></span></div></td>
-                      <!-- <td style="text-align:center"><div ><span class=""><?php echo number_format($venta[$i]["precio"],2);?></span></div></td> -->
+                      <td style="text-align:left"><div><span class=""><?php echo $presupuesto[$i]["Nombre"]."--".$presupuesto[$i]["descripcion"];?></span></div></td>
+                      <td style="text-align:center"><div><span class=""><?php echo $presupuesto[$i]["cantidad"];?></span></div></td>
+                      <!-- <td style="text-align:center"><div ><span class=""><?php echo number_format($presupuesto[$i]["precio"],2);?></span></div></td> -->
                       <td style="text-align:right"><div ><span class=""><?php 
                       if(isset($moneda)){
                         if($moneda==0){
-                          echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);
+                          echo number_format($presupuesto[$i]["tasa"]*$presupuesto[$i]["precio"],2);
                          }else{
-                          echo number_format($venta[$i]["precio"],2);
+                          echo number_format($presupuesto[$i]["precio"],2);
                         }
                       }else{
-                        echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);
+                        echo number_format($presupuesto[$i]["tasa"]*$presupuesto[$i]["precio"],2);
                       }?></span></div></td>
                       
                       <td style="text-align:right"><div ><span class=""><?php 
                         if(isset($moneda)){
                           if($moneda==0){
-                            echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                            echo number_format($presupuesto[$i]["tasa"]*$presupuesto[$i]["precio"]*$presupuesto[$i]["cantidad"],2);
                           }else{
-                            echo number_format($venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                            echo number_format($presupuesto[$i]["precio"]*$presupuesto[$i]["cantidad"],2);
                           }
                         }else{
-                          echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                          echo number_format($presupuesto[$i]["tasa"]*$presupuesto[$i]["precio"]*$presupuesto[$i]["cantidad"],2);
                         }?></span></div></td>
                     </tr>
 
                     <?php
                       }
-                   for($i=0;$i<20-sizeof($venta);$i++){
+                   for($i=0;$i<20-sizeof($presupuesto);$i++){
                    ?>
 
                     <tr style="" >
@@ -239,15 +239,15 @@ label{
    
 
                       <?php
-                        for($i=0;$i<sizeof($venta);$i++){
+                        for($i=0;$i<sizeof($presupuesto);$i++){
 
-                          $subtotal=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"])+$subtotal;
-                          $iva=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"]* 0.16)+$iva;
-                          $total=($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"]* 1.16)+$total;
+                          $subtotal=($presupuesto[$i]["tasa"]*$presupuesto[$i]["precio"]*$presupuesto[$i]["cantidad"])+$subtotal;
+                          $iva=($presupuesto[$i]["tasa"]*$presupuesto[$i]["precio"]*$presupuesto[$i]["cantidad"]* 0.16)+$iva;
+                          $total=($presupuesto[$i]["tasa"]*$presupuesto[$i]["precio"]*$presupuesto[$i]["cantidad"]* 1.16)+$total;
 
-                          $sub_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"])+$sub_dolar;
-                          $iva_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"]* 0.16)+$iva_dolar;
-                          $total_dolar=($venta[$i]["precio"]*$venta[$i]["cantidad"]* 1.16)+$total_dolar;
+                          $sub_dolar=($presupuesto[$i]["precio"]*$presupuesto[$i]["cantidad"])+$sub_dolar;
+                          $iva_dolar=($presupuesto[$i]["precio"]*$presupuesto[$i]["cantidad"]* 0.16)+$iva_dolar;
+                          $total_dolar=($presupuesto[$i]["precio"]*$presupuesto[$i]["cantidad"]* 1.16)+$total_dolar;
                         }
           if(isset($moneda)){
             if($moneda==1){
@@ -257,9 +257,9 @@ label{
           <div style="float:left">
             <label >A SOLO EFECTO DE LO PREVISTO EN EL ARTICULO 25<BR>
               DE LA LEY DE IMPUESTO DE VALOR AGREGADO SE<BR>
-            EXPRESAN LOS MONTOS DE LA FACTURA EN BsS.<BR>
+            EXPRESAN LOS MONTOS DEL PRESUPUESTO EN BsS.<BR>
             CALCULADO A LA TASA DE CAMBIO POR BCV DE<BR>
-          1 USD POR BsS. <?php echo number_format($venta[0]["tasa"],2);?></label>
+          1 USD POR BsS. <?php echo number_format($presupuesto[0]["tasa"],2);?></label>
           </div>
             <?php }
                 }
@@ -374,7 +374,7 @@ $pdf->load_html($salida_html);;
 $pdf->render();
 
 // Enviamos el fichero PDF al navegador.
-$pdf->stream('factura00'.$idFacturas.'.pdf',array("Attachment"=>0));
+$pdf->stream('factura00'.$idPresupuestos.'.pdf',array("Attachment"=>0));
 //$pdf->loadView('f', compact('values'));
 //return $pdf->stream();
 ///echo '<script>window.open("crearPdf.php", "_blank");</script>';
