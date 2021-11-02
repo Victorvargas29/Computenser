@@ -214,24 +214,14 @@
          $atrib_icono="";
          $titulo2="";
 
-        if($row["anulado"] == 1){
-          $atrib_clases = "btn btn-danger btn-md estado";
-          $titulo2="Anulada";
-        }
-        else{ 
-         // $atrib_icono="fas fa-check";
-          $tip = "Anular";
-          $titulo2="Anular";
-          $atrib_clases = "btn btn-success btn-md estado";
-        }
-         
+       
 
         $sub_array[] = '<span>'.$row["idPresupuesto"].'</span> ';
         $sub_array[] = $row["nombre"];
         $sub_array[] = $row["cedula"];  //onClick=mostrarPresupuesto('.$row["idPresupuesto"].','.$moneda.')
         $sub_array[] = '<button title="'.$est.'" type="button" onClick="tipomoneda('.$row["idPresupuesto"].','.$row["tipo_moneda"].');" name="tipo_moneda" id="'.$row["idPresupuesto"].'" class="'.$atrib.'"><i class="'.$atrib_icon.'"></i>'.$titulo.'</button>';
         $sub_array[] = '<button title="Ver" type="button" onClick=mostrarPresupuesto('.$row["idPresupuesto"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
-        $sub_array[] = '<button title="'.$tip.'" type="button" onClick="anulacion('.$row["idPresupuesto"].','.$row["anulado"].')"  id="'.$row["idPresupuesto"].'" class="'.$atrib_clases.'"><i class="'.$atrib_icono.'" aria-hidden="true"></i>'.$titulo2.'</button>';
+        
         
         $data[]=$sub_array;
         }

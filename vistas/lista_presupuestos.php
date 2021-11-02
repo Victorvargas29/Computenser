@@ -89,7 +89,7 @@
                                                 <th width="20%">Cedula</th>
                                                 <th width="10%">Tipo Moneda</th>
                                                 <th width="10%">Ver Presupuesto</th>
-                                                <th width="10%">Anular</th>
+                                               
                                             </tr>
                                         </thead>
                                         <tbody >       
@@ -110,7 +110,7 @@
                 <form method="post" id="reporte_form">   
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Consulta de Factura</h5>
+                            <h5 class="modal-title">Consulta de Presupuesto</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                             </button>
                         </div>

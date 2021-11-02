@@ -7,6 +7,7 @@ function init(){
 	tasa_dia();
 	listar();	
 	idPresupuesto();
+	listarpresupuestos();
 	listarSubTortales();
 	//listarfacturas();
 	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
@@ -398,7 +399,7 @@ function borrar_temporal(){
 }
 
 function listarpresupuestos(){
-
+	console.log("listarpresupuestos");
 	tabla=$('#presupuestos_data').dataTable({  //#usuario_data este es el id de la tabla
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
@@ -500,7 +501,7 @@ function tipomoneda(idPresupuesto, tipo_moneda){
 
 				success:function(data){
 			//		$("#resultados_ajax").html(data);
-					$("#factura_data").DataTable().ajax.reload();
+					$("#presupuestos_data").DataTable().ajax.reload();
 				}
 			});
 			if(tipo_moneda==0){
