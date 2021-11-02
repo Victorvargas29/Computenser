@@ -121,24 +121,24 @@ $cli = $clientes->get_Cliente();
                   </div>
       
                   <br/>
-                <div class="row">
-                    <div class="col-lg-10">          
+               
+            </div>  <!--fin row pb-1 pt-6-->
+            <div class="row pt-2">
+                    <div class="col-lg-7">          
                         <label>Direccion</label>
                         <textarea name="direccion" id="direccion" class="form-control" rows="1"></textarea>  
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5">          
+                    <div class="col-lg-2">          
                         <label>PLACA</label>
                         <input type="text" name="placa" id="placa" class="form-control" placeholder="Placa" ></input>  
                     </div>
                     
-                    <div class="col-lg-5">          
+                    <div class="col-lg-2">          
                         <label>O/E</label>
                         <input type="text" name="oentrega" id="oentrega" class="form-control" placeholder="O/E"></input>  
                     </div>
                 </div>
-            </div>  <!--fin row pb-1 pt-6-->
+                
 
             
             <!--   <div class="row">   
@@ -295,9 +295,14 @@ $cli = $clientes->get_Cliente();
 
             <div class="row">
           
-              <div class="col-lg-4">            
+            <div class="col-lg-1">            
               </div>
-              <div class="col-lg-2">            
+              <div class="col-lg-3 pt-5 mt-5"> 
+
+                  <input type="text" name="campo" id="campo" placeholder="000" required class="form-control"></input>
+
+              </div>
+              <div class="col-lg-1">            
               </div> 
             
               <div class="col-lg-5">
