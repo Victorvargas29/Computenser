@@ -8,7 +8,7 @@ session_start();
 
 			try {
 
-				$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=mydb","root","root");
+				$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=mydb","root","");
 				return $conectar;
 
 			}catch (Exception $e) {
@@ -25,7 +25,7 @@ session_start();
 		}
 		public function ruta(){
 
-			return "http://demos.computenser.com/";
+			return "http://computenser.test/computenser/";
 		}
 	}//cierre class conectar
  ?>

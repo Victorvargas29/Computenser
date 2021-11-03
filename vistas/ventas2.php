@@ -46,9 +46,9 @@ $cli = $clientes->get_Cliente();
         <?php // require_once("modal/lista_productos_ventas_modal.php");?>
         <section class="formulario-compra">
     
-   <!-- <form action="http://computenser.test/computenser/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra"> -->
-  <!--    <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">    -->
-      <form action="http://demos.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">
+    <form action="http://computenser.test/computenser/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">
+    <!--  <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">    
+      <form action="http://demos.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">-->
         <div class="container"> <!--container-->
             <div class="row pb-1 pt-3">
               <div class="col-lg-6">
@@ -121,15 +121,13 @@ $cli = $clientes->get_Cliente();
                   </div>
       
                   <br/>
-               
-            </div>  <!--fin row pb-1 pt-6-->
-            <div class="row pt-2">
+                  <div class="row pt-2">
                     <div class="col-lg-7">          
                         <label>Direccion</label>
                         <textarea name="direccion" id="direccion" class="form-control" rows="1"></textarea>  
                     </div>
                     <div class="col-lg-2">          
-                        <label>PLACA</label>
+                        <label>Placa</label>
                         <input type="text" name="placa" id="placa" class="form-control" placeholder="Placa" ></input>  
                     </div>
                     
@@ -139,6 +137,9 @@ $cli = $clientes->get_Cliente();
                     </div>
                 </div>
                 
+               
+            </div>  <!--fin row pb-1 pt-6-->
+            
 
             
             <!--   <div class="row">   
@@ -299,7 +300,7 @@ $cli = $clientes->get_Cliente();
               </div>
               <div class="col-lg-3 pt-5 mt-5"> 
 
-                  <input type="text" name="campo" id="campo" placeholder="000" required class="form-control"></input>
+                  <input type="text" name="campo" id="campo" placeholder="000" class="form-control"></input>
 
               </div>
               <div class="col-lg-1">            
