@@ -1,7 +1,7 @@
 <?php   
 
 
-header("Location:http://computenser.test/computenser/vistas/index.php");
+header("Location:http://projecteg.test/vistas/index.php");
 
 
 ?>
