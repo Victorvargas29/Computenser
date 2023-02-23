@@ -25,7 +25,7 @@ session_start();
 		}
 		public function ruta(){
 
-			return "http://computenser.test/";
+			return "http://TEG.test/";
 		}
 	}//cierre class conectar
  ?>
