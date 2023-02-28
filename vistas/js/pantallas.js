@@ -95,6 +95,14 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/servicioprestado.php no found");}
 		});
 	});
+	$("#compra").click(function(){
+		$.ajax({
+		url:'../vistas/compras.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/compras.php no found");}
+		});
+	});
 	
 	$("#servi_prestado2").click(function(){
 		$.ajax({

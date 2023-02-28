@@ -292,6 +292,7 @@
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a id="home" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Inicio</span></a></li>
                         <li class="sidebar-item"> <a id="servi_prestado2" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Facturacion</span></a></li>
+                        <li class="sidebar-item"> <a id="compra" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Compras</span></a></li>
                         <!-- <li class="sidebar-item"> <a id="servi_prestado" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Servicio Prestado</span></a></li> -->
                                                
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Servicios </span></a>
@@ -306,11 +307,11 @@
                         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="clientess" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Clientes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Inventario </span></a>
-                        <!--     <ul aria-expanded="false" class="collapse  first-level">
+                           <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"> <a disabled id="producto" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-sitemap"></i><span class="hide-menu">Producto</span></a></li>
                                 <li class="sidebar-item"><a id="presentacionP" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Presentacion del producto </span></a></li>
                                 <li class="sidebar-item"><a id="Iinventario" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Inventario </span></a></li>
-                            </ul>      -->
+                            </ul>     
                         </li>
 
 
