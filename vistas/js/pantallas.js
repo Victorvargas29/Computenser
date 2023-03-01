@@ -113,6 +113,22 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/servicioprestado.php no found");}
 		});
 	});
+	$("#marca").click(function(){
+		$.ajax({
+		url:'../vistas/marca.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/servicioprestado.php no found");}
+		});
+	});
+	$("#modelo").click(function(){
+		$.ajax({
+		url:'../vistas/modelo.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/servicioprestado.php no found");}
+		});
+	});
 
 		$("#clientess").click(function(){
 		$.ajax({
