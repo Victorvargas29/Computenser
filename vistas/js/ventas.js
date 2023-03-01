@@ -1,6 +1,9 @@
 
 
 var tablfa;
+const servicio= document.getElementById("idServicio");
+const cant= document.getElementById("cantidad");
+const precio= document.getElementById("precio");
 
 //funcion q se ejecuta al inicio
 function init(){
@@ -204,11 +207,17 @@ function listar(){
 	}).DataTable();
 
 }
+let arregloDetalle=[];
 function agregar_detalles(){
 
 	// e.preventDefault();//No se activará la acción predeterminada del evento
 	var formData = new FormData($("#form_compra")[0]);
-
+	const objDetalles={
+		cant:cant.value,
+		precio: precio.value,
+		idservi:servicio.value
+	}
+		/*
 		$.ajax({
 			url: "../ajax/ventas.php?op=agregar_detalle",
 			type: "POST",
@@ -230,8 +239,9 @@ function agregar_detalles(){
 				///console.log(datos); 
 				  
 			}
-		});
-		//console.log("formData");
+		});*/
+arregloDetalle.push(objDetalles);
+		console.log(arregloDetalle);
 
 }//fin guardar y editar
 function cargarlista(cedula1,letra){
