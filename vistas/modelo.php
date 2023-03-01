@@ -62,7 +62,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>
-                                <th>Departamento</th>
+                                <th>Marca</th>
                      
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
@@ -94,32 +94,24 @@
                   
 
                     <div class="form-group">
-                        <label for="" class="col-lg-1 control-label">Departamento</label>
-                        <select class="form-control font-weight-bold" id="idDepartamento" name="idDepartamento">
+                        <label for="" class="col-lg-1 control-label">Marca</label>
+                        <select class="form-control font-weight-bold" id="idMarca" name="idMarca">
                          
-<!-- 
-                            <?php
-                           // $num=0;
-                        //   for($i=0; $i<sizeof($dep);$i++){
-                            // $num++;
-                             ?>
-                              <option value="<?php // echo $dep[$i]["idDepartamento"]?>">
+
+                          
                                 <?php
-                                   // echo $num;
-                                 //   echo "• ";
-                                 //   echo $dep[$i]["nombre"];
+                                   
+                                  echo "• ";
+                                  echo "Ford";
                                 ?>
-                              </option>
-                        
-                             <?php
-                        //   }
-                        ?> -->
+                             
+                    
 
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label">Nombre de Categoría:</label>
+                        <label class="col-form-label">Nombre del modelo:</label>
                         <input type="text" class="form-control" name="nombre" id="nombre">
                     </div> 
 

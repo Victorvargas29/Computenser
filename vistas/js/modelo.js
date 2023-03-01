@@ -6,36 +6,36 @@ function init(){
 	listar();
 
 	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
-	$("#categoria_form").on("submit", function(e){
+	$("#modelo_form").on("submit", function(e){
 		guardaryeditar(e);
 	});
 
 	//cambia el titulo de la ventana modal cuando se da click al boton
 	$("#btnNuevo").click(function(){
-		$(".modal-title").text("Agregar Categoria");
-		$("#idDepartamento").val('0');
+		$(".modal-title").text("Agregar Modelo");
+		$("#idMarca").val('0');
 		//document.getElementById("cedula").disabled = false;
 	});
 
-    $.post("../ajax/categoria.php?op=selectDepartamento", function(r){
-        $("#idDepartamento").html(r);
-      //  $('#idDepartamentos').selectpicker("refresh");
+    $.post("../ajax/modelo.php?op=selectMarca", function(r){
+        $("#idMarca").html(r);
+      //  $('#idMarcas').selectpicker("refresh");
     });
 }
 
 //funcion q limpia los campos del formulario
 function limpiar(){
 
-	$("#idCategoria").val("");
+	$("#idmodelo").val("");
 	$("#nombre").val("");
-	$("#idDepartamento").val('0');	
+	$("#idMarca").val('0');	
 
 }
 
 //funcion listar
 function listar(){
 
-	tabla=$('#categoria_data').dataTable({  //#usuario_data este es el id de la tabla
+	tabla=$('#modelo_data').dataTable({  //#usuario_data este es el id de la tabla
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		dom:'Bfrtilp',//Definimos los elementos del control de tabla
@@ -52,7 +52,7 @@ function listar(){
 		],
 		"ajax":
 		{
-			url:'../ajax/categoria.php?op=listar',
+			url:'../ajax/modelo.php?op=listar',
 			type: "get",
 			datatype: "json",
 			error: function(e){
@@ -93,24 +93,24 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(idCategoria){
+function mostrar(idmodelo){
 
-	$.post("../ajax/categoria.php?op=mostrar",{idCategoria : idCategoria}, function(data, status)
+	$.post("../ajax/modelo.php?op=mostrar",{idmodelo : idmodelo}, function(data, status)
 	{
 		data = JSON.parse(data);
 
-		$("#categoriaModal").modal("show");
+		$("#modeloModal").modal("show");
 	//	document.getElementById("cedula").disabled = true;
 		//$("#cedula").
 
 		$("#nombre").val(data.nombre);  // $("#cedula") esto es el id del campo del formulario
 		   //data.nombre el nombre que se coloca en el lado derecho es
 		 //el que se coloco en el ajax en $output["nombre"]
-		 $("#idDepartamento").val(data.idDepartamento);
-		 $("#idCategoria").val(idCategoria);
+		 $("#idMarca").val(data.idMarca);
+		 $("#idmodelo").val(idmodelo);
 	
 
-		$('.modal-title').text("Editar Categoria");
+		$('.modal-title').text("Editar modelo");
 
 		
 	//	$("#id_empleada").val(id_empleada);
@@ -123,10 +123,10 @@ function mostrar(idCategoria){
 function guardaryeditar(e){
 
 	e.preventDefault(); //No se activará la acción predeterminada del evento
-	var formData = new FormData($("#categoria_form")[0]);
+	var formData = new FormData($("#modelo_form")[0]);
 
 		$.ajax({
-			url: "../ajax/categoria.php?op=guardaryeditar",
+			url: "../ajax/modelo.php?op=guardaryeditar",
 			type: "POST",
 			data: formData,
 			contentType: false,
@@ -136,11 +136,11 @@ function guardaryeditar(e){
 
 				//console.log(datos); //muestre los valores en la consola
 
-				$('#categoria_form')[0].reset();
-				$('#categoriaModal').modal('hide');
+				$('#modelo_form')[0].reset();
+				$('#modeloModal').modal('hide');
 				
 				//$('#resultados_ajax').html(datos);
-				$('#categoria_data').DataTable().ajax.reload();
+				$('#modelo_data').DataTable().ajax.reload();
 				limpiar();
 			}
 		});
@@ -148,17 +148,17 @@ function guardaryeditar(e){
 }//fin guardar y editar
 
 
-function eliminar_categoria(idCategoria){
+function eliminar_modelo(idmodelo){
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){
 			if(result){
 				$.ajax({
-					url:"../ajax/categoria.php?op=eliminar_categoria",
+					url:"../ajax/modelo.php?op=eliminar_modelo",
 					method:"POST",
-					data:{idCategoria:idCategoria},
+					data:{idmodelo:idmodelo},
 
 					success:function(data){
 					//	$("#resultados_ajax").html(data);
-						$("#categoria_data").DataTable().ajax.reload();
+						$("#modelo_data").DataTable().ajax.reload();
 					}
 				});
 			}//condicion

@@ -6,13 +6,13 @@ function init(){
 	listar();
 
 	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
-	$("#departamento_form").on("submit", function(e){
+	$("#marca_form").on("submit", function(e){
 		guardaryeditar(e);
 	});
 
 	//cambia el titulo de la ventana modal cuando se da click al boton
 	$("#btnNuevo").click(function(){
-		$(".modal-title").text("Agregar Departamento");
+		$(".modal-title").text("Agregar Marca");
 		//document.getElementById("cedula").disabled = false;
 	});
 /*
@@ -33,7 +33,7 @@ function limpiar(){
 //funcion listar
 function listar(){
 
-	tabla=$('#departamento_data').dataTable({  //#usuario_data este es el id de la tabla
+	tabla=$('#marca_data').dataTable({  //#usuario_data este es el id de la tabla
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		
@@ -51,7 +51,7 @@ function listar(){
 		],
 		"ajax":
 		{
-			url:'../ajax/departamento.php?op=listar',
+			url:'../ajax/marca.php?op=listar',
 			type: "get",
 			datatype: "json",
 			error: function(e){
@@ -94,11 +94,11 @@ function listar(){
 
 function mostrar(idDepartamento){
 
-	$.post("../ajax/departamento.php?op=mostrar",{idDepartamento : idDepartamento}, function(data, status)
+	$.post("../ajax/marca.php?op=mostrar",{idDepartamento : idDepartamento}, function(data, status)
 	{
 		data = JSON.parse(data);
 
-		$("#departamentoModal").modal("show");
+		$("#marcaModal").modal("show");
 	//	document.getElementById("cedula").disabled = true;
 		//$("#cedula").
 
@@ -120,10 +120,10 @@ function mostrar(idDepartamento){
 function guardaryeditar(e){
 
 	e.preventDefault(); //No se activará la acción predeterminada del evento
-	var formData = new FormData($("#departamento_form")[0]);
+	var formData = new FormData($("#marca_form")[0]);
 
 		$.ajax({
-			url: "../ajax/departamento.php?op=guardaryeditar",
+			url: "../ajax/marca.php?op=guardaryeditar",
 			type: "POST",
 			data: formData,
 			contentType: false,
@@ -133,11 +133,11 @@ function guardaryeditar(e){
 
 				//console.log(datos); //muestre los valores en la consola
 
-				$('#departamento_form')[0].reset();
-				$('#departamentoModal').modal('hide');
+				$('#marca_form')[0].reset();
+				$('#marcaModal').modal('hide');
 				
 				//$('#resultados_ajax').html(datos);
-				$('#departamento_data').DataTable().ajax.reload();
+				$('#marca_data').DataTable().ajax.reload();
 				limpiar();
 			}
 		});
@@ -145,17 +145,17 @@ function guardaryeditar(e){
 }//fin guardar y editar
 
 
-function eliminar_departamento (idDepartamento){
+function eliminar_marca (idDepartamento){
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){
 			if(result){
 				$.ajax({
-					url:"../ajax/departamento.php?op=eliminar_departamento",
+					url:"../ajax/marca.php?op=eliminar_marca",
 					method:"POST",
 					data:{idDepartamento:idDepartamento},
 
 					success:function(data){
 					//	$("#resultados_ajax").html(data);
-						$("#departamento_data").DataTable().ajax.reload();
+						$("#marca_data").DataTable().ajax.reload();
 					}
 				});
 			}//condicion

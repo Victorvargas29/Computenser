@@ -26,11 +26,11 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
-        <h4>Clientes</h4>
+        <h4>Proveedor</h4>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">            
-            <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#clienteModal">Nuevo Cliente</button>    
+            <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#proveedorModal">Nuevo Proveedor</button>    
             </div>    
         </div>    
     </div>    

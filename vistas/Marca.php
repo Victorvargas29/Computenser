@@ -30,7 +30,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">            
-            <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#marcaModal">Nuevo Marca</button>    
+            <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#marcaModal">Nueva Marca</button>    
             </div>    
         </div>    
     </div>    

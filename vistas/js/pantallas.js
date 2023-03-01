@@ -95,6 +95,7 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/servicioprestado.php no found");}
 		});
 	});
+
 	$("#compra").click(function(){
 		$.ajax({
 		url:'../vistas/compras.php',
@@ -141,6 +142,14 @@ $(document).ready(function(){
 		$("#clientess").click(function(){
 		$.ajax({
 		url:'../vistas/cliente.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
+		});
+	});
+	$("#proveedor").click(function(){
+		$.ajax({
+		url:'../vistas/proveedor.php',
 		method: "POST",
 		success: function(res){ $("#seccion1").html(res); },
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
