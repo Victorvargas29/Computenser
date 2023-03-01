@@ -138,7 +138,7 @@ label{
                 <label id="">
                   <?php
                     $date = new DateTime($venta[0]["fecha"]);
-                    echo $date->format('d-m-Y');
+                    // echo $date->format('d-m-Y');
                   ?>
                 </label>
               </div>
@@ -206,27 +206,27 @@ label{
                     <tr style="font-size:10pt" class="even_row">
                       <td style="text-align:left"><div><span class=""><?php echo $venta[$i]["Nombre"]."--".$venta[$i]["descripcion"];?></span></div></td>
                       <td style="text-align:center"><div><span class=""><?php echo $venta[$i]["cantidad"];?></span></div></td>
-                      <!-- <td style="text-align:center"><div ><span class=""><?php echo number_format($venta[$i]["precio"],2);?></span></div></td> -->
+                      <!-- <td style="text-align:center"><div ><span class=""><?php echo $venta[$i]["precio"];?></span></div></td> -->
                       <td style="text-align:right"><div ><span class=""><?php 
                       if(isset($moneda)){
                         if($moneda==0){
-                          echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);
+                          echo $venta[$i]["tasa"]*$venta[$i]["precio"];
                          }else{
-                          echo number_format($venta[$i]["precio"],2);
+                          echo $venta[$i]["precio"];
                         }
                       }else{
-                        echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"],2);
+                        echo $venta[$i]["tasa"]*$venta[$i]["precio"];
                       }?></span></div></td>
                       
                       <td style="text-align:right"><div ><span class=""><?php 
                         if(isset($moneda)){
                           if($moneda==0){
-                            echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                            echo $venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"];
                           }else{
-                            echo number_format($venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                            echo $venta[$i]["precio"]*$venta[$i]["cantidad"];
                           }
                         }else{
-                          echo number_format($venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"],2);
+                          echo $venta[$i]["tasa"]*$venta[$i]["precio"]*$venta[$i]["cantidad"];
                         }?></span></div></td>
                     </tr>
 
@@ -269,7 +269,7 @@ label{
               DE LA LEY DE IMPUESTO DE VALOR AGREGADO SE<BR>
             EXPRESAN LOS MONTOS DE LA FACTURA EN BsS.<BR>
             CALCULADO A LA TASA DE CAMBIO POR BCV DE<BR>
-          1 USD POR BsS. <?php echo number_format($venta[0]["tasa"],2);?></label>
+          1 USD POR BsS. <?php echo $venta[0]["tasa"];?></label>
           </div>
             <?php }
                 }
@@ -285,12 +285,12 @@ label{
                   <label style="float:right; margin-top: 7%" class="" id="subtotal"><?php
                     if(isset($moneda)){
                       if($moneda==0){
-                        echo number_format($subtotal,2);
+                        echo $subtotal;
                        }else{
-                        echo number_format($sub_dolar,2);
+                        echo $sub_dolar;
                       }
                     }else{
-                      echo number_format($subtotal,2);
+                      echo $subtotal;
                     } ?></label>
               </div>
               
@@ -302,12 +302,12 @@ label{
                 <label style="float:right; margin-top: 8%" class="" id="iva"><?php 
                     if(isset($moneda)){
                       if($moneda==0){
-                        echo number_format($iva,2);
+                        echo $iva;
                        }else{
-                        echo number_format($iva_dolar,2);
+                        echo $iva_dolar;
                       }
                     }else{
-                      echo number_format($iva,2);
+                      echo $iva;
                     }?>
               </div>
 
@@ -319,12 +319,12 @@ label{
                 <label style="float:right; margin-top: 9%" class="" id="total"><?php 
                  if(isset($moneda)){
                   if($moneda==0){
-                    echo number_format($total,2);
+                    echo $total;
                    }else{
-                    echo number_format($total_dolar,2);
+                    echo $total_dolar;
                   }
                 }else{
-                  echo number_format($total,2);
+                  echo $total;
                 }
                 ?></label>
               </div>

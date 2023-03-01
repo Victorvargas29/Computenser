@@ -46,7 +46,7 @@ $cli = $clientes->get_Cliente();
         <?php // require_once("modal/lista_productos_ventas_modal.php");?>
         <section class="formulario-compra">
     
-    <form action="http://computenser.test/computenser/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">
+    <form action="http://projecteg/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">
     <!--  <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">    
       <form action="http://demos.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">-->
         <div class="container"> <!--container-->

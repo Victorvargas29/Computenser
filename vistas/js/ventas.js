@@ -475,7 +475,7 @@ function mostrarFactura(idFactura){
 			//window.open("http://demos.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
 
 			
-			window.open("http://computenser.test/computenser/report/facturaPdf.php?idFactura="+idFactura);
+			window.open("http://projecteg.test/report/facturaPdf.php?idFactura="+idFactura);
 		//	window.open("http://merilara.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
 		}
 	});
