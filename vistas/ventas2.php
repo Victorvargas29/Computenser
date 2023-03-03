@@ -46,7 +46,7 @@ $cli = $clientes->get_Cliente();
         <?php // require_once("modal/lista_productos_ventas_modal.php");?>
         <section class="formulario-compra">
     
-    <form action="http://projecteg/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">
+    <form method="post" class="form-horizontal" id="form_compra">
     <!--  <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">    
       <form action="http://demos.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">-->
         <div class="container"> <!--container-->
@@ -215,7 +215,7 @@ $cli = $clientes->get_Cliente();
                 
                     <div class="col-lg-3">
                           <div class="btn-group text-center pt-4">
-                            <button id="btnAgregar" type="button" onClick="agregar_detalles()" class="btn btn-primary " data-toggle="modal">Agregar detalle</i></button>
+                            <button id="btnAgregar" type="button" onClick="agregar_detalles(0)" class="btn btn-primary " data-toggle="modal">Agregar detalle</i></button>
                             <input type="hidden" name="iddetallesFT" id="iddetallesFT"/>
                           </div>
                       <!--  <h4 class="text-center"><strong>Tipo de Pago</strong></h4>

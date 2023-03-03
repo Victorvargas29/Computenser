@@ -173,8 +173,9 @@
     
     case 'guardarVenta':
             
-    
-             $venta->registrar($idFactura,$cedula,$moneda,$_POST["placa"],$_POST["oentrega"]);
+
+            $res= $venta->registrar($_POST["cedula"],$_POST["comboCedula"],$_POST["moneda"],$_POST["placa"],$_POST["oentrega"]);
+            echo $res;
              $venta->detallesDetalles($idUsuario);
              sleep(2);
              $venta->eliminar_temp_condicion($idUsuario);

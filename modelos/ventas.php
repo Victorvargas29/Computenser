@@ -40,23 +40,27 @@
              //echo "se registro";
             // print_r($_POST);
    	    }
-         public function registrar($idFactura,$cedula,$moneda,$placa,$oentrega){
-
+         public function registrar($cedula,$comboCedula,$moneda,$placa,$oentrega){
+         //echo $comboCedula;
           $conectar=parent::conectar();
-          //parent::set_names();
-          $sql="insert into factura values(?,now(),?,?,'0',?,?);";
+          
+          $sql="insert into factura values(null,now(),'V-123','1','0','hg','145');";
+         // $sql="delete from factura where idFactura=19";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $_POST["idFactura"]); 
-          $sql->bindValue(2, $_POST["comboCedula"]."".$_POST["cedula"]); 
-          $sql->bindValue(3, $_POST["moneda"]); 
-          $sql->bindValue(4, $placa); 
-          $sql->bindValue(5, $oentrega);
-          ; 
+          
+          $result=$sql->execute();
+          $ress= $conectar->lastInsertId();
+         // $sql->bindValue(1, $_POST["idFactura"]); 
+        /*  $sql->bindValue(1, $comboCedula."".$cedula); 
+          $sql->bindValue(2, $moneda); 
+          $sql->bindValue(3, $placa); 
+          $sql->bindValue(4, $oentrega);
+          ; */
          // $sql->bindValue(4, $_POST["tasa"]);                   
-          $sql->execute();
-          //echo detallesDetalles();
+          
+         echo $ress;
           //eliminar_temporal();
-          echo $_POST["placa"];
+          return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
          // print_r($_POST);
       }
 

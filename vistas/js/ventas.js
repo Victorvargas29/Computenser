@@ -32,8 +32,8 @@ $("form_compra").on("submit", function(){
 
 });
 */
-$("#form_compra").on("submit", function(){
-	registrar();
+$("#form_compra").on("submit", function(e){
+	registrar(e);
 	
 
 });
@@ -208,39 +208,50 @@ function listar(){
 
 }
 let arregloDetalle=[];
-function agregar_detalles(){
+function agregar_detalles(dat){
 
 	// e.preventDefault();//No se activará la acción predeterminada del evento
-	var formData = new FormData($("#form_compra")[0]);
-	const objDetalles={
-		cant:cant.value,
-		precio: precio.value,
-		idservi:servicio.value
+	if (data=0) {
+		const objDetalles={
+			cant:cant.value,
+			precio: precio.value,
+			idservi:servicio.value
+		}
+		arregloDetalle.push(objDetalles);
+	} else {
+		arregloDetalle.forEach(deta => {
+			deta.idFactura=dat;
+		
+
+			var formData = new FormData($("#form_compra")[0]);
+	
+		
+			$.ajax({
+				url: "../ajax/ventas.php?op=agregar_detalle",
+				type: "POST",
+				data: arregloDetalle,
+				cache:false,
+				contentType: false,
+				processData: false,
+
+				success: function(datos){
+
+				///	console.log(formData); //muestre los valores en la consola
+					console.log(datos); //muestre los valores en la consola
+					$('#detalles_ventas').DataTable().ajax.reload();
+					$("#sub").DataTable().ajax.reload();
+					listarSubTortales();
+				//	$('#form_compra')[0].reset();
+					
+				//	limpiar();
+					///console.log(datos); 
+						
+				}
+			});
+		});
 	}
-		/*
-		$.ajax({
-			url: "../ajax/ventas.php?op=agregar_detalle",
-			type: "POST",
-			data: formData,
-			cache:false,
-			contentType: false,
-			processData: false,
+	
 
-			success: function(datos){
-
-			///	console.log(formData); //muestre los valores en la consola
-				console.log(datos); //muestre los valores en la consola
-				$('#detalles_ventas').DataTable().ajax.reload();
-				$("#sub").DataTable().ajax.reload();
-				listarSubTortales();
-			//	$('#form_compra')[0].reset();
-				
-			//	limpiar();
-				///console.log(datos); 
-				  
-			}
-		});*/
-arregloDetalle.push(objDetalles);
 		console.log(arregloDetalle);
 
 }//fin guardar y editar
@@ -353,10 +364,11 @@ function eliminar_item(iddetallesFT){
 	});
 }
 
-function registrar(){
+function registrar(e){
+	e.preventDefault();
 	//e.preventDefault(); //No se activará la acción predeterminada del evento
 	var formData = new FormData($("#form_compra")[0]);
-	//console.log("registrarrrrrr");
+	//console.log("registrarrrrrr",formData);
 		$.ajax({
 			url: "../ajax/ventas.php?op=guardarVenta",
 			type: "POST",
@@ -366,7 +378,7 @@ function registrar(){
 
 			success: function(datos){
 
-				console.log(datos); //muestre los valores en la consola
+				console.log("datps",datos); //muestre los valores en la consola
 
 				$('#form_compra')[0].reset();
 				//$('#servicioModal').modal('hide');
@@ -374,6 +386,7 @@ function registrar(){
 				$("#sub").DataTable().ajax.reload();
 				idfactura();
 				tasa_dia();
+				agregar_detalles(datos);
 				
 				//$('#resultados_ajax').html(datos);
 				//$('#servicio_data').DataTable().ajax.reload();
