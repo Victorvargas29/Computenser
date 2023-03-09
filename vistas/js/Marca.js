@@ -25,7 +25,7 @@ function init(){
 //funcion q limpia los campos del formulario
 function limpiar(){
 
-	$("#idDepartamento").val("");
+	$("#idMarca").val("");
 	$("#nombre").val("");
 
 }
@@ -92,9 +92,9 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(idDepartamento){
+function mostrar(idMarca){
 
-	$.post("../ajax/marca.php?op=mostrar",{idDepartamento : idDepartamento}, function(data, status)
+	$.post("../ajax/marca.php?op=mostrar",{idMarca : idMarca}, function(data, status)
 	{
 		data = JSON.parse(data);
 
@@ -107,9 +107,9 @@ function mostrar(idDepartamento){
 		 //el que se coloco en el ajax en $output["nombre"]
 	
 
-		$('.modal-title').text("Editar Departamento");
+		$('.modal-title').text("Editar Marca");
 
-		$("#idDepartamento").val(idDepartamento);
+		$("#idMarca").val(idMarca);
 	//	$("#id_empleada").val(id_empleada);
 		$("#action").val("Edit");
 
@@ -145,13 +145,13 @@ function guardaryeditar(e){
 }//fin guardar y editar
 
 
-function eliminar_marca (idDepartamento){
+function eliminar_marca (idMarca){
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){
 			if(result){
 				$.ajax({
 					url:"../ajax/marca.php?op=eliminar_marca",
 					method:"POST",
-					data:{idDepartamento:idDepartamento},
+					data:{idMarca:idMarca},
 
 					success:function(data){
 					//	$("#resultados_ajax").html(data);
