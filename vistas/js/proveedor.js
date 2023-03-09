@@ -154,7 +154,7 @@ function eliminar_proveedor (rif){
 				$.ajax({
 					url:"../ajax/proveedor.php?op=eliminar_proveedor",
 					method:"POST",
-					data:{cedula:cedula},
+					data:{rif:rif},
 
 					success:function(data){
 						$("#proveedor_data").DataTable().ajax.reload();
