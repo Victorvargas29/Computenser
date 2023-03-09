@@ -43,14 +43,12 @@
                 <div class="col-md-12">
                     <div class="box">
                     <div class="panel-body table-responsive">        
-                        <table id="cliente_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
-                        <thead class=" text-light" style="background-color: #0e9670;">
+                        <table id="proveedor_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
+                        <thead class="text-light" style="background-color: #0e9670;">
                             <tr>
                                 <th>RIF</th>
                                 <th>Razon Social</th>
                                 <th>Direccion</th>
-                                <th>Telefono</th>
-                                <th>Correo</th>
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
                             </tr>
@@ -66,13 +64,13 @@
     </section>
     </div>    
       
-<?php 
+
+
+</div>  <!-- container-fluid-->
+      <?php 
 //ventana modal proveedor
     require_once("modal/modal-proveedor.php");
  ?>
-
-</div>  <!-- container-fluid-->
-      
     <!-- jQuery, Popper.js, Bootstrap JS -->
     <!-- <script src="jquery/jquery-3.3.1.min.js"></script>
     <script src="popper/popper.min.js"></script>

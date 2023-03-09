@@ -6,7 +6,7 @@ function init(){
 	listar();
 
 	
-	$("#cliente_form").on("submit", function(e){
+	$("#proveedor_form").on("submit", function(e){
 		guardaryeditar(e);
 	});
 
@@ -18,32 +18,33 @@ function init(){
 	
 
 }
+
 $("#rifS").keyup(function(){
 	procesar($("#rifS").val(),$("#comboRif").val());
-	
 });
-function procesar(cedula,comboRif){
+
+function procesar(rif,comboRif){
 	campo1=comboRif;
 	campo2=rif;
+	//fi=campo2;
 	fi=campo1+campo2;
 	document.getElementById('rif').value=fi;
 
 }
+
 //funcion q limpia los campos del formulario
 function limpiar(){
 
 	$("#rif").val("");
-	$("#nombreP").val("");
+	$("#nombre").val("");
 	$("#direccion").val("");
-	$("#telefono").val("");
-	$("#correo").val("");
 }
 
 
 //funcion listar
 function listar(){
 
-	tabla=$('#proveedor_data').dataTable({  //#usuario_data este es el id de la tabla
+	tabla=$('#proveedor_data').dataTable({  
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		
@@ -103,22 +104,19 @@ function listar(){
 }//fin funcion listar
 
 function mostrar(rif){
-console.log("SDF",rif);
 	$.post("../ajax/proveedor.php?op=mostrar",{rif : rif}, function(data, status)
 	{
 		data = JSON.parse(data);
 
 		$("#proveedorModal").modal("show");
 		
-		$("#nombreP").val(data.nombre);  // $("#cedula") esto es el id del campo del formulario
+		$("#nombre").val(data.nombre);
 		$("#direccion").val(data.direccion);
-		$("#telefono").val(data.telefono);
-		$("#correo").val(data.correo);	
 		$("#rif").val(data.rif);
-		//console.log($("#telefono").val(data.telefono));
+
 		$('.modal-title').text("Editar Proveedor");
 		$("#action").val("Edit");
-		//console.log("#telefono");
+
 	});
 }//fin funcion mostrar
 
