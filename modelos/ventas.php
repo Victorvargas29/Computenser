@@ -207,18 +207,20 @@
          // echo intval($sql);
           return $resultado=$sql->fetchAll();
         }
-
-        public function detallesDetalles($idUsuario){
-
+        //$_POST
+        public function detallesDetalles($jsomdetalles){
           $conectar=parent::conectar();
-        //	parent::set_names();
-
-          $sql="insert into detallefactura (idFactura, idServicio,precio,descripcion,tasa,cantidad) select idFactura, idServicio,precioTemp,descripcion,tasa,cantidad from detallesfacturatemporal where idUsuario=?";
-
+          //parent::set_names();
+          $sql="insert into detallefactura values(null,?,?,?,?,?,?);";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $idUsuario);
+          $sql->bindValue(1, $jsomdetalles["idFactura"]); 
+          $sql->bindValue(2, $jsomdetalles["idServicio"]); 
+          $sql->bindValue(3, $jsomdetalles["precio"]);
+          $sql->bindValue(4, $jsomdetalles["descripcion"]);
+          $sql->bindValue(5, $jsomdetalles["tasa"]);
+          $sql->bindValue(6, $jsomdetalles["cantidad"]);
+         // $sql->bindValue(4, $_POST["tasa"]);                   
           $sql->execute();
-         // echo intval($sql);
 
           return $resultado=$sql->fetchAll();
         }

@@ -4,6 +4,9 @@ var tablfa;
 const servicio= document.getElementById("idServicio");
 const cant= document.getElementById("cantidad");
 const precio= document.getElementById("precio");
+const tasa= document.getElementById("tasa");
+const descripcion= document.getElementById("descripcion");
+
 
 //funcion q se ejecuta al inicio
 function init(){
@@ -117,7 +120,7 @@ function listar(){
 		
 		"ajax":
 		{
-			url:'../ajax/ventas.php?op=listar',
+			url:'arregloDetalle',
 			type: "get",
 			datatype: "json",
 			error: function(e){
@@ -209,13 +212,17 @@ function listar(){
 }
 let arregloDetalle=[];
 function agregar_detalles(dat){
-
+	//console.log(dat);
 	// e.preventDefault();//No se activará la acción predeterminada del evento
-	if (data=0) {
+	if (dat==0) {
+		console.log(dat);
 		const objDetalles={
-			cant:cant.value,
+			cantidad:cant.value,
 			precio: precio.value,
-			idservi:servicio.value
+			idServicio:servicio.value,
+			tasa:tasa.value,
+			descripcion:descripcion.value,
+
 		}
 		arregloDetalle.push(objDetalles);
 	} else {
@@ -224,10 +231,12 @@ function agregar_detalles(dat){
 		
 
 			var formData = new FormData($("#form_compra")[0]);
-	
+			$.post("../ajax/ventas.php?op=detallesDetalles",{"arregloDetalle":deta},function(respuesta){
+				alert(respuesta);
+			});
 		
-			$.ajax({
-				url: "../ajax/ventas.php?op=agregar_detalle",
+			/*$.ajax({
+				url: "../ajax/ventas.php?op=detallesDetalles",
 				type: "POST",
 				data: arregloDetalle,
 				cache:false,
@@ -247,7 +256,7 @@ function agregar_detalles(dat){
 					///console.log(datos); 
 						
 				}
-			});
+			});*/
 		});
 	}
 	

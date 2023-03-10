@@ -215,7 +215,7 @@ $cli = $clientes->get_Cliente();
                 
                     <div class="col-lg-3">
                           <div class="btn-group text-center pt-4">
-                            <button id="btnAgregar" type="button" onClick="agregar_detalles(0)" class="btn btn-primary " data-toggle="modal">Agregar detalle</i></button>
+                            <button id="btnAgregar" type="button" onClick="agregar_detalles(data=0)" class="btn btn-primary " data-toggle="modal">Agregar detalle</i></button>
                             <input type="hidden" name="iddetallesFT" id="iddetallesFT"/>
                           </div>
                       <!--  <h4 class="text-center"><strong>Tipo de Pago</strong></h4>

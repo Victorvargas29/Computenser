@@ -41,7 +41,7 @@
 
       if($_POST["idServicio"] != 0){
 
-        $venta->agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$descripcion,$cantidad,$idUsuario);
+        $venta->agregar_detalle($jsomdetalles);
 
       }else {
         echo "debe selecionar un servicio";
@@ -176,13 +176,26 @@
 
             $res= $venta->registrar($_POST["cedula"],$_POST["comboCedula"],$_POST["moneda"],$_POST["placa"],$_POST["oentrega"]);
             echo $res;
-             $venta->detallesDetalles($idUsuario);
+             //$venta->detallesDetalles($idUsuario);
              sleep(2);
-             $venta->eliminar_temp_condicion($idUsuario);
+             //$venta->eliminar_temp_condicion($idUsuario);
             
             
     
     break;
+    case 'detallesDetalles':
+            
+      $jsomdetalles=$_POST["arregloDetalle"];
+     // $res= $venta->registrar($_POST["cedula"],$_POST["comboCedula"],$_POST["moneda"],$_POST["placa"],$_POST["oentrega"]);
+      
+       $res=$venta->detallesDetalles($jsomdetalles);
+       echo "jsom de prueba" , $res;
+      // sleep(2);
+      // $venta->eliminar_temp_condicion($idUsuario);
+      
+      
+
+break;
     case "borrar_temp":
       $venta->eliminar_temp_condicion($idUsuario);
     break;
