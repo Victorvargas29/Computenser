@@ -13,29 +13,37 @@ function init(){
 	//cambia el titulo de la ventana modal cuando se da click al boton
 	$("#btnNuevo").click(function(){
 		$(".modal-title").text("Agregar Modelo");
-		$("#idMarca").val('0');
-		//document.getElementById("cedula").disabled = false;
+		limpiar();
 	});
 
     $.post("../ajax/modelo.php?op=selectMarca", function(r){
         $("#idMarca").html(r);
       //  $('#idMarcas').selectpicker("refresh");
     });
+	$.post("../ajax/modelo.php?op=selectIniGen", function(t){
+        $("#idInicio").html(t);
+    
+    });
+	$.post("../ajax/modelo.php?op=selectFinGen", function(f){
+        $("#idFin").html(f);
+     
+    });
 }
-
 //funcion q limpia los campos del formulario
 function limpiar(){
 
-	$("#idmodelo").val("");
+	$("#idModelo").val("");
 	$("#nombre").val("");
-	$("#idMarca").val('0');	
+	$("#idMarca").val('0');
+	$("#idInicio").val('0');
+	$("#idFin").val('0');
 
 }
 
 //funcion listar
 function listar(){
 
-	tabla=$('#modelo_data').dataTable({  //#usuario_data este es el id de la tabla
+	tabla=$('#modelo_data').dataTable({  
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		dom:'Bfrtilp',//Definimos los elementos del control de tabla
@@ -93,27 +101,21 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(idmodelo){
+function mostrar(idModelo){
 
-	$.post("../ajax/modelo.php?op=mostrar",{idmodelo : idmodelo}, function(data, status)
+	$.post("../ajax/modelo.php?op=mostrar",{idModelo : idModelo}, function(data, status)
 	{
 		data = JSON.parse(data);
 
 		$("#modeloModal").modal("show");
-	//	document.getElementById("cedula").disabled = true;
-		//$("#cedula").
-
-		$("#nombre").val(data.nombre);  // $("#cedula") esto es el id del campo del formulario
-		   //data.nombre el nombre que se coloca en el lado derecho es
-		 //el que se coloco en el ajax en $output["nombre"]
+		$("#nombre").val(data.nombre);
 		 $("#idMarca").val(data.idMarca);
-		 $("#idmodelo").val(idmodelo);
-	
+		 $("#idModelo").val(idModelo);
+		 $("#idInicio").val(data.idInicio);
+		 $("#idFin").val(data.idFin);
 
 		$('.modal-title').text("Editar modelo");
 
-		
-	//	$("#id_empleada").val(id_empleada);
 		$("#action").val("Edit");
 
 	});
@@ -133,13 +135,8 @@ function guardaryeditar(e){
 			processData: false,
 
 			success: function(datos){
-
-				//console.log(datos); //muestre los valores en la consola
-
 				$('#modelo_form')[0].reset();
 				$('#modeloModal').modal('hide');
-				
-				//$('#resultados_ajax').html(datos);
 				$('#modelo_data').DataTable().ajax.reload();
 				limpiar();
 			}
@@ -148,16 +145,15 @@ function guardaryeditar(e){
 }//fin guardar y editar
 
 
-function eliminar_modelo(idmodelo){
+function eliminar_modelo(idModelo){
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){
 			if(result){
 				$.ajax({
 					url:"../ajax/modelo.php?op=eliminar_modelo",
 					method:"POST",
-					data:{idmodelo:idmodelo},
+					data:{idModelo:idModelo},
 
 					success:function(data){
-					//	$("#resultados_ajax").html(data);
 						$("#modelo_data").DataTable().ajax.reload();
 					}
 				});

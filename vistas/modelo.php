@@ -63,7 +63,7 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Marca</th>
-                     
+                                <th>Generacion</th>
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
                             </tr>
@@ -96,25 +96,22 @@
                     <div class="form-group">
                         <label for="" class="col-lg-1 control-label">Marca</label>
                         <select class="form-control font-weight-bold" id="idMarca" name="idMarca">
-                         
-
-                          
-                                <?php
-                                   
-                                  echo "• ";
-                                  echo "Ford";
-                                ?>
-                             
-                    
-
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label class="col-form-label">Nombre del modelo:</label>
                         <input type="text" class="form-control" name="nombre" id="nombre">
-                    </div> 
-
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="" class="col-lg-1 control-label">Rango Generación</label>
+                        <select class="form-control font-weight-bold" id="idInicio" name="idInicio">
+                        </select>
+                        <select class="form-control font-weight-bold" id="idFin" name="idFin">
+                        </select>
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="idModelo" id="idModelo"/>
