@@ -24,10 +24,20 @@ function init(){
         $("#idInicio").html(t);
     
     });
-	$.post("../ajax/modelo.php?op=selectFinGen", function(f){
-        $("#idFin").html(f);
-     
+
+	$(document).ready(function(){
+        $("#idInicio").change(function(){
+         
+         //   $('#iddistrito').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+            $("#idInicio option:selected").each(function(){
+                idInicio= $(this).val();
+                $.post("../ajax/modelo.php?op=selectFinGen", {idInicio:idInicio},function(data){
+                    $("#idFin").html(data);
+                });
+            });
+        });
     });
+
 }
 //funcion q limpia los campos del formulario
 function limpiar(){
@@ -101,24 +111,28 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(idModelo){
-
-	$.post("../ajax/modelo.php?op=mostrar",{idModelo : idModelo}, function(data, status)
-	{
-		data = JSON.parse(data);
-
-		$("#modeloModal").modal("show");
-		$("#nombre").val(data.nombre);
-		 $("#idMarca").val(data.idMarca);
-		 $("#idModelo").val(idModelo);
-		 $("#idInicio").val(data.idInicio);
-		 $("#idFin").val(data.idFin);
-
-		$('.modal-title').text("Editar modelo");
-
-		$("#action").val("Edit");
-
+function mostrar(idModelo,iniannos){
+	$.post("../ajax/modelo.php?op=selectFinGen", {iniannos:iniannos},function(data){
+		$("#idFin").html(data);
 	});
+	setTimeout(function(){
+		$.post("../ajax/modelo.php?op=mostrar",{idModelo : idModelo}, function(data, status)
+		{
+			data = JSON.parse(data);
+
+			$("#modeloModal").modal("show");
+			$("#nombre").val(data.nombre);
+			$("#idMarca").val(data.idMarca);
+			$("#idModelo").val(idModelo);
+			$("#idInicio").val(data.idInicio);
+			$("#idFin").val(data.idFin);
+
+			$('.modal-title').text("Editar modelo");
+
+			$("#action").val("Edit");
+
+		});
+	}, 100);	
 }//fin funcion mostrar
 
 //la funcion guardaryeditar(e); se llama cuando se da click al boton submit

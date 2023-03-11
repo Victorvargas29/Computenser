@@ -4,7 +4,7 @@
 
 require_once("../modelos/Modelo.php");
 require_once("../modelos/Marca.php");
-
+header('Content-Type: text/html; charset=UTF-8');
 	$modelo = new Modelos();
   $marca = new Marcas();
 
@@ -28,15 +28,20 @@ require_once("../modelos/Marca.php");
         $rspta=$modelo->get_años();
         echo '<option value="0" selected disabled>año inicio</option>';
         foreach ($rspta as $regi) {
-          echo '<option class="font-weight-bold" value='. $regi->id .'>'. $regi->annos . '</option>';
+            if($regi->id>1){
+              echo '<option class="font-weight-bold" value='. $regi->id .'>'. $regi->annos . '</option>';
+            }
         }
       break;
 	  case 'selectFinGen':
+      $id_ini=$_POST["idInicio"];
         $rspta=$modelo->get_años();
         echo '<option value="0" selected disabled>años</option>';
         foreach ($rspta as $regis) {
-          echo '<option class="font-weight-bold" value='. $regis->id .'>'. $regis->annos . '</option>';
-        }
+          if($regis->id==1 || $regis->id>$id_ini){
+            echo '<option class="font-weight-bold" value='. $regis->id .'>'. utf8_encode($regis->annos) . '</option>';
+          }
+      }
       break;
 
    		case 'guardaryeditar':
@@ -107,8 +112,12 @@ require_once("../modelos/Marca.php");
    					$sub_array[]=$row["idModelo"];
    					$sub_array[]=$row["nombre"];
             $sub_array[]=$row["marca_nom"];
-            $sub_array[]=$row["iniannos"]." - ".$row["finannos"];
-   					$sub_array[] = '<button type="button" onClick="mostrar('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-warning btn-md update" title="Editar Modelo"><i class="fas fa-edit"></i></button>';
+            if($row["fin_gen"]==1){
+              $sub_array[]=$row["iniannos"];
+            }else{
+              $sub_array[]=$row["iniannos"]." - ".$row["finannos"];
+            }
+   					$sub_array[] = '<button type="button" onClick="mostrar('.$row["idModelo"].','.$row["iniannos"].');"  id="'.$row["idModelo"].'" class="btn btn-warning btn-md update" title="Editar Modelo"><i class="fas fa-edit"></i></button>';
 
             $sub_array[] = '<button type="button" onClick="eliminar_modelo('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-danger btn-md" title="Eliminar Modelo"><i class="fas fa-trash-alt"></i></button>';
 

@@ -20,8 +20,9 @@
 		public function get_modelo(){
 
         	$conectar = parent::conectar();
+            parent::set_names();
 
-            $sql = "select m.idModelo, m.nombre as nombre,  a.annos as iniannos, aa.annos as finannos, ma.nombre as marca_nom from modelo m INNER JOIN marca ma ON m.idMarca=ma.idMarca INNER JOIN anno a ON m.inicio_gen=a.id INNER JOIN anno aa ON m.fin_gen=aa.id";
+            $sql = "select m.idModelo, m.nombre as nombre, m.fin_gen, a.annos as iniannos,aa.annos as finannos, ma.nombre as marca_nom from modelo m INNER JOIN marca ma ON m.idMarca=ma.idMarca INNER JOIN anno a ON m.inicio_gen=a.id INNER JOIN anno aa ON m.fin_gen=aa.id";
        		//$sql = "select m.idModelo, m.nombre as nombre, m.idMarca, m.inicio_gen, m.fin_gen, a.años as iniaños, a.id, aa.id, aa.años as finaños, ma.idMarca, ma.nombre as marca_nom from modelo m INNER JOIN marca ma ON m.idMarca=ma.idMarca INNER JOIN año a ON m.inicio_gen=a.id INNER JOIN año aa ON m.fin_gen=aa.id";
 
         	$sql=$conectar->prepare($sql);
