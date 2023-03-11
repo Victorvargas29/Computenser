@@ -267,7 +267,6 @@ $cli = $clientes->get_Cliente();
                                   <table id="detalles_ventas" class="table table-striped nowrap" width="100%">
                                     <thead>
                                       <tr>
-                                        <th class="min-desktop">Eliminar</th>
                                         <th class="all text-center">Concepto o Descripcion</th>
                                         <th class="min-desktop">USD $</th>
                                         <th class="all">Precio Venta Bs.</th>
@@ -275,11 +274,12 @@ $cli = $clientes->get_Cliente();
                                         <th class="all">Cantidad</th>
                                         <th class="all">Total Bs</th>
                                         <th class="all">Total $</th>
+                                        <th class="min-desktop">Eliminar</th>
                                       </tr>
 
 
                                     </thead>
-                                    <tbody>
+                                    <tbody id="cuerpotabla">
 
                                     </tbody>
 

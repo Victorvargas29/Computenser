@@ -6,12 +6,12 @@ const cant= document.getElementById("cantidad");
 const precio= document.getElementById("precio");
 const tasa= document.getElementById("tasa");
 const descripcion= document.getElementById("descripcion");
-
+const cuerpotabla =document.getElementById("cuerpotabla");
 
 //funcion q se ejecuta al inicio
 function init(){
 	tasa_dia();
-	listar();	
+	//listar();	
 	idfactura();
 	listarSubTortales();
 	listarfacturas();
@@ -111,7 +111,7 @@ $("#comboCedula").change(function(){
 //console.log($("#idServicio").val($("#idServicio").val()));
 });
 
-function listar(){
+/*function listar(){
 	tabla=$('#detalles_ventas').dataTable({ 
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
@@ -160,7 +160,8 @@ function listar(){
 
 	}).DataTable();
 
-}function listarSubTortales(){
+}*/
+function listarSubTortales(){
 	tabla=$('#sub').dataTable({ 
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
@@ -225,6 +226,7 @@ function agregar_detalles(dat){
 
 		}
 		arregloDetalle.push(objDetalles);
+		dibujartabla(arregloDetalle);
 	} else {
 		arregloDetalle.forEach(deta => {
 			deta.idFactura=dat;
@@ -264,6 +266,27 @@ function agregar_detalles(dat){
 		console.log(arregloDetalle);
 
 }//fin guardar y editar
+
+function dibujartabla(arregloDetalle){
+	arregloDetalle.forEach((deta)=>{
+		let fila = document.createElement("tr");
+		fila.innerHTML=`
+						<td>${deta.descripcion}</td>
+						<td>${deta.precio}</td>
+						<td>${deta.precio}</td>
+						<td>${deta.cantidad}</td>
+						<td>${deta.cantidad}</td>
+						<td>${deta.cantidad}</td>`;
+		let tdEliminar =document.createElement("td");
+		let botonEliminar = document.createElement("button");
+		botonEliminar.classList.add("btn","btn-danger");
+		botonEliminar.innerText="Eliminar";
+		tdEliminar.appendChild(botonEliminar);
+		fila.appendChild(tdEliminar);
+		cuerpotabla.appendChild(fila);
+	});
+
+}
 function cargarlista(cedula1,letra){
 
 	var cedula=letra+cedula1;
