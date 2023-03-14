@@ -50,7 +50,7 @@
 
     break;
 
-    case "listar":
+   /* case "listar":
       $datos = $venta->detalles_venta($idUsuario);
       $data = array();
       foreach ($datos as $row) {
@@ -74,7 +74,7 @@
           "aaData"=>$data
           );
         echo json_encode($results);
-    break;
+    break;*/
 
     case "listarSubtotales":
       $datos = $venta->detalles_venta($idUsuario);

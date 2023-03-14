@@ -212,6 +212,40 @@ function listarSubTortales(){
 
 }
 let arregloDetalle=[];
+function LlenarDetalles(objDetalles){
+	
+	const result=arregloDetalle.find((detalle)=>{
+		
+		
+		if(+objDetalles.idServicio === +detalle.idServicio){
+			return detalle;
+		}
+	});
+
+	if (result) {
+		arregloDetalle = arregloDetalle.map((detalle)=>{
+			console.log(" idservicio ", +detalle.cantidad + +objDetalles.cantidad);
+			
+			if (+detalle.idServicio === +objDetalles.idServicio) {
+				var cant=+detalle.cantidad + +objDetalles.cantidad;
+				return {
+					cantidad: cant,
+					precio: detalle.precio,
+					idServicio:detalle.idServicio,
+					tasa:detalle.tasa,
+					descripcion:detalle.descripcion,
+				};
+			}
+			return detalle;
+		
+	});
+	} else {
+		arregloDetalle.push(objDetalles);
+	}
+	
+	
+}
+
 function agregar_detalles(dat){
 	//console.log(dat);
 	// e.preventDefault();//No se activará la acción predeterminada del evento
@@ -225,7 +259,8 @@ function agregar_detalles(dat){
 			descripcion:descripcion.value,
 
 		}
-		arregloDetalle.push(objDetalles);
+		LlenarDetalles(objDetalles);
+		
 		dibujartabla(arregloDetalle);
 	} else {
 		arregloDetalle.forEach(deta => {
@@ -268,6 +303,7 @@ function agregar_detalles(dat){
 }//fin guardar y editar
 
 function dibujartabla(arregloDetalle){
+	cuerpotabla.innerHTML="";
 	arregloDetalle.forEach((deta)=>{
 		let fila = document.createElement("tr");
 		fila.innerHTML=`
