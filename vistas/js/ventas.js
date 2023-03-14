@@ -301,6 +301,15 @@ function agregar_detalles(dat){
 		console.log(arregloDetalle);
 
 }//fin guardar y editar
+function eliminarIten(id){
+	arregloDetalle= arregloDetalle.filter((detalle)=>{
+		if (+id !== +detalle.idServicio) {
+			return detalle;
+			
+		}
+	});
+	dibujartabla(arregloDetalle);
+}
 
 function dibujartabla(arregloDetalle){
 	cuerpotabla.innerHTML="";
@@ -309,16 +318,19 @@ function dibujartabla(arregloDetalle){
 		fila.innerHTML=`
 						<td>${deta.descripcion}</td>
 						<td>${deta.precio}</td>
-						<td>${deta.precio}</td>
+						<td>${+deta.precio * +tasa.value}</td>
 						<td>${deta.cantidad}</td>
-						<td>${deta.cantidad}</td>
-						<td>${deta.cantidad}</td>`;
+						<td>${(+deta.precio * +tasa.value) * +deta.cantidad}</td>
+						<td>${+deta.precio * +deta.cantidad}</td>`;
 		let tdEliminar =document.createElement("td");
 		let botonEliminar = document.createElement("button");
 		botonEliminar.classList.add("btn","btn-danger");
 		botonEliminar.innerText="Eliminar";
 		tdEliminar.appendChild(botonEliminar);
 		fila.appendChild(tdEliminar);
+		botonEliminar.onclick=()=>{
+			eliminarIten(deta.idServicio);
+		};
 		cuerpotabla.appendChild(fila);
 	});
 
