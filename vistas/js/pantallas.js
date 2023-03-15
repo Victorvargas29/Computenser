@@ -130,6 +130,14 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/servicioprestado.php no found");}
 		});
 	});
+	$("#color").click(function(){
+		$.ajax({
+		url:'../vistas/color.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/servicioprestado.php no found");}
+		});
+	});
 	$("#modelo").click(function(){
 		$.ajax({
 		url:'../vistas/modelo.php',
