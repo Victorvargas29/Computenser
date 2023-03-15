@@ -8,8 +8,6 @@ require_once("../modelos/Proveedor.php");
   $comboRif=isset($_POST["comboRif"]);
 	$nombre = isset($_POST["nombre"]);
   $direccion = isset($_POST["direccion"]);
-	$telefono = isset($_POST["telefono"]);
-  $correo = isset($_POST["correo"]);
 
    	switch ($_GET["op"]) {
 
@@ -19,14 +17,14 @@ require_once("../modelos/Proveedor.php");
        
           if(is_array($datos)==true and count($datos)==0){
               
-            $cliente->registrar_proveedor($rif,$nombre,$direccion,$telefono,$correo);
+            $proveedor->registrar_proveedor($rif,$nombre,$direccion);
 			  
 			   	echo "se registro", $rif;
            
             }else{
 
              	echo "el proveedor ya existe";
-              	$proveedor->editar_proveedor($rif, $nombre,$direccion,$telefono,$correo);
+              	$proveedor->editar_proveedor($rif, $nombre,$direccion);
            		echo "se edito";
 
             }
@@ -43,8 +41,6 @@ require_once("../modelos/Proveedor.php");
    					$output["rif"] = $row["rif"];
    					$output["nombre"] = $row["nombre"];
             $output["direccion"] = $row["direccion"];
-   					$output["telefono"] = $row["telefono"];
-            $output["correo"] = $row["correo"];
    				}
    				echo json_encode($output);
    			}else{
@@ -80,9 +76,7 @@ require_once("../modelos/Proveedor.php");
    					$sub_array[]=$row["rif"];
    					$sub_array[]=$row["nombre"];
             $sub_array[]=$row["direccion"];
-   					$sub_array[]=$row["telefono"];
-            $sub_array[]=$row["correo"];
-            $cedula=$row["rif"];
+            $rif=$row["rif"];
    					 $sub_array[] = '<button type="button" onClick="mostrar('."'".$rif."'".');"  id="'.$row["rif"].'" class="btn btn-warning btn-md update" title="Editar proveedor"><i class="fas fa-edit"></i></button>';
 
 
@@ -126,8 +120,6 @@ require_once("../modelos/Proveedor.php");
           $sub_array[] = $row["rif"];
          $sub_array[] = $row["nombre"];        
         $sub_array[] = $row["direccion"];
-        $sub_array[] = $row["telefono"];
-        $sub_array[] = $row["correo"];
             
         $data[] = $sub_array;
       }
@@ -148,7 +140,6 @@ case "buscar_proveedor":
   $datos=$proveedor->get_proveedor_por_id($_POST["rif"]);
 
 
-          // comprobamos que el cliente esté activo, de lo contrario no lo agrega
         if(is_array($datos)==true and count($datos)>0){
 
         foreach($datos as $row)
@@ -157,8 +148,6 @@ case "buscar_proveedor":
           $output["rif"] = $row["rif"];
           $output["nombre"] = $row["nombre"];
           $output["direccion"] = $row["direccion"];
-          $output["telefono"] = $row["telefono"];
-          $output["correo"] = $row["correo"];
           
         }
 
