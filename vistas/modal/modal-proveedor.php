@@ -1,7 +1,7 @@
 <!--Modal para CRUD-->
-<div id="clienteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="proveedorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" id="cliente_form">   
+        <form method="post" id="proveedor_form">   
             <div class="modal-content">
                
                 <div class="modal-header">
@@ -17,9 +17,7 @@
                   <div class="col-lg-2">
                     
                     <select class="form-control font-weight-bold" id="comboRif" name="comboRif" required>
-                        <option class="font-weight-bold" value="V-">V-</option>
                         <option class="font-weight-bold" value="J-">J-</option>
-                        <option class="font-weight-bold" value="E-">E-</option>
                         <option class="font-weight-bold" value="C-">C-</option>
                         <option class="font-weight-bold" value="G-">G-</option>   
                     </select>
@@ -33,7 +31,7 @@
                 </div> <!-- fin row -->
 
                     
-                    <input type="hidden" class="form-control" name="rif" id="rif">
+                    <input type="text" class="form-control" name="rif" id="rif">
                   
                
       
@@ -41,16 +39,10 @@
 
                     
                     <label class="col-form-label">Razon Social:</label>
-                    <input type="text" class="form-control" name="nombreP" id="nombreP">
+                    <input type="text" class="form-control" name="nombre" id="nombre">
                     
                     <label class="col-form-label">Direcccion:</label>
                     <textarea class="form-control" name="direccion" id="direccion" rows="2"></textarea>
-
-                    <label class="col-form-label">Telefono:</label>
-                    <input type="text" class="form-control" name="telefono" id="telefono">
-
-                    <label class="col-form-label">Correo:</label>
-                    <input type="text" class="form-control" name="correo" id="correo">
         
                 </div>
                 <div class="modal-footer">
