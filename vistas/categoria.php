@@ -120,7 +120,7 @@
 
                     <div class="form-group">
                         <label class="col-form-label">Nombre de Categoría:</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre">
+                        <input type="text" class="form-control" name="nombre" id="nombre" required minlength="5" maxlength="40">
                     </div> 
 
                 </div>
