@@ -4,11 +4,14 @@ var tablfa;
 const servicio= document.getElementById("idServicio");
 const cant= document.getElementById("cantidad");
 const precio= document.getElementById("precio");
+const tasa= document.getElementById("tasa");
+const descripcion= document.getElementById("descripcion");
+const cuerpotabla =document.getElementById("cuerpotabla");
 
 //funcion q se ejecuta al inicio
 function init(){
 	tasa_dia();
-	listar();	
+	//listar();	
 	idfactura();
 	listarSubTortales();
 	listarfacturas();
@@ -32,8 +35,8 @@ $("form_compra").on("submit", function(){
 
 });
 */
-$("#form_compra").on("submit", function(){
-	registrar();
+$("#form_compra").on("submit", function(e){
+	registrar(e);
 	
 
 });
@@ -108,7 +111,7 @@ $("#comboCedula").change(function(){
 //console.log($("#idServicio").val($("#idServicio").val()));
 });
 
-function listar(){
+/*function listar(){
 	tabla=$('#detalles_ventas').dataTable({ 
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
@@ -117,7 +120,7 @@ function listar(){
 		
 		"ajax":
 		{
-			url:'../ajax/ventas.php?op=listar',
+			url:'arregloDetalle',
 			type: "get",
 			datatype: "json",
 			error: function(e){
@@ -157,7 +160,8 @@ function listar(){
 
 	}).DataTable();
 
-}function listarSubTortales(){
+}*/
+function listarSubTortales(){
 	tabla=$('#sub').dataTable({ 
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
@@ -208,42 +212,129 @@ function listar(){
 
 }
 let arregloDetalle=[];
-function agregar_detalles(){
+function LlenarDetalles(objDetalles){
+	
+	const result=arregloDetalle.find((detalle)=>{
+		
+		
+		if(+objDetalles.idServicio === +detalle.idServicio){
+			return detalle;
+		}
+	});
 
-	// e.preventDefault();//No se activará la acción predeterminada del evento
-	var formData = new FormData($("#form_compra")[0]);
-	const objDetalles={
-		cant:cant.value,
-		precio: precio.value,
-		idservi:servicio.value
-	}
-		/*
-		$.ajax({
-			url: "../ajax/ventas.php?op=agregar_detalle",
-			type: "POST",
-			data: formData,
-			cache:false,
-			contentType: false,
-			processData: false,
-
-			success: function(datos){
-
-			///	console.log(formData); //muestre los valores en la consola
-				console.log(datos); //muestre los valores en la consola
-				$('#detalles_ventas').DataTable().ajax.reload();
-				$("#sub").DataTable().ajax.reload();
-				listarSubTortales();
-			//	$('#form_compra')[0].reset();
-				
-			//	limpiar();
-				///console.log(datos); 
-				  
+	if (result) {
+		arregloDetalle = arregloDetalle.map((detalle)=>{
+			console.log(" idservicio ", +detalle.cantidad + +objDetalles.cantidad);
+			
+			if (+detalle.idServicio === +objDetalles.idServicio) {
+				var cant=+detalle.cantidad + +objDetalles.cantidad;
+				return {
+					cantidad: cant,
+					precio: detalle.precio,
+					idServicio:detalle.idServicio,
+					tasa:detalle.tasa,
+					descripcion:detalle.descripcion,
+				};
 			}
-		});*/
-arregloDetalle.push(objDetalles);
+			return detalle;
+		
+	});
+	} else {
+		arregloDetalle.push(objDetalles);
+	}
+	
+	
+}
+
+function agregar_detalles(dat){
+	//console.log(dat);
+	// e.preventDefault();//No se activará la acción predeterminada del evento
+	if (dat==0) {
+		console.log(dat);
+		const objDetalles={
+			cantidad:cant.value,
+			precio: precio.value,
+			idServicio:servicio.value,
+			tasa:tasa.value,
+			descripcion:descripcion.value,
+
+		}
+		LlenarDetalles(objDetalles);
+		
+		dibujartabla(arregloDetalle);
+	} else {
+		arregloDetalle.forEach(deta => {
+			deta.idFactura=dat;
+		
+
+			var formData = new FormData($("#form_compra")[0]);
+			$.post("../ajax/ventas.php?op=detallesDetalles",{"arregloDetalle":deta},function(respuesta){
+				alert(respuesta);
+			});
+		
+			/*$.ajax({
+				url: "../ajax/ventas.php?op=detallesDetalles",
+				type: "POST",
+				data: arregloDetalle,
+				cache:false,
+				contentType: false,
+				processData: false,
+
+				success: function(datos){
+
+				///	console.log(formData); //muestre los valores en la consola
+					console.log(datos); //muestre los valores en la consola
+					$('#detalles_ventas').DataTable().ajax.reload();
+					$("#sub").DataTable().ajax.reload();
+					listarSubTortales();
+				//	$('#form_compra')[0].reset();
+					
+				//	limpiar();
+					///console.log(datos); 
+						
+				}
+			});*/
+		});
+	}
+	
+
 		console.log(arregloDetalle);
 
 }//fin guardar y editar
+function eliminarIten(id){
+	arregloDetalle= arregloDetalle.filter((detalle)=>{
+		if (+id !== +detalle.idServicio) {
+			return detalle;
+			
+		}
+	});
+	dibujartabla(arregloDetalle);
+}
+
+function dibujartabla(arregloDetalle){
+	cuerpotabla.innerHTML="";
+	arregloDetalle.forEach((deta)=>{
+		let fila = document.createElement("tr");
+		fila.innerHTML=`
+						<td>${deta.descripcion}</td>
+						<td>${deta.precio}</td>
+						<td>${+deta.precio * +tasa.value}</td>
+						<td>${deta.cantidad}</td>
+						<td>${(+deta.precio * +tasa.value) * +deta.cantidad}</td>
+						<td>${+deta.precio * +deta.cantidad}</td>`;
+		let tdEliminar =document.createElement("td");
+		let botonEliminar = document.createElement("button");
+		botonEliminar.classList.add("btn","btn-danger");
+		botonEliminar.innerText="Eliminar";
+		tdEliminar.appendChild(botonEliminar);
+		fila.appendChild(tdEliminar);
+		botonEliminar.onclick=()=>{
+			eliminarIten(deta.idServicio);
+		};
+		cuerpotabla.appendChild(fila);
+	});
+
+}
 function cargarlista(cedula1,letra){
 
 	var cedula=letra+cedula1;
@@ -353,10 +444,11 @@ function eliminar_item(iddetallesFT){
 	});
 }
 
-function registrar(){
+function registrar(e){
+	e.preventDefault();
 	//e.preventDefault(); //No se activará la acción predeterminada del evento
 	var formData = new FormData($("#form_compra")[0]);
-	//console.log("registrarrrrrr");
+	//console.log("registrarrrrrr",formData);
 		$.ajax({
 			url: "../ajax/ventas.php?op=guardarVenta",
 			type: "POST",
@@ -366,7 +458,7 @@ function registrar(){
 
 			success: function(datos){
 
-				console.log(datos); //muestre los valores en la consola
+				console.log("datps",datos); //muestre los valores en la consola
 
 				$('#form_compra')[0].reset();
 				//$('#servicioModal').modal('hide');
@@ -374,6 +466,7 @@ function registrar(){
 				$("#sub").DataTable().ajax.reload();
 				idfactura();
 				tasa_dia();
+				agregar_detalles(datos);
 				
 				//$('#resultados_ajax').html(datos);
 				//$('#servicio_data').DataTable().ajax.reload();

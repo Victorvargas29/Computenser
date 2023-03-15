@@ -41,7 +41,7 @@
 
       if($_POST["idServicio"] != 0){
 
-        $venta->agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$descripcion,$cantidad,$idUsuario);
+        $venta->agregar_detalle($jsomdetalles);
 
       }else {
         echo "debe selecionar un servicio";
@@ -50,7 +50,7 @@
 
     break;
 
-    case "listar":
+   /* case "listar":
       $datos = $venta->detalles_venta($idUsuario);
       $data = array();
       foreach ($datos as $row) {
@@ -74,7 +74,7 @@
           "aaData"=>$data
           );
         echo json_encode($results);
-    break;
+    break;*/
 
     case "listarSubtotales":
       $datos = $venta->detalles_venta($idUsuario);
@@ -173,15 +173,29 @@
     
     case 'guardarVenta':
             
-    
-             $venta->registrar($idFactura,$cedula,$moneda,$_POST["placa"],$_POST["oentrega"]);
-             $venta->detallesDetalles($idUsuario);
+
+            $res= $venta->registrar($_POST["cedula"],$_POST["comboCedula"],$_POST["moneda"],$_POST["placa"],$_POST["oentrega"]);
+            echo $res;
+             //$venta->detallesDetalles($idUsuario);
              sleep(2);
-             $venta->eliminar_temp_condicion($idUsuario);
+             //$venta->eliminar_temp_condicion($idUsuario);
             
             
     
     break;
+    case 'detallesDetalles':
+            
+      $jsomdetalles=$_POST["arregloDetalle"];
+     // $res= $venta->registrar($_POST["cedula"],$_POST["comboCedula"],$_POST["moneda"],$_POST["placa"],$_POST["oentrega"]);
+      
+       $res=$venta->detallesDetalles($jsomdetalles);
+       echo "jsom de prueba" , $res;
+      // sleep(2);
+      // $venta->eliminar_temp_condicion($idUsuario);
+      
+      
+
+break;
     case "borrar_temp":
       $venta->eliminar_temp_condicion($idUsuario);
     break;
