@@ -2,12 +2,12 @@
 
 require_once("../config/conexion.php");
 
-require_once("../modelos/marcas.php");
+require_once("../modelos/Marca.php");
 
 	$marca = new Marcas();
 
 	//$id_empleada = isset($_POST["id_empleada"]); // $_POST["id_empleada"] del atributo name
-	$idmarca = isset($_POST["idmarca"]);
+	$idMarca = isset($_POST["idMarca"]);
    $nombre = isset($_POST["nombre"]);
 
    	switch ($_GET["op"]) {
@@ -15,8 +15,8 @@ require_once("../modelos/marcas.php");
 
         
         
-        if(empty($_POST["idmarca"])){
-          $datos = $marca->get_marca_por_id($_POST["idmarca"]);
+        if(empty($_POST["idMarca"])){
+          $datos = $marca->get_marca_por_id($_POST["idMarca"]);
             if(is_array($datos)==true and count($datos)==0){
 
                $marca->registrar_marca($nombre);
@@ -24,12 +24,12 @@ require_once("../modelos/marcas.php");
                
             }else{
 
-              echo "el producto ya existe";
+              echo "La marca ya existe";
               
             }
         }else{
 
-            $marca->editar_marca($idmarca, $nombre);
+            $marca->editar_marca($idMarca, $nombre);
             echo "se edito";
         }
            
@@ -37,7 +37,7 @@ require_once("../modelos/marcas.php");
 
    		case 'mostrar':
    			
-   			$datos = $marca->get_marca_por_id($_POST["idmarca"]);
+   			$datos = $marca->get_marca_por_id($_POST["idMarca"]);
    			
    			if(is_array($datos)==true and count($datos)>0){
    				foreach ($datos as $row) {
@@ -75,13 +75,13 @@ require_once("../modelos/marcas.php");
    				foreach ($datos as $row) {
    					$sub_array = array();
 
-   					$sub_array[]=$row["idmarca"];
+   					$sub_array[]=$row["idMarca"];
    					$sub_array[]=$row["nombre"];
 
-   					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["idmarca"].');"  id="'.$row["idmarca"].'" class="btn btn-warning btn-md update" title="Editar marca"><i class="fas fa-edit"></i></button>';
+   					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["idMarca"].');"  id="'.$row["idMarca"].'" class="btn btn-warning btn-md update" title="Editar marca"><i class="fas fa-edit"></i></button>';
 
 
-                   $sub_array[] = '<button type="button" onClick="eliminar_marca('.$row["idmarca"].');"  id="'.$row["idmarca"].'" class="btn btn-danger btn-md" title="Eliminar marcamarca"><i class="fas fa-trash-alt"></i></button>';
+                   $sub_array[] = '<button type="button" onClick="eliminar_marca('.$row["idMarca"].');"  id="'.$row["idMarca"].'" class="btn btn-danger btn-md" title="Eliminar marca"><i class="fas fa-trash-alt"></i></button>';
 
    					$data[]=$sub_array;
    				}
@@ -97,9 +97,9 @@ require_once("../modelos/marcas.php");
 
             case "eliminar_marca":
 
-            $datos = $marca->get_marca_por_id($_POST["idmarca"]);
+            $datos = $marca->get_marca_por_id($_POST["idMarca"]);
             if (is_array($datos)==true and count($datos)>0) {
-                  $marca->eliminar_marca($_POST["idmarca"]);
+                  $marca->eliminar_marca($_POST["idMarca"]);
                   $messages[]="se elimino correctamente";
             }
 

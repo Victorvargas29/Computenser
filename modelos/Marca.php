@@ -44,39 +44,39 @@
             // print_r($_POST);
    	    }
 
-   	    public function editar_marca($idmarca, $nombre){
+   	    public function editar_marca($idMarca, $nombre){
 
              $conectar=parent::conectar();
             // parent::set_names();
-             $sql="update marca set nombre=? where idmarca=?";
+             $sql="update marca set nombre=? where idMarca=?";
              //echo $sql;    //imprime la consulta para verificar en phpmyadmin
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1, $_POST["nombre"]);
-             $sql->bindValue(2, $_POST["idmarca"]);
+             $sql->bindValue(2, $_POST["idMarca"]);
              $sql->execute();
         //print_r($_POST); 	//comprobar que si se estan enviando los datos
    	    /*para q se muestre los valores en la consola hay q agregar console.log(datos);
    	    en el js debajo del success   */
    	    }
 
-   	    public function get_marca_por_id($idmarca){
+   	    public function get_marca_por_id($idMarca){
           
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="select * from marca where idmarca=?";
+          $sql="select * from marca where idMarca=?";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $idmarca);
+          $sql->bindValue(1, $idMarca);
           $sql->execute();
           return $resultado=$sql->fetchAll();
 
    	    }
 
-        public function eliminar_marca($idmarca){
+        public function eliminar_marca($idMarca){
           $conectar=parent::conectar();
 
-          $sql="delete from marca where idmarca=?";
+          $sql="delete from marca where idMarca=?";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $idmarca);
+          $sql->bindValue(1, $idMarca);
           $sql->execute();
           return $resultado=$sql->fetch();
         }

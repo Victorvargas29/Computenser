@@ -67,7 +67,7 @@
 <!--Modal para CRUD-->
 <div id="marcaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" id="Marca_form">   
+        <form method="post" id="marca_form">   
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Agregar Marca</h5>
@@ -100,6 +100,6 @@
       
     <datatables JS 
     <script type="text/javascript" src="datatables/datatables.min.js"></script>     -->
-         <script type="text/javascript" src="js/Marca.js"></script> 
+         <script type="text/javascript" src="js/marca.js"></script> 
   
 </html>
