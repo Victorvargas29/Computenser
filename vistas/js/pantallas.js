@@ -214,6 +214,14 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
 		});
 	});
+	$("#fallas").click(function(){
+		$.ajax({
+		url:'../vistas/fallas.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
+		});
+	});
 
 
 });

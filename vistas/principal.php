@@ -328,6 +328,7 @@
                                 <li class="sidebar-item"><a id="color" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Colores </span></a></li>
                             </ul>      
                         </li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="fallas" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">fallas</span></a></li>
                      
                    <!--   <li class="sidebar-item"> <a id="marca" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Marcas</span></a></li>
                      <li class="sidebar-item"> <a id="modelo" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Modelos</span></a></li>
