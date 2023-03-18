@@ -46,12 +46,11 @@
                         <table id="vehiculo_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
                         <thead class=" text-light" style="background-color: #0e9670;">
                             <tr>
-                                <th>Cedula</th>
-                                <th>Nombre</th>
-                     			<th>Apellido</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
-                                <th>Correo</th>
+                                <th>Cliente</th>
+                                <th>Vehiculo</th>
+                     			<th>Placa</th>
+                                <th>Color</th>
+                                <th>Año</th>
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
                             </tr>
@@ -103,26 +102,39 @@
 
                     
                     <input type="hidden" class="form-control" name="cedula" id="cedula">
-                  
-               
-      
-          
 
-                    
+
                     <label class="col-form-label">Nombre:</label>
                     <input type="text" class="form-control" name="nombre" id="nombre">
-                    
-                    <label class="col-form-label">Apellido:</label>
-                    <input type="text" class="form-control" name="apellido" id="apellido">
-                    
-                    <label class="col-form-label">Direcccion:</label>
-                    <textarea class="form-control" name="direccion" id="direccion" rows="2"></textarea>
+                  
+                    <div class="form-group">
+                        <label for="" class="col-lg-1 control-label">Marca</label>
+                        <select class="form-control font-weight-bold" id="idMarca" name="idMarca">
+                        </select>
+                    </div>
 
-                    <label class="col-form-label">Telefono:</label>
-                    <input type="text" class="form-control" name="telefono" id="telefono">
+                    <div class="form-group">
+                        <label for="" class="col-lg-1 control-label">Modelo</label>
+                        <select class="form-control font-weight-bold" id="idModelo" name="idModelo">
+                        </select>
+                    </div>
 
-                    <label class="col-form-label">Correo:</label>
-                    <input type="text" class="form-control" name="correo" id="correo">
+                    <div class="form-group">
+                        <label for="" class="col-lg-1 control-label">Color</label>
+                        <select class="form-control font-weight-bold" id="idColor" name="idColor">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="col-lg-1 control-label">Año</label>
+                        <select class="form-control font-weight-bold" id="año" name="año">
+                        </select>
+                    </div>
+
+                    
+                    <label class="col-form-label">Placa:</label>
+                    <input type="text" class="form-control" name="placa" id="placa">
+                    
         
                 </div>
                 <div class="modal-footer">

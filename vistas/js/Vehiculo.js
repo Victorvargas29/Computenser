@@ -17,18 +17,28 @@ function init(){
 	});
 	
 
-}
+} //fin init()
+
 $("#cedulaS").keyup(function(){
-	procesar($("#cedulaS").val(),$("#comboCedula").val());
+	cargarlista($("#cedulaS").val(),$("#comboCedula").val());
+
+	if ($("#cedulaS").val()=" ") {
+		$("#cedula").val(cedula1);  	
+		$("#nombre").val(" ");
+		
+	}
 	
 });
-function procesar(cedula,comboCedula){
-	campo1=comboCedula;
-	campo2=cedula;
-	fi=campo1+campo2;
-	document.getElementById('cedula').value=fi;
 
-}
+$("#comboCedula").change(function(){
+	
+	cargarlista($("#cedulaS").val(),$("#comboCedula").val());
+
+//console.log($("#idServicio").val($("#idServicio").val()));
+});
+
+
+
 //funcion q limpia los campos del formulario
 function limpiar(){
 
@@ -170,5 +180,23 @@ function eliminar_vehiculo (cedula){
 		}); //bootbox
 
 	}//fin eliminar	
+
+
+	function cargarlista(cedula1,letra){
+
+		var cedula=letra+cedula1;
+		if (cedula=='V-' || cedula=='J-' || cedula=='C-' || cedula=='G-') {
+			$("#cedula").val(cedula1);
+
+		}
+		$.post("../ajax/vehiculo.php?op=comboCliente",{cedula : cedula}, function(data, status)
+		{			
+			data = JSON.parse(data);			
+			$("#cedulaS").val(cedula1);
+			$("#nombre").val(data.nombre+" "+data.apellido);   
+			$("#nombre").prop('disabled', true);
+
+		});	
+	}
 
 init();
