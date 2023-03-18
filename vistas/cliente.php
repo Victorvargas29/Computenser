@@ -97,7 +97,7 @@
                   
                         
                     <div class="col-lg-10">
-                    <input type="text" class="form-control" name="cedulaS" id="cedulaS">
+                    <input type="number" class="form-control" name="cedulaS" id="cedulaS"  required minlength="5" maxlength="8">
                     </div>
                 </div> <!-- fin row -->
 
@@ -110,10 +110,10 @@
 
                     
                     <label class="col-form-label">Nombre:</label>
-                    <input type="text" class="form-control" name="nombre" id="nombre">
+                    <input type="text" class="form-control" name="nombre" id="nombre"  required minlength="5" maxlength="40">
                     
                     <label class="col-form-label">Apellido:</label>
-                    <input type="text" class="form-control" name="apellido" id="apellido">
+                    <input type="text" class="form-control" name="apellido" id="apellido"  required minlength="5" maxlength="40">
                     
                     <label class="col-form-label">Direcccion:</label>
                     <textarea class="form-control" name="direccion" id="direccion" rows="2"></textarea>
@@ -122,7 +122,7 @@
                     <input type="text" class="form-control" name="telefono" id="telefono">
 
                     <label class="col-form-label">Correo:</label>
-                    <input type="text" class="form-control" name="correo" id="correo">
+                    <input type="email" class="form-control" name="correo" id="correo"  required minlength="2" maxlength="40">
         
                 </div>
                 <div class="modal-footer">

@@ -26,11 +26,11 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
-        <h4>Marcas</h4>
+        <h4>Colores</h4>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">            
-            <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#marcaModal">Nueva Marca</button>    
+            <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#colorModal">Nuevo Color</button>    
             </div>    
         </div>    
     </div>    
@@ -43,7 +43,7 @@
                 <div class="col-md-12">
                     <div class="box">
                     <div class="panel-body table-responsive">        
-                        <table id="marca_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
+                        <table id="color_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
                         <thead class=" text-light" style="background-color: #0e9670;">
                             <tr>
                                 <th>Id</th>
@@ -65,12 +65,12 @@
     </div>    
       
 <!--Modal para CRUD-->
-<div id="marcaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="colorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" id="marca_form">   
+        <form method="post" id="color_form">   
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Agregar Marca</h5>
+                    <h5 class="modal-title">Agregar Color</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -82,7 +82,7 @@
                     </div>         
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="idMarca" id="idMarca"/>
+                    <input type="hidden" name="idColor" id="idColor"/>
                     <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
                     <button type="submit" name="action" id="btnGuardar" value="Add" aria-hidden="true" class="btn btn-dark">Guardar</button>
                     
@@ -100,6 +100,6 @@
       
     <datatables JS 
     <script type="text/javascript" src="datatables/datatables.min.js"></script>     -->
-         <script type="text/javascript" src="js/marca.js"></script> 
+         <script type="text/javascript" src="js/color.js"></script> 
   
 </html>

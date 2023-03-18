@@ -99,7 +99,7 @@ $cli = $clientes->get_Cliente();
 
                   <div class="col-lg-2">
                     <label>Cedula / RIF</label>
-                    <input type="text" name="cedula" id="listaC" placeholder="Cédula" required pattern = "[0-9]{0,15}" class="form-control"></input>
+                    <input type="number" name="cedula" id="listaC" placeholder="Cédula" required pattern = "[0-9]{0,15}" class="form-control"></input>
                   </div>
                   
                   <div class="col-lg-4">

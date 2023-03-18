@@ -101,7 +101,7 @@
 
                     <div class="form-group">
                         <label class="col-form-label">Nombre del modelo:</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre">
+                        <input type="text" class="form-control" name="nombre" id="nombre"  required minlength="5" maxlength="40">
                     </div>
                     
                     <div class="form-group">
