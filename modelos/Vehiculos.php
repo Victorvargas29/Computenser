@@ -21,18 +21,17 @@
    	    	return $resultado=$sql->fetchAll();
    	    }
 
-   	    public function registrar_vehiculo($cedula,$nombre,$apellido,$direccion,$telefono,$correo){
+   	    public function registrar_vehiculo($placa,$cliente,$año,$color,$generacion){
 
              $conectar=parent::conectar();
              //parent::set_names();
-             $sql="insert into vehiculo values(?,?,?,?,?,?);";
-             $sql=$conectar->prepare($sql);
-             $sql->bindValue(1, $_POST["cedula"]); 
-             $sql->bindValue(2, $_POST["nombre"]); 
-             $sql->bindValue(3, $_POST["apellido"]); 
-             $sql->bindValue(4, $_POST["direccion"]); 
-             $sql->bindValue(5, $_POST["telefono"]);
-             $sql->bindValue(6, $_POST["correo"]);
+             $sql="insert into vehiculo values(?,?,?,?,?);";
+             $sql=$conectar->prepare($sql);        
+             $sql->bindValue(1, $_POST["placa"]); 
+             $sql->bindValue(2, $_POST["cedula"]); 
+             $sql->bindValue(3, $_POST["año"]); 
+             $sql->bindValue(4, $_POST["color"]); 
+             $sql->bindValue(5, $_POST["generacion"]);
              $sql->execute();
             // print_r($_POST);
    	    }

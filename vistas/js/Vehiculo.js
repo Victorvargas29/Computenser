@@ -34,7 +34,6 @@ $("#comboCedula").change(function(){
 	
 	cargarlista($("#cedulaS").val(),$("#comboCedula").val());
 
-//console.log($("#idServicio").val($("#idServicio").val()));
 });
 
 
@@ -44,10 +43,10 @@ function limpiar(){
 
 	$("#cedula").val("");
 	$("#nombre").val("");
-	$("#apellido").val("");
-	$("#direccion").val("");
-	$("#telefono").val("");
-	$("#correo").val("");
+	$("#idMarca").val("");
+	$("#idModelo").val("");
+	$("#idColor").val("");
+	$("#año").val("");
 }
 
 
@@ -121,17 +120,15 @@ console.log("SDF",cedula);
 
 		$("#vehiculoModal").modal("show");
 		
-		$("#nombre").val(data.nombre);  // $("#cedula") esto es el id del campo del formulario
-		   
-		$("#apellido").val(data.apellido);
-		$("#direccion").val(data.direccion);
-		$("#telefono").val(data.telefono);
-		$("#correo").val(data.correo);	
+		$("#nombre").val(data.nombre); 
+		$("#idMarca").val(data.apellido);
+		$("#idModelo").val(data.direccion);
+		$("#idColor").val(data.telefono);
+		$("#año").val(data.correo);	
 		$("#cedula").val(data.cedula);
-		//console.log($("#telefono").val(data.telefono));
+
 		$('.modal-title').text("Editar vehiculo");
 		$("#action").val("Edit");
-		//console.log("#telefono");
 	});
 }//fin funcion mostrar
 
@@ -162,14 +159,14 @@ function guardaryeditar(e){
 }//fin guardar y editar
 
 
-function eliminar_vehiculo (cedula){
-	console.log("cedula", cedula);
+function eliminar_vehiculo (placa){
+	console.log("placa", placa);
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){
 			if(result){
 				$.ajax({
 					url:"../ajax/vehiculo.php?op=eliminar_vehiculo",
 					method:"POST",
-					data:{cedula:cedula},
+					data:{placa:placa},
 
 					success:function(data){
 						$("#vehiculo_data").DataTable().ajax.reload();
@@ -193,7 +190,7 @@ function eliminar_vehiculo (cedula){
 		{			
 			data = JSON.parse(data);			
 			$("#cedulaS").val(cedula1);
-			$("#nombre").val(data.nombre+" "+data.apellido);   
+			$("#nombre").val(data.nombre);   
 			$("#nombre").prop('disabled', true);
 
 		});	

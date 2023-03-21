@@ -104,8 +104,12 @@
                     <input type="hidden" class="form-control" name="cedula" id="cedula">
 
 
-                    <label class="col-form-label">Nombre:</label>
+                    <label class="col-form-label">Cliente:</label>
                     <input type="text" class="form-control" name="nombre" id="nombre">
+
+                                   
+                    <label class="col-form-label">Placa:</label>
+                    <input type="text" class="form-control" name="placa" id="placa">
                   
                     <div class="form-group">
                         <label for="" class="col-lg-1 control-label">Marca</label>
@@ -130,10 +134,6 @@
                         <select class="form-control font-weight-bold" id="año" name="año">
                         </select>
                     </div>
-
-                    
-                    <label class="col-form-label">Placa:</label>
-                    <input type="text" class="form-control" name="placa" id="placa">
                     
         
                 </div>
