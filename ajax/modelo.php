@@ -1,14 +1,11 @@
 <?php 
 
-//require_once("../config/conexion.php");
-
 require_once("../modelos/Modelo.php");
 require_once("../modelos/Marca.php");
 header('Content-Type: text/html; charset=UTF-8');
 	$modelo = new Modelos();
   $marca = new Marcas();
 
-	//$id_empleada = isset($_POST["id_empleada"]); // $_POST["id_empleada"] del atributo name
   $idModelo = isset($_POST["idModelo"]);
   $nombre = isset($_POST["nombre"]);  
 	$idMarca = isset($_POST["idMarca"]);
@@ -50,7 +47,7 @@ header('Content-Type: text/html; charset=UTF-8');
           $datos = $modelo->get_modelo_por_id($_POST["idModelo"]);
             if(is_array($datos)==true and count($datos)==0){
 
-               $modelo->registrar_modelo($nombre, $idMarca,$id_ini,$id_fin);
+               $modelo->registrar_modelo($nombre, $idMarca);
                echo "se registro";
                
             }else{
@@ -60,11 +57,40 @@ header('Content-Type: text/html; charset=UTF-8');
             }
         }else{
 
-            $modelo->editar_modelo($idModelo,$nombre,$idMarca,$id_ini,$id_fin);
+            $modelo->editar_modelo($idModelo,$nombre,$idMarca);
             echo "se edito";
         }
            
       break;
+
+      case 'reg_generacion':
+ 
+        if(empty($_POST["idModelo"])){
+              
+               echo "se registro";
+            
+        }else{
+
+            $modelo->reg_generacion($idModelo,$id_ini,$id_fin);
+
+        }
+           
+      break;
+
+      
+   		case 'generacion':
+   
+
+            $output["name_modelo"]="corsaa";
+         
+   				
+   				echo json_encode($output);
+  
+
+   			break;
+   			
+
+        break;
 
    		case 'mostrar':
    			
@@ -75,30 +101,11 @@ header('Content-Type: text/html; charset=UTF-8');
    					$output["nombre"] = $row["nombre"];
             $output["idModelo"]=$row["idModelo"];
             $output["idMarca"]=$row["idMarca"];
-            $output["idInicio"]=$row["inicio_gen"];
-            $output["idFin"]=$row["fin_gen"];
    				}
    				echo json_encode($output);
    			}else{
    				$errors[]="El Modelo no existe";
    			}
-
-   	//inicio mensaje errors
-   	if(isset($errors)){
-   		?>
-   		<div class="alert alert-danger" role="alert">
-   			<button type="button" class="close" data-dismiss="alert">&times;</button>
-   			<strong>Error!</strong>
-   			<?php
-   				foreach ($errors as $error) {
-   					echo $error;
-   				}
-
-   			?>
-   		</div>
-
-   		<?php
-   	}//fin mensaje error
 
    			break;
 
@@ -112,12 +119,15 @@ header('Content-Type: text/html; charset=UTF-8');
    					$sub_array[]=$row["idModelo"];
    					$sub_array[]=$row["nombre"];
             $sub_array[]=$row["marca_nom"];
-            if($row["fin_gen"]==1){
+  /*           if($row["fin_gen"]==1){
               $sub_array[]=$row["iniannos"];
             }else{
               $sub_array[]=$row["iniannos"]." - ".$row["finannos"];
-            }
-   					$sub_array[] = '<button type="button" onClick="mostrar('.$row["idModelo"].','.$row["iniannos"].');"  id="'.$row["idModelo"].'" class="btn btn-warning btn-md update" title="Editar Modelo"><i class="fas fa-edit"></i></button>';
+            } */
+
+            $sub_array[] = '<button type="button" onClick="generacion('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-warning btn-md update" title="Generacion"><i class="fas fa-edit"></i></button>';
+
+   					$sub_array[] = '<button type="button" onClick="mostrar('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-warning btn-md update" title="Editar Modelo"><i class="fas fa-edit"></i></button>';
 
             $sub_array[] = '<button type="button" onClick="eliminar_modelo('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-danger btn-md" title="Eliminar Modelo"><i class="fas fa-trash-alt"></i></button>';
 

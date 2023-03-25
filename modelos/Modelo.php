@@ -22,7 +22,7 @@
         	$conectar = parent::conectar();
             parent::set_names();
 
-            $sql = "select m.idModelo, m.nombre as nombre, m.fin_gen, a.annos as iniannos,aa.annos as finannos, ma.nombre as marca_nom from modelo m INNER JOIN marca ma ON m.idMarca=ma.idMarca INNER JOIN anno a ON m.inicio_gen=a.id INNER JOIN anno aa ON m.fin_gen=aa.id";
+            $sql = "select m.idModelo, m.nombre as nombre, ma.nombre as marca_nom from modelo m INNER JOIN marca ma ON m.idMarca=ma.idMarca";
        		//$sql = "select m.idModelo, m.nombre as nombre, m.idMarca, m.inicio_gen, m.fin_gen, a.años as iniaños, a.id, aa.id, aa.años as finaños, ma.idMarca, ma.nombre as marca_nom from modelo m INNER JOIN marca ma ON m.idMarca=ma.idMarca INNER JOIN año a ON m.inicio_gen=a.id INNER JOIN año aa ON m.fin_gen=aa.id";
 
         	$sql=$conectar->prepare($sql);
@@ -32,15 +32,14 @@
         	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function registrar_modelo($nombre, $idMarca,$inicio_gen,$fin_gen){
+        public function registrar_modelo($nombre, $idMarca){
         	$conectar = parent::conectar();
 
-        	$sql="insert into modelo values(null,?,?,?,?);";
+        	$sql="insert into modelo values(null,?,?);";
             $sql=$conectar->prepare($sql);
         	$sql->bindValue(1, $_POST["nombre"]);
             $sql->bindValue(2, $_POST["idMarca"]);
-            $sql->bindValue(3, $_POST["idInicio"]);
-            $sql->bindValue(4, $_POST["idFin"]);
+    
 			$sql->execute();
         }
 
@@ -62,13 +61,11 @@
 
              $conectar=parent::conectar();
     
-             $sql="update modelo set nombre=?, idMarca=?, inicio_gen=?, fin_gen=? where idModelo=?";
+             $sql="update modelo set nombre=?, idMarca=? where idModelo=?";
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1, $_POST["nombre"]);
              $sql->bindValue(2, $_POST["idMarca"]);
-             $sql->bindValue(3, $_POST["idInicio"]);
-             $sql->bindValue(4, $_POST["idFin"]);
-             $sql->bindValue(5, $_POST["idModelo"]);
+             $sql->bindValue(3, $_POST["idModelo"]);
              $sql->execute();
    	    }
 
@@ -92,14 +89,20 @@
             $sql->execute();
             return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
         }
-		
-        public function get_años(){
-			$conectar= parent::conectar();
-            $sql="select * from anno";
+
+        public function reg_generacion($idModelo, $id_ini, $id_fin){
+        	$conectar = parent::conectar();
+
+        	$sql="insert into generacion values(null,?,?,?);";
             $sql=$conectar->prepare($sql);
-            $sql->execute();
-            return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
-		}
+        	$sql->bindValue(1, $_POST["idModelo"]);
+            $sql->bindValue(2, $_POST["idInicio"]);
+            $sql->bindValue(3, $_POST["idFin"]);
+
+    
+			$sql->execute();
+        }
+
 
 
 	}// fin class modelo

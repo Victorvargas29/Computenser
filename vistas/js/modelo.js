@@ -10,6 +10,10 @@ function init(){
 		guardaryeditar(e);
 	});
 
+	$("#generacion_form").on("submit", function(e){
+		reg_generacion(e);
+	});
+
 	//cambia el titulo de la ventana modal cuando se da click al boton
 	$("#btnNuevo").click(function(){
 		$(".modal-title").text("Agregar Modelo");
@@ -111,11 +115,31 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(idModelo,iniannos){
-	$.post("../ajax/modelo.php?op=selectFinGen", {iniannos:iniannos},function(data){
+function generacion(idModelo){
+
+console.log(idModelo);
+/* 				$.post("../ajax/modelo.php?op=generacion",{idModelo : idModelo}, function(data, status)
+			{
+				data = JSON.parse(data);
+	
+				$("#generacionModal").modal("show");
+				$("#name_modelo").val(nombre);
+				$('.modal-title').text("Registrar Generacion de ");
+
+
+				$("#action").val("Edit");
+	
+			}); */
+/* 		setTimeout(function(){
+		}, 100);	 */
+	} //fin funcion mostrar
+	
+
+function mostrar(idModelo){
+/* 	$.post("../ajax/modelo.php?op=selectFinGen", {iniannos:iniannos},function(data){
 		$("#idFin").html(data);
-	});
-	setTimeout(function(){
+	}); */
+
 		$.post("../ajax/modelo.php?op=mostrar",{idModelo : idModelo}, function(data, status)
 		{
 			data = JSON.parse(data);
@@ -124,21 +148,19 @@ function mostrar(idModelo,iniannos){
 			$("#nombre").val(data.nombre);
 			$("#idMarca").val(data.idMarca);
 			$("#idModelo").val(idModelo);
-			$("#idInicio").val(data.idInicio);
-			$("#idFin").val(data.idFin);
 
 			$('.modal-title').text("Editar modelo");
 
 			$("#action").val("Edit");
 
 		});
-	}, 100);	
+	
 }//fin funcion mostrar
 
 //la funcion guardaryeditar(e); se llama cuando se da click al boton submit
 function guardaryeditar(e){
 
-	e.preventDefault(); //No se activará la acción predeterminada del evento
+	e.preventDefault(); 
 	var formData = new FormData($("#modelo_form")[0]);
 
 		$.ajax({
@@ -158,6 +180,27 @@ function guardaryeditar(e){
 
 }//fin guardar y editar
 
+function reg_generacion(e){
+
+	e.preventDefault(); 
+	var formData = new FormData($("#generacion_form")[0]);
+
+		$.ajax({
+			url: "../ajax/modelo.php?op=reg_generacion",
+			type: "POST",
+			data: formData,
+			contentType: false,
+			processData: false,
+
+			success: function(datos){
+				$('#generacion_form')[0].reset();
+				$('#generacionModal').modal('hide');
+				$('#modelo_data').DataTable().ajax.reload();
+				limpiar();
+			}
+		});
+
+}//fin guardar y editar
 
 function eliminar_modelo(idModelo){
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){
