@@ -126,15 +126,7 @@ $cli = $clientes->get_Cliente();
                         <label>Direccion</label>
                         <textarea name="direccion" id="direccion" class="form-control" rows="1"></textarea>  
                     </div>
-                    <div class="col-lg-2">          
-                        <label>Placa</label>
-                        <input type="text" name="placa" id="placa" class="form-control" placeholder="Placa" ></input>  
-                    </div>
                     
-                    <div class="col-lg-2">          
-                        <label>O/E</label>
-                        <input type="text" name="oentrega" id="oentrega" class="form-control" placeholder="O/E"></input>  
-                    </div>
                 </div>
                 
                

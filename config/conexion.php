@@ -26,7 +26,7 @@ session_start();
 		public function ruta(){
 
 
-			return "http://computenser.test/";
+			return "http://teg.test/";
 
 		}
 	}//cierre class conectar
