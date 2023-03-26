@@ -117,19 +117,19 @@ function listar(){
 
 function generacion(idModelo){
 
-console.log(idModelo);
-/* 				$.post("../ajax/modelo.php?op=generacion",{idModelo : idModelo}, function(data, status)
+
+			$.post("../ajax/modelo.php?op=generacion",{idModelo : idModelo}, function(data, status)
 			{
 				data = JSON.parse(data);
 	
 				$("#generacionModal").modal("show");
-				$("#name_modelo").val(nombre);
-				$('.modal-title').text("Registrar Generacion de ");
+				$("#nombreM").val(data.nombreM);
+				$('.modal-title').text("Registrar Generacion de "+data.nombreM);
 
-
+				//.log(data);
 				$("#action").val("Edit");
 	
-			}); */
+			});
 /* 		setTimeout(function(){
 		}, 100);	 */
 	} //fin funcion mostrar

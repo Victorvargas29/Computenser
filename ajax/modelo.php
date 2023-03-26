@@ -8,6 +8,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
   $idModelo = isset($_POST["idModelo"]);
   $nombre = isset($_POST["nombre"]);  
+  $nombreM = isset($_POST["nombreM"]);  
 	$idMarca = isset($_POST["idMarca"]);
    $id_ini=isset($_POST["idInicio"]);
    $id_fin=isset($_POST["idFin"]);
@@ -22,23 +23,31 @@ header('Content-Type: text/html; charset=UTF-8');
         }
       break;
 	  case 'selectIniGen':
-        $rspta=$modelo->get_años();
+       // $rspta=$modelo->get_años();
         echo '<option value="0" selected disabled>año inicio</option>';
-        foreach ($rspta as $regi) {
+        /* ($rspta as $regi) {
             if($regi->id>1){
               echo '<option class="font-weight-bold" value='. $regi->id .'>'. $regi->annos . '</option>';
             }
+        }*/
+        $j=1970;
+        for ($i=0; $i < 54; $i++) { 
+          //$j+$i;
+          echo '<option class="font-weight-bold" value='. $j+$i .'>'. $j+$i . '</option>';
         }
       break;
 	  case 'selectFinGen':
       $id_ini=$_POST["idInicio"];
-        $rspta=$modelo->get_años();
         echo '<option value="0" selected disabled>años</option>';
-        foreach ($rspta as $regis) {
-          if($regis->id==1 || $regis->id>$id_ini){
-            echo '<option class="font-weight-bold" value='. $regis->id .'>'. utf8_encode($regis->annos) . '</option>';
+        $j=1970;
+        for ($i=0; $i < 54; $i++) { 
+          if($i+$j>$id_ini){
+            echo '<option class="font-weight-bold" value='. $j+$i .'>'. $j+$i . '</option>';
           }
-      }
+          //$j+$i;
+         
+        }
+      
       break;
 
    		case 'guardaryeditar':
@@ -68,10 +77,11 @@ header('Content-Type: text/html; charset=UTF-8');
         if(empty($_POST["idModelo"])){
               
                echo "se registro";
+                $modelo->reg_generacion($idModelo,$id_ini,$id_fin);
             
         }else{
 
-            $modelo->reg_generacion($idModelo,$id_ini,$id_fin);
+           
 
         }
            
@@ -81,11 +91,15 @@ header('Content-Type: text/html; charset=UTF-8');
    		case 'generacion':
    
 
-            $output["name_modelo"]="corsaa";
-         
-   				
-   				echo json_encode($output);
-  
+        $datos = $modelo->get_modelo_por_id($_POST["idModelo"]);
+   			
+       
+          foreach ($datos as $row) {
+            $output["nombreM"]=$row["nombre"];
+           
+          }
+          echo json_encode($output);
+       
 
    			break;
    			

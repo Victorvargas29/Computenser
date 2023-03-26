@@ -95,7 +95,7 @@
 
         	$sql="insert into generacion values(null,?,?,?);";
             $sql=$conectar->prepare($sql);
-        	$sql->bindValue(1, $_POST["idModelo"]);
+        	$sql->bindValue(1, $idModelo);
             $sql->bindValue(2, $_POST["idInicio"]);
             $sql->bindValue(3, $_POST["idFin"]);
 

@@ -15,7 +15,8 @@
 
                     <div class="form-group">
                         <!-- <label class="col-form-label" id="name_modelo" name="name_modelo"></label> -->
-                        <input type="text" class="form-control" name="name_modelo" id="name_modelo"  required minlength="5" maxlength="40">
+                        <input type="hidden" class="form-control" name="nombreM" id="nombreM"  required minlength="5" maxlength="40">
+                        <input type="hidden" class="form-control" name="idModelo" id="idModelo"  required minlength="5" maxlength="40">
                     </div>
                     
                     <div class="form-group">
