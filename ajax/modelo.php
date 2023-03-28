@@ -7,6 +7,8 @@ header('Content-Type: text/html; charset=UTF-8');
   $marca = new Marcas();
 
   $idModelo = isset($_POST["idModelo"]);
+  $Modelo = isset($_POST["Modelo"]);
+
   $nombre = isset($_POST["nombre"]);  
   $nombreM = isset($_POST["nombreM"]);  
 	$idMarca = isset($_POST["idMarca"]);
@@ -33,7 +35,7 @@ header('Content-Type: text/html; charset=UTF-8');
         $j=1970;
         for ($i=0; $i < 54; $i++) { 
           //$j+$i;
-          echo '<option class="font-weight-bold" value='. $j+$i .'>'. $j+$i . '</option>';
+          echo '<option class="font-weight-bold" value='.($j+$i).'>'.($j+$i). '</option>';
         }
       break;
 	  case 'selectFinGen':
@@ -42,7 +44,7 @@ header('Content-Type: text/html; charset=UTF-8');
         $j=1970;
         for ($i=0; $i < 54; $i++) { 
           if($i+$j>$id_ini){
-            echo '<option class="font-weight-bold" value='. $j+$i .'>'. $j+$i . '</option>';
+            echo '<option class="font-weight-bold" value='.($j+$i).'>'.($j+$i). '</option>';
           }
           //$j+$i;
          
@@ -74,14 +76,14 @@ header('Content-Type: text/html; charset=UTF-8');
 
       case 'reg_generacion':
  
-        if(empty($_POST["idModelo"])){
-              
-               echo "se registro";
-                $modelo->reg_generacion($idModelo,$id_ini,$id_fin);
-            
+        if(!empty($_POST["Modelo"])){
+               echo "Registro -";
+               //echo $Modelo;
+               $res= $modelo->reg_generacion($_POST["Modelo"],$_POST["idInicio"],$_POST["idFin"]);
+               
         }else{
 
-           
+          echo $_POST["Modelo"];
 
         }
            
@@ -96,6 +98,7 @@ header('Content-Type: text/html; charset=UTF-8');
        
           foreach ($datos as $row) {
             $output["nombreM"]=$row["nombre"];
+            $output["Modelo"]=$row["idModelo"];
            
           }
           echo json_encode($output);

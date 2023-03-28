@@ -92,12 +92,12 @@
 
         public function reg_generacion($idModelo, $id_ini, $id_fin){
         	$conectar = parent::conectar();
-
+            echo $idModelo," - ",$id_ini, " - ",$id_fin;
         	$sql="insert into generacion values(null,?,?,?);";
             $sql=$conectar->prepare($sql);
         	$sql->bindValue(1, $idModelo);
-            $sql->bindValue(2, $_POST["idInicio"]);
-            $sql->bindValue(3, $_POST["idFin"]);
+            $sql->bindValue(2, $id_ini);
+            $sql->bindValue(3, $id_fin);
 
     
 			$sql->execute();

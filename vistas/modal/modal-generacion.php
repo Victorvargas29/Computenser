@@ -14,12 +14,15 @@
 
 
                     <div class="form-group">
-                        <!-- <label class="col-form-label" id="name_modelo" name="name_modelo"></label> -->
-                        <input type="hidden" class="form-control" name="nombreM" id="nombreM"  required minlength="5" maxlength="40">
-                        <input type="hidden" class="form-control" name="idModelo" id="idModelo"  required minlength="5" maxlength="40">
+                      <!--  <input type="text" class="form-control" name="idModelo" id="idModelo">
+                         <label class="col-form-label" id="name_modelo" name="name_modelo"></label> -->
+                        <input type="text" class="form-control" name="nombreM" id="nombreM" >
+                        <input type="text" class="form-control" name="Modelo" id="Modelo" >
+                       
                     </div>
                     
                     <div class="form-group">
+                        
                         <label for="" class="col-lg-1 control-label">Rango Generación</label>
                         <select class="form-control font-weight-bold" id="idInicio" name="idInicio">
                         </select>
