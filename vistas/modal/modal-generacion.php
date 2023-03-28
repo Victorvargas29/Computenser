@@ -14,10 +14,7 @@
 
 
                     <div class="form-group">
-                      <!--  <input type="text" class="form-control" name="idModelo" id="idModelo">
-                         <label class="col-form-label" id="name_modelo" name="name_modelo"></label> -->
-                        <input type="text" class="form-control" name="nombreM" id="nombreM" >
-                        <input type="text" class="form-control" name="Modelo" id="Modelo" >
+                        <input type="hidden" class="form-control" name="Modelo" id="Modelo" >
                        
                     </div>
                     

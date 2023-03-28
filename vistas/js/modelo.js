@@ -124,10 +124,6 @@ function generacion(idModelo){
 	
 				$("#generacionModal").modal("show");
 				$("#Modelo").val(data.Modelo);
-
-				$("#nombreM").val(data.nombreM);
-				
-
 				$('.modal-title').text("Registrar Generacion de "+data.nombreM);
 
 				//.log(data);

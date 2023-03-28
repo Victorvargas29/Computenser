@@ -10,7 +10,6 @@ header('Content-Type: text/html; charset=UTF-8');
   $Modelo = isset($_POST["Modelo"]);
 
   $nombre = isset($_POST["nombre"]);  
-  $nombreM = isset($_POST["nombreM"]);  
 	$idMarca = isset($_POST["idMarca"]);
    $id_ini=isset($_POST["idInicio"]);
    $id_fin=isset($_POST["idFin"]);
