@@ -63,7 +63,7 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Marca</th>
-                                <th>Generacion</th>
+                                <th width="10%">Generacion</th>
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
                             </tr>
@@ -77,61 +77,17 @@
                 </div>
         </div>  
     </section>
-    </div>    
-      
-<!--Modal para CRUD-->
-<div id="modeloModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form method="post" id="modelo_form">   
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Agregar modelo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-             
-                <div class="modal-body">
-                  
+    </div> 
 
-                    <div class="form-group">
-                        <label for="" class="col-lg-1 control-label">Marca</label>
-                        <select class="form-control font-weight-bold" id="idMarca" name="idMarca">
-                        </select>
-                    </div>
+    <?php 
+    //ventana modal modelo
+    require_once("modal/modal-modelo.php");
+    //ventana modal generacion vehiculo
+    require_once("modal/modal-generacion.php");
+    ?>      
 
-                    <div class="form-group">
-                        <label class="col-form-label">Nombre del modelo:</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre"  required minlength="5" maxlength="40">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="" class="col-lg-1 control-label">Rango Generación</label>
-                        <select class="form-control font-weight-bold" id="idInicio" name="idInicio">
-                        </select>
-                        <select class="form-control font-weight-bold" id="idFin" name="idFin">
-                        </select>
-                    </div>
-                    
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="idModelo" id="idModelo"/>
-                    <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
-                    <button type="submit" name="action" id="btnGuardar" value="Add" aria-hidden="true" class="btn btn-dark">Guardar</button>
-                    
-                </div>
-            </div>
-        </form>
-    </div>
-</div>  
 </div>  <!-- container-fluid-->
-      
-    <!-- jQuery, Popper.js, Bootstrap JS -->
-    <!-- <script src="jquery/jquery-3.3.1.min.js"></script>
-    <script src="popper/popper.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-      
-    <datatables JS 
-    <script type="text/javascript" src="datatables/datatables.min.js"></script>     -->
-         <script type="text/javascript" src="js/modelo.js"></script> 
+
+<script type="text/javascript" src="js/modelo.js"></script> 
   
 </html>
