@@ -20,11 +20,18 @@ function init(){
         $("#idPresentacionP").val('0');
 		//document.getElementById("cedula").disabled = false;
 	});
-/*
-	$("#btnGuardar").click(function(){categoria
-
-	});
-*/
+	$(document).ready(function(){
+        $("#idModelo").change(function(){
+         
+         //   $('#iddistrito').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+            $("#idModelo option:selected").each(function(){
+                idModelo= $(this).val();
+                $.post("../ajax/producto.php?op=selectGen", {idModelo:idModelo},function(data){
+                    $("#idGeneracion").html(data);
+                });
+            });
+        });
+    });
 }
 
 //funcion q limpia los campos del formulario

@@ -36,7 +36,7 @@ require_once("../modelos/Categorias.php");
           echo '<option class="font-weight-bold" value='.$regi->idCategoria.'>'.$regi->nombre.'</option>';
         }
 
-    break;
+      break;
 
 
    		case 'guardaryeditar':

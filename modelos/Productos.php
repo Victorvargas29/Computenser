@@ -16,6 +16,19 @@
 
             return $sql->rowCount();
 		}
+		public function get_lineas(){
+			$conectar= parent::conectar();
+           
+            $sql="select * from linea";
+             
+            $sql=$conectar->prepare($sql);
+
+            $sql->execute();
+
+            $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+
+            return $resultado;
+		}
 
 		public function get_producto(){
 

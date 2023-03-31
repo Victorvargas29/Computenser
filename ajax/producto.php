@@ -4,6 +4,8 @@
 
 require_once("../modelos/Productos.php");
 
+require_once("../modelos/Modelo.php");
+	$modelo = new Modelos();
 	$producto = new Producto();
 
 	//$id_empleada = isset($_POST["id_empleada"]); // $_POST["id_empleada"] del atributo name
@@ -131,6 +133,16 @@ require_once("../modelos/Productos.php");
           }//fin mensaje categoria
 
    		    break;
+			case 'selectGen':
+				$idModelo=$_POST['idModelo'];
+				$rspta=$modelo->generacion_por_modelo($idModelo);
+				echo '<option value="0" selected disabled>Seleccione generacion</option>';
+				foreach($rspta as $regi){
+					echo '<option class="font-weight-bold" value='.$regi->id.'>'.'• '.$regi->anno1.'-'.$regi->anno2.'</option>';
+				}
+		
+			break;
+
    	}
 
  ?>
