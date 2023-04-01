@@ -30,32 +30,38 @@
              $sql->bindValue(1, $_POST["placa"]); 
              $sql->bindValue(2, $_POST["cedula"]); 
              $sql->bindValue(3, $_POST["año"]); 
-             $sql->bindValue(4, $_POST["color"]); 
+             $sql->bindValue(4, $_POST["idColor"]); 
              $sql->bindValue(5, $_POST["generacion"]);
              $sql->execute();
             // print_r($_POST);
    	    }
 
-   	    public function editar_vehiculo($cedula, $nombre, $apellido,$direccion,$telefono,$correo){
+   	    public function editar_vehiculo($placa, $año,$color,$generacion){
 
              $conectar=parent::conectar();
-            // parent::set_names();
-             $sql="update vehiculo set nombre=?, apellido=?, direccion=?, telefono=?, correo=? where cedula=?";
-             //echo $sql;    //imprime la consulta para verificar en phpmyadmin
+             $sql="update vehiculo set anno=?, idColor=?, idGeneracion=? where placa=?";
              $sql=$conectar->prepare($sql);
-             $sql->bindValue(1, $_POST["nombre"]);
-             $sql->bindValue(2, $_POST["apellido"]);
-             $sql->bindValue(3, $_POST["direccion"]);
-             $sql->bindValue(4, $_POST["telefono"]);
-             $sql->bindValue(5, $_POST["correo"]);
-             $sql->bindValue(6, $_POST["cedula"]);
+             $sql->bindValue(1, $_POST["anno"]);
+             $sql->bindValue(2, $_POST["idColor"]);
+             $sql->bindValue(3, $_POST["generacion"]);
+             $sql->bindValue(4, $_POST["placa"]);
              $sql->execute();
-        //print_r($_POST); 	//comprobar que si se estan enviando los datos
-   	    /*para q se muestre los valores en la consola hay q agregar console.log(datos);
-   	    en el js debajo del success   */
+     
    	    }
 
-   	    public function get_vehiculo_por_id($cedula){
+   	    public function get_vehiculo_por_id($placa){
+          
+          $conectar=parent::conectar();
+          //parent::set_names();
+          $sql="select * from vehiculo where placa=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $placa);
+          $sql->execute();
+          return $resultado=$sql->fetchAll();
+
+   	    }
+
+         public function get_vehiculo_por_cliente($cedula){
           
           $conectar=parent::conectar();
           //parent::set_names();
@@ -67,12 +73,12 @@
 
    	    }
 
-        public function eliminar_vehiculo($cedula){
+        public function eliminar_vehiculo($placa){
           $conectar=parent::conectar();
 
-          $sql="delete from vehiculo where cedula=?";
+          $sql="delete from vehiculo where placa=?";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $cedula);
+          $sql->bindValue(1, $placa);
           $sql->execute();
           return $resultado=$sql->fetch();
         }

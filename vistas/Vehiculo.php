@@ -130,8 +130,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="" class="col-lg-1 control-label">Año</label>
-                        <select class="form-control font-weight-bold" id="año" name="año">
+                        <label for="" class="col-lg-1 control-label">Generacion</label>
+                        <select class="form-control font-weight-bold" id="generacion" name="generacion">
                         </select>
                     </div>
                     

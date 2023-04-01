@@ -16,6 +16,36 @@ function init(){
 		$(".modal-header").css("background-color", "#0e9670");
 	});
 	
+	$.post("../ajax/vehiculo.php?op=selectMarca", function(r){
+        $("#idMarca").html(r);
+    });
+
+	$.post("../ajax/vehiculo.php?op=selectColor", function(t){
+        $("#idColor").html(t);
+    });
+	
+	$(document).ready(function(){
+        $("#idMarca").change(function(){
+            $("#idMarca option:selected").each(function(){
+                idMarca= $(this).val();
+                $.post("../ajax/vehiculo.php?op=selectModelo", {idMarca:idMarca},function(data){
+                    $("#idModelo").html(data);
+                });
+            });
+        });
+    });
+	$(document).ready(function(){
+        $("#idModelo").change(function(){
+            $("#idModelo option:selected").each(function(){
+                idModelo= $(this).val();
+                $.post("../ajax/vehiculo.php?op=selectGen", {idModelo:idModelo},function(data){
+                    $("#generacion").html(data);
+                });
+            });
+        });
+    });
+
+
 
 } //fin init()
 

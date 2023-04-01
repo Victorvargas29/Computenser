@@ -17,7 +17,7 @@ require_once("../modelos/Color.php");
   $idMarca = isset($_POST["idMarca"]);  
   $idModelo = isset($_POST["idModelo"]);   
   $idColor = isset($_POST["idColor"]);
-  $idAño = isset($_POST["idAño"]);
+  $año = isset($_POST["año"]);
 
   switch ($_GET["op"]) {
 
@@ -29,24 +29,32 @@ require_once("../modelos/Color.php");
       }
     break;
 
-	  case 'selectIniGen':
-      $rspta=$modelo->get_años();
-      echo '<option value="0" selected disabled>año inicio</option>';
+	  case 'selectModelo':
+      $idMarca = $_POST["idMarca"];
+      $rspta=$modelo->modelo_por_marca($idMarca);
+      echo '<option value="0" selected disabled>Seleccione Modelo</option>';
       foreach ($rspta as $regi) {
-        if($regi->id>1){
-          echo '<option class="font-weight-bold" value='. $regi->id .'>'. $regi->annos . '</option>';
-        }
+        echo '<option class="font-weight-bold" value='. $regi->idModelo .'>'. $regi->nombre . '</option>';   
       }
     break;
     
-	  case 'selectFinGen':
-      $id_ini=$_POST["idInicio"];
-      $rspta=$modelo->get_años();
-      echo '<option value="0" selected disabled>años</option>';
-      foreach ($rspta as $regis) {
-        if($regis->id==1 || $regis->id>$id_ini){
-          echo '<option class="font-weight-bold" value='. $regis->id .'>'. utf8_encode($regis->annos) . '</option>';
-        }
+	  case 'selectColor':
+
+      $rspta=$color->get_color_2();
+      echo '<option value="0" selected disabled>Seleccione Color</option>';
+      foreach ($rspta as $regis) {       
+          echo '<option class="font-weight-bold" value='. $regis->idColor .'>'. $regis->nombre . '</option>';
+        
+      }
+    break;
+    
+    case 'selectGen':
+
+      $rspta=$modelo->generacion_por_modelo();
+      echo '<option value="0" selected disabled>Seleccione Color</option>';
+      foreach ($rspta as $regis) {       
+          echo '<option class="font-weight-bold" value='. $regis->idColor .'>'. $regis->nombre . '</option>';
+        
       }
     break;
 
