@@ -141,9 +141,9 @@ header('Content-Type: text/html; charset=UTF-8');
               $sub_array[]=$row["iniannos"]." - ".$row["finannos"];
             } */
 
-            $sub_array[] = '<button type="button" onClick="generacion('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-warning btn-md update" title="Generacion"><i class="fas fa-edit"></i></button>';
+            $sub_array[] = '<button type="button" onClick="generacion('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-primary btn-md update" title="Generacion"><i class="fas fa-calendar"></i></button>';
 
-   					$sub_array[] = '<button type="button" onClick="mostrar('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-warning btn-md update" title="Editar Modelo"><i class="fas fa-edit"></i></button>';
+   					$sub_array[] = '<button type="button" onClick="mostrar('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-info btn-md update" title="Editar Modelo"><i class="fas fa-edit"></i></button>';
 
             $sub_array[] = '<button type="button" onClick="eliminar_modelo('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-danger btn-md" title="Eliminar Modelo"><i class="fas fa-trash-alt"></i></button>';
 
