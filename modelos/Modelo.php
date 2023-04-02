@@ -102,7 +102,16 @@
     
 			$sql->execute();
         }
+        
+        public function generacion_por_modelo($idModelo){
+            $conectar=parent::conectar();
 
+            $sql="select * from generacion where idModelo=?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $idModelo);
+            $sql->execute();
+            return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
+        }
 
 
 	}// fin class modelo
