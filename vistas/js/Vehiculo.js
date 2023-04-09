@@ -154,21 +154,26 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(placa){
-
+function mostrar(placa,idMarca,idModelo){
+	$.post("../ajax/vehiculo.php?op=selectGen", {idModelo:idModelo},function(data2){
+		$("#generacion").html(data2);
+	});
+	
+	$.post("../ajax/vehiculo.php?op=selectModelo", {idMarca:idMarca},function(data1){
+		$("#idModelo").html(data1);
+		
+	});
 	$.post("../ajax/vehiculo.php?op=mostrar",{placa : placa}, function(data, status)
 	{
 		data = JSON.parse(data);
 		idMarca=data.idMarca;
-		$.post("../ajax/vehiculo.php?op=selectModelo", {idMarca:idMarca},function(data1){
-			$("#idModelo").html(data1);
-			$("#idModelo").val(data1.idModelo);
-		});
+		
 		$("#vehiculoModal").modal("show");
 		$("#cedulaS").val(data.cedula);
 		$("#placa").val(placa); 
+		$("#nombre").val(data.nombre); 
 		$("#idMarca").val(data.idMarca);
-		
+		$("#idModelo").val(data.idModelo);
 		$("#generacion").val(data.idGeneracion);
 		$("#año").val(data.anno);	
 		$("#idColor").val(data.idColor);

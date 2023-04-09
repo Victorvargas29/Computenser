@@ -81,6 +81,7 @@ require_once("../modelos/Color.php");
         foreach ($datos as $row){
           $output["cedula"]=$row["cedula"];
           $output["placa"]=$row["placa"];
+          $output["nombre"]=$row["nombreCli"];
           $output["idMarca"]=$row["idMarca"];
           $output["idModelo"]=$row["idModelo"];
           $output["idGeneracion"]=$row["idGeneracion"];
@@ -115,7 +116,7 @@ require_once("../modelos/Color.php");
         $sub_array[]=$row["placa"];
         $sub_array[]=$row["color_nom"];
         $sub_array[]=$row["anno"];
-        $sub_array[] = '<button type="button" onClick="mostrar('."'".$row["placa"]."'".');"  id="'.$row["placa"].'" class="btn btn-warning btn-md update" title="Editar Vehiculo"><i class="fas fa-edit"></i></button>';
+        $sub_array[] = '<button type="button" onClick="mostrar('."'".$row["placa"]."'".','.$row["idMarca"].','.$row["idModelo"].');"  id="'.$row["placa"].'" class="btn btn-warning btn-md update" title="Editar Vehiculo"><i class="fas fa-edit"></i></button>';
         $sub_array[] = '<button type="button" onClick="eliminar_vehiculo('."'".$row["placa"]."'".');"  id="'.$row["placa"].'" class="btn btn-danger btn-md" title="Eliminar Vehiculo"><i class="fas fa-trash-alt"></i></button>';
         $data[]=$sub_array;
       }

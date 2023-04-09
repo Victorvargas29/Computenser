@@ -15,7 +15,7 @@
     public function get_vehiculo(){
       $conectar = parent::conectar();
       parent::set_names();
-      $sql = "select c.cedula, ma.nombre as marca_nom, mo.nombre as modelo_nom, v.placa, co.nombre as color_nom, v.anno 
+      $sql = "select c.cedula, ma.nombre as marca_nom, mo.nombre as modelo_nom, ma.idMarca, mo.idModelo, v.placa, co.nombre as color_nom, v.anno 
       from vehiculo v 
       INNER JOIN cliente c ON v.cedula=c.cedula
       INNER JOIN color co ON v.idColor=co.idColor
@@ -55,7 +55,7 @@
     public function get_vehiculo_por_id($placa){ 
       $conectar=parent::conectar();
       //$sql="select * from vehiculo where placa=?";
-      $sql = "select c.cedula, ma.idMarca, ma.nombre as marca_nom, mo.idModelo, mo.nombre as modelo_nom, v.placa, co.idColor, co.nombre as color_nom, v.anno, v.idGeneracion 
+      $sql = "select c.cedula, c.nombre as nombreCli, ma.idMarca, ma.nombre as marca_nom, mo.idModelo, mo.nombre as modelo_nom, v.placa, co.idColor, co.nombre as color_nom, v.anno, v.idGeneracion 
       from vehiculo v 
       INNER JOIN cliente c ON v.cedula=c.cedula
       INNER JOIN color co ON v.idColor=co.idColor
