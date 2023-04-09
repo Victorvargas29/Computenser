@@ -21,6 +21,10 @@ function init(){
 		//document.getElementById("cedula").disabled = false;
 	});
 	$(document).ready(function(){
+	//	$('.js-example-basic-single').select2();
+	
+	
+		
         $("#idModelo").change(function(){
          
          //   $('#iddistrito').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
@@ -165,7 +169,33 @@ function guardaryeditar(e){
 		});
 
 }//fin guardar y editar
+function addProveedor(idProducto){
+	console.log(idProducto);
+	
+	$.post("../ajax/producto.php?op=mostrarP",{idProducto : idProducto}, function(data, status)
+	{
+		data = JSON.parse(data);
 
+		$("#productoProveedorModal").modal("show");
+	//	document.getElementById("cedula").disabled = true;
+		//$("#cedula")
+		$("#nombreP").val(data.nombreP);  // $("#cedula") esto es el id del campo del formulario
+		   //data.nombre el nombre que se coloca en el lado derecho es
+		 //el que se coloco en el ajax en $output["nombre"
+	
+
+		//$('.modal-title').text("Editar producto");
+
+		
+	//	$("#id_empleada").val(id_empleada);
+		//$("#action").val("Edit");
+
+	});
+
+
+		
+
+}
 
 function eliminar_producto(idProducto){
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){

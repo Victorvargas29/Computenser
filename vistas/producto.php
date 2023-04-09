@@ -51,8 +51,12 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>
+                                <th>Precio</th>
                                 <th>cantidad</th>
-                                <th>Departamento</th>
+                                <th>Linea</th>
+                                <th>generacion</th>
+
+                                <th width="10%">Add Proveedor</th>
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
                             </tr>
@@ -88,7 +92,7 @@
                         <label class="col-form-label">Precio del Producto:</label>
                         <input type="text" class="form-control" name="precio" id="precio">
                         <label class="col-form-label">Cantidad:</label>
-                        <input type="text" class="form-control mb-2" name="cantidadP" id="cantidadP">
+                        <input type="text" class="form-control mb-2" name="cantidad" id="cantidad">
                         <div class="container border mt-3">
                         <label class="mt-1">Vehiculo:</label>
                                 <select class="form-control font-weight-bold mt-2" id="idModelo" name="idModelo">
@@ -160,9 +164,95 @@
         </form>
     </div>
 </div>  
+
+<div id="productoProveedorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" id="producto_form">   
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Asociar proveedor al Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+             
+                <div class="modal-body">
+                  
+
+                    <div class="form-group">
+                        <label class="col-form-label">Nombre del Producto:</label>
+                        <input type="text" class="form-control" name="nombreP" id="nombreP">
+                        <label class="col-form-label">Precio del Producto:</label>
+                        <input type="text" class="form-control" name="precio" id="precio">
+                        <label class="col-form-label">Cantidad:</label>
+                        <input type="text" class="form-control mb-2" name="cantidad" id="cantidad">
+                        <div class="container border mt-3">
+                        <label class="mt-1">Vehiculo:</label>
+                                <select class="js-example-basic-single" tabindex="null" id="idModelo2" name="state">
+                                    
+                                <option class="font-weight-bold" value="AL">Seleccio Modelo</option>
+                                <option class="font-weight-bold" value="FS">Seleccione el Modelo</option>
+                                <option class="font-weight-bold" value="SD">Selene el Modelo</option>
+                                <option class="font-weight-bold" value="EE">S Modelo</option>
+                                <option class="font-weight-bold" value="WL">Sdelo</option>
+                                    <option class="font-weight-bold" value="WF">Seleccione el Modelo</option>
+
+                                    
+                                </select>
+
+                                
+                                <select class="form-control font-weight-bold mt-2" id="idGeneracion" name="idGeneracion">
+                                <option class="font-weight-bold" value="0">Seleccione generacion</option>
+                                </select>
+                               
+                                <select class="form-control font-weight-bold mt-2 mb-3" id="idLinea" name="idLinea">
+                                <option class="font-weight-bold" value="0">Seleccione la linea del Repuesto</option>
+
+                                    <?php
+                                    // $num=0;
+                                    for($i=0; $i<sizeof($linea);$i++){
+                                    // $num++;
+                                        ?>
+                                        <option value="<?php  echo $linea[$i]["id"]?>">
+                                        <?php
+                                            // echo $num;
+                                            echo "• ";
+                                            echo $linea[$i]["nombre"];
+                                        ?>
+                                        </option>
+                                
+                                        <?php
+                                    }
+                                ?>
+
+                            </select>
+                        </div>
+                            
+
+                       
+
+                    </div>
+
+                    
+
+                </div>
+                
+                <div class="modal-footer">
+                    <input type="hidden" name="idProducto" id="idProducto"/>
+                    <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
+                    <button type="submit" name="action" id="btnGuardar" value="Add" aria-hidden="true" class="btn btn-dark">Guardar</button>
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+</div> 
+
+
 </div>  <!-- container-fluid-->
       
-  
-         <script type="text/javascript" src="js/producto.js"></script> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" integrity="sha512-arEjGlJIdHpZzNfZD2IidQjDZ+QY9r4VFJIm2M/DhXLjvvPyXFj+cIotmo0DLgvL3/DOlIaEDwzEiClEPQaAFQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js" integrity="sha512-m7x59G4+NdYoUUKUscYq2qKkineVwmjXA/7WfXm8pukxYiFavrh9uFImpPtbmZGAnHR0rouVWWk+dgcHNurQ5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+
+<script type="text/javascript" src="js/producto.js"></script> 
   
 </html>

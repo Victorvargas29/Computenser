@@ -24,7 +24,7 @@ require_once("../modelos/Modelo.php");
           
             if(is_array($datos)==true and count($datos)==0){
 
-               $producto->registrar_producto($nombre, $idDepartamento, $idPresentacionP,$cantidadP);
+               $producto->registrar_producto($_POST["nombre"], $_POST["precio"], $_POST["cantidad"],$_POST["idLinea"],$_POST["idGeneracion"]);
                echo "se registro";
                
             }else{
@@ -71,7 +71,25 @@ require_once("../modelos/Modelo.php");
    		<?php
    	}//fin mensaje error
 
-   			break;
+	break;
+		case 'mostrarP':
+	
+		$datos = $producto->get_producto_por_id($_POST["idProducto"]);
+		
+		if(is_array($datos)==true and count($datos)>0){
+			foreach ($datos as $row) {
+			//	$output["idDepartamento"] = $row["idDepartamento"];
+				$output["nombreP"] = $row["nombre"];
+				
+
+			}
+			echo json_encode($output);
+		}else{
+			$errors[]="El PRODUCTO no existe";
+		}
+
+
+		break;
 
    		case 'listar':
 
@@ -81,14 +99,16 @@ require_once("../modelos/Modelo.php");
    					$sub_array = array();
 
    					$sub_array[]=$row["idProducto"];
-   					$sub_array[]=$row["nombre"];
-                    //$sub_array[]=$row["depa_nombre"+"nombreP"];
-                    $sub_array[]=$row["cantidadP"]." ".$row["nombreP"];
+   					$sub_array[]=$row["nombreP"];
+                    $sub_array[]=$row["precio"];
+                    $sub_array[]=$row["cantidad"];
 
                    
                    
 
-					$sub_array[]=$row["depa_nombre"];
+					$sub_array[]=$row["nombreL"];
+					$sub_array[]=$row["anno1"]."-".$row["anno2"];
+					$sub_array[] = '<button type="button" onClick="addProveedor('.$row["idProducto"].');"  id="'.$row["idProducto"].'" class="btn btn-warning btn-md update" title="Asociar Proveedor"><i class="fas fa-edit"></i></button>';
    					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["idProducto"].');"  id="'.$row["idProducto"].'" class="btn btn-warning btn-md update" title="Editar producto"><i class="fas fa-edit"></i></button>';
 
 
