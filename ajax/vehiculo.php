@@ -18,6 +18,7 @@ require_once("../modelos/Color.php");
   $idModelo = isset($_POST["idModelo"]);   
   $idColor = isset($_POST["idColor"]);
   $año = isset($_POST["año"]);
+  $generacion = isset($_POST["generacion"]);
 
   switch ($_GET["op"]) {
 
@@ -47,45 +48,48 @@ require_once("../modelos/Color.php");
         
       }
     break;
-    
-    case 'selectGen':
 
-      $rspta=$modelo->generacion_por_modelo();
-      echo '<option value="0" selected disabled>Seleccione Color</option>';
-      foreach ($rspta as $regis) {       
-          echo '<option class="font-weight-bold" value='. $regis->idColor .'>'. $regis->nombre . '</option>';
-        
+    case 'selectGen':
+      $idModelo=$_POST['idModelo'];
+      $rspta=$modelo->generacion_por_modelo($idModelo);
+      echo '<option value="0" selected disabled>Seleccione generacion</option>';
+      foreach($rspta as $regi){
+        echo '<option class="font-weight-bold" value='.$regi->id.'>'.'• '.$regi->anno1.'-'.$regi->anno2.'</option>';
       }
+  
     break;
 
    	case 'guardaryeditar':
-      if(empty($_POST["idModelo"])){
-        $datos = $modelo->get_modelo_por_id($_POST["idModelo"]);
+    
+        $datos = $vehiculo->get_vehiculo_por_id($_POST["placa"]);
           if(is_array($datos)==true and count($datos)==0){
-            $modelo->registrar_modelo($nombre, $idMarca,$id_ini,$id_fin);
-            echo "se registro";   
+            $vehiculo->registrar_vehiculo($placa,$cedula,$año,$idColor,$generacion);
+            echo "se registro";
+            echo $_POST["cedula"];   
           }else{
-            echo "el producto ya existe";
+            echo "el vehiculo ya existe";
           }
-      }else{
-        $modelo->editar_modelo($idModelo,$nombre,$idMarca,$id_ini,$id_fin);
-        echo "se edito";
-      }     
+    
+       /*  $vehiculo->editar_vehiculo($placa,$año,$idColor,$generacion);
+        echo "se edito"; */
+           
     break;
 
     case 'mostrar':
-      $datos = $modelo->get_modelo_por_id($_POST["idModelo"]);
+      $datos = $vehiculo->get_vehiculo_por_id($_POST["placa"]);
       if(is_array($datos)==true and count($datos)>0){
         foreach ($datos as $row){
-          $output["nombre"] = $row["nombre"];
-          $output["idModelo"]=$row["idModelo"];
+          $output["cedula"]=$row["cedula"];
+          $output["placa"]=$row["placa"];
           $output["idMarca"]=$row["idMarca"];
-          $output["idInicio"]=$row["inicio_gen"];
-          $output["idFin"]=$row["fin_gen"];
+          $output["idModelo"]=$row["idModelo"];
+          $output["idGeneracion"]=$row["idGeneracion"];
+          $output["anno"]=$row["anno"];
+          $output["idColor"]=$row["idColor"];
         }
         echo json_encode($output);
       }else{
-        $errors[]="El Modelo no existe";
+        $errors[]="El vehiculo no existe";
       }
     break;
     
@@ -97,25 +101,22 @@ require_once("../modelos/Color.php");
         }
         echo json_encode($output);
       }else{
-        $errors[]="El Modelo no existe";
+        $errors[]="El cliente no existe";
       }
     break;
 
     case 'listar':
-      $datos = $modelo->get_modelo();
+      $datos = $vehiculo->get_vehiculo();
       $data = array();
       foreach ($datos as $row) {
         $sub_array = array();
-        $sub_array[]=$row["idModelo"];
-        $sub_array[]=$row["nombre"];
-        $sub_array[]=$row["marca_nom"];
-        if($row["fin_gen"]==1){
-          $sub_array[]=$row["iniannos"];
-        }else{
-          $sub_array[]=$row["iniannos"]." - ".$row["finannos"];
-        }
-        $sub_array[] = '<button type="button" onClick="mostrar('.$row["idModelo"].','.$row["iniannos"].');"  id="'.$row["idModelo"].'" class="btn btn-warning btn-md update" title="Editar Modelo"><i class="fas fa-edit"></i></button>';
-        $sub_array[] = '<button type="button" onClick="eliminar_modelo('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-danger btn-md" title="Eliminar Modelo"><i class="fas fa-trash-alt"></i></button>';
+        $sub_array[]=$row["cedula"];
+        $sub_array[]=$row["marca_nom"]." - ".$row["modelo_nom"];
+        $sub_array[]=$row["placa"];
+        $sub_array[]=$row["color_nom"];
+        $sub_array[]=$row["anno"];
+        $sub_array[] = '<button type="button" onClick="mostrar('."'".$row["placa"]."'".');"  id="'.$row["placa"].'" class="btn btn-warning btn-md update" title="Editar Vehiculo"><i class="fas fa-edit"></i></button>';
+        $sub_array[] = '<button type="button" onClick="eliminar_vehiculo('."'".$row["placa"]."'".');"  id="'.$row["placa"].'" class="btn btn-danger btn-md" title="Eliminar Vehiculo"><i class="fas fa-trash-alt"></i></button>';
         $data[]=$sub_array;
       }
       $results=array(
@@ -127,11 +128,13 @@ require_once("../modelos/Color.php");
       echo json_encode($results);
     break;
 
-    case "eliminar_modelo":
-      $datos = $modelo->get_modelo_por_id($_POST["idModelo"]);
+    case "eliminar_vehiculo":
+      $datos = $vehiculo->get_vehiculo_por_id($_POST["placa"]);
       if (is_array($datos)==true and count($datos)>0) {
-        $modelo->eliminar_modelo($_POST["idModelo"]);
-        $messages[]="se elimino correctamente";
+        $vehiculo->eliminar_vehiculo($_POST["placa"]);
+        echo "se elimino correctamente";
+      }else {
+        echo "no se elimino el vehiculo";
       }
     break;
   }

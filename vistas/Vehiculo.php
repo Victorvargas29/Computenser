@@ -74,7 +74,7 @@
                
                 <div class="modal-header">
                     <h5 class="modal-title">Agregar Vehiculo</h5>
-                    <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">&times;</span>
+                    <button type="button" onClick="limpiar()" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">&times;</span>
                     </button>
                 </div>
              
@@ -122,24 +122,30 @@
                         <select class="form-control font-weight-bold" id="idModelo" name="idModelo">
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label for="" class="col-lg-1 control-label">Color</label>
-                        <select class="form-control font-weight-bold" id="idColor" name="idColor">
-                        </select>
-                    </div>
-
+                    
                     <div class="form-group">
                         <label for="" class="col-lg-1 control-label">Generacion</label>
                         <select class="form-control font-weight-bold" id="generacion" name="generacion">
                         </select>
                     </div>
                     
+                    <label class="col-form-label">Año:</label>
+                    <input type="text" class="form-control" name="año" id="año">
+                    
+                    <div class="form-group">
+                        <label for="" class="col-lg-1 control-label">Color</label>
+                        <select class="form-control font-weight-bold" id="idColor" name="idColor">
+                        </select>
+                    </div>
+
+                   
+                    
+                    
         
                 </div>
                 <div class="modal-footer">
                     
-                    <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
+                    <button type="button" class="btn btn-light" onClick="limpiar()" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
                     <button type="submit" name="action" id="btnGuardar" value="Add" aria-hidden="true" class="btn btn-dark" >Guardar</button>
                     
                 </div>

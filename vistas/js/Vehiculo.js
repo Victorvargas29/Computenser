@@ -49,14 +49,18 @@ function init(){
 
 } //fin init()
 
+
+
 $("#cedulaS").keyup(function(){
 	cargarlista($("#cedulaS").val(),$("#comboCedula").val());
-
+	procesar($("#cedulaS").val(),$("#comboCedula").val());
+	
 	if ($("#cedulaS").val()=" ") {
 		$("#cedula").val(cedula1);  	
 		$("#nombre").val(" ");
 		
 	}
+	
 	
 });
 
@@ -66,12 +70,20 @@ $("#comboCedula").change(function(){
 
 });
 
+function procesar(cedula,comboCedula){
+	campo1=comboCedula;
+	campo2=cedula;
+	fi=campo1+campo2;
+	document.getElementById('cedula').value=fi;
+
+}
 
 
 //funcion q limpia los campos del formulario
 function limpiar(){
-
+	$("#placa").val("");
 	$("#cedula").val("");
+	$("#cedulaS").val("");
 	$("#nombre").val("");
 	$("#idMarca").val("");
 	$("#idModelo").val("");
@@ -142,30 +154,35 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(cedula){
-console.log("SDF",cedula);
-	$.post("../ajax/vehiculo.php?op=mostrar",{cedula : cedula}, function(data, status)
+function mostrar(placa){
+
+	$.post("../ajax/vehiculo.php?op=mostrar",{placa : placa}, function(data, status)
 	{
 		data = JSON.parse(data);
-
+		idMarca=data.idMarca;
+		$.post("../ajax/vehiculo.php?op=selectModelo", {idMarca:idMarca},function(data1){
+			$("#idModelo").html(data1);
+			$("#idModelo").val(data1.idModelo);
+		});
 		$("#vehiculoModal").modal("show");
+		$("#cedulaS").val(data.cedula);
+		$("#placa").val(placa); 
+		$("#idMarca").val(data.idMarca);
 		
-		$("#nombre").val(data.nombre); 
-		$("#idMarca").val(data.apellido);
-		$("#idModelo").val(data.direccion);
-		$("#idColor").val(data.telefono);
-		$("#año").val(data.correo);	
-		$("#cedula").val(data.cedula);
+		$("#generacion").val(data.idGeneracion);
+		$("#año").val(data.anno);	
+		$("#idColor").val(data.idColor);
+	
+		
 
 		$('.modal-title').text("Editar vehiculo");
 		$("#action").val("Edit");
 	});
 }//fin funcion mostrar
 
-//la funcion guardaryeditar(e); se llama cuando se da click al boton submit
 function guardaryeditar(e){
 
-	e.preventDefault(); //No se activará la acción predeterminada del evento
+	e.preventDefault();
 	var formData = new FormData($("#vehiculo_form")[0]);
 
 		$.ajax({
@@ -176,9 +193,6 @@ function guardaryeditar(e){
 			processData: false,
 
 			success: function(datos){
-
-				console.log(datos); //muestre los valores en la consola
-
 				$('#vehiculo_form')[0].reset();
 				$('#vehiculoModal').modal('hide');
 				$('#vehiculo_data').DataTable().ajax.reload();
