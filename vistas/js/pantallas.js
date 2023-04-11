@@ -33,17 +33,16 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html(err);}
 		});
 	});
-/*
-	$("#empleadas_p").click(function(){
+
+	$("#vehiculo").click(function(){
 		$.ajax({
-		url:'../vistas/empleada.php',
+		url:'../vistas/vehiculo.php',
 		method: "POST",
 		success: function(res){ $("#seccion1").html(res); },
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
 		});
 	});
 
-	*/
 	$("#empleadas_p").click(function(){
 		$.ajax({
 		url:'../vistas/empleada.php',
