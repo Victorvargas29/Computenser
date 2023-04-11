@@ -89,6 +89,13 @@ function limpiar(){
 	$("#idModelo").val("");
 	$("#idColor").val("");
 	$("#año").val("");
+	$("#comboCedula").val("V-");
+	$("#generacion").val("");
+
+	$("#comboCedula").prop('disabled', false);
+	$("#cedulaS").prop('disabled', false);
+	$("#placa").prop('disabled', false);
+	$("#nombre").prop('disabled', false);
 }
 
 
@@ -169,7 +176,9 @@ function mostrar(placa,idMarca,idModelo){
 		idMarca=data.idMarca;
 		
 		$("#vehiculoModal").modal("show");
-		$("#cedulaS").val(data.cedula);
+		$("#cedulaS").val(data.cedula.slice(2));
+		$("#cedula").val(data.cedula);
+		$("#comboCedula").val(data.cedula.slice(0,2));
 		$("#placa").val(placa); 
 		$("#nombre").val(data.nombre); 
 		$("#idMarca").val(data.idMarca);
@@ -177,8 +186,12 @@ function mostrar(placa,idMarca,idModelo){
 		$("#generacion").val(data.idGeneracion);
 		$("#año").val(data.anno);	
 		$("#idColor").val(data.idColor);
-	
-		
+
+		//disabled .prop('disabled', true);
+		$("#comboCedula").prop('disabled', true);
+		$("#cedulaS").prop('disabled', true);
+		//$("#placa").prop('disabled', true);
+		$("#nombre").prop('disabled', true);
 
 		$('.modal-title').text("Editar vehiculo");
 		$("#action").val("Edit");

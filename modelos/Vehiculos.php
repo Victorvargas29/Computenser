@@ -44,7 +44,7 @@
       $conectar=parent::conectar();
       $sql="update vehiculo set anno=?, idColor=?, idGeneracion=? where placa=?";
       $sql=$conectar->prepare($sql);
-      $sql->bindValue(1, $_POST["anno"]);
+      $sql->bindValue(1, $_POST["año"]);
       $sql->bindValue(2, $_POST["idColor"]);
       $sql->bindValue(3, $_POST["generacion"]);
       $sql->bindValue(4, $_POST["placa"]);

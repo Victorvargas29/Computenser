@@ -68,10 +68,9 @@ require_once("../modelos/Color.php");
             echo $_POST["cedula"];   
           }else{
             echo "el vehiculo ya existe";
+            $vehiculo->editar_vehiculo($placa,$año,$idColor,$generacion);
+            echo "se edito"; 
           }
-    
-       /*  $vehiculo->editar_vehiculo($placa,$año,$idColor,$generacion);
-        echo "se edito"; */
            
     break;
 
