@@ -8,7 +8,7 @@
    Class Fallas extends Conexion {
 
        //listar los usuarios
-   	    public function get_fallaw(){
+   	    public function get_fallas(){
 
    	    	$conectar=parent::conectar();
    	    //	parent::set_names();

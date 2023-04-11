@@ -54,13 +54,10 @@ $(document).ready(function(){
 	});
 });
 $(document).ready(function(){
-	$("#newclient").click(function(){
-		$.ajax({
-		url:'cliente.php',
-		method: "POST",
-		success: function(res){ $("#seccion1").html(res); },
-		error: function(err){ $("#seccion1").html(err);}
-		});
+	$.post("../ajax/vehiculo.php?op=selectVehiculo", function(r){
+		$("#idVehiculo").html(r);
+		$('#idMarca').selectpicker('render');
+	  //  $('#idMarcas').selectpicker("refresh");
 	});
 });
 

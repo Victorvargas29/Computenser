@@ -37,7 +37,8 @@ $falla = $fallas->get_fallas();
 
             <div class="col-lg-3">
               <label>Placa</label>
-              <input type="text" name="placa" id="listaC" placeholder="placa" required pattern = "[0-9]{0,15}" class="form-control"></input>
+              <select class="form-control font-weight-bold" data-live-search="true" data-tokens id="idVehiculo" name="idVehiculo">
+              </select>
             </div>
             <div class="col-lg-3">          
                 <label>modelo</label>
@@ -45,7 +46,7 @@ $falla = $fallas->get_fallas();
             </div>
             <div class="col-lg-3">          
                 <label>Color</label>
-                <input type="text" name="placa" id="placa" class="form-control" placeholder="Placa" ></input>  
+                <input type="text" name="color" id="color" class="form-control" placeholder="Color" readonly ></input>  
             </div>
             
             <div class="col-lg-3">          
