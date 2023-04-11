@@ -3,9 +3,10 @@
 require_once("../config/conexion.php");
 
 require_once("../modelos/Fallas.php");
-require_once("../modelos/Vehiculo.php");
+require_once("../modelos/Vehiculos.php");
 
 	$falla = new Fallas();
+	$vehiculo = new Vehiculos();
 
 	//$id_empleada = isset($_POST["id_empleada"]); // $_POST["id_empleada"] del atributo name
 	$idFalla = isset($_POST["idFalla"]);
@@ -38,10 +39,10 @@ require_once("../modelos/Vehiculo.php");
 
    		case 'selectVehiculo':
    			
-			$rspta=$vehiculo->get_vehiculo();
+			$rspta= $vehiculo->get_vehiculo();
 			echo '<option value="0" selected disabled>Ingrese la placa </option>';
 			foreach ($rspta as $reg) {
-			  echo '<option class="font-weight-bold" value='. $reg->placa .'>'. $reg->placa . '</option>';
+			  echo '<option class="font-weight-bold" value='. $reg->nombreCli .'>'. $reg->nombreCli . '</option>';
 			}
 
    		break;
