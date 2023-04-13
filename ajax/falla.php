@@ -42,7 +42,7 @@ require_once("../modelos/Vehiculos.php");
 			$rspta= $vehiculo->get_vehiculo();
 			echo '<option value="0" selected disabled>Ingrese la placa </option>';
 			foreach ($rspta as $reg) {
-			  echo '<option class="font-weight-bold" value='. $reg->nombreCli .'>'. $reg->nombreCli . '</option>';
+			  echo '<option class="font-weight-bold" value='. $reg["placa"] .'>'. $reg["placa"] . '</option>';
 			}
 
    		break;
