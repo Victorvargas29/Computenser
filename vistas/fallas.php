@@ -42,7 +42,7 @@ $falla = $fallas->get_fallas();
             </div>
             <div class="col-lg-3">          
                 <label>modelo</label>
-                <textarea name="direccion" id="direccion" class="form-control" rows="1"></textarea>  
+                <input name="modelo" id="modelo" class="form-control" placeholder="Modelo"></input>  
             </div>
             <div class="col-lg-3">          
                 <label>Color</label>
@@ -51,7 +51,7 @@ $falla = $fallas->get_fallas();
             
             <div class="col-lg-3">          
                 <label>cliente</label>
-                <input type="text" name="oentrega" id="oentrega" class="form-control" placeholder="O/E"></input>  
+                <input type="text" name="cliente" id="cliente" class="form-control" placeholder="Cliente"></input>  
             </div>
             
              

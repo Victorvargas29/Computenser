@@ -73,6 +73,19 @@ require_once("../modelos/Vehiculos.php");
 
 			echo json_encode($results);
    		break;
+		case 'mostrarVehiculo':
+		$datos = $vehiculo->get_vehiculo_por_id($_POST["placa"]);
+		if(is_array($datos)==true and count($datos)>0){
+			foreach ($datos as $row){
+			$output["nombreCli"]=$row["nombreCli"];
+			$output["modelo_nom"]=$row["modelo_nom"];
+			$output["color_nom"]=$row["idModelo"];
+			}
+			echo json_encode($output);
+		}else{
+			$errors[]="El vehiculo no existe";
+		}
+		break;
 
         case "eliminar_falla":
 

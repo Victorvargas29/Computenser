@@ -11,38 +11,37 @@ const cuerpotabla =document.getElementById("cuerpotabla");
 //funcion q se ejecuta al inicio
 function init(){
 	
-	//listar();	
+	$(document).ready(function(){
+		$.post("../ajax/falla.php?op=selectVehiculo", function(r){
+			$("#idVehiculo").html(r);
+			$('#idVehiculo').selectpicker();
+		  //  $('#idMarcas').selectpicker("refresh");
+		});
+
+		$("#idVehiculo").change(function(){
 	
-/*	$("#form_compra").on("button", function(e){
-		cargarlistaS(e);
+			cargarVehiculo($("#idVehiculo").val());
+		
+		
+		});
 	});
-
-	//cambia el titulo de la ventana modal cuando se da click al boton
-	
-	
-
-	$("#btnGuardar").click(function(){
-
-	});
-
-
-
-$("form_compra").on("submit", function(){
-	cargarlistaS();
-
-});
-*/
-
-
 }
 
-$(document).ready(function(){
-	$.post("../ajax/falla.php?op=selectVehiculo", function(r){
-		$("#idVehiculo").html(r);
-		$('#idVehiculo').selectpicker();
-	  //  $('#idMarcas').selectpicker("refresh");
-	});
-});
+
+function cargarVehiculo(placa){
+
+
+		
+	$.post("../ajax/falla.php?op=mostrarVehiculo",{placa : placa}, function(data, status)
+	{			
+		data = JSON.parse(data);			
+		$("#modelo").val(data.modelo_nom);
+		$("#color").val(data.color_nom);  
+		$("#cliente").val(data.nombreCli);
+	});	
+}
+
+
 
 
 init();

@@ -92,6 +92,7 @@ require_once("../modelos/Color.php");
         $errors[]="El vehiculo no existe";
       }
     break;
+   
     
     case 'comboCliente':
       $datos = $cliente->get_cliente_por_id($_POST["cedula"]);
