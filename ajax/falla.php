@@ -49,19 +49,16 @@ require_once("../modelos/Vehiculos.php");
 
    		case 'listar':
 
-   			$datos = $falla->get_falla();
+   			$datos = $falla->get_fallas();
 			$data = array();
 			foreach ($datos as $row) {
 				$sub_array = array();
-
-				$sub_array[]=$row["idFalla"];
-				$sub_array[]=$row["nombre"];
-
-					$sub_array[] = '<button type="button" onClick="mostrar('.$row["idFalla"].');"  id="'.$row["idFalla"].'" class="btn btn-warning btn-md update" title="Editar Falla"><i class="fas fa-edit"></i></button>';
-
-
-				$sub_array[] = '<button type="button" onClick="eliminar_falla('.$row["idFalla"].');"  id="'.$row["idFalla"].'" class="btn btn-danger btn-md" title="Eliminar Falla"><i class="fas fa-trash-alt"></i></button>';
-
+				$sub_array[]=$row["id"];
+				$sub_array[]=$row["descripcion"];
+				$sub_array[]=$row["fecha"];
+				$sub_array[]=$row["estatus"];
+				$sub_array[]=$row["vehiculo_placa"];
+				$sub_array[] = '<button type="button" onClick="eliminar_falla('.$row["id"].');"  id="'.$row["id"].'" class="btn btn-danger btn-md" title="Eliminar Falla"><i class="fas fa-trash-alt"></i></button>';
 				$data[]=$sub_array;
 			}
 			$results=array(

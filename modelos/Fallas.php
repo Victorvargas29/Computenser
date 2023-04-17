@@ -18,7 +18,7 @@
    	    	$sql=$conectar->prepare($sql);
    	    	$sql->execute();
 
-   	    	return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
+   	    	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
    	    }
    	    public function registrar_falla($nombre){
 

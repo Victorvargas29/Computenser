@@ -42,16 +42,16 @@ $falla = $fallas->get_fallas();
             </div>
             <div class="col-lg-3">          
                 <label>modelo</label>
-                <input name="modelo" id="modelo" class="form-control" placeholder="Modelo"></input>  
+                <input name="modelo1" id="modelo1" class="form-control" placeholder="Modelo" readonly></input>  
             </div>
             <div class="col-lg-3">          
                 <label>Color</label>
-                <input type="text" name="color" id="color" class="form-control" placeholder="Color" readonly ></input>  
+                <input type="text" name="color1" id="color1" class="form-control" placeholder="Color" readonly ></input>  
             </div>
             
             <div class="col-lg-3">          
                 <label>cliente</label>
-                <input type="text" name="cliente" id="cliente" class="form-control" placeholder="Cliente"></input>  
+                <input type="text" name="cliente" id="cliente" class="form-control" placeholder="Cliente" readonly></input>  
             </div>
             
              
@@ -90,18 +90,17 @@ $falla = $fallas->get_fallas();
                   <!-- /.box-header -->
                   <!-- centro width="35%"-->
                   <div class="panel-body table-responsive">
-                    <table id="fallas" class="table table-striped nowrap" width="100%">
-                      <thead>
+                    <table id="fallas_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
+                      <thead class=" text-light" style="background-color: #0e9670;">
                         <tr>
+                          <th class="all text-center">Placa</th>                          
                           <th class="all text-center">Descripcion</th>                          
                           <th class="all">Feccha y Hora</th>
                           <th class="all">Estado</th>
                           <th class="min-desktop">Eliminar</th>
                         </tr>
-
-
                       </thead>
-                      <tbody id="cuerpotabla">
+                      <tbody>
 
                       </tbody>
 
