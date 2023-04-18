@@ -69,6 +69,19 @@
 
             return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
+        public function get_producto_por_nombre($nombre){
+
+        	$conectar= parent::conectar();
+
+            $sql="select * from producto where nombre=?";
+
+            $sql=$conectar->prepare($sql);
+
+            $sql->bindValue(1, $nombre);
+            $sql->execute();
+
+            return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
 
         public function editar_producto($idProducto, $nombre, $idDepartamento,$idPresentacionP,$cantidadP){
 

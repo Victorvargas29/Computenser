@@ -21,17 +21,22 @@ require_once("../modelos/Modelo.php");
    		case 'guardaryeditar':
 				
 			$datos = $producto->get_producto_por_id($_POST["idProducto"]);
-          
+			$datosNombre = $producto->get_producto_por_nombre($_POST["nombre"]);
             if(is_array($datos)==true and count($datos)==0){
-
-               $producto->registrar_producto($_POST["nombre"], $_POST["precio"], $_POST["cantidad"],$_POST["idLinea"],$_POST["idGeneracion"]);
-               echo "se registro";
-               
-            }else{
-
-            $producto->editar_producto($idProducto, $nombre, $idDepartamento,$idPresentacionP,$cantidadP);
-            echo "se edito";
-        }
+				if(is_array($datosNombre)==true and count($datosNombre)==0){
+					$producto->registrar_producto($_POST["nombre"], $_POST["precio"], $_POST["cantidad"],$_POST["idLinea"],$_POST["idGeneracion"]);
+					echo "se registro";
+				}else{
+						echo "Ya existe un registro con ese nombre";
+				   }
+				}else{
+				if(is_array($datosNombre)==true and count($datosNombre)==0){
+					$producto->editar_producto($idProducto, $nombre, $idDepartamento,$idPresentacionP,$cantidadP);
+					echo "se edito";
+				}else{
+					echo "Ya existe un registro con ese nombre";
+			   }
+        	}
            
       break;
 

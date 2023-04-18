@@ -176,7 +176,7 @@ function addProveedor(idProducto){
 	{
 		data = JSON.parse(data);
 
-		$("#productoProveedorModal").modal("show");
+		$("#prodProvModal").modal("show");
 	//	document.getElementById("cedula").disabled = true;
 		//$("#cedula")
 		$("#nombreP").val(data.nombreP);  // $("#cedula") esto es el id del campo del formulario
