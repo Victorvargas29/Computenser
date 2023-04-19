@@ -112,23 +112,23 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(idProducto){
-
+function mostrar(idProducto,idModelo){
+	l
 	$.post("../ajax/producto.php?op=mostrar",{idProducto : idProducto}, function(data, status)
 	{
 		data = JSON.parse(data);
 
 		$("#productoModal").modal("show");
-	//	document.getElementById("cedula").disabled = true;
-		//$("#cedula")
-		$("#nombre").val(data.nombre);  // $("#cedula") esto es el id del campo del formulario
-		   //data.nombre el nombre que se coloca en el lado derecho es
-		 //el que se coloco en el ajax en $output["nombre"]
-        $("#idDepartamento").val(data.idDepartamento);
-        $("#cantidadP").val(data.cantidadP);
+	
+		$("#nombre").val(data.nombre);
+		   
+        $("#idLinea").val(data.idLinea);
+        $("#cantidad").val(data.cantidad);
+        $("#precio").val(data.precio);
     
    
-	    $("#idPresentacionP").val(data.idPresentacionP);
+	    $("#idGeneracion").val(data.idGeneracion);
+	    $("#idModelo").val(idModelo);
 		$("#idProducto").val(idProducto);
 	
 

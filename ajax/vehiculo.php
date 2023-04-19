@@ -63,7 +63,7 @@ require_once("../modelos/Color.php");
     
         $datos = $vehiculo->get_vehiculo_por_id($_POST["placa"]);
           if(is_array($datos)==true and count($datos)==0){
-            $vehiculo->registrar_vehiculo($placa,$cedula,$año,$idColor,$generacion);
+            $vehiculo->registrar_vehiculo($_POST["placa"],$_POST["cedula"],$_POST["año"],$_POST["idColor"],$_POST["generacion"]);
             echo "se registro";
             echo $_POST["cedula"];   
           }else{

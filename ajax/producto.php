@@ -48,9 +48,12 @@ require_once("../modelos/Modelo.php");
    				foreach ($datos as $row) {
    				//	$output["idDepartamento"] = $row["idDepartamento"];
    					$output["nombre"] = $row["nombre"];
-                    $output["idDepartamento"]=$row["idDepartamento"];
-                    $output["idPresentacionP"]=$row["idPresentacionP"];
-                    $output["cantidadP"]=$row["cantidadP"];
+					$output["cantidad"]=$row["cantidad"];
+					$output["precio"]=$row["precio"];
+
+                    $output["idLinea"]=$row["linea_id"];
+                    $output["idGeneracion"]=$row["generacion_id"];
+                    
 
 
    				}
@@ -114,7 +117,7 @@ require_once("../modelos/Modelo.php");
 					$sub_array[]=$row["nombreL"];
 					$sub_array[]=$row["anno1"]."-".$row["anno2"];
 					$sub_array[] = '<button type="button" onClick="addProveedor('.$row["idProducto"].');"  id="'.$row["idProducto"].'" class="btn btn-warning btn-md update" title="Asociar Proveedor"><i class="fas fa-edit"></i></button>';
-   					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["idProducto"].');"  id="'.$row["idProducto"].'" class="btn btn-warning btn-md update" title="Editar producto"><i class="fas fa-edit"></i></button>';
+   					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["idProducto"].','.$row["idModelo"].');"  id="'.$row["idProducto"].'" class="btn btn-warning btn-md update" title="Editar producto"><i class="fas fa-edit"></i></button>';
 
 
             $sub_array[] = '<button type="button" onClick="eliminar_producto('.$row["idProducto"].');"  id="'.$row["idProducto"].'" class="btn btn-danger btn-md" title="Eliminar producto"><i class="fas fa-trash-alt"></i> </button>';

@@ -27,15 +27,15 @@
       return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
-   	public function registrar_vehiculo($placa,$cliente,$año,$color,$generacion){
+   	public function registrar_vehiculo($placa,$cedula,$año,$idColor,$generacion){
       $conectar=parent::conectar();
       $sql="insert into vehiculo values(?,?,?,?,?);";
       $sql=$conectar->prepare($sql);        
-      $sql->bindValue(1, $_POST["placa"]); 
-      $sql->bindValue(2, $_POST["cedula"]); 
-      $sql->bindValue(3, $_POST["año"]); 
-      $sql->bindValue(4, $_POST["idColor"]); 
-      $sql->bindValue(5, $_POST["generacion"]);
+      $sql->bindValue(1, $placa); 
+      $sql->bindValue(2, $cedula); 
+      $sql->bindValue(3, $idColor); 
+      $sql->bindValue(4, $año); 
+      $sql->bindValue(5, $generacion);
       $sql->execute();
     }
 

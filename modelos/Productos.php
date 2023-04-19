@@ -34,7 +34,7 @@
 
         	$conectar = parent::conectar();
        
-       		$sql = "select p.precio, p.cantidad, p.nombre as nombreP, p.idProducto, l.nombre as nombreL, g.anno1, g.anno2 from producto p INNER JOIN linea l ON p.linea_id=l.id INNER JOIN generacion g ON p.generacion_id=g.id";
+       		$sql = "select p.precio, p.cantidad, p.nombre as nombreP, p.idProducto, l.nombre as nombreL, g.anno1, g.anno2, g.id as idGen, m.idModelo from producto p INNER JOIN linea l ON p.linea_id=l.id INNER JOIN generacion g ON p.generacion_id=g.id JOIN modelo m on g.idModelo=m.idModelo";
 
         	$sql=$conectar->prepare($sql);
 
