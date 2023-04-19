@@ -59,6 +59,15 @@ require_once("../modelos/Color.php");
   
     break;
 
+    case 'selectCliente':
+      $rspta = $cliente->get_cliente();
+      echo '<option value="0" selected disabled>Seleccione cliente</option>';
+      foreach($rspta as $regist){
+        echo '<option class="font-weight-bold" value='.$regist->cedula.'>'.$regist->cedula.' - '.$regist->nombre.'</option>';
+      }
+  
+    break;
+
    	case 'guardaryeditar':
     
         $datos = $vehiculo->get_vehiculo_por_id($_POST["placa"]);

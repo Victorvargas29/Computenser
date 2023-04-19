@@ -80,33 +80,14 @@
              
                 <div class="modal-body">
                     <label class="col-form-label">Cedula:</label>
-              <div class="row">
-                  
-                  <div class="col-lg-2">
-                    
-                    <select class="form-control font-weight-bold" id="comboCedula" name="comboCedula" required>
-                        <option class="font-weight-bold" value="V-">V-</option>
-                        <option class="font-weight-bold" value="J-">J-</option>
-                        <option class="font-weight-bold" value="E-">E-</option>
-                        <option class="font-weight-bold" value="C-">C-</option>
-                        <option class="font-weight-bold" value="G-">G-</option>   
-                    </select>
-                  </div>
-
-                  
+              <div class="row">           
                         
-                    <div class="col-lg-10">
-                    <input type="text" class="form-control" name="cedulaS" id="cedulaS">
+                    <div class="col-lg-12">
+                        <select class="form-control font-weight-bold" data-live-search="true" data-tokens id="cedula" name="cedula">
+                        </select>
                     </div>
                 </div> <!-- fin row -->
-
-                    
-                    <input type="hidden" class="form-control" name="cedula" id="cedula">
-
-
-                    <label class="col-form-label">Cliente:</label>
-                    <input type="text" class="form-control" name="nombre" id="nombre">
-
+                
                                    
                     <label class="col-form-label">Placa:</label>
                     <input type="text" class="form-control" name="placa" id="placa">

@@ -45,46 +45,28 @@ function init(){
         });
     });
 
+//cambiar a mayuscula lo que se va escribiendo en el text
+	$(document).ready(function(){
+		$("#placa").on("keyup",function(){
+			$input=$(this);
+			setTimeout(function(){
+				$input.val($input.val().toUpperCase());
+		 	},20);
+		});
+	});
 
+$.post("../ajax/vehiculo.php?op=selectCliente",function(re){
+	$("#cedula").html(re);
+	$("#cedula").selectpicker();
+});
 
 } //fin init()
-
-
-
-$("#cedulaS").keyup(function(){
-	cargarlista($("#cedulaS").val(),$("#comboCedula").val());
-	procesar($("#cedulaS").val(),$("#comboCedula").val());
-	
-	if ($("#cedulaS").val()=" ") {
-		$("#cedula").val(cedula1);  	
-		$("#nombre").val(" ");
-		
-	}
-	
-	
-});
-
-$("#comboCedula").change(function(){
-	
-	cargarlista($("#cedulaS").val(),$("#comboCedula").val());
-
-});
-
-function procesar(cedula,comboCedula){
-	campo1=comboCedula;
-	campo2=cedula;
-	fi=campo1+campo2;
-	document.getElementById('cedula').value=fi;
-
-}
 
 
 //funcion q limpia los campos del formulario
 function limpiar(){
 	$("#placa").val("");
-	$("#cedula").val("");
-	$("#cedulaS").val("");
-	$("#nombre").val("");
+	$("#cedula").val(0);
 	$("#idMarca").val("");
 	$("#idModelo").val("");
 	$("#idColor").val("");
@@ -92,10 +74,7 @@ function limpiar(){
 	$("#comboCedula").val("V-");
 	$("#generacion").val("");
 
-	$("#comboCedula").prop('disabled', false);
-	$("#cedulaS").prop('disabled', false);
-	$("#placa").prop('disabled', false);
-	$("#nombre").prop('disabled', false);
+	$("#placa").removeAttr("readonly");
 }
 
 
@@ -176,22 +155,19 @@ function mostrar(placa,idMarca,idModelo){
 		idMarca=data.idMarca;
 		
 		$("#vehiculoModal").modal("show");
-		$("#cedulaS").val(data.cedula.slice(2));
+		
 		$("#cedula").val(data.cedula);
-		$("#comboCedula").val(data.cedula.slice(0,2));
+	
 		$("#placa").val(placa); 
-		$("#nombre").val(data.nombre); 
+	 
 		$("#idMarca").val(data.idMarca);
 		$("#idModelo").val(data.idModelo);
 		$("#generacion").val(data.idGeneracion);
 		$("#año").val(data.anno);	
 		$("#idColor").val(data.idColor);
 
-		//disabled .prop('disabled', true);
-		$("#comboCedula").prop('disabled', true);
-		$("#cedulaS").prop('disabled', true);
-		//$("#placa").prop('disabled', true);
-		$("#nombre").prop('disabled', true);
+		//$("#nombre").prop('disabled', true);
+		//$("#placa").attr("readonly","readonly");
 
 		$('.modal-title').text("Editar vehiculo");
 		$("#action").val("Edit");
@@ -239,23 +215,5 @@ function eliminar_vehiculo (placa){
 		}); //bootbox
 
 	}//fin eliminar	
-
-
-	function cargarlista(cedula1,letra){
-
-		var cedula=letra+cedula1;
-		if (cedula=='V-' || cedula=='J-' || cedula=='C-' || cedula=='G-') {
-			$("#cedula").val(cedula1);
-
-		}
-		$.post("../ajax/vehiculo.php?op=comboCliente",{cedula : cedula}, function(data, status)
-		{			
-			data = JSON.parse(data);			
-			$("#cedulaS").val(cedula1);
-			$("#nombre").val(data.nombre);   
-			$("#nombre").prop('disabled', true);
-
-		});	
-	}
 
 init();
