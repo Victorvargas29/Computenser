@@ -18,7 +18,7 @@
    	    	$sql=$conectar->prepare($sql);
    	    	$sql->execute();
 
-   	    	return $resultado=$sql->fetchAll();
+   	    	return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
    	    }
 
    	    public function registrar_cliente($cedula,$nombre,$apellido,$direccion,$telefono,$correo){
