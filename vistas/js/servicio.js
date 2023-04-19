@@ -128,7 +128,7 @@ function mostrar(idServicio){
 		   //data.nombre el nombre que se coloca en el lado derecho es
 		 //el que se coloco en el ajax en $output["nombre"]
 		 $("#precio").val(data.precio);
-		 $("#idCategoria").val(data.idCategoria);
+		 $("#idDepartamento").val(data.idDepartamento);
 		 
 		 $('.modal-title').text("Editar Servicio");
 		 $("#idServicio").val(idServicio);

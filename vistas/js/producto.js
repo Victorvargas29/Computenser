@@ -20,11 +20,22 @@ function init(){
         $("#idPresentacionP").val('0');
 		//document.getElementById("cedula").disabled = false;
 	});
-/*
-	$("#btnGuardar").click(function(){categoria
-
-	});
-*/
+	$(document).ready(function(){
+	//	$('.js-example-basic-single').select2();
+	
+	
+		
+        $("#idModelo").change(function(){
+         
+         //   $('#iddistrito').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+            $("#idModelo option:selected").each(function(){
+                idModelo= $(this).val();
+                $.post("../ajax/producto.php?op=selectGen", {idModelo:idModelo},function(data){
+                    $("#idGeneracion").html(data);
+                });
+            });
+        });
+    });
 }
 
 //funcion q limpia los campos del formulario
@@ -101,23 +112,23 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(idProducto){
-
+function mostrar(idProducto,idModelo){
+	l
 	$.post("../ajax/producto.php?op=mostrar",{idProducto : idProducto}, function(data, status)
 	{
 		data = JSON.parse(data);
 
 		$("#productoModal").modal("show");
-	//	document.getElementById("cedula").disabled = true;
-		//$("#cedula")
-		$("#nombre").val(data.nombre);  // $("#cedula") esto es el id del campo del formulario
-		   //data.nombre el nombre que se coloca en el lado derecho es
-		 //el que se coloco en el ajax en $output["nombre"]
-        $("#idDepartamento").val(data.idDepartamento);
-        $("#cantidadP").val(data.cantidadP);
+	
+		$("#nombre").val(data.nombre);
+		   
+        $("#idLinea").val(data.idLinea);
+        $("#cantidad").val(data.cantidad);
+        $("#precio").val(data.precio);
     
    
-	    $("#idPresentacionP").val(data.idPresentacionP);
+	    $("#idGeneracion").val(data.idGeneracion);
+	    $("#idModelo").val(idModelo);
 		$("#idProducto").val(idProducto);
 	
 
@@ -158,7 +169,33 @@ function guardaryeditar(e){
 		});
 
 }//fin guardar y editar
+function addProveedor(idProducto){
+	console.log(idProducto);
+	
+	$.post("../ajax/producto.php?op=mostrarP",{idProducto : idProducto}, function(data, status)
+	{
+		data = JSON.parse(data);
 
+		$("#prodProvModal").modal("show");
+	//	document.getElementById("cedula").disabled = true;
+		//$("#cedula")
+		$("#nombreP").val(data.nombreP);  // $("#cedula") esto es el id del campo del formulario
+		   //data.nombre el nombre que se coloca en el lado derecho es
+		 //el que se coloco en el ajax en $output["nombre"
+	
+
+		//$('.modal-title').text("Editar producto");
+
+		
+	//	$("#id_empleada").val(id_empleada);
+		//$("#action").val("Edit");
+
+	});
+
+
+		
+
+}
 
 function eliminar_producto(idProducto){
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){

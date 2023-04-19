@@ -16,12 +16,60 @@ function init(){
 		$(".modal-header").css("background-color", "#0e9670");
 	});
 	
+	$.post("../ajax/vehiculo.php?op=selectMarca", function(r){
+        $("#idMarca").html(r);
+    });
 
-}
+	$.post("../ajax/vehiculo.php?op=selectColor", function(t){
+        $("#idColor").html(t);
+    });
+	
+	$(document).ready(function(){
+        $("#idMarca").change(function(){
+            $("#idMarca option:selected").each(function(){
+                idMarca= $(this).val();
+                $.post("../ajax/vehiculo.php?op=selectModelo", {idMarca:idMarca},function(data){
+                    $("#idModelo").html(data);
+                });
+            });
+        });
+    });
+	$(document).ready(function(){
+        $("#idModelo").change(function(){
+            $("#idModelo option:selected").each(function(){
+                idModelo= $(this).val();
+                $.post("../ajax/vehiculo.php?op=selectGen", {idModelo:idModelo},function(data){
+                    $("#generacion").html(data);
+                });
+            });
+        });
+    });
+
+
+
+} //fin init()
+
+
+
 $("#cedulaS").keyup(function(){
+	cargarlista($("#cedulaS").val(),$("#comboCedula").val());
 	procesar($("#cedulaS").val(),$("#comboCedula").val());
 	
+	if ($("#cedulaS").val()=" ") {
+		$("#cedula").val(cedula1);  	
+		$("#nombre").val(" ");
+		
+	}
+	
+	
 });
+
+$("#comboCedula").change(function(){
+	
+	cargarlista($("#cedulaS").val(),$("#comboCedula").val());
+
+});
+
 function procesar(cedula,comboCedula){
 	campo1=comboCedula;
 	campo2=cedula;
@@ -29,15 +77,25 @@ function procesar(cedula,comboCedula){
 	document.getElementById('cedula').value=fi;
 
 }
+
+
 //funcion q limpia los campos del formulario
 function limpiar(){
-
+	$("#placa").val("");
 	$("#cedula").val("");
+	$("#cedulaS").val("");
 	$("#nombre").val("");
-	$("#apellido").val("");
-	$("#direccion").val("");
-	$("#telefono").val("");
-	$("#correo").val("");
+	$("#idMarca").val("");
+	$("#idModelo").val("");
+	$("#idColor").val("");
+	$("#año").val("");
+	$("#comboCedula").val("V-");
+	$("#generacion").val("");
+
+	$("#comboCedula").prop('disabled', false);
+	$("#cedulaS").prop('disabled', false);
+	$("#placa").prop('disabled', false);
+	$("#nombre").prop('disabled', false);
 }
 
 
@@ -103,32 +161,46 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
-function mostrar(cedula){
-console.log("SDF",cedula);
-	$.post("../ajax/vehiculo.php?op=mostrar",{cedula : cedula}, function(data, status)
+function mostrar(placa,idMarca,idModelo){
+	$.post("../ajax/vehiculo.php?op=selectGen", {idModelo:idModelo},function(data2){
+		$("#generacion").html(data2);
+	});
+	
+	$.post("../ajax/vehiculo.php?op=selectModelo", {idMarca:idMarca},function(data1){
+		$("#idModelo").html(data1);
+		
+	});
+	$.post("../ajax/vehiculo.php?op=mostrar",{placa : placa}, function(data, status)
 	{
 		data = JSON.parse(data);
-
-		$("#vehiculoModal").modal("show");
+		idMarca=data.idMarca;
 		
-		$("#nombre").val(data.nombre);  // $("#cedula") esto es el id del campo del formulario
-		   
-		$("#apellido").val(data.apellido);
-		$("#direccion").val(data.direccion);
-		$("#telefono").val(data.telefono);
-		$("#correo").val(data.correo);	
+		$("#vehiculoModal").modal("show");
+		$("#cedulaS").val(data.cedula.slice(2));
 		$("#cedula").val(data.cedula);
-		//console.log($("#telefono").val(data.telefono));
+		$("#comboCedula").val(data.cedula.slice(0,2));
+		$("#placa").val(placa); 
+		$("#nombre").val(data.nombre); 
+		$("#idMarca").val(data.idMarca);
+		$("#idModelo").val(data.idModelo);
+		$("#generacion").val(data.idGeneracion);
+		$("#año").val(data.anno);	
+		$("#idColor").val(data.idColor);
+
+		//disabled .prop('disabled', true);
+		$("#comboCedula").prop('disabled', true);
+		$("#cedulaS").prop('disabled', true);
+		//$("#placa").prop('disabled', true);
+		$("#nombre").prop('disabled', true);
+
 		$('.modal-title').text("Editar vehiculo");
 		$("#action").val("Edit");
-		//console.log("#telefono");
 	});
 }//fin funcion mostrar
 
-//la funcion guardaryeditar(e); se llama cuando se da click al boton submit
 function guardaryeditar(e){
 
-	e.preventDefault(); //No se activará la acción predeterminada del evento
+	e.preventDefault();
 	var formData = new FormData($("#vehiculo_form")[0]);
 
 		$.ajax({
@@ -139,9 +211,6 @@ function guardaryeditar(e){
 			processData: false,
 
 			success: function(datos){
-
-				console.log(datos); //muestre los valores en la consola
-
 				$('#vehiculo_form')[0].reset();
 				$('#vehiculoModal').modal('hide');
 				$('#vehiculo_data').DataTable().ajax.reload();
@@ -152,14 +221,14 @@ function guardaryeditar(e){
 }//fin guardar y editar
 
 
-function eliminar_vehiculo (cedula){
-	console.log("cedula", cedula);
+function eliminar_vehiculo (placa){
+	console.log("placa", placa);
 		bootbox.confirm("¿Esta seguro de eliminar?", function(result){
 			if(result){
 				$.ajax({
 					url:"../ajax/vehiculo.php?op=eliminar_vehiculo",
 					method:"POST",
-					data:{cedula:cedula},
+					data:{placa:placa},
 
 					success:function(data){
 						$("#vehiculo_data").DataTable().ajax.reload();
@@ -170,5 +239,23 @@ function eliminar_vehiculo (cedula){
 		}); //bootbox
 
 	}//fin eliminar	
+
+
+	function cargarlista(cedula1,letra){
+
+		var cedula=letra+cedula1;
+		if (cedula=='V-' || cedula=='J-' || cedula=='C-' || cedula=='G-') {
+			$("#cedula").val(cedula1);
+
+		}
+		$.post("../ajax/vehiculo.php?op=comboCliente",{cedula : cedula}, function(data, status)
+		{			
+			data = JSON.parse(data);			
+			$("#cedulaS").val(cedula1);
+			$("#nombre").val(data.nombre);   
+			$("#nombre").prop('disabled', true);
+
+		});	
+	}
 
 init();

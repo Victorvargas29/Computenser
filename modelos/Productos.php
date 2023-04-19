@@ -16,12 +16,25 @@
 
             return $sql->rowCount();
 		}
+		public function get_lineas(){
+			$conectar= parent::conectar();
+           
+            $sql="select * from linea";
+             
+            $sql=$conectar->prepare($sql);
+
+            $sql->execute();
+
+            $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+
+            return $resultado;
+		}
 
 		public function get_producto(){
 
         	$conectar = parent::conectar();
        
-       		$sql = "select p.idProducto, p.nombre as nombre, p.idDepartamento, p.cantidadP, p.idPresentacionP, d.idDepartamento, d.nombre as depa_nombre, pr.idPresentacionP, pr.nombre as nombreP from producto p INNER JOIN departamento d ON p.idDepartamento=d.idDepartamento INNER JOIN presentacionProducto pr ON p.idPresentacionP=pr.idPresentacionP";
+       		$sql = "select p.precio, p.cantidad, p.nombre as nombreP, p.idProducto, l.nombre as nombreL, g.anno1, g.anno2, g.id as idGen, m.idModelo from producto p INNER JOIN linea l ON p.linea_id=l.id INNER JOIN generacion g ON p.generacion_id=g.id JOIN modelo m on g.idModelo=m.idModelo";
 
         	$sql=$conectar->prepare($sql);
 
@@ -30,15 +43,16 @@
         	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function registrar_producto($nombre, $idDepartamento, $idPresentacionP,$cantidadP){
+        public function registrar_producto($nombre, $precio, $cantidad,$idLinea,$idGeneracion){
         	$conectar = parent::conectar();
 
-        	$sql="insert into producto values(null,?,?,?,?);";
+        	$sql="insert into producto values(null,?,?,?,?,?);";
             $sql=$conectar->prepare($sql);
-        	$sql->bindValue(1, $_POST["nombre"]);
-			$sql->bindValue(2, $_POST["idDepartamento"]);
-            $sql->bindValue(3, $_POST["idPresentacionP"]);
-            $sql->bindValue(4, $_POST["cantidadP"]);
+        	$sql->bindValue(1, $nombre);
+			$sql->bindValue(2, $precio);
+            $sql->bindValue(3, $cantidad);
+            $sql->bindValue(4, $idLinea);
+            $sql->bindValue(5, $idGeneracion);
 			$sql->execute();
         }
 
@@ -51,6 +65,19 @@
             $sql=$conectar->prepare($sql);
 
             $sql->bindValue(1, $idProducto);
+            $sql->execute();
+
+            return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function get_producto_por_nombre($nombre){
+
+        	$conectar= parent::conectar();
+
+            $sql="select * from producto where nombre=?";
+
+            $sql=$conectar->prepare($sql);
+
+            $sql->bindValue(1, $nombre);
             $sql->execute();
 
             return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);

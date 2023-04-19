@@ -4,15 +4,15 @@
     
    // require_once("../../config/conexion.php");
     
-    require_once("../modelos/Departamentos.php");
-    require_once("../modelos/PresentacionP.php");
-    $prese= new PresentacionP();
-    $p=$prese->get_presentacionP();
+    require_once("../modelos/Modelo.php");
+    require_once("../modelos/Productos.php");
+    
 
+    $lineas= new producto();
+    $linea = $lineas->get_lineas();
 
-    $departamento = new Departamentos();
-
-    $dep = $departamento->get_departamento();
+    $modelos = new Modelos();
+    $modelo = $modelos->get_filas_modelo();
        
        
 ?>
@@ -51,12 +51,12 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>
+                                <th>Precio</th>
                                 <th>cantidad</th>
-                                
+                                <th>Linea</th>
+                                <th>generacion</th>
 
-                                
-                                <th>Departamento</th>
-                     
+                                <th width="10%">Add Proveedor</th>
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
                             </tr>
@@ -87,59 +87,66 @@
                   
 
                     <div class="form-group">
-
-                        <input type="date" name="">
-
                         <label class="col-form-label">Nombre del Producto:</label>
                         <input type="text" class="form-control" name="nombre" id="nombre">
-                        
-                        <label for="" class="col-lg-1 control-label">Departamento</label>
-                        <select class="form-control font-weight-bold" id="idDepartamento" name="idDepartamento">
-                            
-                            <option class="font-weight-bold" value="0">Seleccione</option>
-
-                            <?php
-                           
-                                for($i=0; $i<sizeof($dep);$i++){
-                           
-                             ?>
-                                <option value="<?php  echo $dep[$i]["idDepartamento"]?>">
-                                <?php
-                                   
-                                    echo "• ";
-                                    echo $dep[$i]["nombre"];
-                                ?>
-                              </option>
-                        
-                             <?php
-                           }
-                        ?>
-                        </select>
-
+                        <label class="col-form-label">Precio del Producto:</label>
+                        <input type="text" class="form-control" name="precio" id="precio">
                         <label class="col-form-label">Cantidad:</label>
-                        <input type="text" class="form-control" name="cantidadP" id="cantidadP" style="width:50%">
+                        <input type="text" class="form-control mb-2" name="cantidad" id="cantidad">
+                        <div class="container border mt-3">
+                        <label class="mt-1">Vehiculo:</label>
+                                <select class="form-control font-weight-bold mt-2" id="idModelo" name="idModelo">
+                                    
+                                    <option class="font-weight-bold" value="0">Seleccione el Modelo</option>
 
-                        <select class="form-control font-weight-bold" id="idPresentacionP" name="idPresentacionP" style="width:40%">
-                        <option class="font-weight-bold" value="0">Seleccione</option>
-
-                            <?php
-                           // $num=0;
-                           for($i=0; $i<sizeof($p);$i++){
-                            // $num++;
-                             ?>
-                              <option value="<?php  echo $p[$i]["idPresentacionP"]?>">
-                                <?php
-                                   // echo $num;
-                                    echo "• ";
-                                    echo $p[$i]["nombre"];
+                                    <?php
+                                    
+                                        for($i=0; $i<sizeof($modelo);$i++){
+                                    
+                                        ?>
+                                        <option value="<?php  echo $modelo[$i]["idModelo"]?>">
+                                        <?php
+                                            
+                                            echo "• ";
+                                            echo $modelo[$i]["nombre"];
+                                        ?>
+                                        </option>
+                                
+                                        <?php
+                                    }
                                 ?>
-                              </option>
-                        
-                             <?php
-                           }
-                        ?>
+                                </select>
 
-                        </select>
+                                
+                                <select class="form-control font-weight-bold mt-2" id="idGeneracion" name="idGeneracion">
+                                <option class="font-weight-bold" value="0">Seleccione generacion</option>
+                                </select>
+                               
+                                <select class="form-control font-weight-bold mt-2 mb-3" id="idLinea" name="idLinea">
+                                <option class="font-weight-bold" value="0">Seleccione la linea del Repuesto</option>
+
+                                    <?php
+                                    // $num=0;
+                                    for($i=0; $i<sizeof($linea);$i++){
+                                    // $num++;
+                                        ?>
+                                        <option value="<?php  echo $linea[$i]["id"]?>">
+                                        <?php
+                                            // echo $num;
+                                            echo "• ";
+                                            echo $linea[$i]["nombre"];
+                                        ?>
+                                        </option>
+                                
+                                        <?php
+                                    }
+                                ?>
+
+                            </select>
+                        </div>
+                            
+
+                       
 
                     </div>
 
@@ -157,9 +164,55 @@
         </form>
     </div>
 </div>  
+
+
+<div id="prodProvModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                    <div class="panel-body table-responsive">        
+                        <table id="proveedor_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
+                        <thead class="text-light" style="background-color: #0e9670;">
+                            <tr>
+                                <th>RIF</th>
+                                <th>Razon Social</th>
+                                <th hidden>Direccion</th>
+                                <th width="10%" hidden>Editar</th>
+                                <th width="10%">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                              
+                        </tbody>        
+                       </table>                    
+                    </div>
+                </div>
+                </div>
+        </div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </div>  <!-- container-fluid-->
       
-  
-         <script type="text/javascript" src="js/producto.js"></script> 
+<script type="text/javascript" src="js/proveedor.js"></script>
+<script type="text/javascript" src="js/producto.js"></script> 
+
   
 </html>
