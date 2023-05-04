@@ -100,7 +100,7 @@ $falla = $fallas->get_fallas();
                           <th class="min-desktop">Eliminar</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="cuerpotabla">
 
                       </tbody>
 

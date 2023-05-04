@@ -70,6 +70,26 @@ require_once("../modelos/Vehiculos.php");
 
 			echo json_encode($results);
    		break;
+		case 'mostrarPorVehiculo':
+
+			$datos = $falla->get_fallasPorVehiculo($_POST["idVehiculo"]);
+		 $data = array();
+		 foreach ($datos as $row) {
+			$output["vehiculo_placa"]=$row["vehiculo_placa"];
+			$output["descripcion"]=$row["descripcion"];
+			$output["fecha"]=$row["fecha"];
+			$output["estatus"]=$row["estatus"];
+			}
+			echo json_encode($output);
+		 $results=array(
+			 "sEcho"=>1,
+			 "iTotalRecords"=>count($data),
+			 "iTotalDisplayRecords"=>count($data),
+			 "aaData"=>$data
+			 );
+
+		 echo json_encode($results);
+		break;
 		case 'mostrarVehiculo':
 		$datos = $vehiculo->get_vehiculo_por_id($_POST["placa"]);
 		if(is_array($datos)==true and count($datos)>0){

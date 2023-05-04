@@ -2,7 +2,7 @@
 
 var tabla;
 
-
+const cuerpotabla =document.getElementById("cuerpotabla");
 
 //funcion q se ejecuta al inicio
 function init(){
@@ -26,7 +26,7 @@ function init(){
 
 function cargarVehiculo(placa){
 
-
+	
 		
 	$.post("../ajax/falla.php?op=mostrarVehiculo",{placa : placa}, function(data, status)
 	{			
@@ -36,6 +36,7 @@ function cargarVehiculo(placa){
 		$("#cliente").val(data.nombreCli);
 		console.log(data.modelo_nom);
 	});	
+	buscarFalla(placa);
 }
 function listar(){
 
@@ -96,6 +97,42 @@ function listar(){
 
 	}).DataTable();
 }//fin funcion listar
+
+function buscarFalla(idVehiculo){
+	
+	$.post("../ajax/falla.php?op=mostrarPorVehiculo",{idVehiculo: idVehiculo}, function(data, status)
+	{
+		console.log("fdadsasdasdhola");
+		data = JSON.parse(data);
+
+		console.log(data);
+		cuerpotabla.innerHTML="";
+		data.forEach((deta)=>{
+			let fila = document.createElement("tr");
+			fila.innerHTML=`
+							<td>${deta.vehiculo_placa}</td>
+							<td>${deta.descripcion}</td>
+							<td>${deta.fecha}</td>
+							<td>${deta.estatus}</td>`;
+			let tdEliminar =document.createElement("td");
+			let botonEliminar = document.createElement("button");
+			botonEliminar.classList.add("btn","btn-danger");
+			botonEliminar.innerText="Eliminar";
+			tdEliminar.appendChild(botonEliminar);
+			fila.appendChild(tdEliminar);
+			botonEliminar.onclick=()=>{
+				eliminarIten(deta.id);
+			};
+		cuerpotabla.appendChild(fila);
+	});
+
+
+	});
+
+
+	
+
+}
 
 
 
