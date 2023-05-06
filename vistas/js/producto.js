@@ -171,7 +171,7 @@ function guardaryeditar(e){
 }//fin guardar y editar
 function addProveedor(idProducto){
 	console.log(idProducto);
-	
+	listarEnProducto();
 	$.post("../ajax/producto.php?op=mostrarP",{idProducto : idProducto}, function(data, status)
 	{
 		data = JSON.parse(data);

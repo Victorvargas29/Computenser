@@ -20,7 +20,18 @@
 
    	    	return $resultado=$sql->fetchAll();
    	    }
+         public function get_proveedorParaProductos(){
 
+          $conectar=parent::conectar();
+        //	parent::set_names();
+
+          $sql="select * from proveedor";
+
+          $sql=$conectar->prepare($sql);
+          $sql->execute();
+
+          return $resultado=$sql->fetchAll();
+        }
    	    public function registrar_proveedor($rif,$nombre,$direccion){
 
              $conectar=parent::conectar();

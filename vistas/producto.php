@@ -166,9 +166,9 @@
 </div>  
 
 
-<div id="prodProvModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
+<div id="prodProvModal" class="modal fade " tabindex="-1" role="dialog">
+  <div class="modal-dialog" style="margin-left: 21%;" role="document">
+    <div class="modal-content tamanoModalP">
       <div class="modal-header">
         <h5 class="modal-title">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -180,18 +180,29 @@
                 <div class="col-md-12">
                     <div class="box">
                     <div class="panel-body table-responsive">        
-                        <table id="proveedor_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
+                        <table id="proveedorEnProducto_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
                         <thead class="text-light" style="background-color: #0e9670;">
                             <tr>
                                 <th>RIF</th>
                                 <th>Razon Social</th>
-                                <th hidden>Direccion</th>
-                                <th width="10%" hidden>Editar</th>
-                                <th width="10%">Eliminar</th>
+                                <th>Asociar</th>
                             </tr>
                         </thead>
                         <tbody >
-                              
+
+                        <?php
+                            // $num=0;
+                            for($i=0; $i<sizeof($linea);$i++){
+                            // $num++;
+                        ?>
+                        <?php
+                            <td>pro.descripcion</td>
+                            <td>pro.precio</td>
+                            <td></td>
+                        ?>
+                        <?php
+                            }
+                        ?>     
                         </tbody>        
                        </table>                    
                     </div>

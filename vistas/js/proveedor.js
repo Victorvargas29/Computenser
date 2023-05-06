@@ -103,6 +103,45 @@ function listar(){
 	}).DataTable();
 }//fin funcion listar
 
+function listarEnProducto(){
+
+	tabla=$('#proveedorEnProducto_data').dataTable({  
+		"aProcessing":true,//Activamos el procesamiento del datatables
+		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
+		
+		"bDestroy":true,
+		"responsive":true,
+		"bInfo":true,
+		"iDisplayLength":10,//por cada 10 reg hace una paginacion
+		"order":[[0,"desc"]],//Ordenar(Columna, Orden)
+
+		"language":{
+			"sProcessing": "Procesando...",
+			"sLengthMenu": "Mostrar _MENU_ registro",
+			"sZeroRecords": "No se encontraron resultados",
+			"sEmptyTable": "Ningun dato disponible en esta tabla",
+			"sInfo": "Mostrando un total de _TOTAL_ registros",
+			"sInfoEmpty": "Mostrando un total de 0 registros",
+			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix": "",
+			"sSearch": "Buscar",
+			"sUrl": "",
+			"sInfoThousands": "",
+			"sLoadingRecords": "Cargando...",
+			"oPaginate":{
+				"sFirst": "Primero",
+				"sLast": "Ultimo",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior"
+			},
+			"oAria":{
+				"sSortAscending": ": Activar para ordenar la columna",
+				"sSortDescending": ": Activar para ordenar la columna"
+			}
+		}//cierra language
+
+	}).DataTable();
+}
 function mostrar(rif){
 	$.post("../ajax/proveedor.php?op=mostrar",{rif : rif}, function(data, status)
 	{

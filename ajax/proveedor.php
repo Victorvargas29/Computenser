@@ -94,6 +94,32 @@ require_once("../modelos/Proveedor.php");
    				echo json_encode($results);
    			break;
 
+			case 'listarEnProducto':
+
+			$datos = $proveedor->get_proveedor();
+				$data = array();
+				foreach ($datos as $row) {
+					$sub_array = array();
+
+					$sub_array[]=$row["rif"];
+					$sub_array[]=$row["nombre"];
+					$rif=$row["rif"];
+						$sub_array[] = '<button type="button" onClick="asociar('."'".$rif."'".');"  id="'.$row["rif"].'" class="btn btn-warning btn-md update" title="Asociar proveedor al producto"><i class="fas fa-edit"></i></button>';
+
+
+				
+					$data[]=$sub_array;
+				}
+				$results=array(
+					"sEcho"=>1,
+					"iTotalRecords"=>count($data),
+					"iTotalDisplayRecords"=>count($data),
+					"aaData"=>$data
+					);
+
+				echo json_encode($results);
+			break;	
+
             case "eliminar_proveedor":
 
             $datos = $proveedor->get_proveedor_por_id($_POST["rif"]);
@@ -103,6 +129,8 @@ require_once("../modelos/Proveedor.php");
             }
 
    		    break;
+
+			
 
           case "listar_en_compras":
 
