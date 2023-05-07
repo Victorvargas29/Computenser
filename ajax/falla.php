@@ -10,7 +10,7 @@ require_once("../modelos/Vehiculos.php");
 
 	//$id_empleada = isset($_POST["id_empleada"]); // $_POST["id_empleada"] del atributo name
 	$idFalla = isset($_POST["idFalla"]);
-   $nombre = isset($_POST["nombre"]);
+   $nombre = isset($_POST["descripcion"]);
 
    	switch ($_GET["op"]) {
    		case 'guardaryeditar':
@@ -18,17 +18,13 @@ require_once("../modelos/Vehiculos.php");
         
 			
 			if(empty($_POST["idFalla"])){
-			$datos = $falla->get_falla_por_id($_POST["idFalla"]);
-				if(is_array($datos)==true and count($datos)==0){
+			
+				
 
-				$falla->registrar_falla($nombre);
+				$falla->registrar_falla($_POST["descripcion"],$_POST["idVehiculo"],);
 				echo "se registro";
 				
-				}else{
-
-				echo "el producto ya existe";
 				
-				}
 			}else{
 
 				$falla->editar_falla($idFalla, $nombre);
@@ -40,7 +36,7 @@ require_once("../modelos/Vehiculos.php");
    		case 'selectVehiculo':
    			
 			$rspta= $vehiculo->get_vehiculo();
-			echo '<option value="0" selected disabled>Ingrese la placa </option>';
+			echo '<option value="0">Ingrese la placa </option>';
 			foreach ($rspta as $reg) {
 			  echo '<option class="font-weight-bold" value='. $reg["placa"] .'>'. $reg["placa"] . '</option>';
 			}
@@ -55,10 +51,10 @@ require_once("../modelos/Vehiculos.php");
 				$sub_array = array();
 				$sub_array[]=$row["id"];
 				$sub_array[]=$row["descripcion"];
-				$sub_array[]=$row["fecha"];
-				$sub_array[]=$row["estatus"];
-				$sub_array[]=$row["vehiculo_placa"];
-				$sub_array[] = '<button type="button" onClick="eliminar_falla('.$row["id"].');"  id="'.$row["id"].'" class="btn btn-danger btn-md" title="Eliminar Falla"><i class="fas fa-trash-alt"></i></button>';
+				$sub_array[]=$row["fechaHora"];
+				$sub_array[]=$row["status"];
+				$sub_array[]=$row["idVehiculo"];
+				$sub_array[] = '<button type="button" onClick="editar_falla('.$row["id"].');"  id="'.$row["id"].'" class="btn btn-warning btn-md" title="Editar Falla"><i class="fas fa-edit"></i></button>';
 				$data[]=$sub_array;
 			}
 			$results=array(

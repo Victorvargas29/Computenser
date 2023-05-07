@@ -2,11 +2,26 @@
 
 var tabla;
 
-const cuerpotabla =document.getElementById("cuerpotabla");
+var cuerpotabla =document.getElementById("cuerpotabla");
 
 //funcion q se ejecuta al inicio
+
+function limpiar(){
+
+	$("#idVehiculo").val(0);
+	$("#modelo1").val("");
+	$("#color1").val("");
+	$("#cliente").val("");
+	$("#descripcion").val("");
+
+}
 function init(){
 	listar();
+
+	$("#falla_form").on("submit", function(e){
+		guardaryeditar(e);
+	});
+
 	$(document).ready(function(){
 		$.post("../ajax/falla.php?op=selectVehiculo", function(r){
 			$("#idVehiculo").html(r);
@@ -15,13 +30,41 @@ function init(){
 		});
 
 		$("#idVehiculo").change(function(){
-	
+			
 			cargarVehiculo($("#idVehiculo").val());
-		
-		
+			$('#fallas_data').DataTable().ajax.reload();
+			
 		});
 	});
 }
+function guardaryeditar(e){
+
+	e.preventDefault(); //No se activará la acción predeterminada del evento
+	var formData = new FormData($("#falla_form")[0]);
+
+		$.ajax({
+			url: "../ajax/falla.php?op=guardaryeditar",
+			type: "POST",
+			data: formData,
+			contentType: false,
+			processData: false,
+
+			success: function(datos){
+
+				//console.log(datos); //muestre los valores en la consola
+
+				$('#falla_form')[0].reset();
+				
+				$('#fallaModal').modal('hide');
+				$("#idVehiculo").val(0);
+				//$('#resultados_ajax').html(datos);
+				$('#fallas_data').DataTable().ajax.reload();
+				limpiar();
+			}
+		});
+
+}//fin guardar y editar
+
 
 
 function cargarVehiculo(placa){
@@ -34,9 +77,11 @@ function cargarVehiculo(placa){
 		$("#modelo1").val(data.modelo_nom);
 		$("#color1").val(data.color_nom);  
 		$("#cliente").val(data.nombreCli);
+		
+		
 		console.log(data.modelo_nom);
 	});	
-	buscarFalla(placa);
+	//buscarFalla(placa);
 }
 function listar(){
 
@@ -99,7 +144,7 @@ function listar(){
 }//fin funcion listar
 
 function buscarFalla(idVehiculo){
-	
+	/*
 	$.post("../ajax/falla.php?op=mostrarPorVehiculo",{idVehiculo: idVehiculo}, function(data, status)
 	{
 		console.log("fdadsasdasdhola");
@@ -130,7 +175,7 @@ function buscarFalla(idVehiculo){
 	});
 
 
-	
+*/	
 
 }
 

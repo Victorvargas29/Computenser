@@ -20,25 +20,27 @@
 
    	    	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
    	    }
-         public function  get_fallasPorVehiculo($vehiculo_placa){
+         public function  get_fallasPorVehiculo($idVehiculo){
 
             $conectar=parent::conectar();
-            $sql="select * from falla where vehiculo_placa=?";
+            $sql="select * from falla where idVehiculo=?";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $vehiculo_placa);
+            $sql->bindValue(1, $idVehiculo);
             $sql->execute();
        
 
           return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
         
-   	    public function registrar_falla($nombre){
+   	    public function registrar_falla($descripcion, $idVehiculo){
 
              $conectar=parent::conectar();
              //parent::set_names();
-             $sql="insert into falla values(null,?);";
+             $sql="insert into falla values(null,?,now(),?,?);";
              $sql=$conectar->prepare($sql);
-             $sql->bindValue(1, $_POST["nombre"]); 
+             $sql->bindValue(1,  $descripcion); 
+             $sql->bindValue(2,  $idVehiculo); 
+             $sql->bindValue(3, "Abierta"); 
              $sql->execute();
             // print_r($_POST);
    	    }
