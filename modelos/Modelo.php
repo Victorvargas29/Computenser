@@ -14,7 +14,7 @@
 
             $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 
-            return $sql->rowCount();
+            return $resultado;
 		}
 
 		public function get_modelo(){
@@ -111,8 +111,8 @@
             $sql->bindValue(1, $idModelo);
             $sql->execute();
             return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
-        }
-
+		}
+        
 
 	}// fin class modelo
 

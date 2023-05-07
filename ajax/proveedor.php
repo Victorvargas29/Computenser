@@ -75,8 +75,8 @@ require_once("../modelos/Proveedor.php");
 
    					$sub_array[]=$row["rif"];
    					$sub_array[]=$row["nombre"];
-            $sub_array[]=$row["direccion"];
-            $rif=$row["rif"];
+            		$sub_array[]=$row["direccion"];
+            		$rif=$row["rif"];
    					 $sub_array[] = '<button type="button" onClick="mostrar('."'".$rif."'".');"  id="'.$row["rif"].'" class="btn btn-warning btn-md update" title="Editar proveedor"><i class="fas fa-edit"></i></button>';
 
 

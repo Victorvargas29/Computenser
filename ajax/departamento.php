@@ -14,23 +14,27 @@ require_once("../modelos/Departamentos.php");
    		case 'guardaryeditar':
 
         
-        
+		$datosNombre = $departamento->get_departamento_por_nombre($_POST["nombre"]);
         if(empty($_POST["idDepartamento"])){
           $datos = $departamento->get_departamento_por_id($_POST["idDepartamento"]);
+          
             if(is_array($datos)==true and count($datos)==0){
-
-               $departamento->registrar_departamento($nombre);
-               echo "se registro";
-               
-            }else{
-
-              echo "el producto ya existe";
-              
+				if(is_array($datosNombre)==true and count($datosNombre)==0){
+					$departamento->registrar_departamento($nombre);
+					echo "se registro";
+				}else{
+					echo "el Departamento ya existe";
+				  }
             }
         }else{
 
-            $departamento->editar_departamento($idDepartamento, $nombre);
-            echo "se edito";
+			if(is_array($datosNombre)==true and count($datosNombre)==0){
+				$departamento->editar_departamento($idDepartamento, $nombre);
+            	echo "se edito";	
+			}else{
+				echo "el Departamento ya existe";
+			  }
+            
         }
            
       break;

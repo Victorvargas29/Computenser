@@ -63,7 +63,7 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Precio</th>
-                                <th>Categoria</th>
+                               
                                 <th>Departamento</th>
                      
                                 <th width="10%">Editar</th>
@@ -95,27 +95,21 @@
                 <div class="modal-body">
                   <div class="form-group">
                         <label for="" class="inputWithIcon col-lg-1 control-label">Departamento</label>
-                        <select class="form-control font-weight-bold" id="idDepartamentos" name="idDepartamentos">
+                        <select class="form-control font-weight-bold" id="idDepartamentos" name="idDepartamentos" required>
               <!--               <option class="font-weight-bold" value="0">Seleccione Departamentos</option> -->
                         </select>
                     </div>
 
 
-                    <div class="form-group">
-                        <label for="" class="inputWithIcon col-lg-1 control-label">Categoria</label>
-                        <select class="form-control font-weight-bold" id="idCategoria" name="idCategoria">
-
-    
-                        </select>
-                    </div>
+                    
 
                     <div class="form-group">
                         <label class="col-form-label">Nombre de Servicio:</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre"  required minlength="5" maxlength="40">
+                        <input type="text" class="form-control" name="nombre" id="nombre"  required minlength="5" maxlength="40" >
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Precio</label>
-                        <input type="number" class="form-control" name="precio" id="precio">
+                        <input type="number" class="form-control" name="precio" id="precio" required>
                     </div> 
 
                 </div>

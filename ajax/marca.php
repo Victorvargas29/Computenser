@@ -17,15 +17,17 @@ require_once("../modelos/Marca.php");
         
         if(empty($_POST["idMarca"])){
           $datos = $marca->get_marca_por_id($_POST["idMarca"]);
+          $datosNombre = $marca->get_marca_por_nombre($_POST["nombre"]);
+
             if(is_array($datos)==true and count($datos)==0){
+				if(is_array($datosNombre)==true and count($datosNombre)==0){
+					$marca->registrar_marca($nombre);
+					echo "se registro";
+				}else{
 
-               $marca->registrar_marca($nombre);
-               echo "se registro";
-               
-            }else{
-
-              echo "La marca ya existe";
-              
+					echo "La marca ya existe";
+					
+				  }
             }
         }else{
 

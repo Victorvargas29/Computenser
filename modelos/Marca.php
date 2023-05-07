@@ -70,6 +70,17 @@
           return $resultado=$sql->fetchAll();
 
    	    }
+         public function get_marca_por_Nombre($nombre){
+          
+          $conectar=parent::conectar();
+          //parent::set_names();
+          $sql="select * from marca where nombre=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $nombre);
+          $sql->execute();
+          return $resultado=$sql->fetchAll();
+
+   	    }
 
         public function eliminar_marca($idMarca){
           $conectar=parent::conectar();

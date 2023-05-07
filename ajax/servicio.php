@@ -36,23 +36,22 @@ require_once("../modelos/Categorias.php");
           echo '<option class="font-weight-bold" value='.$regi->idCategoria.'>'.$regi->nombre.'</option>';
         }
 
-    break;
+      break;
 
 
    		case 'guardaryeditar':
   
         if(empty($_POST["idServicio"])){
           $datos = $servicio->get_servicio_por_id($_POST["idServicio"]);
+          $datosNombre = $servicio->get_servicio_por_nombre($_POST["nombre"]);
             if(is_array($datos)==true and count($datos)==0){
-
-               $servicio->registrar_servicio($nombre,$precio,$idCategoria);
-               echo "se registro";
-               
-            }else{
-
-              echo "el producto ya existe";
-              
-            }
+              if(is_array($datosNombre)==true and count($datosNombre)==0){
+                $servicio->registrar_servicio($_POST["nombre"],$_POST["precio"],$_POST["idDepartamentos"]);
+                echo "se registro";
+              }else{
+                echo "el producto ya existe";
+              }
+            } 
         }else{
 
             $servicio->editar_servicio($idServicio,$nombre,$precio);
@@ -68,9 +67,9 @@ require_once("../modelos/Categorias.php");
    			if(is_array($datos)==true and count($datos)>0){
    				foreach ($datos as $row) {
    				//	$output["idDepartamento"] = $row["idDepartamento"];
-   				$output["nombre"] = $row["nombre"];
-            	$output["precio"]=$row["precio"];
-            	$output["idCategoria"]=$row["idCategoria"];
+   				  $output["nombre"] = $row["Nombre"];
+            	$output["precio"]=$row["Precio"];
+            	$output["idDepartamento"]=$row["idDepartamento"];
 
    				}
    				echo json_encode($output);
@@ -90,7 +89,7 @@ require_once("../modelos/Categorias.php");
    					$sub_array[]=$row["idServicio"];
    					$sub_array[]=$row["nombre"];
             $sub_array[]=$row["precio"];
-            $sub_array[]=$row["cat_nombre"];
+            
             $sub_array[]=$row["depa_nombre"];
 
    					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["idServicio"].');"  id="'.$row["idServicio"].'" class="btn btn-warning btn-md update" title="Editar servicio"><i class="fas fa-edit"></i></button>';
