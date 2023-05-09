@@ -292,7 +292,7 @@
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a id="home" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Inicio</span></a></li>
                         <li class="sidebar-item"> <a id="servi_prestado2" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Facturacion</span></a></li>
-                        <li class="sidebar-item"> <a id="compra" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Compras</span></a></li>
+                        <li class="sidebar-item"> <a id="compra" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Ordenes</span></a></li>
                         <!-- <li class="sidebar-item"> <a id="servi_prestado" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Servicio Prestado</span></a></li> -->
                                                
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Servicios </span></a>
@@ -302,7 +302,7 @@
                             </ul>
                         </li>
                         
-                        <!--<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="empleadas_p" aria-expanded="false"><i class="fas fa-address-card"></i><span class="hide-menu">Empleadas</span></a></li>-->
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="empleadas_p" aria-expanded="false"><i class="fas fa-address-card"></i><span class="hide-menu">Empleadas</span></a></li>
                         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="clientess" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Clientes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="proveedor" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Proveedores</span></a></li>

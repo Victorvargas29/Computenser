@@ -4,16 +4,16 @@
 
 require_once("../modelos/Servicios.php");
 require_once("../modelos/Departamentos.php");
-require_once("../modelos/Categorias.php");
+
 	$servicio = new Servicio();
   $depar = new Departamentos();
-  $cate = new Categoria();
+
 
 	//$id_empleada = isset($_POST["id_empleada"]); // $_POST["id_empleada"] del atributo name
   $idServicio = isset($_POST["idServicio"]);
   $nombre = isset($_POST["nombre"]);  //nombre servicio
   $precio = isset($_POST["precio"]);
-  $idCategoria = isset($_POST["idCategoria"]);
+
   $idDepartamento = isset($_POST["iddepartamento"]);
 
    
@@ -28,12 +28,12 @@ require_once("../modelos/Categorias.php");
         }
       break;
 
-      case 'selectCategoria':
-        $iddepartamento=$_POST['iddepartamento'];
-        $rspta=$cate->categoria_por_departamento($iddepartamento);
-        echo '<option value="0" selected disabled>Seleccione categoria</option>';
+      case 'selectServicio':
+       
+        $rspta=$servicio->get_servicio2();
+        echo '<option value="0" selected disabled>Seleccione el Servicio</option>';
         foreach($rspta as $regi){
-          echo '<option class="font-weight-bold" value='.$regi->idCategoria.'>'.$regi->nombre.'</option>';
+          echo '<option class="font-weight-bold" value='.$regi->idServicio.'>'.$regi->nombre.'</option>';
         }
 
       break;

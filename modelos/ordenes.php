@@ -5,10 +5,10 @@
    require_once("../config/conexion.php");
 
 
-   Class Compras extends Conexion {
+   Class Ordenes extends Conexion {
 
        //listar los usuarios
-   	    public function get_compra(){
+   	    public function get_orden(){
 
    	    	$conectar=parent::conectar();
    	    //	parent::set_names();
@@ -84,11 +84,11 @@
 
           }
 
-   	    public function editar_compra($cedula, $nombre, $apellido,$direccion,$telefono){
+   	    public function editar_orden($cedula, $nombre, $apellido,$direccion,$telefono){
 
              $conectar=parent::conectar();
             // parent::set_names();
-             $sql="update compra set nombre=?, apellido=?, direccion=?, telefono=? where cedula=?";
+             $sql="update orden set nombre=?, apellido=?, direccion=?, telefono=? where cedula=?";
              //echo $sql;    //imprime la consulta para verificar en phpmyadmin
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1, $_POST["nombre"]);
@@ -102,11 +102,11 @@
    	    en el js debajo del success   */
    	    }
 
-   	    public function get_compra_por_id($cedula){
+   	    public function get_orden_por_id($cedula){
           
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="select * from compra where cedula=?";
+          $sql="select * from orden where cedula=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $cedula);
           $sql->execute();
@@ -114,17 +114,17 @@
 
    	    }
 
-        public function eliminar_compra($cedula){
+        public function eliminar_orden($cedula){
           $conectar=parent::conectar();
 
-          $sql="delete from compra where cedula=?";
+          $sql="delete from orden where cedula=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $cedula);
           $sql->execute();
           return $resultado=$sql->fetch();
         }
 
-        public function detalles_compra($idUsuario){
+        public function detalles_orden($idUsuario){
          
           $conectar=parent::conectar();
           $sql="select * from detallesfacturatemporal where idUsuario=?"; 
@@ -135,7 +135,7 @@
           return $resultado=$sql->fetchAll();
 
         }
-        public function compra(){
+        public function orden(){
          
           $conectar=parent::conectar();
    	    	
@@ -220,7 +220,7 @@
           return $resultado=$sql->fetchAll();
         }
         
-        public function get_compra_idfactura($idFactura){
+        public function get_orden_idfactura($idFactura){
           
           $conectar=parent::conectar();
           //parent::set_names();
@@ -293,6 +293,35 @@
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$idFactura);
           $sql->execute();
+        }
+        public function get_fallaVehiculo($idVehiculo){
+          
+          $conectar=parent::conectar();
+          //parent::set_names();
+          $sql="select * from falla where idVehiculo=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $idVehiculo);
+          $sql->execute();
+          return $resultado=$sql->fetchAll();
+
+   	    }
+
+     
+        public function get_vehiculo($cedula){
+          $conectar = parent::conectar();
+          parent::set_names();
+          $sql = "select c.cedula, ma.nombre as marca_nom, mo.nombre as modelo_nom, ma.idMarca, mo.idModelo, v.placa, co.nombre as color_nom, v.anno 
+          from vehiculo v 
+          INNER JOIN cliente c ON v.cedula=c.cedula
+          INNER JOIN color co ON v.idColor=co.idColor
+          INNER JOIN generacion g ON v.idGeneracion=g.id
+          INNER JOIN modelo mo ON g.idModelo=mo.idModelo
+          INNER JOIN marca ma ON mo.idMarca=ma.idMarca where c.cedula=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$cedula);
+          $sql->execute();
+
+          return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
    }
    

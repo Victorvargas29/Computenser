@@ -32,6 +32,22 @@ require_once("../modelos/Vehiculos.php");
 			}
            
      	break;
+		case 'get_falla_por_id':
+   			
+			$datos = $falla->get_falla_por_id($_POST["idFalla"]);
+			
+			if(is_array($datos)==true and count($datos)>0){
+				foreach ($datos as $row) {
+				
+					$output["descripcion"] = $row["descripcion"];
+				}
+				echo json_encode($output);
+			}else{
+				$errors[]="Falla no existe";
+			}
+			
+
+		break;
 
    		case 'selectVehiculo':
    			

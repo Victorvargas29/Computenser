@@ -29,6 +29,18 @@
 
         	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
+        public function get_servicio2(){
+
+        	$conectar = parent::conectar();
+       
+       		$sql = "select s.idServicio, s.nombre as nombre, s.precio, d.nombre as depa_nombre from servicio s INNER JOIN departamento d ON s.idDepartamento=d.idDepartamento";
+
+        	$sql=$conectar->prepare($sql);
+
+        	$sql->execute();
+
+          return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
+        }
 
         public function registrar_servicio($nombre,$precio,$idDepartamento){
         	$conectar = parent::conectar();
