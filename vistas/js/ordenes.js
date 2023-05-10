@@ -2,18 +2,18 @@
 
 var tablfa;
 var jsomdetalle;
-var idFalla= document.getElementById("idFalla");
+
 var idServicio= document.getElementById("idServicio");
 var nombreServi= document.getElementById("nombreServi");
 var precio= document.getElementById("precio");
 var descripcion= document.getElementById("descripcion");
-var nombreFalla= document.getElementById("nombreFalla");
+
 var cuerpotabla =document.getElementById("cuerpotabla");
 //funcion q se ejecuta al inicio
 function init(){
 	///tasa_dia();
 	//listar();	
-	$("#idFalla").selectpicker();
+	
 	$("#idVehiculo").selectpicker();
 	
 	$.post("../ajax/Orden.php?op=selectCliente",function(re){
@@ -42,33 +42,6 @@ function init(){
         });
     });
 
-
-	$(document).ready(function(){
-        $("#idVehiculo").change(function(){
-            $("#idVehiculo option:selected").each(function(){
-				
-                idVehiculo= $(this).val();
-                $.post("../ajax/Orden.php?op=selectFalla", {idVehiculo:idVehiculo},function(datas){
-                    
-					$("#idFalla").html(datas);
-					
-					$("#idFalla").selectpicker();
-					$("#idFalla").val('default').selectpicker("refresh");
-
-                });
-            });
-        });
-    });
-	$(document).ready(function(){
-        $("#idFalla").change(function(){
-            idFalla= $(this).val();
-			console.log(idFalla);
-                $.post("../ajax/falla.php?op=get_falla_por_id", {idFalla:idFalla},function(data){
-					idFalla= $(this).val();				
-					$("#nombreFalla").val(data.descripcion);
-                });
-        });
-    });
 $("#form_orden").on("submit", function(){
 	registrar();
 	
@@ -271,7 +244,6 @@ function dibujartabla(arregloDetalle){
 		let fila = document.createElement("tr");
 		fila.innerHTML=`
 						<td>${deta.descripcion}</td>
-						<td>${deta.nombreFalla}</td>
 						<td>${deta.nombreServi}</td>
 						<td>${+deta.precio}</td>
 						<td>${+deta.precio}</td>`;
@@ -293,12 +265,12 @@ function agregar_detalles(){
 
 	
 		const objDetalles={
-			idFalla:idFalla.value,
+			
 			precio: precio.value,
 			idServicio:idServicio.value,
 			descripcion:descripcion.value,
 			nombreServi:nombreServi.value,
-			nombreFalla:nombreFalla.value,
+			
 
 
 		}
@@ -319,7 +291,7 @@ function LlenarDetalles(objDetalles){
 	const result=arregloDetalle.find((detalle)=>{
 		
 		
-		if((+objDetalles.idServicio === +detalle.idServicio) && (+objDetalles.idFalla === +detalle.idFalla)){
+		if((+objDetalles.idServicio === +detalle.idServicio)){
 			return detalle;
 		}
 	});

@@ -92,24 +92,13 @@ $cli = $clientes->get_Cliente();
               
 
                 <div class="row pt-4 pb-2">
-                  <div class="row">
+                  
+                  
                     <div class="col-lg-2 ">
-                      <label class="col-form-label ml-4">Fallas:</label>
+                      <label class="col-form-label">Servicios:</label>
                     </div>
                     <div class="col-lg-10">
-                      <select class="form-control font-weight-bold" data-width="26rem"  id="idFalla" name="idFalla" required>
-                        <option selected disabled value="0">Seleccione la Falla</option>
-                      </select>
-                      <input type="text" name="nombreFalla" id="nombreFalla"   class="form-control"></input>
-
-                    </div>   
-                  </div> 
-                  <div class="row">
-                    <div class="col-lg-2 ">
-                      <label class="col-form-label pl-3 ml-4 mr-5">Servicios:</label>
-                    </div>
-                    <div class="col-lg-10">
-                      <select class="form-control font-weight-bold ml-2" data-width="26rem"  id="idServicio" name="idServicio" required>
+                      <select class="form-control font-weight-bold ml-2" data-width="51rem"  id="idServicio" name="idServicio" required>
                         <option selected disabled value="0">Seleccione el Servicio</option>
 
                       </select>
@@ -117,7 +106,6 @@ $cli = $clientes->get_Cliente();
                         <input type="text" name="precio" id="precio"   class="form-control"></input>
 
                     </div>   
-                  </div>   
                 </div>   
                     
                     
