@@ -302,7 +302,7 @@
                             </ul>
                         </li>
                         
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="empleadas_p" aria-expanded="false"><i class="fas fa-address-card"></i><span class="hide-menu">Empleadas</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="empleadas_p" aria-expanded="false"><i class="fas fa-address-card"></i><span class="hide-menu">Empleados</span></a></li>
                         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="clientess" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Clientes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="proveedor" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Proveedores</span></a></li>

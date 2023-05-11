@@ -33,7 +33,7 @@
 
         	$conectar = parent::conectar();
        
-       		$sql = "select s.idServicio, s.nombre as nombre, s.precio, d.nombre as depa_nombre from servicio s INNER JOIN departamento d ON s.idDepartamento=d.idDepartamento";
+       		$sql = "select idServicio, nombre, precio from servicio";
 
         	$sql=$conectar->prepare($sql);
 

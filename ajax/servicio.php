@@ -14,7 +14,7 @@ require_once("../modelos/Departamentos.php");
   $nombre = isset($_POST["nombre"]);  //nombre servicio
   $precio = isset($_POST["precio"]);
 
-  $idDepartamento = isset($_POST["iddepartamento"]);
+  
 
    
 
@@ -66,10 +66,10 @@ require_once("../modelos/Departamentos.php");
    			
    			if(is_array($datos)==true and count($datos)>0){
    				foreach ($datos as $row) {
-   				//	$output["idDepartamento"] = $row["idDepartamento"];
+
    				  $output["nombre"] = $row["Nombre"];
             	$output["precio"]=$row["Precio"];
-            	$output["idDepartamento"]=$row["idDepartamento"];
+            	
 
    				}
    				echo json_encode($output);

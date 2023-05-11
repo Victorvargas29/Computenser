@@ -143,7 +143,7 @@ $cli = $clientes->get_Cliente();
 
          
 
-           
+         
             <div class="row">
               <div class="col-md-12">
                 <div class="box">
@@ -184,56 +184,72 @@ $cli = $clientes->get_Cliente();
               </div><!-- /.col -->
             </div>
             <!-- /.row -->
-
+        </div>
+    </form> 
             <!--TABLA SUBTOTAL - TOTAL -->
 
-            <div class="row">
+         
           
-            <div class="col-lg-1">            
-              </div>
-              <div class="col-lg-3 pt-5 mt-5"> 
+           
 
-                  <input type="text" name="campo" id="campo" placeholder="000" class="form-control"></input>
 
-              </div>
-              <div class="col-lg-1">            
-              </div> 
-            
-              <div class="col-lg-5">
-                  <div class="box lg-6">
-                    <div class="panel-body table-responsive">
-                      
-                        <table class="table table-striped nowrap" width="100%" id="sub">
-                          <thead>
-                            <tr class="bg-success">
-                              <!-- <th class="col-lg-1">SUBTOTAL $</th> -->
-                              <th class="col-lg-3">SUBTOTAL BsS</th>           
-                              <!-- <th class="col-lg-2">DESCUENTO %</th> -->
-                              <th class="col-lg-2">I.V.A 16%</th> 
-                              <!-- <th class="col-lg-2">TOTAL $</th> -->
-                              <th class="col-lg-2">TOTAL</th>     
-                            </tr>
-                          </thead>
-                          <tbody>
-                            
-                          </tbody>
-                        </table>
-                      <div class="boton_registrar">
-                      <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Orden</button>
-                        <!-- <a class="btn btn-primary col-lg-offset-10 col-xs-offset-3" href="http://computenser.test/computenser/report/crearPdf2.php" target="_blank"  id="bt"><i class="fa fa-save" aria-hidden="true"></i></a> -->
-                    <!--   <button type="button" onClick="borrar_temporal()" value="Add" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true">
-                      </i>Cancelar</button> -->
-                      <!-- <input type="hidden" name="idUser" id="idUser" value="" required pattern = "[0-9]{0,15}" class="form-control"><?php echo $_SESSION["idUsuario"]
-                              ?></input>  -->
-                    </div>
-                  
-                    </div> <!-- /.box-body -->
-                </div> <!-- /.box -->            
-              </div> <!-- /.col -->
-              <div class="col-lg-1">            
+        <div id="empleadaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form method="post" id="emleado_form">   
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Agregar empleado al servicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        
+                            <div  class="modal-body">
+                                <div class="form-group">
+                                <div class="row">
+                                  <div class="col-10">
+                                    <select class="form-control font-weight-bold border" id="idEmpleada" name="idEmpleada" required>
+                                      <option selected disabled value="0">Seleccione el Empleado</option>
+                                    </select>
+                                  </div>
+                                  
+                                  <div class="col-2 pr-0">
+                                   <button type="button" id="btnGuardar" onClick="agregar_empleadas()" value="Add" aria-hidden="true" class="btn btn-dark pr-2">Agregar</button>
+
+                                  </div>
+                                </div>
+                                 
+                                </div>       
+
+                                <div class="panel-body table-responsive">
+                                  <table id="detalles_ordenes" class="table table-striped nowrap mr-2" width="90%">
+                                    <thead>
+                                      <tr>
+          
+                                        <th class="min-desktop">Cedula</th>
+                                        <th class="all">Nombre</th>
+                                        <th class="all">Eliminar</th>
+                                        
+                                      </tr>
+
+
+                                    </thead>
+                                    <tbody id="cuerpotablaE">
+
+                                    </tbody>
+
+                                  </table>  
+                                </div>  
+                             </div>
+                            <div class="modal-footer">
+                                
+                                <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
+                                
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div> 
-          </div>
-        </form>
       </section>
           <!--section formulario - pedido -->
 

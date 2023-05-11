@@ -7,7 +7,7 @@ var idServicio= document.getElementById("idServicio");
 var nombreServi= document.getElementById("nombreServi");
 var precio= document.getElementById("precio");
 var descripcion= document.getElementById("descripcion");
-
+var nombreE;
 var cuerpotabla =document.getElementById("cuerpotabla");
 //funcion q se ejecuta al inicio
 function init(){
@@ -23,6 +23,11 @@ function init(){
 	$.post("../ajax/Servicio.php?op=selectServicio",function(re){
 		$("#idServicio").html(re);
 		$("#idServicio").selectpicker();
+		
+	});
+	$.post("../ajax/empleada.php?op=selectEmpleada",function(re){
+		$("#idEmpleada").html(re);
+		$("#idEmpleada").selectpicker();
 		
 	});
 	$(document).ready(function(){
@@ -41,100 +46,61 @@ function init(){
             });
         });
     });
+	$(document).ready(function(){
+        $("#idEmpleada").change(function(){
+            $("#idEmpleada option:selected").each(function(){
+				
+                cedula= $(this).val();
+				$.post("../ajax/empleada.php?op=mostrar",{cedula : cedula}, function(data, status)
+				{
+					console.log(data);			
+					data =JSON.parse(data);	  
+					
+					 $("#idEmpleada").val(cedula);
+					 nombreE=data.nombre;
+					 console.log("esto es el id Empleada",idEmpleada.value);
+					 
+				});
+            });
+        });
+    });
+	$(document).ready(function(){
+        $("#idServicio").change(function(){
+            $("#idServicio option:selected").each(function(){
+				
+                idServicio1= $(this).val();
+				$.post("../ajax/servicio.php?op=mostrar",{idServicio : idServicio1}, function(data, status)
+				{
+					console.log(data);			
+					data =JSON.parse(data);	  
+					 $("#precio").val(data.precio);
+					 $("#idServicio").val(idServicio1);
+					 $("#nombreServi").val(data.nombre);
+					 console.log("esto es el id servicio",idServicio.value);
+					 
+				});
+            });
+        });
+    });
 
-$("#form_orden").on("submit", function(){
-	registrar();
-	
-
-});
-
-}
-function listarSubTortales(){
-	tabla=$('#sub').dataTable({ 
-		"aProcessing":true,//Activamos el procesamiento del datatables
-		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
+	$("#form_orden").on("submit", function(){
+		registrar();
 		
-		dom:'r',//Definimos los elementos del control de tabla  Bfrtilp' t=mostra reg.
-		
-		"ajax":
-		{
-			url:'../ajax/ordenes.php?op=listarSubtotales',
-			type: "get",
-			datatype: "json",
-			error: function(e){
-				console.log(e.responseText);
-			}
-		},
-		"bDestroy":true,
-		"responsive":true,
-		"bInfo":true,
-		"iDisplayLength":10,//por cada 10 reg hace una paginacion
-		"order":[[0,"desc"]],//Ordenar(Columna, Orden)
 
-		"language":{
-			"sProcessing": "Procesando...",
-			"sLengthMenu": "Mostrar _MENU_ registro",
-			"sZeroRecords": "No se encontraron resultados",
-			"sEmptyTable": "Ningun dato disponible en esta tabla",
-			"sInfo": "Mostrando un total de _TOTAL_ registros",
-			"sInfoEmpty": "Mostrando un total de 0 registros",
-			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix": "",
-			"sSearch": "Buscar",
-			"sUrl": "",
-			"sInfoThousands": "",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate":{
-				"sFirst": "Primero",
-				"sLast": "Ultimo",
-				"sNext": "Siguiente",
-				"sPrevious": "Anterior"
-			}, 
-			"oAria":{
-				"sSortAscending": ": Activar para ordenar la columna",
-				"sSortDescending": ": Activar para ordenar la columna"
-			}
-		}//cierra language
-
-	}).DataTable();
-
-}
-
-function cargarServicio(idServicio){
-	
-		$.post("../ajax/servicio.php?op=mostrar",{idServicio : idServicio}, function(data, status)
-		{
-			console.log(data);			
-			data =JSON.parse(data);	  
-			 $("#precio").val(data.precio);
-			 $("#nombreServi").val(data.nombre);
-			 
-		});
-		//var sel =document.getElementById("idServicio");
-	////var seltex= sel.options[getElementIndex("idServicio").text]
-	///$("nombre_ser").val($seltex);
-}
-
-function eliminar_item(iddetallesFT){
-	
-	$.ajax({
-		url:"../ajax/ordenes.php?op=eliminar_item",
-		method:"POST",
-		data:{iddetallesFT:iddetallesFT},
-
-		success:function(data){
-			$("#detalles_ordenes").DataTable().ajax.reload();
-			$("#sub").DataTable().ajax.reload();
-		}
 	});
+
 }
+
+
+
+
 
 function registrar(){
 	//e.preventDefault(); //No se activará la acción predeterminada del evento
 	var formData = new FormData($("#form_orden")[0]);
 	//console.log("registrarrrrrr");
 		$.ajax({
-			url: "../ajax/ordenes.php?op=guardarCompra",
+			url: "../ajax/ordenes.php?op=guardarOrden",
 			type: "POST",
 			data: formData,
 			contentType: false,
@@ -160,66 +126,6 @@ function registrar(){
 }
 
 
-function listarfacturas(){
-
-	tabla=$('#factura_data').dataTable({  //#usuario_data este es el id de la tabla
-		"aProcessing":true,//Activamos el procesamiento del datatables
-		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
-		
-		dom:'Bfrtilp',//Definimos los elementos del control de tabla
-		buttons:[
-	    	//Botón para PDF
-	    	{
-	        extend: 'pdfHtml5',
-	        //footer: true,
-	       	text:'<i class="fas fa-file-pdf"></i>',
-	        titleAttr: 'Exportar a PDF',
-	        //filename: 'Export_File_pdf',
-	        className: 'btn btn-danger'
-	      	}
-		],
-		"ajax":
-		{
-			url:'../ajax/ordenes.php?op=listarfacturas',
-			type: "get",
-			datatype: "json",
-			error: function(e){
-				console.log(e.responseText);
-			}
-		},
-		"bDestroy":true,
-		"responsive":true,
-		"bInfo":true,
-		"iDisplayLength":10,//por cada 10 reg hace una paginacion
-		"order":[[0,"desc"]],//Ordenar(Columna, Orden)
-
-		"language":{
-			"sProcessing": "Procesando...",
-			"sLengthMenu": "Mostrar _MENU_ registro",
-			"sZeroRecords": "No se encontraron resultados",
-			"sEmptyTable": "Ningun dato disponible en esta tabla",
-			"sInfo": "Mostrando un total de _TOTAL_ registros",
-			"sInfoEmpty": "Mostrando un total de 0 registros",
-			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix": "",
-			"sSearch": "Buscar",
-			"sUrl": "",
-			"sInfoThousands": "",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate":{
-				"sFirst": "Primero",
-				"sLast": "Ultimo",
-				"sNext": "Siguiente",
-				"sPrevious": "Anterior"
-			},
-			"oAria":{
-				"sSortAscending": ": Activar para ordenar la columna",
-				"sSortDescending": ": Activar para ordenar la columna"
-			}
-		}//cierra language
-
-	}).DataTable();
-}//fin funcion listar
 
 
 function mostrarFactura(idFactura){
@@ -245,18 +151,55 @@ function dibujartabla(arregloDetalle){
 		fila.innerHTML=`
 						<td>${deta.descripcion}</td>
 						<td>${deta.nombreServi}</td>
-						<td>${+deta.precio}</td>
 						<td>${+deta.precio}</td>`;
+		let tdEmpleada =document.createElement("td");
+		let botonEmpleada = document.createElement("button");
+		botonEmpleada.classList.add("btn","btn-primary");
+		botonEmpleada.title="Empleado";
+		botonEmpleada.type="button";
+
+		botonEmpleada.className="fas fa-address-card btn btn-primary btn-md";
+		tdEmpleada.appendChild(botonEmpleada);
+		fila.appendChild(tdEmpleada);
+		botonEmpleada.onclick=()=>{
+			abrirModal(deta.idServicio,deta.nombreServi);
+		};
 		let tdEliminar =document.createElement("td");
 		let botonEliminar = document.createElement("button");
 		botonEliminar.classList.add("btn","btn-danger");
-		botonEliminar.innerText="Eliminar";
+		botonEliminar.title="Eliminar";
+		botonEliminar.type="button";
+		botonEliminar.className="fas fa-trash-alt btn btn-danger btn-md";
 		tdEliminar.appendChild(botonEliminar);
 		fila.appendChild(tdEliminar);
 		botonEliminar.onclick=()=>{
 			eliminarIten(deta.idServicio);
 		};
+		
 		cuerpotabla.appendChild(fila);
+	});
+
+}
+function dibujartablaE(arregloEmpleada){
+	cuerpotablaE.innerHTML="";
+	arregloEmpleada.forEach((data)=>{
+		let fila = document.createElement("tr");
+		fila.innerHTML=`
+						<td>${data.empleada}</td>
+						<td>${data.nombreE}</td>`;
+		let tdEliminar =document.createElement("td");
+		let botonEliminarE = document.createElement("button");
+		botonEliminarE.classList.add("btn","btn-danger");
+		botonEliminarE.title="Eliminar";
+		botonEliminarE.type="button";
+		botonEliminarE.className="fas fa-trash-alt btn btn-danger btn-md";
+		tdEliminar.appendChild(botonEliminarE);
+		fila.appendChild(tdEliminar);
+		botonEliminarE.onclick=()=>{
+			eliminarIten(data.cedula);
+		};
+		
+		cuerpotablaE.appendChild(fila);
 	});
 
 }
@@ -271,8 +214,7 @@ function agregar_detalles(){
 			descripcion:descripcion.value,
 			nombreServi:nombreServi.value,
 			
-
-
+			
 		}
 		LlenarDetalles(objDetalles);
 		
@@ -285,6 +227,32 @@ function agregar_detalles(){
 
 }//fin guardar y editar
 
+function agregar_empleadas(){
+	
+
+	
+	const objEmpleda={
+		idServicio:idServicio.value,
+		empleada:idEmpleada.value,
+		nombreE:nombreE,
+		
+	}
+	LlenarEmpleada(objEmpleda);
+	
+	dibujartablaE(arregloEmpleada);
+
+
+
+
+	console.log(arregloEmpleada);
+
+}
+function abrirModal(idServicio,nombreServi) {
+	$("#empleadaModal").modal("show");
+	$('.modal-title').text("Agregar empleado al servicio");
+	
+}
+
 var arregloDetalle=[];
 function LlenarDetalles(objDetalles){
 	
@@ -296,26 +264,26 @@ function LlenarDetalles(objDetalles){
 		}
 	});
 
-	if (result) {
-		/*arregloDetalle = arregloDetalle.map((detalle)=>{
-			console.log(" idservicio ", +detalle.cantidad + +objDetalles.cantidad);
-			
-			if (+detalle.idServicio === +objDetalles.idServicio) {
-				var cant=+detalle.cantidad + +objDetalles.cantidad;
-				return {
-					cantidad: cant,
-					precio: detalle.precio,
-					idServicio:detalle.idServicio,
-					tasa:detalle.tasa,
-					descripcion:detalle.descripcion,
-				};
-			}
-			return detalle;
-		
-		});*/
-	} else {
+	if (!result) {
 		arregloDetalle.push(objDetalles);
-	}
+	} 
+	
+	
+}
+var arregloEmpleada=[];
+function LlenarEmpleada(objEmpleda){
+	
+	const result=arregloEmpleada.find((detalle)=>{
+		
+		
+		if((+objEmpleda.cedula === +detalle.cedula)){
+			return detalle;
+		}
+	});
+
+	if (!result) {
+		arregloEmpleada.push(objEmpleda);
+	} 
 	
 	
 }

@@ -92,6 +92,16 @@ require_once("../modelos/Empleadas.php");
 
 			$datos = $empleada->get_empleada_por_id($_POST["cedula"]);
 			echo json_encode($output);
+			break;
+			case 'selectEmpleada':
+       
+				$rspta=$empleada->get_empleada2();
+				echo '<option value="0" selected disabled>Seleccione el Empleado</option>';
+				foreach($rspta as $regi){
+				  echo '<option class="font-weight-bold" value='.$regi->cedula.'>'.$regi->cedula.' - '.$regi->nombre.'</option>';
+				}
+		
+			  break;
 			
 			   
 
