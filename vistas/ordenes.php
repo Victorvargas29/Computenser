@@ -87,23 +87,23 @@ $cli = $clientes->get_Cliente();
             <div class="container">
 
                   <div class="row pb-1 pt-3">
-                    <h3 class="col-lg-6">Fallas y Servicios</h3>
+                    <h3 class="col-lg-6">Servicios</h3>
                   </div>
               
 
                 <div class="row pt-4 pb-2">
                   
                   
-                    <div class="col-lg-2 ">
+                    <div class="col-lg-1 ">
                       <label class="col-form-label">Servicios:</label>
                     </div>
-                    <div class="col-lg-10">
-                      <select class="form-control font-weight-bold ml-2" data-width="51rem"  id="idServicio" name="idServicio" required>
+                    <div class="col-lg-11">
+                      <select class="form-control font-weight-bold" data-width="61rem"  id="idServicio" name="idServicio" required>
                         <option selected disabled value="0">Seleccione el Servicio</option>
 
                       </select>
-                        <input type="text" name="nombreServi" id="nombreServi"   class="form-control"></input>
-                        <input type="text" name="precio" id="precio"   class="form-control"></input>
+                        <input type="hidden" name="nombreServi" id="nombreServi"   class="form-control"></input>
+                        <input type="hidden" name="precio" id="precio"   class="form-control"></input>
 
                     </div>   
                 </div>   
@@ -113,21 +113,21 @@ $cli = $clientes->get_Cliente();
                  
                 
               <div class="row pt-4 pb-2">                    
-                  <div class="col-lg-9">
+                  <div class="col-lg-10">
                     <div class="row">
-                      <div class="col-lg-2 ">
-                        <label class="col-form-label ml-2">Descripcion:</label>
+                      <div class="col-lg-1 ">
+                        <label class="col-form-label">Descripcion:</label>
                       </div>
-                      <div class="col-lg-10">        
-                        <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" required  class="form-control"></input>
+                      <div class="col-lg-11">        
+                        <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" required  class="form-control ml-3"></input>
                       </div>
                     </div>
                   </div>
                   
               
-                  <div class="col-lg-3">
+                  <div class="col-lg-2">
                         <div class="btn-group text-center">
-                          <button id="btnAgregar" type="button" onClick="agregar_detalles()" class="btn btn-primary " data-toggle="modal">Agregar detalle</i></button>
+                          <button id="btnAgregar" type="button" onClick="agregar_detalles()" class="btn btn-primary "  style="width:7.5rem" data-toggle="modal">Agregar </i></button>
                           <input type="hidden" name="iddetallesFT" id="iddetallesFT"/>
                         </div>
                     <!--  <h4 class="text-center"><strong>Tipo de Pago</strong></h4>
@@ -145,43 +145,43 @@ $cli = $clientes->get_Cliente();
 
            
             <div class="row">
-            <div class="col-md-12">
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h1 class="box-title">
-                            <!-- <button class="btn btn-primary" id="add_button" onClick="limpiar()" data-toggle="modal" data-target="#usuarioModal"><i class="fa fa-plus" aria-hidde="true"></i> Nuevo Usuario</button></h1> -->
-                            <div class="box-tools pull-right">
-                            </div>
+              <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h1 class="box-title">
+                        <!-- <button class="btn btn-primary" id="add_button" onClick="limpiar()" data-toggle="modal" data-target="#usuarioModal"><i class="fa fa-plus" aria-hidde="true"></i> Nuevo Usuario</button></h1> -->
+                        <div class="box-tools pull-right">
                         </div>
-                        <!-- /.box-header -->
-                        <!-- centro width="35%"-->
-                        <div class="panel-body table-responsive">
-                            <table id="detalles_ordenes" class="table table-striped nowrap" width="100%">
-                              <thead>
-                                <tr>
-                                  
-                                  <th class="all text-center">Concepto o Descripcion</th>
-                                  <th class="all" width="25%">Fallas</th>
-                                  <th class="min-desktop">Servicio</th>
-                                  
-                                  <!-- <th class="min-desktop">IVA 16%</th> -->
-                                  <th class="all">Empleado</th>
-                                  <th class="all">Precio</th>
-                                  <th class="min-desktop">Eliminar</th>
-                                </tr>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- centro width="35%"-->
+                    <div class="panel-body table-responsive">
+                        <table id="detalles_ordenes" class="table table-striped nowrap mr-2" width="90%">
+                          <thead>
+                            <tr>
+                              
+                              <th class="all text-center">Concepto o Descripcion</th>
+                              
+                              <th class="min-desktop">Servicio</th>
+                              
+                              <!-- <th class="min-desktop">IVA 16%</th> -->
+                              <th class="all">Empleado</th>
+                              <th class="all">Precio</th>
+                              <th class="min-desktop">Eliminar</th>
+                            </tr>
 
 
-                              </thead>
-                              <tbody id="cuerpotabla">
+                          </thead>
+                          <tbody id="cuerpotabla">
 
-                              </tbody>
+                          </tbody>
 
-                            </table>  
-                        </div>
-                        
-                          <!--Fin centro -->
-                          </div><!-- /.box -->
-                      </div><!-- /.col -->
+                        </table>  
+                    </div>
+                    
+                      <!--Fin centro -->
+                </div><!-- /.box -->
+              </div><!-- /.col -->
             </div>
             <!-- /.row -->
 
