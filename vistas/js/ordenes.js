@@ -11,8 +11,12 @@ var nombreE;
 var cuerpotabla =document.getElementById("cuerpotabla");
 //funcion q se ejecuta al inicio
 function init(){
-	///tasa_dia();
-	//listar();	
+
+	$("#form_orden").on("submit", function(e){
+		registrar(e);
+		
+
+	});
 	
 	$("#idVehiculo").selectpicker();
 	
@@ -83,11 +87,20 @@ function init(){
         });
     });
 
-	$("#form_orden").on("submit", function(){
-		registrar();
-		
+	$(document).ready(function(){
+        $("#idVehiculo ").change(function(){
+            $("#idVehiculo option:selected").each(function(){
+				
+                idVehiculo1= $(this).val();
+					 $("#idVehiculo").val(idVehiculo1);	 
+					 console.log(idVehiculo1);
+			});
+        });
 
-	});
+    });
+    
+
+	
 
 }
 
@@ -95,12 +108,12 @@ function init(){
 
 
 
-function registrar(){
-	//e.preventDefault(); //No se activará la acción predeterminada del evento
+function registrar(e){
+	e.preventDefault(); //No se activará la acción predeterminada del evento
 	var formData = new FormData($("#form_orden")[0]);
 	//console.log("registrarrrrrr");
 		$.ajax({
-			url: "../ajax/ordenes.php?op=guardarOrden",
+			url: "../ajax/Orden.php?op=guardarOrden",
 			type: "POST",
 			data: formData,
 			contentType: false,
@@ -112,10 +125,9 @@ function registrar(){
 
 				$('#form_orden')[0].reset();
 				//$('#servicioModal').modal('hide');
-				$("#detalles_ordenes").DataTable().ajax.reload();
-				$("#sub").DataTable().ajax.reload();
-				idfactura();
-				tasa_dia();
+				guardar_detalles(datos);
+				
+				
 				
 				//$('#resultados_ajax').html(datos);
 				//$('#servicio_data').DataTable().ajax.reload();
@@ -124,8 +136,55 @@ function registrar(){
 		});
 	
 }
+function guardar_detalles(datos) {
+	arregloDetalle.forEach(deta => {
+		deta.idOrden=datos;
+		/*$.ajax({
+			url: "../ajax/Orden.php?op=detallesDetalles",
+			type: "POST",
+			data: deta,
+			contentType: false,
+			processData: false,
 
+			success: function(datos){
 
+				console.log(datos); 
+
+				
+				servicioEmpleada(datos,deta.idServicio);
+				
+				
+				
+				
+			}
+		});*/
+		$.post("../ajax/Orden.php?op=detallesDetalles",{"arregloDetalle":deta},function(datas){
+			
+			
+				servicioEmpleada(datas,deta.idServicio);
+			
+			
+		});
+	
+	});
+	
+}
+function servicioEmpleada(data,servicio) {
+	arregloEmpleada.forEach(empleada => {
+				
+		var formData = new FormData($("#form_compra")[0]);
+		if (+servicio===+empleada.idServicio) {
+			empleada.ordenServicio=String(data);
+			$.post("../ajax/Orden.php?op=detallesEmpleada",{"arregloEmpleada":empleada},function(data){
+	
+				alert(data);
+			});
+		} 			
+		
+			
+	
+	});
+}
 
 
 function mostrarFactura(idFactura){

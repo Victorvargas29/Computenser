@@ -185,11 +185,11 @@
     break;
     case 'detallesDetalles':
             
-      $jsomdetalles=$_POST["arregloDetalle"];
+      $jsomEmpleada=$_POST["arregloEmpleada"];
      // $res= $venta->registrar($_POST["cedula"],$_POST["comboCedula"],$_POST["moneda"],$_POST["placa"],$_POST["oentrega"]);
       
        $res=$venta->detallesDetalles($jsomdetalles);
-       echo "jsom de prueba" , $res;
+       echo "jsom de prueba de Empleada" , $res;
       // sleep(2);
       // $venta->eliminar_temp_condicion($idUsuario);
       

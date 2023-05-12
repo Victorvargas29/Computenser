@@ -272,28 +272,6 @@ function agregar_detalles(dat){
 				alert(respuesta);
 			});
 		
-			/*$.ajax({
-				url: "../ajax/ventas.php?op=detallesDetalles",
-				type: "POST",
-				data: arregloDetalle,
-				cache:false,
-				contentType: false,
-				processData: false,
-
-				success: function(datos){
-
-				///	console.log(formData); //muestre los valores en la consola
-					console.log(datos); //muestre los valores en la consola
-					$('#detalles_ventas').DataTable().ajax.reload();
-					$("#sub").DataTable().ajax.reload();
-					listarSubTortales();
-				//	$('#form_compra')[0].reset();
-					
-				//	limpiar();
-					///console.log(datos); 
-						
-				}
-			});*/
 		});
 	}
 	

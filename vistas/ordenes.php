@@ -46,7 +46,7 @@ $cli = $clientes->get_Cliente();
         <?php // require_once("modal/lista_productos_ordenes_modal.php");?>
         <section class="formulario-orden">
     
-    <form action="http://computenser.test/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">
+    <form method="post" id="form_orden">
     <!--  <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">    
       <form action="http://demos.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">-->
         <div class="container"> <!--container-->
@@ -177,6 +177,10 @@ $cli = $clientes->get_Cliente();
                           </tbody>
 
                         </table>  
+                        <div class="boton_registrar">
+                          <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Venta</button>
+                            
+                        </div>
                     </div>
                     
                       <!--Fin centro -->

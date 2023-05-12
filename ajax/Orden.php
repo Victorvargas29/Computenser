@@ -188,21 +188,44 @@
       $venta->eliminar_item($_POST["iddetallesFT"]);   
     break;
     
-    case 'guardarVenta':
+    case 'guardarOrden':
             
     
-             $venta->registrar($idFactura,$cedula,$moneda,$_POST["placa"],$_POST["oentrega"]);
-             $venta->detallesDetalles($idUsuario);
+            $placa= $ordenes->registrar($_POST["idVehiculo"]);
+            //echo "viendo la placa del vehiculo " , $placa;
              sleep(2);
-             $venta->eliminar_temp_condicion($idUsuario);
+            
             
             
     
     break;
-    case "borrar_temp":
-      $venta->eliminar_temp_condicion($idUsuario);
-    break;
+    
+    case 'detallesEmpleada':
+            
+      $jsomEmpleada=$_POST["arregloEmpleada"];
+    
+      
+       $res=$ordenes->detallesEmpleada($jsomEmpleada);
+       echo "jsom de prueba de Empleada", $res;
+       sleep(1);
+      // $venta->eliminar_temp_condicion($idUsuario);
+      
+      
 
+    break;
+    case 'detallesDetalles':
+            
+      $jsomdetalles=$_POST["arregloDetalle"];
+   
+      
+       $res=$ordenes->detallesDetalles($jsomdetalles);
+       echo $res;
+        sleep(1);
+      // $venta->eliminar_temp_condicion($idUsuario);
+      
+      
+
+    break;
     case "listarfacturas":
       
       $datos = $venta->get_facturas();
