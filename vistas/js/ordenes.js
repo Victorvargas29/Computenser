@@ -244,23 +244,28 @@ function dibujartabla(arregloDetalle){
 function dibujartablaE(arregloEmpleada){
 	cuerpotablaE.innerHTML="";
 	arregloEmpleada.forEach((data)=>{
-		let fila = document.createElement("tr");
-		fila.innerHTML=`
-						<td>${data.empleada}</td>
-						<td>${data.nombreE}</td>`;
-		let tdEliminar =document.createElement("td");
-		let botonEliminarE = document.createElement("button");
-		botonEliminarE.classList.add("btn","btn-danger");
-		botonEliminarE.title="Eliminar";
-		botonEliminarE.type="button";
-		botonEliminarE.className="fas fa-trash-alt btn btn-danger btn-md";
-		tdEliminar.appendChild(botonEliminarE);
-		fila.appendChild(tdEliminar);
-		botonEliminarE.onclick=()=>{
-			eliminarIten(data.cedula);
-		};
+		console.log("srevi",data.idServicio);
+		console.log("imput",$("#idser").val());
+		if (data.idServicio===$("#idser").val()) {
+			let fila = document.createElement("tr");
+			fila.innerHTML=`
+							<td>${data.empleada}</td>
+							<td>${data.nombreE}</td>`;
+			let tdEliminar =document.createElement("td");
+			let botonEliminarE = document.createElement("button");
+			botonEliminarE.classList.add("btn","btn-danger");
+			botonEliminarE.title="Eliminar";
+			botonEliminarE.type="button";
+			botonEliminarE.className="fas fa-trash-alt btn btn-danger btn-md";
+			tdEliminar.appendChild(botonEliminarE);
+			fila.appendChild(tdEliminar);
+			botonEliminarE.onclick=()=>{
+				eliminarItenE(data.empleada);
+			};
+			
+			cuerpotablaE.appendChild(fila);
+		}
 		
-		cuerpotablaE.appendChild(fila);
 	});
 
 }
@@ -292,13 +297,13 @@ function agregar_empleadas(){
 	
 
 	
-	const objEmpleda={
+	const objEmpleada={
 		idServicio:idServicio.value,
 		empleada:idEmpleada.value,
 		nombreE:nombreE,
 		
 	}
-	LlenarEmpleada(objEmpleda);
+	LlenarEmpleada(objEmpleada);
 	
 	dibujartablaE(arregloEmpleada);
 
@@ -309,9 +314,11 @@ function agregar_empleadas(){
 
 }
 function abrirModal(idServicio,nombreServi) {
+	
+	$("#idser").val(idServicio);
 	$("#empleadaModal").modal("show");
 	$('.modal-title').text("Agregar empleado al servicio");
-	
+	dibujartablaE(arregloEmpleada);
 }
 
 var arregloDetalle=[];
@@ -332,20 +339,63 @@ function LlenarDetalles(objDetalles){
 	
 }
 var arregloEmpleada=[];
-function LlenarEmpleada(objEmpleda){
+function LlenarEmpleada(objEmpleada){
 	
 	const result=arregloEmpleada.find((detalle)=>{
 		
-		
-		if((+objEmpleda.cedula === +detalle.cedula)){
+		console.log("objempleada",objEmpleada.empleada);
+		console.log("detalle",detalle.empleada);
+
+
+		if((objEmpleada.empleada === detalle.empleada && objEmpleada.idServicio === detalle.idServicio)){
 			return detalle;
 		}
 	});
 
 	if (!result) {
-		arregloEmpleada.push(objEmpleda);
-	} 
+		arregloEmpleada.push(objEmpleada);
+	} else{
+		alert("Emplado ya registrado para este servicio");
+	}
 	
+	
+}
+function eliminarIten(id){
+	arregloDetalle= arregloDetalle.filter((detalle)=>{
+		if (+id !== +detalle.idServicio) {
+			return detalle;
+			
+		}else{
+			eliminarEmpleadaS(id);
+		}
+	});
+	dibujartabla(arregloDetalle);
+}
+function eliminarItenE(id){
+	arregloEmpleada= arregloEmpleada.filter((detalle)=>{
+		if (+id !== +detalle.empleada) {
+			return detalle;
+			
+		}
+	});
+	dibujartablaE(arregloEmpleada);
+}
+function eliminarEmpleadaS(id){
+	arregloEmpleada= arregloEmpleada.filter((detalle)=>{
+		if (+id !== +detalle.idServicio) {
+			return detalle;
+			
+		}
+	});
+	//dibujartabla(arregloEmpleada);
+}
+function cancelarOrden() {
+	$.ajax({
+		url:'../vistas/ordenes.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/ordenes.php no found");}
+		});
 	
 }
 

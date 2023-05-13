@@ -65,7 +65,7 @@ $cli = $clientes->get_Cliente();
                       </div>
                       <div class="col-lg-10">
 
-                        <select class="form-control font-weight-bold" data-width="26rem" data-live-search="true" data-tokens id="cedula" name="cedula">
+                        <select class="form-control font-weight-bold" data-width="26rem" required data-live-search="true" data-tokens id="cedula" name="cedula">
                         </select>
                       </div>
                     </div>
@@ -76,7 +76,7 @@ $cli = $clientes->get_Cliente();
                       <label class="col-form-label ml-3">Vehiculo:</label>
                     </div>
                     <div class="col-lg-10">
-                        <select class="form-control font-weight-bold"  data-width="26rem" data-live-search="true" data-tokens id="idVehiculo" name="idVehiculo">
+                        <select class="form-control font-weight-bold"  data-width="26rem" required data-live-search="true" data-tokens id="idVehiculo" name="idVehiculo">
                         <option value="0"  selected disabled>Ingrese la placa </option>
                       </select>
                     </div>
@@ -161,12 +161,9 @@ $cli = $clientes->get_Cliente();
                             <tr>
                               
                               <th class="all text-center">Concepto o Descripcion</th>
-                              
                               <th class="min-desktop">Servicio</th>
-                              
-                              <!-- <th class="min-desktop">IVA 16%</th> -->
-                              <th class="all">Empleado</th>
                               <th class="all">Precio</th>
+                              <th class="all">Empleado</th>
                               <th class="min-desktop">Eliminar</th>
                             </tr>
 
@@ -178,8 +175,9 @@ $cli = $clientes->get_Cliente();
 
                         </table>  
                         <div class="boton_registrar">
-                          <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Venta</button>
-                            
+                          <button type="button" onClick="cancelarOrden()" class="btn btn-light m-2">Cancelar</button>
+
+                          <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 m-2"  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Orden</button>
                         </div>
                     </div>
                     
@@ -214,6 +212,7 @@ $cli = $clientes->get_Cliente();
                                     <select class="form-control font-weight-bold border" id="idEmpleada" name="idEmpleada" required>
                                       <option selected disabled value="0">Seleccione el Empleado</option>
                                     </select>
+                                    <input type="hidden" name="idser" id="idser"/>
                                   </div>
                                   
                                   <div class="col-2 pr-0">
@@ -246,7 +245,7 @@ $cli = $clientes->get_Cliente();
                              </div>
                             <div class="modal-footer">
                                 
-                                <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cancelar</button>
+                                <button type="button" class="btn btn-light" aria-hidden="true" data-dismiss="modal" value="Add">Cerrar</button>
                                 
                                 
                             </div>
