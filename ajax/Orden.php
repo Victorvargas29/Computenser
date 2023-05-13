@@ -42,7 +42,7 @@
     break;
     case 'selectCliente':
       $rspta = $cliente->get_cliente2();
-      echo '<option value="0" selected disabled>Seleccione cliente</option>';
+      echo '<option value="" selected disabled>Seleccione cliente</option>';
       foreach($rspta as $regist){
         echo '<option class="font-weight-bold" value='.$regist->cedula.'>'.$regist->cedula.' - '.$regist->nombre.' '.$regist->apellido.'</option>';
       }
@@ -51,7 +51,7 @@
     case 'selectVehiculo':
       $cedula=$_POST['cedula'];
 			$rspt= $ordenes->get_vehiculo($cedula);
-			echo '<option value="0"  selected disabled>Ingrese la placa </option>';
+			echo '<option value=""  selected disabled>Ingrese la placa </option>';
 			foreach ($rspt as $reg) {
 			  echo '<option class="font-weight-bold" value='. $reg["placa"] .'>'. $reg["placa"] . '</option>';
 			}

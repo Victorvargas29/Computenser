@@ -13,7 +13,9 @@ var cuerpotabla =document.getElementById("cuerpotabla");
 function init(){
 
 	$("#form_orden").on("submit", function(e){
+		
 		registrar(e);
+		//
 		
 
 	});

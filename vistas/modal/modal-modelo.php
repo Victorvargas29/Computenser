@@ -14,7 +14,7 @@
 
                     <div class="form-group">
                         <label for="" class="col-lg-1 control-label">Marca</label>
-                        <select class="form-control font-weight-bold" id="idMarca" name="idMarca">
+                        <select class="form-control font-weight-bold" required id="idMarca" name="idMarca">
                         </select>
                     </div>
 

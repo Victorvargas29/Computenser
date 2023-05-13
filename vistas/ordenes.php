@@ -65,7 +65,8 @@ $cli = $clientes->get_Cliente();
                       </div>
                       <div class="col-lg-10">
 
-                        <select class="form-control font-weight-bold" data-width="26rem" required data-live-search="true" data-tokens id="cedula" name="cedula">
+                        <select class="form-control font-weight-bold" placeholder="Descripcion" data-width="26rem" required data-live-search="true" data-tokens id="cedula" name="cedula">
+                        
                         </select>
                       </div>
                     </div>
@@ -77,7 +78,7 @@ $cli = $clientes->get_Cliente();
                     </div>
                     <div class="col-lg-10">
                         <select class="form-control font-weight-bold"  data-width="26rem" required data-live-search="true" data-tokens id="idVehiculo" name="idVehiculo">
-                        <option value="0"  selected disabled>Ingrese la placa </option>
+                        <option value=""  selected disabled>Ingrese la placa </option>
                       </select>
                     </div>
                   </div>
@@ -99,7 +100,7 @@ $cli = $clientes->get_Cliente();
                     </div>
                     <div class="col-lg-11">
                       <select class="form-control font-weight-bold" data-width="61rem"  id="idServicio" name="idServicio" required>
-                        <option selected disabled value="0">Seleccione el Servicio</option>
+                        <option selected disabled value="">Seleccione el Servicio</option>
 
                       </select>
                         <input type="hidden" name="nombreServi" id="nombreServi"   class="form-control"></input>

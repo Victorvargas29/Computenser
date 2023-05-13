@@ -31,7 +31,7 @@ require_once("../modelos/Departamentos.php");
       case 'selectServicio':
        
         $rspta=$servicio->get_servicio2();
-        echo '<option value="0" selected disabled>Seleccione el Servicio</option>';
+        echo '<option value="" selected disabled>Seleccione el Servicio</option>';
         foreach($rspta as $regi){
           echo '<option class="font-weight-bold" value='.$regi->idServicio.'>'.$regi->nombre.'</option>';
         }
