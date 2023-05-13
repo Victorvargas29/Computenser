@@ -92,7 +92,7 @@ function init(){
             $("#idVehiculo option:selected").each(function(){
 				
                 idVehiculo1= $(this).val();
-					 $("#idVehiculo").val(idVehiculo1);	 
+				$("#idVehiculo").val(idVehiculo1);	 
 					 console.log(idVehiculo1);
 			});
         });
@@ -139,6 +139,8 @@ function registrar(e){
 function guardar_detalles(datos) {
 	arregloDetalle.forEach(deta => {
 		deta.idOrden=datos;
+		ordenSer=deta.idServicio+""+deta.idOrden;
+		ordenSer=ordenSer.replace(" ", "");
 		/*$.ajax({
 			url: "../ajax/Orden.php?op=detallesDetalles",
 			type: "POST",
@@ -159,31 +161,31 @@ function guardar_detalles(datos) {
 			}
 		});*/
 		$.post("../ajax/Orden.php?op=detallesDetalles",{"arregloDetalle":deta},function(datas){
-			
-			
-				servicioEmpleada(datas,deta.idServicio);
-			
-			
+
 		});
+		setTimeout(function(){
+			servicioEmpleada(ordenSer,deta.idServicio);
+			console.log(" viendo el orden servicios ",ordenSer);
+		}, 2000);
+		
 	
 	});
-	
+	 
 }
 function servicioEmpleada(data,servicio) {
-	arregloEmpleada.forEach(empleada => {
-				
-		var formData = new FormData($("#form_compra")[0]);
-		if (+servicio===+empleada.idServicio) {
-			empleada.ordenServicio=String(data);
-			$.post("../ajax/Orden.php?op=detallesEmpleada",{"arregloEmpleada":empleada},function(data){
 	
-				alert(data);
-			});
-		} 			
+		arregloEmpleada.forEach(empleada => {	
+			var formData = new FormData($("#form_compra")[0]);
+			if (+servicio===+empleada.idServicio) {
+				empleada.ordenServicio=String(data);
+				$.post("../ajax/Orden.php?op=detallesEmpleada",{"arregloEmpleada":empleada},function(data){
 		
-			
+					alert(data);
+				});
+			} 			
+		});
 	
-	});
+	
 }
 
 

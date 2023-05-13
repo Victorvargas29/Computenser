@@ -193,7 +193,7 @@
     
             $placa= $ordenes->registrar($_POST["idVehiculo"]);
             //echo "viendo la placa del vehiculo " , $placa;
-             sleep(2);
+           
             
             
             
@@ -204,10 +204,10 @@
             
       $jsomEmpleada=$_POST["arregloEmpleada"];
     
-      
+      sleep(3);
        $res=$ordenes->detallesEmpleada($jsomEmpleada);
        echo "jsom de prueba de Empleada", $res;
-       sleep(1);
+      
       // $venta->eliminar_temp_condicion($idUsuario);
       
       
@@ -220,7 +220,7 @@
       
        $res=$ordenes->detallesDetalles($jsomdetalles);
        echo $res;
-        sleep(1);
+      
       // $venta->eliminar_temp_condicion($idUsuario);
       
       

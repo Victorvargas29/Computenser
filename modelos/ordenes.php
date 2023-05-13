@@ -79,7 +79,7 @@
         
         public function detallesDetalles($jsomdetalles){
           
-          $text=$jsomdetalles["idServicio"]."M".$jsomdetalles["idOrden"];
+          $text=$jsomdetalles["idServicio"]."".$jsomdetalles["idOrden"];
           $text=str_replace(" ","",$text);
           $conectar=parent::conectar();
           //parent::set_names();
@@ -91,14 +91,14 @@
           $sql->bindValue(4, $jsomdetalles["descripcion"]);
           $sql->bindValue(5, $jsomdetalles["precio"]);                   
           $sql->execute();
-          sleep(2);
+          
           return $text;
         }
         public function detallesEmpleada($arregloEmpleada){
 
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql1="insert into empleadoservicios values(null,'2683148',?);";
+          $sql1="insert into empleadoservicios values(null,'25135123',?);";
           $sql1=$conectar->prepare($sql1);
         
           $sql1->bindValue(1, $arregloEmpleada["ordenServicio"]); 
