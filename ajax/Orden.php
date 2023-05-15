@@ -57,15 +57,25 @@
 			}
 
    		break;
-      case 'selectFalla':
+      case 'selectOrden':
       $idVehiculo=$_POST['idVehiculo'];
-      $rspt= $ordenes->get_fallaVehiculo($idVehiculo);
-      echo '<option value="0"  selected disabled>Ingrese la Falla </option>';
+      $rspt= $ordenes->get_ordenVehiculo($idVehiculo);
+      
+      //$rspt= $ordenes->get_sumaPrecioDetalle($reg["numDoc"]);
+      echo '<option value=""  selected disabled>Ingrese la Orden </option>';
       foreach ($rspt as $reg) {
-        echo '<option class="font-weight-bold" value='. $reg["id"] .'>'. $reg["descripcion"] . '</option>';
+        $suma= $ordenes->get_sumaPrecioDetalle($reg["numDoc"]);
+        echo '<option class="font-weight-bold" value='. $reg["numDoc"] .'>'.'N° de orden: 000'.$reg["numDoc"].' ---  Fecha: ' . $reg["fecha"]. ' --- ' .'Total: '.$suma["precio"].'$$'. '</option>';
       }
 
-        break;
+    break;
+
+      case 'mostrarDetalles':
+        $idOrden=$_POST['idOrden'];
+        $results= $ordenes->mostrarDetalles($idOrden);
+        echo json_encode($results);
+  
+      break;
        
     case "listar":
       $datos = $venta->detalles_venta($idUsuario);

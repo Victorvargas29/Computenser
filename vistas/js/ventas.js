@@ -1,68 +1,80 @@
 
 
 var tablfa;
-const servicio= document.getElementById("idServicio");
-const cant= document.getElementById("cantidad");
-const precio= document.getElementById("precio");
-const tasa= document.getElementById("tasa");
-const descripcion= document.getElementById("descripcion");
-const cuerpotabla =document.getElementById("cuerpotabla");
+
 
 //funcion q se ejecuta al inicio
 function init(){
 	tasa_dia();
-	//listar();	
+		
 	idfactura();
 	listarSubTortales();
 	listarfacturas();
-	//cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
-/*	$("#form_compra").on("button", function(e){
-		cargarlistaS(e);
+	$("#idVehiculo").selectpicker();
+	$("#form_compra").on("submit", function(e){
+		registrar(e);
 	});
-
-	//cambia el titulo de la ventana modal cuando se da click al boton
-	
-	
-
-	$("#btnGuardar").click(function(){
-
+	$.post("../ajax/Orden.php?op=selectCliente",function(re){
+		$("#cedula").html(re);
+		$("#cedula").selectpicker();
 	});
+	$.post("../ajax/Servicio.php?op=selectServicio",function(re){
+		$("#idServicio").html(re);
+		$("#idServicio").selectpicker();
+		
+	});
+	$(document).ready(function(){
+        $("#cedula").change(function(){
+            $("#cedula option:selected").each(function(){
+				
+                cedula= $(this).val();
+                $.post("../ajax/Orden.php?op=selectVehiculo", {cedula:cedula},function(datas){
+                    
+					$("#idVehiculo").html(datas);
+					
+					$("#idVehiculo").selectpicker();
+					$("#idVehiculo").val('default').selectpicker("refresh");
+					$("#idOrden").selectpicker();
+					$("#idOrden").val('default').selectpicker("refresh");
 
+                });
+            });
+        });
+    });
 
+	$(document).ready(function(){
+        $("#idVehiculo ").change(function(){
+            $("#idVehiculo option:selected").each(function(){
+                idVehiculo= $(this).val();
+				$.post("../ajax/Orden.php?op=selectOrden", {idVehiculo:idVehiculo},function(datas){
+                    
+					$("#idOrden").html(datas);
+					$("#idOrden").selectpicker();
+					$("#idOrden").val('default').selectpicker("refresh");
 
-$("form_compra").on("submit", function(){
-	cargarlistaS();
+					
+					
 
-});
-*/
-$("#form_compra").on("submit", function(e){
-	registrar(e);
-	
-
-});
+                });
+			});
+        });
+    });
+	$(document).ready(function(){
+        $("#idOrden ").change(function(){
+            $("#idOrden option:selected").each(function(){
+                idOrden= $(this).val();
+				$.post("../ajax/Orden.php?op=mostrarDetalles", {idOrden:idOrden},function(datas){
+					//dibujartabla(datas);
+					for (const iterator of datas) {
+						console.log(iterator.numDoc);
+					}
+					//console.log(datas[0].codeServicio);
+                });
+			});
+        });
+    });
 
 }
-
-$(document).ready(function(){
-	$("#listafact").click(function(){
-		$.ajax({
-		url:'lista_facturas.php',
-		method: "POST",
-		success: function(res){ $("#seccion1").html(res); },
-		error: function(err){ $("#seccion1").html(err);}
-		});
-	});
-});
-$(document).ready(function(){
-	$("#newclient").click(function(){
-		$.ajax({
-		url:'cliente.php',
-		method: "POST",
-		success: function(res){ $("#seccion1").html(res); },
-		error: function(err){ $("#seccion1").html(err);}
-		});
-	});
-});
 
 
 function tasa_dia(){
@@ -211,7 +223,7 @@ function listarSubTortales(){
 	}).DataTable();
 
 }
-let arregloDetalle=[];
+var arregloDetalle=[];
 function LlenarDetalles(objDetalles){
 	
 	const result=arregloDetalle.find((detalle)=>{
@@ -291,15 +303,19 @@ function eliminarIten(id){
 
 function dibujartabla(arregloDetalle){
 	cuerpotabla.innerHTML="";
-	arregloDetalle.forEach((deta)=>{
+	console.log(arregloDetalle[0]["descripcion"]);
+	/*for (let deta in arregloDetalle) {
+		
+		
+	
 		let fila = document.createElement("tr");
 		fila.innerHTML=`
 						<td>${deta.descripcion}</td>
 						<td>${deta.precio}</td>
-						<td>${+deta.precio * +tasa.value}</td>
-						<td>${deta.cantidad}</td>
-						<td>${(+deta.precio * +tasa.value) * +deta.cantidad}</td>
-						<td>${+deta.precio * +deta.cantidad}</td>`;
+						<td>${deta.numDoc}</td>
+						<td>${deta.numDoc}</td>
+						<td>${deta.ordenServicio}</td>
+						<td>${deta.codeServicio}</td>`;
 		let tdEliminar =document.createElement("td");
 		let botonEliminar = document.createElement("button");
 		botonEliminar.classList.add("btn","btn-danger");
@@ -310,7 +326,7 @@ function dibujartabla(arregloDetalle){
 			eliminarIten(deta.idServicio);
 		};
 		cuerpotabla.appendChild(fila);
-	});
+	}*/
 
 }
 function cargarlista(cedula1,letra){

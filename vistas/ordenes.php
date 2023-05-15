@@ -145,50 +145,51 @@ $cli = $clientes->get_Cliente();
          
 
          
-            <div class="row">
-              <div class="col-md-12">
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h1 class="box-title">
-                        <!-- <button class="btn btn-primary" id="add_button" onClick="limpiar()" data-toggle="modal" data-target="#usuarioModal"><i class="fa fa-plus" aria-hidde="true"></i> Nuevo Usuario</button></h1> -->
-                        <div class="box-tools pull-right">
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- centro width="35%"-->
-                    <div class="panel-body table-responsive">
-                        <table id="detalles_ordenes" class="table table-striped nowrap mr-2" width="90%">
-                          <thead>
-                            <tr>
-                              
-                              <th class="all text-center">Concepto o Descripcion</th>
-                              <th class="min-desktop">Servicio</th>
-                              <th class="all">Precio</th>
-                              <th class="all">Empleado</th>
-                              <th class="min-desktop">Eliminar</th>
-                            </tr>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="box">
+                      <div class="box-header with-border">
+                          <h1 class="box-title">
+                          <!-- <button class="btn btn-primary" id="add_button" onClick="limpiar()" data-toggle="modal" data-target="#usuarioModal"><i class="fa fa-plus" aria-hidde="true"></i> Nuevo Usuario</button></h1> -->
+                          <div class="box-tools pull-right">
+                          </div>
+                      </div>
+                      <!-- /.box-header -->
+                      <!-- centro width="35%"-->
+                      <div class="panel-body table-responsive">
+                          <table id="detalles_ordenes" class="table table-striped nowrap mr-2" width="90%">
+                            <thead>
+                              <tr>
+                                
+                                <th class="all text-center">Concepto o Descripcion</th>
+                                <th class="min-desktop">Servicio</th>
+                                <th class="all">Precio</th>
+                                <th class="all">Empleado</th>
+                                <th class="min-desktop">Eliminar</th>
+                              </tr>
 
 
-                          </thead>
-                          <tbody id="cuerpotabla">
+                            </thead>
+                            <tbody id="cuerpotabla">
 
-                          </tbody>
+                            </tbody>
 
-                        </table>  
-                        <div class="boton_registrar">
-                          <button type="button" onClick="cancelarOrden()" class="btn btn-light m-2">Cancelar</button>
+                          </table>  
+                          <div class="boton_registrar">
+                            <button type="button" onClick="cancelarOrden()" class="btn btn-light m-2">Cancelar</button>
 
-                          <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 m-2"  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Orden</button>
-                        </div>
-                    </div>
-                    
-                      <!--Fin centro -->
-                </div><!-- /.box -->
-              </div><!-- /.col -->
+                            <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 m-2"  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Orden</button>
+                          </div>
+                      </div>
+                      
+                        <!--Fin centro -->
+                  </div><!-- /.box -->
+                </div><!-- /.col -->
+              </div>
+              <!-- /.row -->
             </div>
-            <!-- /.row -->
-        </div>
-    </form> 
+          </div>
+        </form> 
             <!--TABLA SUBTOTAL - TOTAL -->
 
          

@@ -15,8 +15,7 @@ function init(){
 	$("#form_orden").on("submit", function(e){
 		
 		registrar(e);
-		//
-		
+
 
 	});
 	
@@ -92,28 +91,33 @@ function init(){
 	$(document).ready(function(){
         $("#idVehiculo ").change(function(){
             $("#idVehiculo option:selected").each(function(){
-				
                 idVehiculo1= $(this).val();
 				$("#idVehiculo").val(idVehiculo1);	 
 					 console.log(idVehiculo1);
 			});
         });
-
     });
-    
-
-	
-
 }
 
-
-
-
-
 function registrar(e){
-	e.preventDefault(); //No se activará la acción predeterminada del evento
-	var formData = new FormData($("#form_orden")[0]);
-	//console.log("registrarrrrrr");
+	e.preventDefault();
+	if (arregloDetalle.length===0) {
+		alert("No puede registrar una orden si servicios");
+	} else {
+		var existeE;
+		arregloDetalle.forEach(deta => {
+		
+			var result=arregloEmpleada.find((empleada)=>{	
+		
+				if((deta.idServicio === empleada.idServicio)){
+					return result;
+				}
+			});
+		
+			existeE=result;
+		});
+		var formData = new FormData($("#form_orden")[0]);
+		console.log("registrarrrrrr", arregloDetalle);
 		$.ajax({
 			url: "../ajax/Orden.php?op=guardarOrden",
 			type: "POST",
@@ -122,20 +126,14 @@ function registrar(e){
 			processData: false,
 
 			success: function(datos){
-
-				console.log(datos); //muestre los valores en la consola
-
+				console.log(datos);
 				$('#form_orden')[0].reset();
-				//$('#servicioModal').modal('hide');
 				guardar_detalles(datos);
-				
-				
-				
-				//$('#resultados_ajax').html(datos);
-				//$('#servicio_data').DataTable().ajax.reload();
-				//limpiar();
 			}
 		});
+		
+	}
+	
 	
 }
 function guardar_detalles(datos) {
@@ -271,49 +269,29 @@ function dibujartablaE(arregloEmpleada){
 	});
 
 }
-function agregar_detalles(){
-	
 
-	
+function agregar_detalles(){
 		const objDetalles={
-			
 			precio: precio.value,
 			idServicio:idServicio.value,
 			descripcion:descripcion.value,
 			nombreServi:nombreServi.value,
-			
-			
 		}
 		LlenarDetalles(objDetalles);
-		
 		dibujartabla(arregloDetalle);
-	
-	
-	
-
 		console.log(arregloDetalle);
-
 }//fin guardar y editar
 
 function agregar_empleadas(){
-	
 
-	
 	const objEmpleada={
 		idServicio:idServicio.value,
 		empleada:idEmpleada.value,
-		nombreE:nombreE,
-		
+		nombreE:nombreE,	
 	}
 	LlenarEmpleada(objEmpleada);
-	
 	dibujartablaE(arregloEmpleada);
-
-
-
-
 	console.log(arregloEmpleada);
-
 }
 function abrirModal(idServicio,nombreServi) {
 	

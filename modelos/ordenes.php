@@ -28,7 +28,7 @@
           //parent::set_names();
           $sql="insert into orden values(null,now(),?,?);";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, "Sin procesar"); 
+          $sql->bindValue(1, '0'); 
           $sql->bindValue(2, $placa); 
          
          
@@ -153,6 +153,40 @@
 
           return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        
+        public function get_ordenVehiculo($idVehiculo){
+          $conectar = parent::conectar();
+          parent::set_names();
+          $sql = "select * from orden where placa=? and estatus='0'";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$idVehiculo);
+          $sql->execute();
+
+          return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        public function get_sumaPrecioDetalle($nunDoc){
+          $conectar = parent::conectar();
+          parent::set_names();
+          $sql = "select SUM(precio)precio from ordenservicios where numDoc=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$nunDoc);
+          $sql->execute();
+
+          return $resultado= $sql->fetch(PDO::FETCH_ASSOC);
+        }
+        public function mostrarDetalles($nunDoc){
+          $conectar = parent::conectar();
+          parent::set_names();
+          $sql = "select * from ordenservicios where numDoc=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$nunDoc);
+          $sql->execute();
+
+          return $resultado= $sql->fetchAll();
+        }
+        
    }
    
 ?>
