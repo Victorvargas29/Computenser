@@ -64,7 +64,7 @@
           
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="select * from falla where idfalla=?";
+          $sql="select * from falla where id=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idfalla);
           $sql->execute();

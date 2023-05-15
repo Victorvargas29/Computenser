@@ -14,8 +14,7 @@ function init(){
 	$("#add_button").click(function(){
 		$(".modal-title").text("Agregar Empleada");
 		$("#cedula").prop('disabled', false);
-		$("#idDepartamento").prop('disabled', false);
-		$("#idDepartamento").val('0');
+		
 
 	});
 
@@ -28,13 +27,12 @@ function limpiar(){
 	$("#cedula").val("");
 
 	$("#nombre").val("");
-	$("#apellido").val("");
+	
 	$("#telefono").val("");
-//	$('#email').val("");
+
 	$("#direccion").val("");
-	$("#idDepartamento").val('0');
-	$("#idDepartamento").prop('disabled', false);
-	//$("#id_empleada").val("");
+	
+	
 }
 
 //funcion listar
@@ -113,15 +111,14 @@ function mostrar(cedula){
 	//	$("#cedula").prop('disabled', false);
 		
 		
-		$("#nombre").val(data.nombre);   //data.nombre el nombre que se coloca en el lado derecho es
-		$("#apellido").val(data.apellido); //el que se coloco en el ajax en $output["nombre"]
+		$("#nombre").val(data.nombre);   
 		$("#telefono").val(data.telefono);
 		$("#direccion").val(data.direccion);
-		//$("#email").val(data.email);
-		$("#idDepartamento").val(data.idDepartamento);
+		
+		
 
-		$("#idDepartamento").prop('disabled', 'disabled');
-		$('.modal-title').text("Editar Usuario");
+		
+		$('.modal-title').text("Editar Empleado");
 	//	$("#id_empleada").val(id_empleada);
 		$("#action").val("Edit");
 

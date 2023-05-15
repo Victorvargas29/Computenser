@@ -71,13 +71,8 @@
                                     <tr>
                                       <th>Cédula</th>
                                       <th>Nombres</th>
-                                      <th>Apellidos</th>
-                                      
                                       <th>Telefono</th>
-                                      <th>Direccion</th> 
-                                   <!--   <th>Correo</th>   -->
-                                      <th>Fecha Ingreso</th>
-                                      <th>Departamento</th>
+                                      <th>Especialidad</th>
                                       <th width="10%">Editar</th>
                                       <th width="10%">Eliminar</th>
 

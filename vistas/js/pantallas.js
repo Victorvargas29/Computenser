@@ -97,10 +97,10 @@ $(document).ready(function(){
 
 	$("#compra").click(function(){
 		$.ajax({
-		url:'../vistas/compras.php',
+		url:'../vistas/ordenes.php',
 		method: "POST",
 		success: function(res){ $("#seccion1").html(res); },
-		error: function(err){ $("#seccion1").html("pagina vista/compras.php no found");}
+		error: function(err){ $("#seccion1").html("pagina vista/ordenes.php no found");}
 		});
 	});
 	

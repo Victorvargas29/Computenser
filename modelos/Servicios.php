@@ -29,6 +29,18 @@
 
         	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
+        public function get_servicio2(){
+
+        	$conectar = parent::conectar();
+       
+       		$sql = "select idServicio, nombre, precio from servicio";
+
+        	$sql=$conectar->prepare($sql);
+
+        	$sql->execute();
+
+          return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
+        }
 
         public function registrar_servicio($nombre,$precio,$idDepartamento){
         	$conectar = parent::conectar();

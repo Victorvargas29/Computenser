@@ -17,51 +17,14 @@
                     <label>Nombres</label>
                     <input type="text" name="nombre" id="nombre" placeholder="Nombres" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
                     <br/>
-
-                    <label>Apellidos</label>
-                    <input type="text" name="apellido" id="apellido" placeholder="Apellidos" required pattern = "^[a-zA-Z_áéíóúñ\s]{0,30}$" class="form-control"></input>
-                    <br/>
-
                     <label>Telefono</label>
                     <input type="text" name="telefono" id="telefono" placeholder="Teléfono" required pattern = "[0-9]{0,15}" class="form-control"></input>
                     <br/>
-<!--
-                    <label>Correo</label>
-                    <input type="email" name="email" id="email" placeholder="Correo" required="required" class="form-control"></input>
-                    <br/>
--->
+
                     <label>Direccion</label>
                     <input type="text" name="direccion" id="direccion" placeholder="Direccion"  class="form-control"></input>
                     <br/>
-<!--
-                    <label>Dirección</label>
-                    <textarea cols="66" rows="3" id="direccion" name="direccion" placeholder="Dirección..." required pattern = "^[a-zA-Z_áéíóúñ\s]{0,200}$"></textarea>
-                    <br/>   -->
 
-                     <div class="form-group">
-                        <label for="" class="col-lg-1 control-label">Departamento</label>
-                        <select class="form-control font-weight-bold" id="idDepartamento" name="idDepartamento">
-                            <option class="font-weight-bold" value="0">Seleccione</option>
-
-                            <?php
-                           // $num=0;
-                           for($i=0; $i<sizeof($dep);$i++){
-                            // $num++;
-                             ?>
-                              <option value="<?php  echo $dep[$i]["idDepartamento"]?>">
-                                <?php
-                                   // echo $num;
-                                    echo "• ";
-                                    echo $dep[$i]["nombre"];
-                                ?>
-                              </option>
-                        
-                             <?php
-                           }
-                        ?>
-
-                        </select>
-                    </div>
 
                 </div>
  

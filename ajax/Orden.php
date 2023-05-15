@@ -3,10 +3,13 @@
   require_once("../config/conexion.php");
 
   //llamo al modelo Venta
-  require_once("../modelos/ventas.php");
+  require_once("../modelos/Clientes.php");
+  require_once("../modelos/Ordenes.php");
   require_once("../modelos/Servicios.php");
 
-	$venta = new Ventas();
+	
+	$cliente = new Clientes();
+	$ordenes = new Ordenes();
   $servicio = new Servicio();
   $cedula = isset($_POST["cedula"]);
 	$idFactura = isset($_POST["idFactura"]);
@@ -18,18 +21,6 @@
 	$oentrega = isset($_POST["oentrega"]);
   $comboCedula = isset($_POST["comboCedula"]);
 
- 
-
-  $moneda = isset($_POST["moneda"]);
-
-  $estado = isset($_POST["estado"]);
-
-  $NroFactura = isset($_POST["NroFactura"]);
-  //$idUsuario = isset($_POST["idUser"]);
-	$idUsuario = $_SESSION["idUsuario"];
-  $tasa = isset($_POST["tasa"]);
-  $cantidad = isset($_POST["cantidad"]);
-  $precio=0;
   $precioBs=0;
   $iva=0;
   $ivaBs=0;
@@ -49,7 +40,43 @@
      
 
     break;
+    case 'selectCliente':
+      $rspta = $cliente->get_cliente2();
+      echo '<option value="" selected disabled>Seleccione cliente</option>';
+      foreach($rspta as $regist){
+        echo '<option class="font-weight-bold" value='.$regist->cedula.'>'.$regist->cedula.' - '.$regist->nombre.' '.$regist->apellido.'</option>';
+      }
+  
+    break;
+    case 'selectVehiculo':
+      $cedula=$_POST['cedula'];
+			$rspt= $ordenes->get_vehiculo($cedula);
+			echo '<option value=""  selected disabled>Ingrese la placa </option>';
+			foreach ($rspt as $reg) {
+			  echo '<option class="font-weight-bold" value='. $reg["placa"] .'>'. $reg["placa"] . '</option>';
+			}
 
+   		break;
+      case 'selectOrden':
+      $idVehiculo=$_POST['idVehiculo'];
+      $rspt= $ordenes->get_ordenVehiculo($idVehiculo);
+      
+      //$rspt= $ordenes->get_sumaPrecioDetalle($reg["numDoc"]);
+      echo '<option value=""  selected disabled>Ingrese la Orden </option>';
+      foreach ($rspt as $reg) {
+        $suma= $ordenes->get_sumaPrecioDetalle($reg["numDoc"]);
+        echo '<option class="font-weight-bold" value='. $reg["numDoc"] .'>'.'N° de orden: 000'.$reg["numDoc"].' ---  Fecha: ' . $reg["fecha"]. ' --- ' .'Total: '.$suma["precio"].'$$'. '</option>';
+      }
+
+    break;
+
+      case 'mostrarDetalles':
+        $idOrden=$_POST['idOrden'];
+        $results= $ordenes->mostrarDetalles($idOrden);
+        echo json_encode($results);
+  
+      break;
+       
     case "listar":
       $datos = $venta->detalles_venta($idUsuario);
       $data = array();
@@ -171,21 +198,44 @@
       $venta->eliminar_item($_POST["iddetallesFT"]);   
     break;
     
-    case 'guardarVenta':
+    case 'guardarOrden':
             
     
-             $venta->registrar($idFactura,$cedula,$moneda,$_POST["placa"],$_POST["oentrega"]);
-             $venta->detallesDetalles($idUsuario);
-             sleep(2);
-             $venta->eliminar_temp_condicion($idUsuario);
+            $placa= $ordenes->registrar($_POST["idVehiculo"]);
+            //echo "viendo la placa del vehiculo " , $placa;
+           
+            
             
             
     
     break;
-    case "borrar_temp":
-      $venta->eliminar_temp_condicion($idUsuario);
-    break;
+    
+    case 'detallesEmpleada':
+            
+      $jsomEmpleada=$_POST["arregloEmpleada"];
+    
+      sleep(3);
+       $res=$ordenes->detallesEmpleada($jsomEmpleada);
+       echo "jsom de prueba de Empleada", $res;
+      
+      // $venta->eliminar_temp_condicion($idUsuario);
+      
+      
 
+    break;
+    case 'detallesDetalles':
+            
+      $jsomdetalles=$_POST["arregloDetalle"];
+   
+      
+       $res=$ordenes->detallesDetalles($jsomdetalles);
+       echo $res;
+      
+      // $venta->eliminar_temp_condicion($idUsuario);
+      
+      
+
+    break;
     case "listarfacturas":
       
       $datos = $venta->get_facturas();

@@ -18,8 +18,22 @@
    	    	$sql=$conectar->prepare($sql);
    	    	$sql->execute();
 
-   	    	return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
+   	    	return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
    	    }
+
+         public function get_cliente2(){
+
+          $conectar=parent::conectar();
+        //	parent::set_names();
+
+          $sql="select * from cliente";
+
+          $sql=$conectar->prepare($sql);
+          $sql->execute();
+
+          return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
+        }
+
 
    	    public function registrar_cliente($cedula,$nombre,$apellido,$direccion,$telefono,$correo){
 
