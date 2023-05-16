@@ -179,7 +179,7 @@
         public function mostrarDetalles($nunDoc){
           $conectar = parent::conectar();
           parent::set_names();
-          $sql = "select * from ordenservicios where numDoc=?";
+          $sql = "select * from ordenservicios as o inner join servicio as s on s.codeServicio=o.codeServicio where numDoc=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$nunDoc);
           $sql->execute();

@@ -65,14 +65,31 @@
       echo '<option value=""  selected disabled>Ingrese la Orden </option>';
       foreach ($rspt as $reg) {
         $suma= $ordenes->get_sumaPrecioDetalle($reg["numDoc"]);
-        echo '<option class="font-weight-bold" value='. $reg["numDoc"] .'>'.'N° de orden: 000'.$reg["numDoc"].' ---  Fecha: ' . $reg["fecha"]. ' --- ' .'Total: '.$suma["precio"].'$$'. '</option>';
+        echo '<option class="font-weight-bold" value='. $reg["numDoc"] .'>'.'N° de orden: 000'.$reg["numDoc"].' ---  Fecha: ' . $reg["fecha"]. ' --- ' .'Total: '.number_format($suma["precio"],2).'$$'. '</option>';
       }
 
     break;
 
       case 'mostrarDetalles':
         $idOrden=$_POST['idOrden'];
-        $results= $ordenes->mostrarDetalles($idOrden);
+        $tasa=$_POST['tasa'];
+        $datos= $ordenes->mostrarDetalles($idOrden);
+        foreach ($datos as $row) {
+          $sub_array = array();
+          $sub_array[] = $row["nombre"]." - ".$row["descripcion"];
+          $sub_array[] = number_format($row["precio"],2);
+          //$sub_array[] = $row["precio"];
+          $sub_array[] = number_format($row["precio"] * $tasa,2);
+         // $sub_array[] = '<button type="button" onClick="eliminar_detalle('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-danger btn-md" title="Eliminar Modelo"><i class="fas fa-trash-alt"></i></button>';
+          
+          $data[]=$sub_array;
+        }
+        $results=array(
+          "sEcho"=>1,
+          "iTotalRecords"=>count($data),
+          "iTotalDisplayRecords"=>count($data),
+          "aaData"=>$data
+          );
         echo json_encode($results);
   
       break;

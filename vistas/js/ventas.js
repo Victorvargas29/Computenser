@@ -1,17 +1,14 @@
 
 
-var tablfa;
+var tabla;
 
 
 //funcion q se ejecuta al inicio
 function init(){
-	tasa_dia();
-		
-	idfactura();
+	tasa_dia();	
 	listarSubTortales();
-	listarfacturas();
 	$("#idVehiculo").selectpicker();
-	$("#form_compra").on("submit", function(e){
+	$("#form_ventas").on("submit", function(e){
 		registrar(e);
 	});
 	$.post("../ajax/Orden.php?op=selectCliente",function(re){
@@ -63,13 +60,14 @@ function init(){
         $("#idOrden ").change(function(){
             $("#idOrden option:selected").each(function(){
                 idOrden= $(this).val();
-				$.post("../ajax/Orden.php?op=mostrarDetalles", {idOrden:idOrden},function(datas){
+				listar(idOrden);
+				//$.post("../ajax/Orden.php?op=mostrarDetalles", {idOrden:idOrden},function(datas){
 					//dibujartabla(datas);
-					for (const iterator of datas) {
-						console.log(iterator.numDoc);
-					}
+					//for (const iterator of datas) {
+					//	console.log(iterator.numDoc);
+					//}
 					//console.log(datas[0].codeServicio);
-                });
+                //});
 			});
         });
     });
@@ -79,7 +77,7 @@ function init(){
 
 function tasa_dia(){
 $.getJSON("https://s3.amazonaws.com/dolartoday/data.json",function(data){
-	$('#tasa').val(data.USD.transferencia);
+	$('#tasa').val(data.USD.promedio_real);
  // $('#texto').html('Transferencia: '+data.USD.transferencia+ '<br> Sicad: ' + data.USD.sicad2);
  // $('#al').html('DolarToday al: '+data._timestamp.fecha);
     });   
@@ -123,22 +121,32 @@ $("#comboCedula").change(function(){
 //console.log($("#idServicio").val($("#idServicio").val()));
 });
 
-/*function listar(){
+function listar(idOrden){
+	var tasa=$("#tasa").val();
 	tabla=$('#detalles_ventas').dataTable({ 
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		
 		dom:'frtilp',//Definimos los elementos del control de tabla
 		
-		"ajax":
+		"ajax" : {
+            'url' : '../ajax/Orden.php?op=mostrarDetalles',
+            data : { 'idOrden' : idOrden, 'tasa': tasa},
+            type : "post",
+			datatype: "json",
+			error: function(e){
+				console.log(e.responseText);
+			}
+        },
+		/*"ajax":
 		{
-			url:'arregloDetalle',
+			url:'../ajax/Orden.php?op=mostrarDetalles',
 			type: "get",
 			datatype: "json",
 			error: function(e){
 				console.log(e.responseText);
 			}
-		},
+		},*/
 		"bDestroy":true,
 		"responsive":true,
 		"bInfo":true,
@@ -172,7 +180,7 @@ $("#comboCedula").change(function(){
 
 	}).DataTable();
 
-}*/
+}
 function listarSubTortales(){
 	tabla=$('#sub').dataTable({ 
 		"aProcessing":true,//Activamos el procesamiento del datatables
@@ -258,193 +266,20 @@ function LlenarDetalles(objDetalles){
 	
 }
 
-function agregar_detalles(dat){
-	//console.log(dat);
-	// e.preventDefault();//No se activará la acción predeterminada del evento
-	if (dat==0) {
-		console.log(dat);
-		const objDetalles={
-			cantidad:cant.value,
-			precio: precio.value,
-			idServicio:servicio.value,
-			tasa:tasa.value,
-			descripcion:descripcion.value,
 
-		}
-		LlenarDetalles(objDetalles);
-		
-		dibujartabla(arregloDetalle);
-	} else {
-		arregloDetalle.forEach(deta => {
-			deta.idFactura=dat;
-		
 
-			var formData = new FormData($("#form_compra")[0]);
-			$.post("../ajax/ventas.php?op=detallesDetalles",{"arregloDetalle":deta},function(respuesta){
-				alert(respuesta);
-			});
-		
-		});
-	}
-	
 
-		console.log(arregloDetalle);
 
-}//fin guardar y editar
-function eliminarIten(id){
-	arregloDetalle= arregloDetalle.filter((detalle)=>{
-		if (+id !== +detalle.idServicio) {
-			return detalle;
-			
-		}
-	});
-	dibujartabla(arregloDetalle);
-}
 
-function dibujartabla(arregloDetalle){
-	cuerpotabla.innerHTML="";
-	console.log(arregloDetalle[0]["descripcion"]);
-	/*for (let deta in arregloDetalle) {
-		
-		
-	
-		let fila = document.createElement("tr");
-		fila.innerHTML=`
-						<td>${deta.descripcion}</td>
-						<td>${deta.precio}</td>
-						<td>${deta.numDoc}</td>
-						<td>${deta.numDoc}</td>
-						<td>${deta.ordenServicio}</td>
-						<td>${deta.codeServicio}</td>`;
-		let tdEliminar =document.createElement("td");
-		let botonEliminar = document.createElement("button");
-		botonEliminar.classList.add("btn","btn-danger");
-		botonEliminar.innerText="Eliminar";
-		tdEliminar.appendChild(botonEliminar);
-		fila.appendChild(tdEliminar);
-		botonEliminar.onclick=()=>{
-			eliminarIten(deta.idServicio);
-		};
-		cuerpotabla.appendChild(fila);
-	}*/
 
-}
-function cargarlista(cedula1,letra){
-
-	var cedula=letra+cedula1;
-	if (cedula=='V-' || cedula=='J-' || cedula=='C-' || cedula=='G-') {
-		$("#cedula").val(cedula1);  // $("#cedula") esto es el id del campo del formulario	
-		$("#nombre").val(" ");   //data.nombre el nombre que se coloca en el lado derecho es
-	//	$("#nombre").prop('disabled', true);
-
-		$("#apellido").val(""); //el que se coloco en el ajax en $output["nombre"]
-		$("#direccion").val("");
-		$("#telefono").val("");
-		$("#correo").val("");
-		
-	}
-
-	console.log("asdfa",cedula);
-		
-		$.post("../ajax/cliente.php?op=mostrar",{cedula : cedula}, function(data, status)
-		{			
-			data = JSON.parse(data);
-			console.log("asdfa",data);				
-				$("#cedula").val(cedula1);  // $("#cedula") esto es el id del campo del formulario	
-				$("#nombre").val(data.nombre+" "+data.apellido);   //data.nombre el nombre que se coloca en el lado derecho es
-				$("#nombre").prop('disabled', true);
-
-				$("#apellido").val(data.apellido); //el que se coloco en el ajax en $output["nombre"]
-				$("#direccion").val(data.direccion);
-				$("#telefono").val(data.telefono);
-				$("#correo").val(data.correo);
-				
-			
-
-		});	
-}
-function cargarlistaE(cedula){
-
-	
-		
-	$.post("../ajax/empleada.php?op=mostrar",{cedula : cedula}, function(data, status)
-	{
-		console.log(data);
-		data = JSON.parse(data);
-
-		
-	//	$("#idEmpleada").val(data.cedula);
-		//$("#cedula").
-		$("#cedula").val(cedula);  // $("#cedula") esto es el id del campo del formulario
-	//	$("#cedula").prop('disabled', false);
-		
-		
-		$("#nombres").val(data.nombre);   //data.nombre el nombre que se coloca en el lado derecho es
-		$("#apellidos").val(data.apellido); //el que se coloco en el ajax en $output["nombre"]
-		$("#telefono").val(data.telefono);
-		$("#Departamento").val(data.nom);
-		//$("#email").val(data.email);
-		
-
-		
-
-	});
-
-}
-function cargarServicio(idServicio){
-	
-		$.post("../ajax/servicio.php?op=mostrar",{idServicio : idServicio}, function(data, status)
-		{
-			console.log(data);			
-			data =JSON.parse(data);	  
-			 $("#precio").val(data.precio);
-			 $("#nombre_ser").val(data.nombre);
-			 
-		});
-		//var sel =document.getElementById("idServicio");
-	////var seltex= sel.options[getElementIndex("idServicio").text]
-	///$("nombre_ser").val($seltex);
-}
-function idfactura(){
-	var idFf=1;
-	$.post("../ajax/ventas.php?op=mostrar", function(data, status)
-	{	idFf=1;
-		console.log(data);			
-		data =JSON.parse(data);	 
-		idF =data.idFactura;
-		$('#idFacturas').html(idF);
-		 $("#idFactura").val(idF);
-	//	 $("#idFacturas").val(idF);
-		// console.log(idF); 
-		//// $("#nombre_ser").val(data.nombre);
-	});
-	///$("#idFactura").val($("#idFactura").val()+1);
-	//var sel =document.getElementById("idServicio");
-////var seltex= sel.options[getElementIndex("idServicio").text]
-///$("nombre_ser").val($seltex);
-}
-
-function eliminar_item(iddetallesFT){
-	
-	$.ajax({
-		url:"../ajax/ventas.php?op=eliminar_item",
-		method:"POST",
-		data:{iddetallesFT:iddetallesFT},
-
-		success:function(data){
-			$("#detalles_ventas").DataTable().ajax.reload();
-			$("#sub").DataTable().ajax.reload();
-		}
-	});
-}
 
 function registrar(e){
 	e.preventDefault();
 	//e.preventDefault(); //No se activará la acción predeterminada del evento
-	var formData = new FormData($("#form_compra")[0]);
+	var formData = new FormData($("#form_ventas")[0]);
 	//console.log("registrarrrrrr",formData);
 		$.ajax({
-			url: "../ajax/ventas.php?op=guardarVenta",
+			url: "../ajax/ventas.php?op=guardarFactura",
 			type: "POST",
 			data: formData,
 			contentType: false,
@@ -454,42 +289,19 @@ function registrar(e){
 
 				console.log("datps",datos); //muestre los valores en la consola
 
-				$('#form_compra')[0].reset();
+				$('#form_ventas')[0].reset();
 				//$('#servicioModal').modal('hide');
 				$("#detalles_ventas").DataTable().ajax.reload();
 				$("#sub").DataTable().ajax.reload();
-				idfactura();
-				tasa_dia();
-				agregar_detalles(datos);
 				
-				//$('#resultados_ajax').html(datos);
-				//$('#servicio_data').DataTable().ajax.reload();
-				//limpiar();
+				tasa_dia();
+				
 			}
 		});
 	
 }
 
-function borrar_temporal(){
-	var formData = new FormData($("#form_compra")[0]);
-	$.ajax({
-		url: "../ajax/ventas.php?op=borrar_temp",
-		type: "POST",
-		data: formData,
-		contentType: false,
-		processData: false,
 
-		success: function(datos){
-
-			console.log(datos); //muestre los valores en la consola
-			$('#form_compra')[0].reset();
-			$("#detalles_ventas").DataTable().ajax.reload();
-			$("#sub").DataTable().ajax.reload();
-			idfactura();
-			tasa_dia();
-		}
-	});
-}
 
 function listarfacturas(){
 
@@ -571,50 +383,7 @@ function mostrarFactura(idFactura){
 }//fin funcion mostrar
 
 
-function tipomoneda(idFactura, tipo_moneda){
-		var coin = "";
-		if(tipo_moneda==1){
-			coin="Bolivares"		
-			}else{
-				coin="Dolares";
-			}
-	swal.fire({
-		
-		title: "¿Desea cambiar el tipo de moneda a "+coin+"?",
-		type: "question",
-		showCancelButton: true,
-		confirmButtonText: "Cambiar",
-		confirmButtonColor: "#3085d6",
-		cancelButtonColor: "#ca5939"
-	})
-	.then(result => {
-		 if (result.value) {
-			   $.ajax({
-				url:"../ajax/ventas.php?op=activarydesactivar",
-				method:"POST",
-				data:{idFactura:idFactura, tipo_moneda:tipo_moneda},
 
-				success:function(data){
-			//		$("#resultados_ajax").html(data);
-					$("#factura_data").DataTable().ajax.reload();
-				}
-			});
-			if(tipo_moneda==0){
-				  tipo_moneda="Dolares"
-			  }else{
-				  tipo_moneda="Bolivares"
-			  }
-		swal.fire(
-		  "Se cambio el tipo de moneda a: "+tipo_moneda,
-
-		  "¡Aviso!",
-		  "success"
-		);
-	  }
-	});
-
-
-}//fin tipomoneda
 
 function anulacion(idFactura, anulado){
 if(anulado!=1){

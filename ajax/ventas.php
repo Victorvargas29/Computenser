@@ -50,34 +50,10 @@
 
     break;
 
-   /* case "listar":
-      $datos = $venta->detalles_venta($idUsuario);
-      $data = array();
-      foreach ($datos as $row) {
-        $sub_array = array();
+   
 
-        $sub_array[] = '<button title="Eliminar" type="button" onClick="eliminar_item('.$row["iddetallesFT"].');"  id="'.$row["iddetallesFT"].'" class="btn btn-danger btn-md"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>';
-        $sub_array[] = $row["nombre_serv"]." - ".$row["descripcion"];
-        $sub_array[] = $row["precioTemp"];
-        $sub_array[] = number_format($row["precioTemp"] * $row["tasa"],2);
-        // $sub_array[] = $row["precioTemp"] * $row["tasa"] * 0.16; 
-        $sub_array[] = $row["cantidad"];
-        $sub_array[] = number_format($row["precioTemp"] * $row["tasa"] * $row["cantidad"],2);
-        $sub_array[] = number_format($row["precioTemp"] * $row["cantidad"],2);
-        
-        $data[]=$sub_array;
-      }
-        $results=array(
-          "sEcho"=>1,
-          "iTotalRecords"=>count($data),
-          "iTotalDisplayRecords"=>count($data),
-          "aaData"=>$data
-          );
-        echo json_encode($results);
-    break;*/
-
-    case "listarSubtotales":
-      $datos = $venta->detalles_venta($idUsuario);
+    /*case "listarSubtotales":
+     // $datos = $venta->detalles_venta($idUsuario);
       $data = array();
       foreach ($datos as $row) {
         $sub_array = array();
@@ -90,91 +66,32 @@
         $precioT = ($row["precioTemp"] * $row["cantidad"]*1.16)+$precioT;
         
       }
-    //   $sub_array[] = $precio;
-      $sub_array[] = number_format($precioBs,2);
-    //   $sub_array[] = $iva;
-      $sub_array[] = number_format($ivaBs,2);
-    //   $sub_array[] = $precioT;
-      $sub_array[] = number_format($precioTBs,2);
-      
-      $data[]=$sub_array;
+      //   $sub_array[] = $precio;
+        $sub_array[] = number_format($precioBs,2);
+      //   $sub_array[] = $iva;
+        $sub_array[] = number_format($ivaBs,2);
+      //   $sub_array[] = $precioT;
+        $sub_array[] = number_format($precioTBs,2);
+        
+        $data[]=$sub_array;
 
-      
-        $results=array(
-          "sEcho"=>1,
-          "iTotalRecords"=>count($data),
-          "iTotalDisplayRecords"=>count($data),
-          "aaData"=>$data
-          );
-        echo json_encode($results);
-    break;
-
-    case 'mostrar':
-
-      $facturaMax = $venta->Max();
-      $temporalMax = $venta->datos_en_temporal();
-      $TemporalUsuario = $venta->datos_en_temporal_idUsuario($idUsuario);
- 
-      if(is_array($temporalMax)==true and count($temporalMax)>0){
-
-        if(is_array($TemporalUsuario)==true and count($TemporalUsuario)>0){
-          foreach ($TemporalUsuario as $row) {
-
-            //	$output["idDepartamento"] = $row["idDepartamento"];
-              $output["idFactura"] = $row["idFactura"];
-            }
-            echo json_encode($output);
-        }else{
-
-            foreach ($temporalMax as $row) {
-            //	$output["idDepartamento"] = $row["idDepartamento"];
-             $temp= $row["idFactura"];
-            }
-            foreach ($facturaMax as $facturaMaxima) {
-              //	$output["idDepartamento"] = $row["idDepartamento"];
-                $fact = $facturaMaxima["idFactura"];
-            }
-              if ($fact>$temp) {
-                foreach ($facturaMax as $row) {
-                  //	$output["idDepartamento"] = $row["idDepartamento"];
-                  $output["idFactura"]= $row["idFactura"]+1;
-                  }
-
-              }
-              else{
-                foreach ($temporalMax as $row) {
-                  //	$output["idDepartamento"] = $row["idDepartamento"];
-                  $output["idFactura"]= $row["idFactura"]+1;
-                  }
-
-              }
-            echo json_encode($output);
-        }
-      }else{
-
-          if(is_array($facturaMax)==true and count($facturaMax)>0){
-            foreach ($facturaMax as $row) {
-            //	$output["idDepartamento"] = $row["idDepartamento"];
-              $output["idFactura"] = $row["idFactura"]+1;
-            }
-            echo json_encode($output);
-        }else{
-          $errors[]="El Servicio no existe";
-        }
-      }
-
-      
-
-      break;
-
+        
+          $results=array(
+            "sEcho"=>1,
+            "iTotalRecords"=>count($data),
+            "iTotalDisplayRecords"=>count($data),
+            "aaData"=>$data
+            );
+          echo json_encode($results);
+    break;*/
     case "eliminar_item":
       $venta->eliminar_item($_POST["iddetallesFT"]);   
     break;
     
-    case 'guardarVenta':
+    case 'guardarFactura':
             
 
-            $res= $venta->registrar($_POST["cedula"],$_POST["comboCedula"],$_POST["moneda"],$_POST["placa"],$_POST["oentrega"]);
+            $res= $venta->registrar($_POST["tasa"],$_POST["idOrden"]);
             echo $res;
              //$venta->detallesDetalles($idUsuario);
              sleep(2);

@@ -21,71 +21,28 @@
    	    	return $resultado=$sql->fetchAll();
    	    }
 
-   	    public function agregar_detalle($idFactura,$idServicio,$nombre_ser,$precio,$tasa,$descripcion,$cantidad,$idUsuario){
-
-             $conectar=parent::conectar();
-             //parent::set_names();
-             $sql="insert into detallesfacturatemporal values(null,?,?,?,?,?,?,?,?);";
-             $sql=$conectar->prepare($sql);
-             $sql->bindValue(1, $_POST["idFactura"]); 
-             $sql->bindValue(2, $_POST["idServicio"]); 
-             $sql->bindValue(3, $_POST["nombre_ser"]);
-             $sql->bindValue(4, $_POST["precio"]);
-             $sql->bindValue(5, $_POST["descripcion"]);
-             $sql->bindValue(6, $_POST["tasa"]);
-             $sql->bindValue(7, $_POST["cantidad"]);
-             $sql->bindValue(8, $idUsuario); 
-            // $sql->bindValue(4, $_POST["tasa"]);                   
-             $sql->execute();
-             //echo "se registro";
-            // print_r($_POST);
-   	    }
-         public function registrar($cedula,$comboCedula,$moneda,$placa,$oentrega){
+  
+         public function registrar($tasa,$idorden){
          //echo $comboCedula;
           $conectar=parent::conectar();
           
-          $sql="insert into factura values(null,now(),'V-123','1','0','hg','145');";
-         // $sql="delete from factura where idFactura=19";
+          $sql="insert into factura values(null,now(),?,?,?);";
+        
           $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, '0'); 
+          $sql->bindValue(2, $tasa); 
+          $sql->bindValue(3, $idorden);
+          
           
           $result=$sql->execute();
-          $ress= $conectar->lastInsertId();
-         // $sql->bindValue(1, $_POST["idFactura"]); 
-        /*  $sql->bindValue(1, $comboCedula."".$cedula); 
-          $sql->bindValue(2, $moneda); 
-          $sql->bindValue(3, $placa); 
-          $sql->bindValue(4, $oentrega);
-          ; */
-         // $sql->bindValue(4, $_POST["tasa"]);                   
-          
-         echo $ress;
-          //eliminar_temporal();
           return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
          // print_r($_POST);
       }
 
           
-          public function eliminar_temporal(){
-            $conectar=parent::conectar();
+         
 
-          $sql="delete from detallesfacturatemporal";
-          $sql=$conectar->prepare($sql);
-          
-          $sql->execute();
-          return $resultado=$sql->fetch();
-
-          }
-
-          public function eliminar_temp_condicion($idUsuario){
-            $conectar=parent::conectar();
-
-          $sql="delete from detallesfacturatemporal where idUsuario=?";
-          $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $idUsuario);
-          $sql->execute();
-          return $resultado=$sql->fetch();
-
-          }
+        
 
    	    public function editar_venta($cedula, $nombre, $apellido,$direccion,$telefono){
 
@@ -127,17 +84,7 @@
           return $resultado=$sql->fetch();
         }
 
-        public function detalles_venta($idUsuario){
-         
-          $conectar=parent::conectar();
-          $sql="select * from detallesfacturatemporal where idUsuario=?"; 
-          $sql=$conectar->prepare($sql);
-          $sql->bindValue(1, $idUsuario);
-          $sql->execute();
-
-          return $resultado=$sql->fetchAll();
-
-        }
+       
         public function venta(){
          
           $conectar=parent::conectar();
@@ -152,42 +99,12 @@
 
         }
 
-        public function eliminar_item($idTemporal){
-          $conectar=parent::conectar();
-
-          $sql="delete from detallesfacturatemporal where iddetallesFT=?";
-
-          $sql=$conectar->prepare($sql);
-          $sql->bindValue(1,$idTemporal);
-          $sql->execute();
-
-          return $resultado=$sql->fetch();
-        }
+      
 
 
-        public function datos_en_temporal(){
-          $conectar=parent::conectar();
-          //	parent::set_names();
         
-            $sql="select idFactura from detallesfacturatemporal";
-            $sql=$conectar->prepare($sql);
-            $sql->execute();
-            return $resultado=$sql->fetchAll();
 
-        }
-
-        public function datos_en_temporal_idUsuario($idUsuario){
-          $conectar=parent::conectar();
-          //	parent::set_names();
-        
-            $sql="select idFactura, idUsuario from detallesfacturatemporal where idUsuario=?";
-            $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $idUsuario);
-            $sql->execute();
-            return $resultado=$sql->fetchAll();
-
-        }
-
+       
         public function Max2(){
           $conectar=parent::conectar();
           //	parent::set_names();
