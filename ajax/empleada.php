@@ -19,13 +19,13 @@ require_once("../modelos/Empleadas.php");
    		$datos = $empleada->get_empleada_por_id($_POST["cedula"]);
    		if(is_array($datos)==true and count($datos)==0){
 //
-   					$empleada->registrar_empleada($cedula, $nombre, $telefono, $direccion);
+   					$empleada->registrar_empleada($_POST["cedula"], $_POST["nombre"], $_POST["telefono"], $_POST["direccion"]);
 
    					echo "Se ha registrado correctamente un nuevo empleado";
 
    			}else{
 
-   				$empleada->editar_empleada($cedula, $nombre, $telefono, $direccion);
+   				$empleada->editar_empleada($_POST["cedula"], $_POST["nombre"], $_POST["telefono"], $_POST["direccion"]);
    				echo "Se ha editado correctamente los datos del empleado";
    			}
 

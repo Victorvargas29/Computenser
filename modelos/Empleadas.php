@@ -72,36 +72,16 @@
         //metodo para editar usuario
    	    public function editar_empleada($cedula, $nombre, $telefono, $direccion){
 
-             $conectar=parent::conectar();
+             $conectar=parent::conectar(); 
             // parent::set_names();
 
-             $sql="update empleada set
-
-              nombre=?,
-              telefono=?,
-              direccion=?
-
-              where 
-              cedula=?
-
-             ";
-
-             //echo $sql;    //imprime la consulta para verificar en phpmyadmin
-
+             $sql="update empleada set nombre=?, telefono=?, direccion=? where cedula=?";
              $sql=$conectar->prepare($sql);
-
-             $sql->bindValue(1, $_POST["nombre"]);
-             $sql->bindValue(3, $_POST["telefono"]);
-             $sql->bindValue(4, $_POST["direccion"]);
-             $sql->bindValue(5, $_POST["cedula"]);
-
+             $sql->bindValue(1, $nombre);
+             $sql->bindValue(2, $telefono);
+             $sql->bindValue(3, $direccion);
+             $sql->bindValue(4, $cedula);
              $sql->execute();
-            
-
-            print_r($_POST);
-             //print_r($_POST); 	//comprobar que si se estan enviando los datos
-   	   /*para q se muestre los valores en la consola hay q agregar console.log(datos);
-   	    en el js debajo del success   */
    	    }
 
         
