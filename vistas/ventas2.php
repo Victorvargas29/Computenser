@@ -115,8 +115,7 @@
                 <div class="container"><!-- /.container -->
                   <div class="row">
                 
-                    <div class="col-lg-1">            
-                    </div>
+                    
                     <div class="col-lg-3 pt-5 mt-5"> 
                         <label class="col-form-label ml-3">Tasa del Día:</label>
                         <input type="text" name="tasa" id="tasa" placeholder="Tasa" class="form-control"></input>
@@ -125,7 +124,7 @@
                     <div class="col-lg-1">            
                     </div> 
                   
-                    <div class="col-lg-5">
+                    <div class="col-lg-8">
                       <div class="box lg-6">
                           <div class="panel-body table-responsive">
                             
@@ -133,7 +132,10 @@
                                 <thead>
                                   <tr class="bg-success">
                                     <!-- <th class="col-lg-1">SUBTOTAL $</th> -->
-                                    <th class="col-lg-3">SUBTOTAL BsS</th>           
+                                    <th class="col-lg-3">SUBTOTAL $$</th> 
+                                    <th class="col-lg-3">TOTAL $$</th> 
+
+                                    <th class="col-lg-3">SUBTOTAL Bs</th>           
                                     <!-- <th class="col-lg-2">DESCUENTO %</th> -->
                                     <th class="col-lg-2">I.V.A 16%</th> 
                                     <!-- <th class="col-lg-2">TOTAL $</th> -->
@@ -141,26 +143,19 @@
                                   </tr>
                                 </thead>
                                 <tbody id="subTotales">
-                                <tr class="bg-success">
-                                    <!-- <th class="col-lg-1">SUBTOTAL $</th> -->
-                                    <th class="col-lg-3"> </th>           
-                                    <!-- <th class="col-lg-2">DESCUENTO %</th> -->
-                                    <th class="col-lg-2"> </th> 
-                                    <!-- <th class="col-lg-2">TOTAL $</th> -->
-                                    <th class="col-lg-2"> </th>     
-                                </tr>
+                                
                                   
                                 </tbody>
                               </table>
                             <div class="boton_registrar">
 
-                              <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Venta</button>
+                              <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Factura</button>
                           
                             </div>
                       
                           </div> <!-- /.box-body -->
                         </div> <!-- /.box -->            
-                    </div> <!-- /col-lg-5 -->
+                    </div> <!-- /col-lg-8 -->
                   </div><!-- /.container -->
               </div><!-- /container-lg-5 -->
           </form>

@@ -74,11 +74,14 @@ function init(){
 function dibujartabla(sub){
 	var tasa=$('#tasa').val();
 	var precio=tasa*sub;
-	var iva=(tasa*sub)*0.16;
-	var total=(tasa*sub)+((tasa*sub)*0.16);
+	var iva=precio*0.16;
+	var total=precio*1.16;
+	var totalDolar=(sub*1.16);
 	subTotales.innerHTML="";
 		let fila = document.createElement("tr");
 		fila.innerHTML=`
+						<td>${sub}</td>
+						<td>${totalDolar.toFixed(2)}</td>
 						<td>${precio.toFixed(2)}</td>
 						<td>${iva.toFixed(2)}</td>
 						<td>${total.toFixed(2)}</td>`;
