@@ -291,43 +291,41 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a id="home" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Inicio</span></a></li>
-                        <li class="sidebar-item"> <a id="servi_prestado2" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Facturacion</span></a></li>
-                        <li class="sidebar-item"> <a id="compra" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Ordenes</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Facturacion </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item pl-3"> <a id="servi_prestado2" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Factura</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Ordenes </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item pl-3"> <a id="compra" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Orden</span></a></li>
+                            </ul>
+                        </li>
                         <!-- <li class="sidebar-item"> <a id="servi_prestado" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Servicio Prestado</span></a></li> -->
                                                
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Servicios </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"> <a id="depa" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-sitemap"></i><span class="hide-menu">Departamentos</span></a></li>
-                                <li class="sidebar-item"><a id="servi" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Servicios </span></a></li>
+                                <li class="sidebar-item pl-3"><a id="servi" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Servicios </span></a></li>
                             </ul>
                         </li>
                         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="empleadas_p" aria-expanded="false"><i class="fas fa-address-card"></i><span class="hide-menu">Empleados</span></a></li>
                         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="clientess" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Clientes</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="proveedor" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Proveedores</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Inventario </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"> <a disabled id="producto" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-sitemap"></i><span class="hide-menu">Producto</span></a></li>
-                              <!--  <li class="sidebar-item"><a id="presentacionP" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Presentacion del producto </span></a></li>
-                                <li class="sidebar-item"><a id="Iinventario" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Inventario </span></a></li>-->
-                            </ul>      
-                        </li>
+                      
 
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="usuarios_p" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Usuarios</span></a></li>
                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="reportes_p" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reportes Facturas</span></a></li>
-                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="reportes_presupuestos" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reportes Presupuestos</span></a></li>
-                     <li class="sidebar-item"> <a id="presupuesto_p" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Presupuesto</span></a></li>
                      <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Vehiculos </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a id="vehiculo" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Vehiculos </span></a></li>
-                                <li class="sidebar-item"> <a id="marca" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Marcas</span></a></li>
-                                <li class="sidebar-item"> <a id="modelo" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Modelos</span></a></li>
-                                <li class="sidebar-item"><a id="color" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Colores </span></a></li>
+                                <li class="sidebar-item pl-3"><a id="vehiculo" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Vehiculos </span></a></li>
+                                <li class="sidebar-item pl-3"> <a id="marca" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Marcas</span></a></li>
+                                <li class="sidebar-item pl-3"> <a id="modelo" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Modelos</span></a></li>
+                                <li class="sidebar-item pl-3"><a id="color" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Colores </span></a></li>
                             </ul>      
                         </li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="fallas" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">fallas</span></a></li>
+               
                      
                    <!--   <li class="sidebar-item"> <a id="marca" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Marcas</span></a></li>
                      <li class="sidebar-item"> <a id="modelo" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Modelos</span></a></li>

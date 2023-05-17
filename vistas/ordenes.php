@@ -16,19 +16,9 @@ require_once("../modelos/Clientes.php");
 $clientes = new clientes();
 
 $cli = $clientes->get_Cliente();
+      
 
-
-    require_once("../modelos/Productos.php");
-
-    $productos = new Producto();
-
-    $prod = $productos->get_producto();
-       
-       
-
-   // if(isset($_SESSION["idUsuario"])){
-
-   // }
+ 
     
 ?>
 

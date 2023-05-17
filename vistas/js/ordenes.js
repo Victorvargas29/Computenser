@@ -136,6 +136,10 @@ function registrar(e){
 	
 	
 }
+
+
+
+
 function guardar_detalles(datos) {
 	arregloDetalle.forEach(deta => {
 		deta.idOrden=datos;
@@ -175,7 +179,7 @@ function guardar_detalles(datos) {
 function servicioEmpleada(data,servicio) {
 	
 		arregloEmpleada.forEach(empleada => {	
-			var formData = new FormData($("#form_compra")[0]);
+			
 			if (+servicio===+empleada.idServicio) {
 				empleada.ordenServicio=String(data);
 				$.post("../ajax/Orden.php?op=detallesEmpleada",{"arregloEmpleada":empleada},function(data){
