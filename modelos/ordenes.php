@@ -186,6 +186,16 @@
 
           return $resultado= $sql->fetchAll();
         }
+
+        public function cambiarEstado($idOrden){
+          $conectar = parent::conectar(); 
+
+          $sql="update orden set estatus='1' where numDoc=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$idOrden);
+          $sql->execute();
+          echo $idOrden;
+        }
         
    }
    

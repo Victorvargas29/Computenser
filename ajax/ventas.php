@@ -94,7 +94,7 @@
             $res= $venta->registrar($_POST["tasa"],$_POST["idOrden"]);
             echo $res;
              //$venta->detallesDetalles($idUsuario);
-             sleep(2);
+             //sleep(2);
              //$venta->eliminar_temp_condicion($idUsuario);
             
             
