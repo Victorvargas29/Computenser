@@ -17,3 +17,10 @@
     display: flex;
     outline: none;
 }
+
+.div2{
+  height:100%;
+  width: 100%;
+
+  background-color:#e2e1e1;
+}

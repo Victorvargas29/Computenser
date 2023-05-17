@@ -21,8 +21,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="20x20" href="../public/assets/images/m.png">
-    <title>MERILARA</title>
+    <link rel="icon" type="image/png" sizes="20x20" href="../public/assets/images/logo-r.png">
+    <title>JYM SERVICE</title>
     <!-- Custom CSS -->
     <link href="../public/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -106,10 +106,10 @@
                     <a id="logo-home" class="navbar-brand" >
                         <!-- Logo icon  -->
                         <b class="logo-icon p-l-8">  
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon
-                            <img src="../public/assets/images/logo-min.png" alt="homepage" class="light-logo" /> 
-                           -->
+                            <!--You can put here icon as well // //--> <i class="wi wi-sunset"></i>
+                            <!-- Dark Logo icon-->
+                            <img src="../public/assets/images/logo-r.png" alt="homepage" class="light-logo" /> 
+                           
                        </b> 
                      <!--    End Logo icon -->
                          <!-- Logo text -->
@@ -371,7 +371,7 @@
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
 
-
+        
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
