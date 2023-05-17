@@ -3,10 +3,10 @@
 //require_once("../config/conexion.php");
 
 require_once("../modelos/Servicios.php");
-require_once("../modelos/Departamentos.php");
+
 
 	$servicio = new Servicio();
-  $depar = new Departamentos();
+  
 
 
 	//$id_empleada = isset($_POST["id_empleada"]); // $_POST["id_empleada"] del atributo name
@@ -20,20 +20,14 @@ require_once("../modelos/Departamentos.php");
 
    	switch ($_GET["op"]) {
 
-      case 'selectDepartamento':
-        $rspta=$depar->get_departamento_2();
-        echo '<option value="0" selected disabled>Seleccione departamento </option>';
-        foreach ($rspta as $reg) {
-          echo '<option class="font-weight-bold" value='. $reg->idDepartamento .'>'. $reg->nombre . '</option>';
-        }
-      break;
+      
 
       case 'selectServicio':
        
         $rspta=$servicio->get_servicio2();
         echo '<option value="" selected disabled>Seleccione el Servicio</option>';
         foreach($rspta as $regi){
-          echo '<option class="font-weight-bold" value='.$regi->idServicio.'>'.$regi->nombre.'</option>';
+          echo '<option class="font-weight-bold" value='.$regi->codeServicio.'>'.$regi->nombre.'</option>';
         }
 
       break;
@@ -46,7 +40,7 @@ require_once("../modelos/Departamentos.php");
           $datosNombre = $servicio->get_servicio_por_nombre($_POST["nombre"]);
             if(is_array($datos)==true and count($datos)==0){
               if(is_array($datosNombre)==true and count($datosNombre)==0){
-                $servicio->registrar_servicio($_POST["nombre"],$_POST["precio"],$_POST["idDepartamentos"]);
+                $servicio->registrar_servicio($_POST["nombre"],$_POST["precio"]);
                 echo "se registro";
               }else{
                 echo "el producto ya existe";
@@ -67,8 +61,8 @@ require_once("../modelos/Departamentos.php");
    			if(is_array($datos)==true and count($datos)>0){
    				foreach ($datos as $row) {
 
-   				  $output["nombre"] = $row["Nombre"];
-            	$output["precio"]=$row["Precio"];
+   				  $output["nombre"] = $row["nombre"];
+            $output["precio"]=$row["Precio"];
             	
 
    				}
@@ -86,16 +80,16 @@ require_once("../modelos/Departamentos.php");
    				foreach ($datos as $row) {
    					$sub_array = array();
 
-   					$sub_array[]=$row["idServicio"];
+   					$sub_array[]=$row["codeServicio"];
    					$sub_array[]=$row["nombre"];
             $sub_array[]=$row["precio"];
             
-            $sub_array[]=$row["depa_nombre"];
+            
 
-   					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["idServicio"].');"  id="'.$row["idServicio"].'" class="btn btn-warning btn-md update" title="Editar servicio"><i class="fas fa-edit"></i></button>';
+   					 $sub_array[] = '<button type="button" onClick="mostrar('.$row["codeServicio"].');"  id="'.$row["codeServicio"].'" class="btn btn-warning btn-md update" title="Editar servicio"><i class="fas fa-edit"></i></button>';
 
 
-            			$sub_array[] = '<button type="button" onClick="eliminar_servicio('.$row["idServicio"].');"  id="'.$row["idServicio"].'" class="btn btn-danger btn-md" title="Eliminar servicio"><i class="fas fa-trash-alt"></i></button>';
+            			$sub_array[] = '<button type="button" onClick="eliminar_servicio('.$row["codeServicio"].');"  id="'.$row["codeServicio"].'" class="btn btn-danger btn-md" title="Eliminar servicio"><i class="fas fa-trash-alt"></i></button>';
 
    					$data[]=$sub_array;
 

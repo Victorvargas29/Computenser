@@ -15,27 +15,12 @@ function init(){
 		limpiar();
 		$(".modal-title").text("Agregar Servicio");
 		$("#idCategoria").val('0');
-		//$("#idDepartamentos").val('0');
+	
 		//document.getElementById("cedula").disabled = false;
 	});
 
-    $.post("../ajax/servicio.php?op=selectDepartamento", function(r){
-        $("#idDepartamentos").html(r);
-      //  $('#idDepartamentos').selectpicker("refresh");
-    });
-
-    $(document).ready(function(){
-        $("#idDepartamentos").change(function(){
-         
-         //   $('#iddistrito').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-            $("#idDepartamentos option:selected").each(function(){
-                iddepartamento= $(this).val();
-                $.post("../ajax/servicio.php?op=selectCategoria", { iddepartamento:iddepartamento},function(data){
-                    $("#idCategoria").html(data);
-                });
-            });
-        });
-    });
+   
+   
 
 }
 
@@ -46,8 +31,7 @@ function limpiar(){
 	$("#nombre").val("");
 	$("#precio").val("");
 	$("#idCategoria").val('0');	
-	$("#idDepartamentos").val('0');
-//	$('#idDepartamentos').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+	
 	$('#idCategoria').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
 }
 
@@ -128,7 +112,6 @@ function mostrar(idServicio){
 		   //data.nombre el nombre que se coloca en el lado derecho es
 		 //el que se coloco en el ajax en $output["nombre"]
 		 $("#precio").val(data.precio);
-		 $("#idDepartamento").val(data.idDepartamento);
 		 
 		 $('.modal-title').text("Editar Servicio");
 		 $("#idServicio").val(idServicio);

@@ -82,7 +82,7 @@ function init(){
 					 $("#idServicio").val(idServicio1);
 					 $("#nombreServi").val(data.nombre);
 					 console.log("esto es el id servicio",idServicio.value);
-					 
+					
 				});
             });
         });

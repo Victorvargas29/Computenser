@@ -64,8 +64,6 @@
                                 <th>Nombre</th>
                                 <th>Precio</th>
                                
-                                <th>Departamento</th>
-                     
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
                             </tr>
@@ -93,16 +91,6 @@
                 </div>
              
                 <div class="modal-body">
-                  <div class="form-group">
-                        <label for="" class="inputWithIcon col-lg-1 control-label">Departamento</label>
-                        <select class="form-control font-weight-bold" id="idDepartamentos" name="idDepartamentos" required>
-              <!--               <option class="font-weight-bold" value="0">Seleccione Departamentos</option> -->
-                        </select>
-                    </div>
-
-
-                    
-
                     <div class="form-group">
                         <label class="col-form-label">Nombre de Servicio:</label>
                         <input type="text" class="form-control" name="nombre" id="nombre"  required minlength="5" maxlength="40" >
