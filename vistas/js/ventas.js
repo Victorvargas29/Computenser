@@ -287,20 +287,32 @@ function registrar(e){
 
 			success: function(datos){
 
-				console.log("datps",datos); //muestre los valores en la consola
+				console.log("repuesta",datos); //muestre los valores en la consola
 
 				$('#form_ventas')[0].reset();
 				//$('#servicioModal').modal('hide');
 				$("#detalles_ventas").DataTable().ajax.reload();
 				$("#sub").DataTable().ajax.reload();
-				
+				actualizarOrden(datos);
 				tasa_dia();
 				
 			}
 		});
 	
 }
+function actualizarOrden(idOrden){
+	console.log("idORDEN",idOrden);
 
+	$.ajax({
+		url:"../ajax/Orden.php?op=cambiarEstado",
+		method:"POST",
+		data:{idOrden:idOrden},
+		success:function(data){
+			console.log("datps",data);
+		}
+	});
+
+}
 
 
 function listarfacturas(){

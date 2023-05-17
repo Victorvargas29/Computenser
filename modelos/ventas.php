@@ -35,7 +35,7 @@
           
           
           $result=$sql->execute();
-          return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
+          return $idorden;
          // print_r($_POST);
       }
 

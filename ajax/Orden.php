@@ -324,9 +324,9 @@
             $venta->cambiar_moneda($_POST["idFactura"],$_POST["tipo_moneda"]);
       //    }
       break;
-      case "anular":
+      case "cambiarEstado":
   
-            $venta->anular($_POST["idFactura"]);
-
+            $rr=$ordenes->cambiarEstado($_POST["idOrden"]);
+            echo $rr;
       break;
 }
