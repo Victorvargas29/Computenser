@@ -129,7 +129,7 @@
                       <div class="box lg-6">
                           <div class="panel-body table-responsive">
                             
-                              <table class="table table-striped nowrap" width="100%" id="sub">
+                              <table  id="ta" class="table table-striped nowrap" width="100%" id="sub">
                                 <thead>
                                   <tr class="bg-success">
                                     <!-- <th class="col-lg-1">SUBTOTAL $</th> -->
@@ -140,7 +140,15 @@
                                     <th class="col-lg-2">TOTAL</th>     
                                   </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="subTotales">
+                                <tr class="bg-success">
+                                    <!-- <th class="col-lg-1">SUBTOTAL $</th> -->
+                                    <th class="col-lg-3"> </th>           
+                                    <!-- <th class="col-lg-2">DESCUENTO %</th> -->
+                                    <th class="col-lg-2"> </th> 
+                                    <!-- <th class="col-lg-2">TOTAL $</th> -->
+                                    <th class="col-lg-2"> </th>     
+                                </tr>
                                   
                                 </tbody>
                               </table>

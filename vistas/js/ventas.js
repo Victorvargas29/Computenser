@@ -1,12 +1,12 @@
 
 
 var tabla;
-
+var subTotales =document.getElementById("subTotales");
 
 //funcion q se ejecuta al inicio
 function init(){
 	tasa_dia();	
-	listarSubTortales();
+	
 	$("#idVehiculo").selectpicker();
 	$("#form_ventas").on("submit", function(e){
 		registrar(e);
@@ -61,19 +61,31 @@ function init(){
             $("#idOrden option:selected").each(function(){
                 idOrden= $(this).val();
 				listar(idOrden);
-				//$.post("../ajax/Orden.php?op=mostrarDetalles", {idOrden:idOrden},function(datas){
-					//dibujartabla(datas);
-					//for (const iterator of datas) {
-					//	console.log(iterator.numDoc);
-					//}
-					//console.log(datas[0].codeServicio);
-                //});
+				$.post("../ajax/Orden.php?op=sumarTotal", {idOrden:idOrden},function(datas){
+					dibujartabla(datas)
+                });
 			});
         });
     });
 
 }
 
+
+function dibujartabla(sub){
+	var tasa=$('#tasa').val();
+	var precio=tasa*sub;
+	var iva=(tasa*sub)*0.16;
+	var total=(tasa*sub)+((tasa*sub)*0.16);
+	subTotales.innerHTML="";
+		let fila = document.createElement("tr");
+		fila.innerHTML=`
+						<td>${precio.toFixed(2)}</td>
+						<td>${iva.toFixed(2)}</td>
+						<td>${total.toFixed(2)}</td>`;
+		subTotales.appendChild(fila);
+	
+
+}
 
 function tasa_dia(){
 $.getJSON("https://s3.amazonaws.com/dolartoday/data.json",function(data){
@@ -181,56 +193,7 @@ function listar(idOrden){
 	}).DataTable();
 
 }
-function listarSubTortales(){
-	tabla=$('#sub').dataTable({ 
-		"aProcessing":true,//Activamos el procesamiento del datatables
-		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
-		
-		dom:'r',//Definimos los elementos del control de tabla  Bfrtilp' t=mostra reg.
-		
-		"ajax":
-		{
-			url:'../ajax/ventas.php?op=listarSubtotales',
-			type: "get",
-			datatype: "json",
-			error: function(e){
-				console.log(e.responseText);
-			}
-		},
-		"bDestroy":true,
-		"responsive":true,
-		"bInfo":true,
-		"iDisplayLength":10,//por cada 10 reg hace una paginacion
-		"order":[[0,"desc"]],//Ordenar(Columna, Orden)
 
-		"language":{
-			"sProcessing": "Procesando...",
-			"sLengthMenu": "Mostrar _MENU_ registro",
-			"sZeroRecords": "No se encontraron resultados",
-			"sEmptyTable": "Ningun dato disponible en esta tabla",
-			"sInfo": "Mostrando un total de _TOTAL_ registros",
-			"sInfoEmpty": "Mostrando un total de 0 registros",
-			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix": "",
-			"sSearch": "Buscar",
-			"sUrl": "",
-			"sInfoThousands": "",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate":{
-				"sFirst": "Primero",
-				"sLast": "Ultimo",
-				"sNext": "Siguiente",
-				"sPrevious": "Anterior"
-			}, 
-			"oAria":{
-				"sSortAscending": ": Activar para ordenar la columna",
-				"sSortDescending": ": Activar para ordenar la columna"
-			}
-		}//cierra language
-
-	}).DataTable();
-
-}
 var arregloDetalle=[];
 function LlenarDetalles(objDetalles){
 	
