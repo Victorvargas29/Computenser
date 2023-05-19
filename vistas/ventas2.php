@@ -121,7 +121,9 @@
                         <input type="text" name="tasa" id="tasa" placeholder="Tasa" class="form-control"></input>
 
                     </div>
-                    <div class="col-lg-1">            
+                    <div class="col-lg-1">  
+                    <input type="text" name="idFactura" id="idFactura" placeholder="idFactura" class="form-control"></input>
+
                     </div> 
                   
                     <div class="col-lg-8">

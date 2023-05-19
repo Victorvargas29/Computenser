@@ -15,6 +15,13 @@ function init(){
 		$("#cedula").html(re);
 		$("#cedula").selectpicker();
 	});
+	$.post("../ajax/ventas.php?op=max",function(data){
+		
+		var idFac='000'+data;
+		idFac=idFac.replace(" ", "");
+		$("#idFactura").val(idFac);
+		
+	});
 	$.post("../ajax/Servicio.php?op=selectServicio",function(re){
 		$("#idServicio").html(re);
 		$("#idServicio").selectpicker();

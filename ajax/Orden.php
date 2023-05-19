@@ -85,7 +85,7 @@
           $sub_array[] = $row["nombre"]." - ".$row["descripcion"];
           $sub_array[] = number_format($row["precio"],2);
           //$sub_array[] = $row["precio"];
-          $sub_array[] = number_format($row["precio"] * $tasa,2);
+          $sub_array[] = number_format(+$row["precio"] * +$tasa,2);
          // $sub_array[] = '<button type="button" onClick="eliminar_detalle('.$row["idModelo"].');"  id="'.$row["idModelo"].'" class="btn btn-danger btn-md" title="Eliminar Modelo"><i class="fas fa-trash-alt"></i></button>';
           
           $data[]=$sub_array;

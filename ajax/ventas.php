@@ -52,38 +52,17 @@
 
    
 
-    /*case "listarSubtotales":
-     // $datos = $venta->detalles_venta($idUsuario);
-      $data = array();
-      foreach ($datos as $row) {
-        $sub_array = array();
-       
-        $precio= ($row["precioTemp"]*$row["cantidad"])+$precio;
-        $precioBs = ($row["precioTemp"] * $row["tasa"]*$row["cantidad"])+$precioBs;
-        $ivaBs = ($row["precioTemp"] * $row["tasa"]*$row["cantidad"] * 0.16)+$ivaBs; 
-        $iva = ($row["precioTemp"] *$row["cantidad"] * 0.16)+$iva; 
-        $precioTBs = ($row["precioTemp"] * $row["tasa"] * $row["cantidad"]*1.16)+$precioTBs;
-        $precioT = ($row["precioTemp"] * $row["cantidad"]*1.16)+$precioT;
-        
-      }
-      //   $sub_array[] = $precio;
-        $sub_array[] = number_format($precioBs,2);
-      //   $sub_array[] = $iva;
-        $sub_array[] = number_format($ivaBs,2);
-      //   $sub_array[] = $precioT;
-        $sub_array[] = number_format($precioTBs,2);
-        
-        $data[]=$sub_array;
+    case "max":
 
-        
-          $results=array(
-            "sEcho"=>1,
-            "iTotalRecords"=>count($data),
-            "iTotalDisplayRecords"=>count($data),
-            "aaData"=>$data
-            );
-          echo json_encode($results);
-    break;*/
+      $facturaMax = $venta->Max();
+     
+      
+          $fact = $facturaMax["idFactura"];
+          //$output["idFactura"]= $fact+1;
+          echo $fact+1;
+      
+    break;
+
     case "eliminar_item":
       $venta->eliminar_item($_POST["iddetallesFT"]);   
     break;

@@ -90,28 +90,9 @@
             return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
         }
 
-        public function reg_generacion($idModelo, $id_ini, $id_fin){
-        	$conectar = parent::conectar();
-            echo $idModelo," - ",$id_ini, " - ",$id_fin;
-        	$sql="insert into generacion values(null,?,?,?);";
-            $sql=$conectar->prepare($sql);
-        	$sql->bindValue(1, $idModelo);
-            $sql->bindValue(2, $id_ini);
-            $sql->bindValue(3, $id_fin);
-
-    
-			$sql->execute();
-        }
+       
         
-        public function generacion_por_modelo($idModelo){
-            $conectar=parent::conectar();
-
-            $sql="select * from generacion where idModelo=?";
-            $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $idModelo);
-            $sql->execute();
-            return $resultado=$sql->fetchAll(PDO::FETCH_OBJ);
-		}
+       
         
 
 	}// fin class modelo

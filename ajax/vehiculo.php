@@ -18,7 +18,7 @@ require_once("../modelos/Color.php");
   $idModelo = isset($_POST["idModelo"]);   
   $idColor = isset($_POST["idColor"]);
   $año = isset($_POST["año"]);
-  $generacion = isset($_POST["generacion"]);
+
 
   switch ($_GET["op"]) {
 
@@ -49,18 +49,10 @@ require_once("../modelos/Color.php");
       }
     break;
 
-    case 'selectGen':
-      $idModelo=$_POST['idModelo'];
-      $rspta=$modelo->generacion_por_modelo($idModelo);
-      echo '<option value="0" selected disabled>Seleccione generacion</option>';
-      foreach($rspta as $regi){
-        echo '<option class="font-weight-bold" value='.$regi->id.'>'.'• '.$regi->anno1.'-'.$regi->anno2.'</option>';
-      }
-  
-    break;
+   
 
     case 'selectCliente':
-      $rspta = $cliente->get_cliente();
+      $rspta = $cliente->get_cliente2();
       echo '<option value="0" selected disabled>Seleccione cliente</option>';
       foreach($rspta as $regist){
         echo '<option class="font-weight-bold" value='.$regist->cedula.'>'.$regist->cedula.' - '.$regist->nombre.'</option>';
@@ -72,12 +64,12 @@ require_once("../modelos/Color.php");
     
         $datos = $vehiculo->get_vehiculo_por_id($_POST["placa"]);
           if(is_array($datos)==true and count($datos)==0){
-            $vehiculo->registrar_vehiculo($_POST["placa"],$_POST["cedula"],$_POST["año"],$_POST["idColor"],$_POST["generacion"]);
+            $vehiculo->registrar_vehiculo($_POST["placa"],$_POST["cedula"],$_POST["idColor"],$_POST["año"],$_POST["idModelo"]);
             echo "se registro";
             echo $_POST["cedula"];   
           }else{
             echo "el vehiculo ya existe";
-            $vehiculo->editar_vehiculo($placa,$año,$idColor,$generacion);
+            $vehiculo->editar_vehiculo($_POST["placa"],$_POST["cedula"],$_POST["idColor"],$_POST["año"],$_POST["idModelo"]);
             echo "se edito"; 
           }
            
@@ -92,7 +84,6 @@ require_once("../modelos/Color.php");
           $output["nombre"]=$row["nombreCli"];
           $output["idMarca"]=$row["idMarca"];
           $output["idModelo"]=$row["idModelo"];
-          $output["idGeneracion"]=$row["idGeneracion"];
           $output["anno"]=$row["anno"];
           $output["idColor"]=$row["idColor"];
         }

@@ -63,7 +63,7 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Marca</th>
-                                <th width="10%">Generacion</th>
+                            
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
                             </tr>
@@ -82,8 +82,7 @@
     <?php 
     //ventana modal modelo
     require_once("modal/modal-modelo.php");
-    //ventana modal generacion vehiculo
-    require_once("modal/modal-generacion.php");
+    
     ?>      
 
 </div>  <!-- container-fluid-->

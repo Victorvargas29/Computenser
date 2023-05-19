@@ -144,8 +144,7 @@
           from vehiculo v 
           INNER JOIN cliente c ON v.cedula=c.cedula
           INNER JOIN color co ON v.idColor=co.idColor
-          INNER JOIN generacion g ON v.idGeneracion=g.id
-          INNER JOIN modelo mo ON g.idModelo=mo.idModelo
+          INNER JOIN modelo mo ON v.idModelo=mo.idModelo
           INNER JOIN marca ma ON mo.idMarca=ma.idMarca where c.cedula=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$cedula);
@@ -184,7 +183,7 @@
           $sql->bindValue(1,$nunDoc);
           $sql->execute();
 
-          return $resultado= $sql->fetchAll();
+          return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function cambiarEstado($idOrden){

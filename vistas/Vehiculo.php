@@ -103,13 +103,7 @@
                         <select class="form-control font-weight-bold" id="idModelo" name="idModelo" required>
                         </select>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="" class="col-lg-1 control-label">Generacion</label>
-                        <select class="form-control font-weight-bold" id="generacion" name="generacion" required>
-                        </select>
-                    </div>
-                    
+                                        
                     <label class="col-form-label">Año:</label>
                     <input type="text" class="form-control" name="año" id="año" required>
                     

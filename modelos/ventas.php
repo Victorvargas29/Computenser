@@ -99,23 +99,17 @@
 
         }
 
-      
-
-
-        
-
-       
-        public function Max2(){
+        public function Max(){
           $conectar=parent::conectar();
           //	parent::set_names();
-            $sql="select MAX(idFactura) from factura";
+            $sql="select MAX(idFactura)idFactura from factura";
             $sql=$conectar->prepare($sql);
             $sql->execute();
           // echo intval($sql);
-            return $resultado=$sql->fetchAll();
+          return $resultado= $sql->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function Max(){
+        public function Max2(){
           $conectar=parent::conectar();
         //	parent::set_names();
           $sql="select idFactura from factura order by idFactura asc";
