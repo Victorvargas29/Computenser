@@ -141,21 +141,30 @@ function registrar(e){
 
 
 function guardar_detalles(datos) {
-	arregloDetalle.forEach(deta => {
+	for (const deta of arregloDetalle) {
 		deta.idOrden=datos;
 		ordenSer=deta.idServicio+""+deta.idOrden;
 		ordenSer=ordenSer.replace(" ", "");
-		
-		$.post("../ajax/Orden.php?op=detallesDetalles",{"arregloDetalle":deta},function(datas){
+		let todoMenus;
+		$.ajax({
+			url:"../ajax/Orden.php?op=detallesDetalles",
+			method:"POST",
+			data:{"arregloDetalle":deta},
+			async:false,
 
+			success:function(data){
+				
+			
+				console.log(" viendo el orden servicios ",data);
+			}
 		});
-		setTimeout(function(){
-			servicioEmpleada(ordenSer,deta.idServicio);
-			console.log(" viendo el orden servicios ",ordenSer);
-		}, 2000);
-		
+		setTimeout(servicioEmpleada(ordenSer,deta.idServicio), 2000);
+		//setTimeout(function(){
+			
+			
+		//}, 100);
+	}
 	
-	});
 	 
 }
 function servicioEmpleada(data,servicio) {
@@ -163,10 +172,11 @@ function servicioEmpleada(data,servicio) {
 		arregloEmpleada.forEach(empleada => {	
 			
 			if (+servicio===+empleada.idServicio) {
+				console.log(" viendo las empleadas ",empleada.nombreE, "con el servicio", servicio);
 				empleada.ordenServicio=String(data);
 				$.post("../ajax/Orden.php?op=detallesEmpleada",{"arregloEmpleada":empleada},function(data){
 		
-					bootbox.alert(data);
+					//alert(data);
 				});
 			} 			
 		});
@@ -266,6 +276,7 @@ function agregar_detalles(){
 				descripcion:descripcion.value,
 				nombreServi:nombreServi.value,
 			}
+			$("#descripcion").val('');
 			$("#idServicio").val('default').selectpicker("refresh");
 			LlenarDetalles(objDetalles);
 			dibujartabla(arregloDetalle);
@@ -295,11 +306,11 @@ function agregar_empleadas(){
 
 	if ($("#idEmpleada").val()!==null) {
 		const objEmpleada={
-			idServicio:idServicio.value,
+			idServicio:$("#idser").val(),
 			empleada:idEmpleada.value,
 			nombreE:nombreE,	
 		}
-		//$("#idEmpleada").val('default').selectpicker("refresh");
+		$("#idEmpleada").val('default').selectpicker("refresh");
 		LlenarEmpleada(objEmpleada);
 
 		dibujartablaE(arregloEmpleada);
@@ -373,7 +384,7 @@ function LlenarEmpleada(objEmpleada){
 }
 function eliminarIten(id,nombre){
 	swal.fire({
-		title: "¿Esta seguro(a) de eliminar este servico: "+nombre+", de esta orden?",
+		title: "¿Esta seguro(a) de eliminar este servicio: "+nombre+", de esta orden?",
 		type: "question",
 		showCancelButton: true,
 		confirmButtonText: "Eliminar",

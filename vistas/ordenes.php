@@ -55,7 +55,7 @@ $cli = $clientes->get_Cliente();
                       </div>
                       <div class="col-lg-10">
 
-                        <select class="form-control font-weight-bold" placeholder="Descripcion" data-width="26rem" required data-live-search="true" data-tokens id="cedula" name="cedula">
+                        <select class="form-control font-weight-bold" title="Seleccione el cliente" placeholder="Descripcion" data-width="26rem" required data-live-search="true" data-tokens id="cedula" name="cedula">
                         
                         </select>
                       </div>
@@ -67,7 +67,7 @@ $cli = $clientes->get_Cliente();
                       <label class="col-form-label ml-3">Vehiculo:</label>
                     </div>
                     <div class="col-lg-10">
-                        <select class="form-control font-weight-bold"  data-width="26rem" required data-live-search="true" data-tokens id="idVehiculo" name="idVehiculo">
+                        <select class="form-control font-weight-bold"  data-width="26rem" title="Ingrese la placa" required data-live-search="true" data-tokens id="idVehiculo" name="idVehiculo">
                         <option value=""  selected disabled>Ingrese la placa </option>
                       </select>
                     </div>
@@ -89,7 +89,7 @@ $cli = $clientes->get_Cliente();
                       <label class="col-form-label">Servicios:</label>
                     </div>
                     <div class="col-lg-11">
-                      <select class="form-control font-weight-bold" data-width="61rem"  id="idServicio" name="idServicio" required>
+                      <select class="form-control font-weight-bold" data-width="61rem" title="Seleccione el Servicio" id="idServicio" name="idServicio">
                         <option selected disabled value="">Seleccione el Servicio</option>
 
                       </select>
@@ -110,7 +110,7 @@ $cli = $clientes->get_Cliente();
                         <label class="col-form-label">Descripcion:</label>
                       </div>
                       <div class="col-lg-11">        
-                        <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" required  class="form-control ml-3"></input>
+                        <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" class="form-control ml-3"></input>
                       </div>
                     </div>
                   </div>
@@ -121,14 +121,7 @@ $cli = $clientes->get_Cliente();
                           <button id="btnAgregar" type="button" onClick="agregar_detalles()" class="btn btn-primary "  style="width:7.5rem" data-toggle="modal">Agregar </i></button>
                           <input type="hidden" name="iddetallesFT" id="iddetallesFT"/>
                         </div>
-                    <!--  <h4 class="text-center"><strong>Tipo de Pago</strong></h4>
-                      <select name="tipo_pago" class="col-lg-offset-3 col-xs-offset-2" id="tipo_pago" class="select" maxlength="10" >
-                              <option value="">SELECCIONE TIPO DE PAGO</option>
-                              <option value="CHEQUE">PAGAR CON CHEQUE</option>
-                              <option value="EFECTIVO">PAGAR CON EFECTIVO</option>
-                              <option value="TRANSFERENCIA">PAGAR CON TRANSFERENCIA</option>
-                            </select>-->
-                      <!-- <i class="fas fa-cart-plus">  -->
+                    
                   </div>      
               </div>  
 
@@ -201,7 +194,7 @@ $cli = $clientes->get_Cliente();
                                 <div class="form-group">
                                 <div class="row">
                                   <div class="col-10">
-                                    <select class="form-control font-weight-bold border" id="idEmpleada" name="idEmpleada" required>
+                                    <select class="form-control font-weight-bold border" title="Seleccione el Empleado" id="idEmpleada" name="idEmpleada" required>
                                       <option selected disabled value="0">Seleccione el Empleado</option>
                                     </select>
                                     <input type="hidden" name="idser" id="idser"/>

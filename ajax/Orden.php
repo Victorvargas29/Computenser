@@ -237,7 +237,7 @@
             
       $jsomEmpleada=$_POST["arregloEmpleada"];
     
-      sleep(3);
+      
        $res=$ordenes->detallesEmpleada($jsomEmpleada);
        echo "jsom de prueba de Empleada", $res;
       

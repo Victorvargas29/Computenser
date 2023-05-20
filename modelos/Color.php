@@ -4,9 +4,11 @@
 
    require_once("../config/conexion.php");
 
+   require_once("../modelos/Bitacora.php");
+
    
    Class Colors extends Conexion {
-
+    
        //listar los usuarios
    	    public function get_color_2(){
 
@@ -41,6 +43,8 @@
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1, $_POST["nombre"]); 
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Registrar','color');
             // print_r($_POST);
    	    }
 
@@ -54,6 +58,8 @@
              $sql->bindValue(1, $_POST["nombre"]);
              $sql->bindValue(2, $_POST["idColor"]);
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Actualizar','color');
         //print_r($_POST); 	//comprobar que si se estan enviando los datos
    	    /*para q se muestre los valores en la consola hay q agregar console.log(datos);
    	    en el js debajo del success   */
@@ -78,6 +84,8 @@
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idColor);
           $sql->execute();
+          $bita = new Bitacora();
+          $bita->registrar('Eliminar','color');
           return $resultado=$sql->fetch();
         }
    }

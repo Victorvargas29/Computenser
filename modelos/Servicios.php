@@ -1,6 +1,6 @@
 <?php 
 	require_once("../config/conexion.php");
-
+  require_once("../modelos/Bitacora.php");
 	Class Servicio extends Conexion{
 
 		public function get_filas_servicio(){
@@ -50,6 +50,8 @@
         	  $sql->bindValue(1,$nombre);
             $sql->bindValue(2, $precio);
 			      $sql->execute();
+            $bita = new Bitacora();
+             $bita->registrar('Registrar','servicio');
         }
 
         public function get_servicio_por_id($idServicio){
@@ -61,6 +63,8 @@
           $sql->bindValue(1, $idServicio);
           ;
           $sql->execute();
+          $bita = new Bitacora();
+             $bita->registrar('Actualizar','servicio');
           return $resultado=$sql->fetchAll();
         }
         public function get_servicio_por_nombre($nombre){
@@ -95,6 +99,8 @@
 	        $sql=$conectar->prepare($sql);
 	        $sql->bindValue(1, $idServicio);
 	        $sql->execute();
+          $bita = new Bitacora();
+          $bita->registrar('Eliminar','servicio');
 	        return $resultado=$sql->fetch();
         }
 

@@ -1,6 +1,6 @@
 <?php 
 	require_once("../config/conexion.php");
-
+    require_once("../modelos/Bitacora.php");
 	Class Modelos extends Conexion{
 
 		public function get_filas_modelo(){
@@ -41,6 +41,8 @@
             $sql->bindValue(2, $_POST["idMarca"]);
     
 			$sql->execute();
+            $bita = new Bitacora();
+             $bita->registrar('Registrar','modelo');
         }
 
         public function get_modelo_por_id($idModelo){
@@ -67,6 +69,8 @@
              $sql->bindValue(2, $_POST["idMarca"]);
              $sql->bindValue(3, $_POST["idModelo"]);
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Actualizar','modelo');
    	    }
 
    	    public function eliminar_modelo($idModelo){
@@ -77,6 +81,8 @@
 	        $sql=$conectar->prepare($sql);
 	        $sql->bindValue(1, $idModelo);
 	        $sql->execute();
+            $bita = new Bitacora();
+          $bita->registrar('Eliminar','modelo');
 	        return $resultado=$sql->fetch();
         }
 
