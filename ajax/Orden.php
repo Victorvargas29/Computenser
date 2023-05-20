@@ -40,6 +40,15 @@
      
 
     break;
+
+    case "max":
+      $ordenMax = $ordenes->Max();
+          $orden = $ordenMax["numDoc"];
+          //$output["idFactura"]= $fact+1;
+          echo $orden+1;
+      
+    break;
+
     case 'selectCliente':
       $rspta = $cliente->get_cliente2();
       echo '<option value="" selected disabled>Seleccione cliente</option>';

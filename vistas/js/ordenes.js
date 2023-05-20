@@ -97,6 +97,14 @@ function init(){
 			});
         });
     });
+	$.post("../ajax/Orden.php?op=max",function(data){
+		
+		var num='000'+data;
+		num=num.replace(" ", "");
+		$("#numDoc").val(num);
+		$("#ordenH3").text("N° Orden: "+num);
+		
+	});
 }
 
 function registrar(e){

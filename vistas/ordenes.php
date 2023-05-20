@@ -42,8 +42,16 @@ $cli = $clientes->get_Cliente();
         <div class="container"> <!--container-->
             <div class="row pb-1 pt-3">
               <div class="col-lg-6">
-                <h1 class="col-lg-6 ml-3">Orden</h1>
+                <h1 class="ml-3">Orden</h1>
               </div>
+              <div class="col-lg-3">
+
+              </div>
+              <div class="col-lg-3">  
+                  <h4 class="ml-5 pl-5" id="ordenH3" name="ordenH3"></h4>
+                  <input type="hidden" name="numDoc" id="numDoc" class="form-control"></input>
+
+              </div> 
             </div>
             <div class="row"> 
               

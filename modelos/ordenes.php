@@ -195,6 +195,16 @@
           $sql->execute();
           echo $idOrden;
         }
+
+        public function Max(){
+          $conectar=parent::conectar();
+          //	parent::set_names();
+            $sql="select MAX(numDoc)numDoc from orden";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+          // echo intval($sql);
+          return $resultado= $sql->fetch(PDO::FETCH_ASSOC);
+        }
         
    }
    
