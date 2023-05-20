@@ -131,7 +131,7 @@ function guardaryeditar(e){
 
 			success: function(datos){
 
-				//console.log(datos); //muestre los valores en la consola
+				console.log(datos); //muestre los valores en la consola
 
 				$('#marca_form')[0].reset();
 				$('#marcaModal').modal('hide');
