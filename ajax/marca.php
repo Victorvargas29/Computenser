@@ -22,11 +22,11 @@ require_once("../modelos/Marca.php");
             if(is_array($datos)==true and count($datos)==0){
 				if(is_array($datosNombre)==true and count($datosNombre)==0){
 					$marca->registrar_marca($nombre);
-					echo "se registro";
+					echo "se regi2222222stro";
 				}else{
 
-					echo "La marca ya existe";
-					
+					$errors[]= "La marca ya existe";
+					echo "se edddddddito";
 				  }
             }
         }else{
@@ -34,6 +34,23 @@ require_once("../modelos/Marca.php");
             $marca->editar_marca($idMarca, $nombre);
             echo "se edito";
         }
+
+
+		if(isset($errors)){
+			?>
+			<div class="alert alert-danger" role="alert">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Error!</strong>
+				<?php
+					foreach ($errors as $error) {
+						echo $error;
+					}
+ 
+				?>
+			</div>
+ 
+			<?php
+		}//fin mensaje error
            
       break;
 

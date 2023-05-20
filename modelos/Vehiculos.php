@@ -1,7 +1,7 @@
 <?php
 
    require_once("../config/conexion.php");
-
+   require_once("../modelos/Bitacora.php");
    Class Vehiculos extends Conexion {
 
     public function get_vehiculo_2(){
@@ -37,6 +37,8 @@
       $sql->bindValue(5, $idModelo); 
  
       $sql->execute();
+      $bita = new Bitacora();
+      $bita->registrar('Registrar','vehiculo');
     }
 
    	public function editar_vehiculo($placa,$cedula,$color,$año,$modelo){
@@ -53,6 +55,8 @@
       $sql->bindValue(5, $placa);
 
       $sql->execute();
+      $bita = new Bitacora();
+      $bita->registrar('Actualizar','vehiculo');
 
     }
 
@@ -86,6 +90,8 @@
       $sql=$conectar->prepare($sql);
       $sql->bindValue(1, $_POST["placa"]);
       $sql->execute();
+      $bita = new Bitacora();
+      $bita->registrar('Eliminar','vehiculo');
       return $resultado=$sql->fetch();
     }
 

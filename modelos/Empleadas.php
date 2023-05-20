@@ -3,7 +3,7 @@
   //conexion a la base de datos
 
    require_once("../config/conexion.php");
-
+   require_once("../modelos/Bitacora.php");
 
    class Empleadas extends conexion {
 
@@ -66,7 +66,10 @@
              
             
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Registrar','empleado');
              print_r($_POST);
+             
    	    }
 
         //metodo para editar usuario
@@ -82,6 +85,8 @@
              $sql->bindValue(3, $direccion);
              $sql->bindValue(4, $cedula);
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Actualizar','empleado');
    	    }
 
         
@@ -112,7 +117,8 @@
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $cedula);
           $sql->execute();
-
+          $bita = new Bitacora();
+          $bita->registrar('Eliminar','empleado');
           return $resultado=$sql->fetch();
         }
 

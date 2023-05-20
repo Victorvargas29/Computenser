@@ -4,7 +4,7 @@
 
    require_once("../config/conexion.php");
 
-
+   require_once("../modelos/Bitacora.php");
    class Usuarios extends conexion {
 
       public function login (){
@@ -145,6 +145,8 @@
              $sql->bindValue(6, $_POST["estado"]);
              $sql->bindValue(7, $avatar);
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Registrar','usuario');
              print_r($_POST);
    	    }
 
@@ -195,6 +197,8 @@
              $sql->bindValue(7, $avatar);
              $sql->bindValue(8, $_POST["idUsuario"]);
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Actualizar','usuario');
 
              //print_r($_POST); 	//comprobar que si se estan enviando los datos
    	   /*para q se muestre los valores en la consola hay q agregar console.log(datos);
@@ -330,7 +334,8 @@
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$idUsuario);
           $sql->execute();
-
+          $bita = new Bitacora();
+          $bita->registrar('Eliminar','usuario');
           return $resultado=$sql->fetch();
         }
    }

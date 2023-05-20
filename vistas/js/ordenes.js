@@ -149,39 +149,30 @@ function registrar(e){
 
 
 function guardar_detalles(datos) {
-	arregloDetalle.forEach(deta => {
+	for (const deta of arregloDetalle) {
 		deta.idOrden=datos;
 		ordenSer=deta.idServicio+""+deta.idOrden;
 		ordenSer=ordenSer.replace(" ", "");
-		/*$.ajax({
-			url: "../ajax/Orden.php?op=detallesDetalles",
-			type: "POST",
-			data: deta,
-			contentType: false,
-			processData: false,
+		let todoMenus;
+		$.ajax({
+			url:"../ajax/Orden.php?op=detallesDetalles",
+			method:"POST",
+			data:{"arregloDetalle":deta},
+			async:false,
 
-			success: function(datos){
-
-				console.log(datos); 
-
+			success:function(data){
 				
-				servicioEmpleada(datos,deta.idServicio);
-				
-				
-				
-				
+			
+				console.log(" viendo el orden servicios ",data);
 			}
-		});*/
-		$.post("../ajax/Orden.php?op=detallesDetalles",{"arregloDetalle":deta},function(datas){
-
 		});
-		setTimeout(function(){
-			servicioEmpleada(ordenSer,deta.idServicio);
-			console.log(" viendo el orden servicios ",ordenSer);
-		}, 2000);
-		
+		setTimeout(servicioEmpleada(ordenSer,deta.idServicio), 2000);
+		//setTimeout(function(){
+			
+			
+		//}, 100);
+	}
 	
-	});
 	 
 }
 function servicioEmpleada(data,servicio) {
@@ -189,10 +180,11 @@ function servicioEmpleada(data,servicio) {
 		arregloEmpleada.forEach(empleada => {	
 			
 			if (+servicio===+empleada.idServicio) {
+				console.log(" viendo las empleadas ",empleada.nombreE, "con el servicio", servicio);
 				empleada.ordenServicio=String(data);
 				$.post("../ajax/Orden.php?op=detallesEmpleada",{"arregloEmpleada":empleada},function(data){
 		
-					alert(data);
+					//alert(data);
 				});
 			} 			
 		});
@@ -246,7 +238,7 @@ function dibujartabla(arregloDetalle){
 		tdEliminar.appendChild(botonEliminar);
 		fila.appendChild(tdEliminar);
 		botonEliminar.onclick=()=>{
-			eliminarIten(deta.idServicio);
+			eliminarIten(deta.idServicio,deta.nombreServi);
 		};
 		
 		cuerpotabla.appendChild(fila);
@@ -256,8 +248,8 @@ function dibujartabla(arregloDetalle){
 function dibujartablaE(arregloEmpleada){
 	cuerpotablaE.innerHTML="";
 	arregloEmpleada.forEach((data)=>{
-		console.log("srevi",data.idServicio);
-		console.log("imput",$("#idser").val());
+		console.log("1234",data.idServicio);
+		console.log("123",$("#idser").val());
 		if (data.idServicio===$("#idser").val()) {
 			let fila = document.createElement("tr");
 			fila.innerHTML=`
@@ -283,27 +275,62 @@ function dibujartablaE(arregloEmpleada){
 }
 
 function agregar_detalles(){
-		const objDetalles={
-			precio: precio.value,
-			idServicio:idServicio.value,
-			descripcion:descripcion.value,
-			nombreServi:nombreServi.value,
+	if ($("#idServicio").val()!==null) {
+		console.log("descripcion", $("#descripcion").val());
+		if ($("#descripcion").val()!='') {
+			const objDetalles={
+				precio: precio.value,
+				idServicio:idServicio.value,
+				descripcion:descripcion.value,
+				nombreServi:nombreServi.value,
+			}
+			$("#descripcion").val('');
+			$("#idServicio").val('default').selectpicker("refresh");
+			LlenarDetalles(objDetalles);
+			dibujartabla(arregloDetalle);
+			console.log(arregloDetalle);
+			document.getElementById("descripcion").style.border = 0;
+		} else {
+			document.getElementById("descripcion").style.borderColor = "red";
+			swal.fire(
+				"¡Ingrese Descripcion!",
+				"No se puede agreagar un servicio sin descripcion",
+				"error"
+				);
+		
 		}
-		LlenarDetalles(objDetalles);
-		dibujartabla(arregloDetalle);
-		console.log(arregloDetalle);
+		
+	} else {
+		swal.fire(
+			"¡Seleccione un servicio!",
+			"No se puede agreagar un servicio sin datos",
+			"error"
+			);
+	
+	}
 }//fin guardar y editar
 
 function agregar_empleadas(){
 
-	const objEmpleada={
-		idServicio:idServicio.value,
-		empleada:idEmpleada.value,
-		nombreE:nombreE,	
+	if ($("#idEmpleada").val()!==null) {
+		const objEmpleada={
+			idServicio:$("#idser").val(),
+			empleada:idEmpleada.value,
+			nombreE:nombreE,	
+		}
+		$("#idEmpleada").val('default').selectpicker("refresh");
+		LlenarEmpleada(objEmpleada);
+
+		dibujartablaE(arregloEmpleada);
+		console.log("0000000000",arregloEmpleada);
+	} else {
+		swal.fire(
+			"¡Seleccione un empleado!",
+			"No se puede agreagar un empleado sin datos",
+			"error"
+		);
 	}
-	LlenarEmpleada(objEmpleada);
-	dibujartablaE(arregloEmpleada);
-	console.log(arregloEmpleada);
+	
 }
 function abrirModal(idServicio,nombreServi) {
 	
@@ -326,7 +353,13 @@ function LlenarDetalles(objDetalles){
 
 	if (!result) {
 		arregloDetalle.push(objDetalles);
-	} 
+	} else {
+		swal.fire(
+			"¡Registro duplicado!",
+			"El servicio ya esta registrado para esta orden",
+			"error"
+		  );
+	}
 	
 	
 }
@@ -347,21 +380,51 @@ function LlenarEmpleada(objEmpleada){
 	if (!result) {
 		arregloEmpleada.push(objEmpleada);
 	} else{
-		alert("Emplado ya registrado para este servicio");
+		//bootbox.alert("Emplado ya registrado para este servicio");
+		swal.fire(
+			"¡Registro duplicado!",
+			"Emplado ya registrado para este servicio",
+			"error"
+		  );
 	}
 	
 	
 }
-function eliminarIten(id){
-	arregloDetalle= arregloDetalle.filter((detalle)=>{
-		if (+id !== +detalle.idServicio) {
-			return detalle;
-			
-		}else{
-			eliminarEmpleadaS(id);
-		}
+function eliminarIten(id,nombre){
+	swal.fire({
+		title: "¿Esta seguro(a) de eliminar este servicio: "+nombre+", de esta orden?",
+		type: "question",
+		showCancelButton: true,
+		confirmButtonText: "Eliminar",
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#ca5939"
+	})
+	.then(result => {
+		
+		 if (result.value) {
+			arregloDetalle= arregloDetalle.filter((detalle)=>{
+				if (+id !== +detalle.idServicio) {
+					return detalle;
+					
+				}else{
+					
+					eliminarEmpleadaS(id);
+				}
+			});
+			dibujartabla(arregloDetalle);
+
+		swal.fire(
+		  "Se eliminino el servicio: "+nombre,
+
+		  "¡Aviso!",
+		  "success"
+		);
+	  }
 	});
-	dibujartabla(arregloDetalle);
+
+
+	//
+	
 }
 function eliminarItenE(id){
 	arregloEmpleada= arregloEmpleada.filter((detalle)=>{

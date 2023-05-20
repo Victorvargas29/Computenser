@@ -3,7 +3,7 @@
   //conexion a la base de datos
 
    require_once("../config/conexion.php");
-
+   require_once("../modelos/Bitacora.php");
 
    Class Ordenes extends Conexion {
 
@@ -98,10 +98,11 @@
 
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql1="insert into empleadoservicios values(null,'25135123',?);";
+          $sql1="insert into empleadoservicios values(null,?,?);";
           $sql1=$conectar->prepare($sql1);
         
-          $sql1->bindValue(1, $arregloEmpleada["ordenServicio"]); 
+          $sql1->bindValue(1, $arregloEmpleada["empleada"]); 
+          $sql1->bindValue(2, $arregloEmpleada["ordenServicio"]); 
                          
           $sql1->execute();
 

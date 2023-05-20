@@ -4,7 +4,7 @@
 
    require_once("../config/conexion.php");
 
-
+   require_once("../modelos/Bitacora.php");
    Class Clientes extends Conexion {
 
        //listar los usuarios
@@ -48,6 +48,8 @@
              $sql->bindValue(5, $_POST["telefono"]);
              $sql->bindValue(6, $_POST["correo"]);
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Registrar','cliente');
             // print_r($_POST);
    	    }
 
@@ -65,6 +67,8 @@
              $sql->bindValue(5, $_POST["correo"]);
              $sql->bindValue(6, $_POST["cedula"]);
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Actualizar','cliente');
         //print_r($_POST); 	//comprobar que si se estan enviando los datos
    	    /*para q se muestre los valores en la consola hay q agregar console.log(datos);
    	    en el js debajo del success   */
@@ -89,6 +93,8 @@
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $cedula);
           $sql->execute();
+          $bita = new Bitacora();
+          $bita->registrar('Eliminar','cliente');
           return $resultado=$sql->fetch();
         }
    }

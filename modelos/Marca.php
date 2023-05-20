@@ -4,7 +4,7 @@
 
    require_once("../config/conexion.php");
 
-
+   require_once("../modelos/Bitacora.php");
    Class Marcas extends Conexion {
 
        //listar los usuarios
@@ -41,6 +41,8 @@
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1, $_POST["nombre"]); 
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Registrar','marca');
             // print_r($_POST);
    	    }
 
@@ -54,6 +56,8 @@
              $sql->bindValue(1, $_POST["nombre"]);
              $sql->bindValue(2, $_POST["idMarca"]);
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Actualizar','marca');
         //print_r($_POST); 	//comprobar que si se estan enviando los datos
    	    /*para q se muestre los valores en la consola hay q agregar console.log(datos);
    	    en el js debajo del success   */
@@ -89,6 +93,8 @@
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idMarca);
           $sql->execute();
+          $bita = new Bitacora();
+          $bita->registrar('Eliminar','marca');
           return $resultado=$sql->fetch();
         }
    }

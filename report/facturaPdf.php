@@ -14,7 +14,6 @@ if(isset($_POST['idFactura'])){
   $Factura_anulado = $sold->get_venta_idfactura($_POST["idFactura"]);
   $venta=$sold->get_detalles_factura($_POST["idFactura"]);
   $idFacturas=$_POST["idFactura"];
-  $moneda=$_POST["moneda"];
 }else{
   $Factura_anulado = $sold->get_venta_idfactura($_GET["idFactura"]);
   $venta=$sold->get_detalles_factura($_GET["idFactura"]);

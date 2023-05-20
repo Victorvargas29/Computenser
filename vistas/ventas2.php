@@ -7,7 +7,7 @@
   <section class="content">
     <section class="formulario-ventas">
     
-          <form method="post" class="form-horizontal" id="form_ventas">
+          <form action="http://teg.test/report/facturaPdf.php" method="post" class="form-horizontal" id="form_ventas">
             <!--  <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">    
             <form action="http://demos.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">-->
               <div class="container"> <!--container-->
