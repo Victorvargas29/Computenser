@@ -103,45 +103,66 @@ label{
               <label class="Estilo2">Orden N°:</label>
               <label class="EstiloFactura" id="i"><?php echo "000".$numDoc;?></label>
             </div>
-            <div class="" style="display: inline-block">
-              <label class="Estilo3" style="margin-top: 50%">NOMBRE O RAZON SOCIAL:</label>
-              <label id=""><?php echo $orden[0]["cliente_nom"]." ".$orden[0]["apellido"];?></label>
+
+            <div>
+              <div class="" style="display: inline-block">
+                <label class="Estilo3" style="margin-top: 50%">NOMBRE O RAZON SOCIAL:</label>
+                <label id=""><?php echo $orden[0]["cliente_nom"]." ".$orden[0]["apellido"];?></label>
+              </div>
+              <div style="display: inline-block">
+                <label class="Estilo3" style="margin-top: 50%">RIF / CI:</label>
+                <label id=""><?php echo $orden[0]["cedula"]?></label>
+              </div>
             </div>
-            <div style="display: inline-block">
-            <label class="Estilo3" style="margin-left: 15%">RIF / CI:</label>
-              <label id=""><?php echo $orden[0]["cedula"]?></label>
-            </div>
+            
             <div>
               <div style="display: inline-block">
                 <label class="Estilo3">DOMICILIO FISCAL:</label>
                 <label id=""><?php echo $orden[0]["direccion"]?></label>
               </div>
+              
+            </div>
+
+            <div>
               <div style="display: inline-block">
-                  <label class="Estilo3" style="margin-left: 25%">TELEFONO:</label>
-                  <label id=""><?php echo $orden[0]["telefono"]?></label>
-                  <br/>
+                <label class="Estilo3" style="margin-top: 50%">TELEFONO:</label>
+                <label id=""><?php echo $orden[0]["telefono"]?></label>
+                <br/>
               </div>
               <div style="display: inline-block">
-                <label class="Estilo3" style="margin-left: 30%">FECHA:</label>
+                <label class="Estilo3" style="margin-top: 50%">FECHA:</label>
                 <label id="">
                   <?php
                     $date = new DateTime($orden[0]["fecha"]);
-                    echo $date->format('d-m-Y h:i-a');
+                    echo $date->format('d-m-Y h:i a');
                   ?>
                 </label>
               </div>
+
             </div>
             
     </div>
     <div > 
-            <div class="" style="display: inline-block">
-              <label class="Estilo3" style="margin-top: 50%">PLACA:</label>
-              <label id=""><?php echo $orden[0]["placa"];?></label>
-            </div>
-            <div style="display: inline-block">
-              <label class="Estilo3" style="margin-left: 15%"> Estado de Orden:</label>
-              <label id=""><?php echo $orden[0]["estatus"]?></label>
-            </div>            
+      <div class="" style="display: inline-block">
+        <label class="Estilo3" style="margin-top: 50%">PLACA:</label>
+        <label id=""><?php echo $orden[0]["placa"];?></label>
+      </div>
+      <div class="" style="display: inline-block">
+        <label class="Estilo3" style="margin-top: 50%">Vehiculo:</label>
+        <label id=""><?php echo $orden[0]["marca_nom"]." ".$orden[0]["modelo_nom"]." - ".$orden[0]["color_nom"];?></label>
+      </div>
+      <div style="display: inline-block">
+        <label class="Estilo3" style="margin-top: 50%"> Estado de Orden:</label>
+        <label id="">
+          <?php
+            if($orden[0]["estatus"]==1){
+              echo "TERMINADO";
+            }else{
+              echo "EN PROCESO";
+            }
+             
+          ?></label>
+      </div>            
     </div>
    
 <table  class="" width="100%" id="">
