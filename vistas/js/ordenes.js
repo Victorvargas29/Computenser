@@ -264,7 +264,7 @@ function dibujartablaE(arregloEmpleada){
 			tdEliminar.appendChild(botonEliminarE);
 			fila.appendChild(tdEliminar);
 			botonEliminarE.onclick=()=>{
-				eliminarItenE(data.empleada);
+				eliminarItenE(data.empleada,data.idServicio);
 			};
 			
 			cuerpotablaE.appendChild(fila);
@@ -426,11 +426,15 @@ function eliminarIten(id,nombre){
 	//
 	
 }
-function eliminarItenE(id){
+function eliminarItenE(id,idServicio){
 	arregloEmpleada= arregloEmpleada.filter((detalle)=>{
 		if (+id !== +detalle.empleada) {
 			return detalle;
 			
+		}else{
+			if (+idServicio !== +detalle.idServicio) {
+				return detalle;
+			}
 		}
 	});
 	dibujartablaE(arregloEmpleada);

@@ -4,7 +4,7 @@ require_once("../config/conexion.php");
 
 session_destroy();
 
-header("Location:".conexion::ruta()."vistas/index.php");
+header("Location:http://teg.test/vistas/index.php");
 exit();
 
  ?>
