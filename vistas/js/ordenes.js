@@ -77,10 +77,10 @@ function init(){
                 idServicio1= $(this).val();
 				$.post("../ajax/servicio.php?op=mostrar",{idServicio : idServicio1}, function(data, status)
 				{
-					console.log(data);			
+					//.log(data);			
 					data =JSON.parse(data);	  
 					 $("#precio").val(data.precio);
-					 $("#idServicio").val(idServicio1);
+					$("#idServicio").val(idServicio1);
 					 $("#nombreServi").val(data.nombre);
 					 console.log("esto es el id servicio",idServicio.value);
 					
