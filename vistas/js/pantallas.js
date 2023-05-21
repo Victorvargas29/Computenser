@@ -229,5 +229,13 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
 		});
 	});
+	$("#bitacora").click(function(){
+		$.ajax({
+		url:'../vistas/lista_bitacora.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
+		});
+	});
 
 });
