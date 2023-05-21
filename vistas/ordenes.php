@@ -31,21 +31,22 @@ $cli = $clientes->get_Cliente();
     
           <!-- <form method="post" id="form_orden">
           <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">  -->
-      <div class="container"> <!--container-->  
         <form action="http://teg.test/report/ordenPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">
-          <div class="row pb-1 pt-3">
-            <div class="col-lg-6">
-              <h1 class="ml-3">Orden</h1>
-            </div>
-            <div class="col-lg-3">
+          <div class="container"> <!--container-->  
+          
+            <div class="row pb-1 pt-3">
+              <div class="col-lg-6">
+                <h1 class="ml-3">Orden</h1>
+              </div>
+              <div class="col-lg-3">
 
-            </div>
-            <div class="col-lg-3">  
-                <h4 class="ml-5 pl-5" id="ordenH3" name="ordenH3"></h4>
-                <input type="hidden" name="numDoc" id="numDoc" class="form-control"></input>
+              </div>
+              <div class="col-lg-3">  
+                  <h4 class="ml-5 pl-5" id="ordenH3" name="ordenH3"></h4>
+                  <input type="hidden" name="numDoc" id="numDoc" class="form-control"></input>
 
-            </div> 
-          </div>
+              </div> 
+            </div>
             <div class="row"> 
               
               <div class="row">               
@@ -73,7 +74,7 @@ $cli = $clientes->get_Cliente();
                   </div>
                 </div>
               </div>        
-  
+
               <div class="container">
 
                     <div class="row pb-1 pt-3">
@@ -170,9 +171,10 @@ $cli = $clientes->get_Cliente();
                 </div>
                 <!-- /.row -->
               </div>
-          </div>
+            </div>
+          </div>  <!--container--> 
         </form> 
-            <!--TABLA SUBTOTAL - TOTAL -->
+        
 
          
           
@@ -238,7 +240,7 @@ $cli = $clientes->get_Cliente();
           </div>
         </div> 
 
-      </div>  <!--container--> 
+     
     </section>
           <!--section formulario - pedido -->
 

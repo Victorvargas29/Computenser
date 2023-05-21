@@ -108,7 +108,7 @@ function init(){
 }
 
 function registrar(e){
-	e.preventDefault();
+	//e.preventDefault();
 	if (arregloDetalle.length===0) {
 		alert("No puede registrar una orden si servicios");
 	} else {
