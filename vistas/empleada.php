@@ -1,30 +1,17 @@
 <html>
 
-<?php
-    
-
-    
-    require_once("../modelos/Departamentos.php");
-
-    $departamento = new Departamentos();
-
-    $dep = $departamento->get_departamento();
-       
-       
-?>
-
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-            <h4>Listado de Empleadas</h4>
+            <h4>Listado de Empleados</h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                            <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li> -->
                         </ol>
                     </nav>
                 </div>
@@ -72,7 +59,7 @@
                                       <th>Cédula</th>
                                       <th>Nombres</th>
                                       <th>Telefono</th>
-                                      <th>Especialidad</th>
+                                      <th>Dirección</th>
                                       <th width="10%">Editar</th>
                                       <th width="10%">Eliminar</th>
 
