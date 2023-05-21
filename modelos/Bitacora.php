@@ -34,5 +34,13 @@
             $sql->execute();
             return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function nameusers_bitacora(){
+            $conectar=parent::conectar();
+            $sql="select id, u.nombre, u.apellido, operacion, tabla, fecha from bitacora join usuario u where usuario=u.idUsuario"; 
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>
