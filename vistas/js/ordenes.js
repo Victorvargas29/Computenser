@@ -13,12 +13,12 @@ var cuerpotabla =document.getElementById("cuerpotabla");
 var tablaO;
 function init(){
 	listarordenes();
-	$("#form_orden").on("submit", function(e){
+	/*$("#form_orden").on("submit", function(e){
 		
 		registrar(e);
 
 
-	});
+	});*/
 	
 	$("#idVehiculo").selectpicker();
 	
@@ -107,8 +107,19 @@ function init(){
 	});
 }
 
-function registrar(e){
-	//e.preventDefault();
+function registrar(event,formu){
+	event.preventDefault();
+	setTimeout(function() {
+		formu.submit();
+
+		$.ajax({
+			url:'../vistas/ordenes.php',
+			method: "POST",
+			success: function(res){ $("#seccion1").html(res); },
+			error: function(err){ $("#seccion1").html("pagina vista/ordenes.php no found");}
+			});
+		
+	},1000);
 	if (arregloDetalle.length===0) {
 		alert("No puede registrar una orden si servicios");
 	} else {

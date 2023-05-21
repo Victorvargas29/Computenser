@@ -31,7 +31,7 @@ $cli = $clientes->get_Cliente();
     
           <!-- <form method="post" id="form_orden">
           <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">  -->
-        <form action="http://teg.test/report/ordenPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">
+        <form action="http://teg.test/report/ordenPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden" onsubmit="registrar(event, this)">
           <div class="container"> <!--container-->  
           
             <div class="row pb-1 pt-3">
