@@ -221,6 +221,13 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
 		});
 	});
-
+	$("#reportes_ordenes").click(function(){
+		$.ajax({
+		url:'../vistas/lista_ordenes.php',
+		method: "POST",
+		success: function(res){ $("#seccion1").html(res); },
+		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
+		});
+	});
 
 });

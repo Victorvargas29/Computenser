@@ -72,7 +72,7 @@
           $sql=$conectar->prepare($sql);
           $sql->execute();
 
-          return $resultado=$sql->fetchAll();
+          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 
         }
 
@@ -184,6 +184,44 @@
           $sql->execute();
 
           return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function reporte_orden($numDoc){
+
+          $conectar = parent::conectar();      
+
+          $sql = "select o.numDoc, o.placa, o.estatus, o.fecha,
+          c.cedula, c.nombre AS cliente_nom, c.apellido,  c.direccion, c.telefono,
+          v.placa, v.cedula, v.idColor, v.anno, v.idModelo,
+          mo.idModelo, mo.nombre as modelo_nom, mo.idMarca,
+          ma.idMarca, ma.nombre as marca_nom,
+          co.idColor, co.nombre AS color_nom
+          from orden o
+          JOIN vehiculo v ON v.placa=o.placa
+          INNER JOIN cliente c ON v.cedula=c.cedula
+          INNER JOIN  modelo mo ON v.idModelo=mo.idModelo
+          INNER JOIN marca ma ON ma.idMarca=mo.idMarca
+          INNER JOIN color co ON co.idColor=v.idColor
+          WHERE o.numDoc=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $numDoc);
+          $sql->execute();
+          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function detalles_reporte_orden($numDoc){
+
+          $conectar = parent::conectar();      
+ /*   INNER JOIN empleadoservicios es ON os.ordenServicio=es.ordenServicio
+          INNER JOIN empleada e ON es.cedula=e.cedula */
+          $sql = "select os.ordenServicio, os.codeServicio, os.descripcion, os.precio,
+          s.codeServicio, s.nombre as servicio_n
+          from ordenservicios os     
+          INNER JOIN servicio s ON os.codeServicio=s.codeServicio
+          WHERE os.numDoc=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $numDoc);
+          $sql->execute();
+          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function cambiarEstado($idOrden){
