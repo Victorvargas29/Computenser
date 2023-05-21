@@ -61,10 +61,7 @@
           $sql="select * from servicio where codeServicio=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idServicio);
-          ;
           $sql->execute();
-          $bita = new Bitacora();
-             $bita->registrar('Actualizar','servicio');
           return $resultado=$sql->fetchAll();
         }
         public function get_servicio_por_nombre($nombre){
@@ -74,7 +71,6 @@
           $sql="select * from servicio where nombre=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $nombre);
-          
           $sql->execute();
           return $resultado=$sql->fetchAll();
         }
@@ -89,6 +85,8 @@
              $sql->bindValue(2, $_POST["precio"]);
              $sql->bindValue(3, $_POST["idServicio"]);
              $sql->execute();
+             $bita = new Bitacora();
+             $bita->registrar('Actualizar','servicio');
    	    }
 
    	    public function eliminar_servicio($idServicio){
