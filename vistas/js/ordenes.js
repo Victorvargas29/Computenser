@@ -10,8 +10,9 @@ var descripcion= document.getElementById("descripcion");
 var nombreE;
 var cuerpotabla =document.getElementById("cuerpotabla");
 //funcion q se ejecuta al inicio
+var tablaO;
 function init(){
-
+	listarordenes();
 	$("#form_orden").on("submit", function(e){
 		
 		registrar(e);
@@ -98,7 +99,6 @@ function init(){
         });
     });
 	$.post("../ajax/Orden.php?op=max",function(data){
-		
 		var num='000'+data;
 		num=num.replace(" ", "");
 		$("#numDoc").val(num);
@@ -193,21 +193,21 @@ function servicioEmpleada(data,servicio) {
 }
 
 
-function mostrarFactura(idFactura){
+function mostrarOrden(numDoc){
 	$.ajax({
 		
 
 		success:function(data){
-			console.log(idFactura);
+			console.log(numDoc);
 			//window.open("http://demos.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
 
 			
-			window.open("http://computenser.test/computenser/report/facturaPdf.php?idFactura="+idFactura);
+			window.open("http://teg.test/report/ordenPdf.php?numDoc="+numDoc);
 		//	window.open("http://merilara.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
 		}
 	});
 
-	$.post("../report/facturaPdf.php",{idFactura : idFactura});
+	$.post("../report/facturaPdf.php",{numDoc : numDoc});
 }//fin funcion mostrar
 function dibujartabla(arregloDetalle){
 	cuerpotabla.innerHTML="";
@@ -453,6 +453,67 @@ function cancelarOrden() {
 		});
 	
 }
+
+function listarordenes(){
+
+	tablaO=$('#orden_data').dataTable({  
+		"aProcessing":true,//Activamos el procesamiento del datatables
+		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
+		
+		dom:'Bfrtilp',//Definimos los elementos del control de tabla
+		buttons:[
+	    	//Botón para PDF
+	    	{
+	        extend: 'pdfHtml5',
+	        //footer: true,
+	       	text:'<i class="fas fa-file-pdf"></i>',
+	        titleAttr: 'Exportar a PDF',
+	        //filename: 'Export_File_pdf',
+	        className: 'btn btn-danger'
+	      	}
+		],
+		"ajax":
+		{
+			url:'../ajax/Orden.php?op=listarordenes',
+			type: "get",
+			datatype: "json",
+			error: function(e){
+				console.log(e.responseText);
+			}
+		},
+		"bDestroy":true,
+		"responsive":true,
+		"bInfo":true,
+		"iDisplayLength":10,//por cada 10 reg hace una paginacion
+		"order":[[0,"desc"]],//Ordenar(Columna, Orden)
+
+		"language":{
+			"sProcessing": "Procesando...",
+			"sLengthMenu": "Mostrar _MENU_ registro",
+			"sZeroRecords": "No se encontraron resultados",
+			"sEmptyTable": "Ningun dato disponible en esta tabla",
+			"sInfo": "Mostrando un total de _TOTAL_ registros",
+			"sInfoEmpty": "Mostrando un total de 0 registros",
+			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix": "",
+			"sSearch": "Buscar",
+			"sUrl": "",
+			"sInfoThousands": "",
+			"sLoadingRecords": "Cargando...",
+			"oPaginate":{
+				"sFirst": "Primero",
+				"sLast": "Ultimo",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior"
+			},
+			"oAria":{
+				"sSortAscending": ": Activar para ordenar la columna",
+				"sSortDescending": ": Activar para ordenar la columna"
+			}
+		}//cierra language
+
+	}).DataTable();
+}//fin funcion listar
 
 
 

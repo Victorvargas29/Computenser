@@ -268,58 +268,18 @@
       
 
     break;
-    case "listarfacturas":
+    case "listarordenes":
       
-      $datos = $venta->get_facturas();
+      $datos = $ordenes->orden();
       $data = array();
       foreach ($datos as $row) {
-        if ($row["idFactura"]>1) {
-          $sub_array = array();
-
-          $est = '';
-          $atrib = "";
-          $atrib_icon = "";
-          $titulo="";
-
-         if($row["tipo_moneda"] == 0){
-           $est = 'Bolivares';
-           $atrib = "btn boton-bs btn-md estado";
-           $atrib_icon = "";
-           $titulo="Bs";
-         }
-         else{ $est = 'Dolares';
-          $atrib = "btn boton-verde btn-md estado";
-          $atrib_icon = "fas fa-dollar-sign";
-         }
-
-
-         $tip = "";
-         $atrib_clases = "";
-         $atrib_icono="";
-         $titulo2="";
-
-        if($row["anulado"] == 1){
-          $atrib_clases = "btn btn-danger btn-md estado";
-          $titulo2="Anulada";
-        }
-        else{ 
-         // $atrib_icono="fas fa-check";
-          $tip = "Anular";
-          $titulo2="Anular";
-          $atrib_clases = "btn btn-success btn-md estado";
-        }
-         
-
-        $sub_array[] = '<span>'.$row["idFactura"].'</span> ';
-        $sub_array[] = $row["nombre"];
-        $sub_array[] = $row["cedula"];  //onClick=mostrarFactura('.$row["idFactura"].','.$moneda.')
-        $sub_array[] = '<button title="'.$est.'" type="button" onClick="tipomoneda('.$row["idFactura"].','.$row["tipo_moneda"].');" name="tipo_moneda" id="'.$row["idFactura"].'" class="'.$atrib.'"><i class="'.$atrib_icon.'"></i>'.$titulo.'</button>';
-        $sub_array[] = '<button title="Ver" type="button" onClick=mostrarFactura('.$row["idFactura"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
-        $sub_array[] = '<button title="'.$tip.'" type="button" onClick="anulacion('.$row["idFactura"].','.$row["anulado"].')"  id="'.$row["idFactura"].'" class="'.$atrib_clases.'"><i class="'.$atrib_icono.'" aria-hidden="true"></i>'.$titulo2.'</button>';
+        $sub_array=array();
+        $sub_array[] = $row["numDoc"];
+        $sub_array[] = $row["placa"];
+        $sub_array[] = $row["estatus"];
+        $sub_array[] = '<button title="Ver" type="button" onClick=mostrarOrden('.$row["numDoc"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';  
         
-        $data[]=$sub_array;
-        }
-        
+        $data[]=$sub_array;    
       }
         $results=array(
           "sEcho"=>1,
@@ -330,15 +290,6 @@
         echo json_encode($results);
     break;
 
-    case "activarydesactivar":
-        //los parametros id_usuario y est vienen por via ajax
-     
-        //valida el id del usuario
-         // if(is_array($datos)==true and count($datos)>0){
-            //edita el estado del usuario 
-            $venta->cambiar_moneda($_POST["idFactura"],$_POST["tipo_moneda"]);
-      //    }
-      break;
       case "cambiarEstado":
   
             $rr=$ordenes->cambiarEstado($_POST["idOrden"]);

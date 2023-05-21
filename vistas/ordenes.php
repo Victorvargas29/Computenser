@@ -36,10 +36,10 @@ $cli = $clientes->get_Cliente();
         <?php // require_once("modal/lista_productos_ordenes_modal.php");?>
         <section class="formulario-orden">
     
-    <form method="post" id="form_orden">
-    <!--  <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">    
-      <form action="http://demos.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">-->
-        <div class="container"> <!--container-->
+   <!-- <form method="post" id="form_orden">
+      <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">  -->
+        <div class="container"> <!--container-->  
+      <form action="http://teg.test/report/ordenPdf.php" target="_blank" method="post" class="form-horizontal" id="form_orden">
             <div class="row pb-1 pt-3">
               <div class="col-lg-6">
                 <h1 class="ml-3">Orden</h1>
