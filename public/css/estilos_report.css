@@ -1,0 +1,59 @@
+html{
+  font-family: "Helvetica", normal;
+  font-size: 150%;
+}
+.text-center{
+  text-align: center;
+
+}
+
+.text-derecha{
+ text-align: right;
+ /* direction: rtl; */
+}
+
+.text-izquierda{
+ text-align: left;
+  /* direction: ltr; */
+}
+
+.EstiloFactura{
+  font-family: "Courier", bold;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ea1717
+}
+.margen {
+  margin-top:  11%;
+  margin-left: 80%
+}
+.totales {
+ /* margin-top:  12%;  */
+  margin-left: 60%
+}
+table{
+  margin-top: 4%;
+  border-collapse: collapse;
+  /* border: 0.5px solid black; */
+}
+
+span, label{
+  text-align: right;
+  direction: rtl;
+}
+
+th,td{
+  padding: 5px;
+  height: 15px;
+}
+
+label{
+  font-size: 12px;
+}
+
+.Estilo2{font-size: 12px}
+.Estilo3{font-weight: bold;}
+.Estilo4{color: #FFFFFF}
+.Estilo_color{
+  background-color: #a4a7a9;
+}

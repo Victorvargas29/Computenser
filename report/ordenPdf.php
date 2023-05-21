@@ -32,11 +32,10 @@ ob_start();
 ?>
 
 <link type="text/css" rel="stylesheet" href="dompdf/css/print_static.css"/>
-
+<link type="text/css" rel="stylesheet" href="../public/css/estilos_report.css"/>
 
 
 <style type="text/css">
-
 html{
   font-family: "Helvetica", normal;
   font-size: 150%;
@@ -73,10 +72,7 @@ html{
 table{
   margin-top: 4%;
   border-collapse: collapse;
-}
-
-table{
- /* border: 0.5px solid black; */
+  /* border: 0.5px solid black; */
 }
 
 span, label{
@@ -99,7 +95,6 @@ label{
 .Estilo_color{
   background-color: #a4a7a9;
 }
-
 </style>
 
 
@@ -131,7 +126,7 @@ label{
                 <label id="">
                   <?php
                     $date = new DateTime($orden[0]["fecha"]);
-                    // echo $date->format('d-m-Y');
+                    echo $date->format('d-m-Y h:i-a');
                   ?>
                 </label>
               </div>
@@ -241,6 +236,23 @@ $pdf = new DOMPDF($options);
 $pdf->set_paper("letter", "portrait");
 //$pdf->set_paper(array(0,0,104,250));
 
+//Fondo o Marca de agua
+$canvas = $pdf->getCanvas();
+$w = $canvas->get_width();
+$h = $canvas->get_height();
+//$imagenUrl = '../public/images/perfil-avatar-mujer-icono-redondo_24640-14042.jpg';
+$imagenUrl = 'formato.png';
+$imgwidth = 612;
+$imgHeight = 792;
+
+$canvas->set_opacity(1);
+
+$x=(($w-$imgwidth)/2);
+$y=(($h-$imgHeight)/2);
+
+$canvas->image($imagenUrl,$x,$y,$imgwidth,$imgHeight);
+//fin de fondo o marca de agua
+
 // Cargamos el contenido HTML.
 $pdf->load_html($salida_html);;
  
@@ -249,20 +261,5 @@ $pdf->render();
 
 // Enviamos el fichero PDF al navegador.
 $pdf->stream('Orden000'.$numDoc.'.pdf',array("Attachment"=>0));
-//$pdf->loadView('f', compact('values'));
-//return $pdf->stream();
-///echo '<script>window.open("crearPdf.php", "_blank");</script>';
-
-/* 
-function file_get_contents_curl($url) {
-	$crl = curl_init();
-	$timeout = 5;
-	curl_setopt($crl, CURLOPT_URL, $url);
-	curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, $timeout);
-	$ret = curl_exec($crl);
-	curl_close($crl);
-	return $ret;
-} */
 
 ?>
