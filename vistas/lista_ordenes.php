@@ -26,19 +26,19 @@
     <!-- ============================================================== -->
     <!-- Container fluid  -->
     <!-- ============================================================== -->
-<div class="container-fluid">
+    <div class="container-fluid">
         <div class="row pt-2 pb-2">
             <div class="col-lg-3">
-            <h4>Consultar Ordenes</h4>    
+                <h4>Consultar Ordenes</h4>    
             </div>   
             <div class="col-lg-4">
-               
-                </h3> 
-            </div>
-           
-        </div>  
-       
-        </div>  
+            </div> 
+        </div>   
+    </div>
+    <div id="content_grafic" class="shadow-lg p-3 mb-5 bg-white">
+
+    </div>
+
         <br>  
         <div class="content-wrapper">        
             <!-- Main content -->

@@ -105,6 +105,44 @@ function init(){
 		$("#ordenH3").text("N° Orden: 000"+num);
 		
 	});
+
+	//grafica de pizza
+	$(document).ready(function(){
+		var container = $("#content_grafic");
+		var chart = Highcharts.chart(container[0],{
+			chart:{
+				type:'pie'
+			},
+			title:{
+				text:'Ordenes Nro de Orden'
+			},
+			series:[{
+				data: chartData(tablaO)
+			}]
+		});
+
+		tablaO.on('draw',function(){
+			chart.series[0].setData(chartData(tablaO));
+		});
+		function chartData(tablaO){
+			var filasAfectadas = {};
+			tablaO.column(0,{search:'applied'}).data().each(function(val){
+				if(filasAfectadas[val]){
+					filasAfectadas[val] += 1;
+				}else{
+					filasAfectadas[val]= 1;
+				}
+			});
+
+			return $.map(filasAfectadas, function (cantidad,clave){
+				return{
+					name:clave,
+					y:cantidad
+				};
+			});
+		}
+
+	});
 }
 
 function registrar(event,formu){
@@ -206,20 +244,14 @@ function servicioEmpleada(data,servicio) {
 
 function mostrarOrden(numDoc){
 	$.ajax({
-		
-
 		success:function(data){
 			console.log(numDoc);
-			//window.open("http://demos.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
-
-			
 			window.open("http://teg.test/report/ordenPdf.php?numDoc="+numDoc);
-		//	window.open("http://merilara.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
 		}
 	});
+	//$.post("../report/facturaPdf.php",{numDoc : numDoc});
+}//fin funcion mostrar orden
 
-	$.post("../report/facturaPdf.php",{numDoc : numDoc});
-}//fin funcion mostrar
 function dibujartabla(arregloDetalle){
 	cuerpotabla.innerHTML="";
 	arregloDetalle.forEach((deta)=>{
