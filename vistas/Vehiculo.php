@@ -27,13 +27,13 @@
     <!-- ============================================================== -->
     <div class="container-fluid">
         <h4>Vehiculos</h4>
-    <div class="container">
+
         <div class="row">
             <div class="col-lg-12">            
-            <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#vehiculoModal">Nuevo Vehiculo</button>    
+                <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#vehiculoModal">Nuevo Vehiculo</button>    
             </div>    
         </div>    
-    </div>    
+       
     <br>  
     <div class="content-wrapper">        
         <!-- Main content -->

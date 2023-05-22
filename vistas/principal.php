@@ -146,27 +146,11 @@
                         <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
                         <!-- ============================================================== -->
                         <!-- create new -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <span class="d-none d-md-block">Create New <i class="fa fa-angle-down"></i></span>
-                             <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
+                        <!-- borrado menu create new============================================================== -->
+
                         <!-- ============================================================== -->
                         <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
-                            </form>
-                        </li>
+                        <!-- borrado search============================================================== -->
 
                         <li class="nav-item">
                         
@@ -181,7 +165,7 @@
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                       <!--  <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
                             </a>
                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -190,65 +174,14 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
-                        </li>
-                        <!-- ============================================================== -->
+                        </li> -->
+                        <!-- comentado menu inutilizado============================================================== -->
                         <!-- End Comment -->
                         <!-- ============================================================== -->
                         <!-- ============================================================== -->
                         <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
-                                <ul class="list-style-none">
-                                    <li>
-                                        <div class="">
-                                             <!-- Message -->
-                                            <a href="javascript:void(0)" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">Event today</h5> 
-                                                        <span class="mail-desc">Just a reminder that event</span> 
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">Settings</h5> 
-                                                        <span class="mail-desc">You can customize this template</span> 
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">Pavan kumar</h5> 
-                                                        <span class="mail-desc">Just see the my admin!</span> 
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">Luanch Admin</h5> 
-                                                        <span class="mail-desc">Just see the my new admin!</span> 
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        <!-- borrado menu de messages noti ============================================================== -->
+                       
                         <!-- ============================================================== -->
                         <!-- End Messages -->
                         <!-- ============================================================== -->
@@ -311,23 +244,19 @@
                         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="empleadas_p" aria-expanded="false"><i class="fas fa-address-card"></i><span class="hide-menu">Empleados</span></a></li>
                         
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="clientess" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Clientes</span></a></li>
-                      
-
-
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="usuarios_p" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Usuarios</span></a></li>
-                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="reportes_p" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reportes Facturas</span></a></li>
-                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="reportes_ordenes" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reportes Ordenes</span></a></li>
-                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="bitacora" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Bitacora</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="clientess" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Clientes</span></a></li>   
                      <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Vehiculos </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item pl-3"><a id="vehiculo" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Vehiculos </span></a></li>
-                                <li class="sidebar-item pl-3"> <a id="marca" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Marcas</span></a></li>
-                                <li class="sidebar-item pl-3"> <a id="modelo" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Modelos</span></a></li>
-                                <li class="sidebar-item pl-3"><a id="color" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Colores </span></a></li>
-                            </ul>      
-                        </li>
-               
+                        <ul aria-expanded="false" class="collapse  first-level">
+                            <li class="sidebar-item pl-3"><a id="vehiculo" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Vehiculos </span></a></li>
+                            <li class="sidebar-item pl-3"> <a id="marca" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Marcas</span></a></li>
+                            <li class="sidebar-item pl-3"> <a id="modelo" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Modelos</span></a></li>
+                            <li class="sidebar-item pl-3"><a id="color" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Colores </span></a></li>
+                        </ul>      
+                    </li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="reportes_p" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reportes Facturas</span></a></li>
+                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="reportes_ordenes" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reportes Ordenes</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="usuarios_p" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Usuarios</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="bitacora" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Bitacora</span></a></li>
                      
                    <!--   <li class="sidebar-item"> <a id="marca" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Marcas</span></a></li>
                      <li class="sidebar-item"> <a id="modelo" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Modelos</span></a></li>
@@ -384,7 +313,7 @@
           <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                Todo los derechos reservados. Diseñado y desarrollado por <a href="https://www.facebook.com/vic7orvargas29">Computenser</a>.
+                Todo los derechos reservados. Diseñado y desarrollado por <a href="https://www.facebook.com/pachecox">Edwin Pacheco</a> y <a href="https://www.facebook.com/vic7orvargas29">Victor Vargas</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

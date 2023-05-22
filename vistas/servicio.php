@@ -40,14 +40,14 @@
     <!-- ============================================================== -->
     <div class="container-fluid">
       
-    <div class="container">
+ 
         <h4>Servicios</h4>
         <div class="row">
             <div class="col-lg-12">            
-            <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#servicioModal">Nueva Servicio</button>    
+                <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#servicioModal">Nueva Servicio</button>    
             </div>    
         </div>    
-    </div>    
+      
     <br>  
     <div class="content-wrapper">        
         <!-- Main content -->
@@ -86,7 +86,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Agregar Servicio</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                 </div>
              

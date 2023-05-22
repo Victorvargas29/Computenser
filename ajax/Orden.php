@@ -276,7 +276,12 @@
         $sub_array=array();
         $sub_array[] = $row["numDoc"];
         $sub_array[] = $row["placa"];
-        $sub_array[] = $row["estatus"];
+        if($row["estatus"]==0){
+          $estado="Sin procesar";
+        }else{
+          $estado="Facturado";
+        }
+        $sub_array[] = $estado;
         $sub_array[] = '<button title="Ver" type="button" onClick=mostrarOrden('.$row["numDoc"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';  
         
         $data[]=$sub_array;    

@@ -56,7 +56,7 @@
                                                 <th width="10%">Nro Orden</th>
                                                 <th width="10%">Placa</th>
                                                 <th width="10%">Estado</th>
-                                                <th width="10%">Ver Orden</th>
+                                                <th width="10%">Ver PDF Orden</th>
                                                 
                                             </tr>
                                         </thead>

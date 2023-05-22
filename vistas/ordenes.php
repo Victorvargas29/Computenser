@@ -42,7 +42,7 @@ $cli = $clientes->get_Cliente();
 
               </div>
               <div class="col-lg-3">  
-                  <h4 class="ml-5 pl-5" id="ordenH3" name="ordenH3"></h4>
+                  <h4 class="ml-1" id="ordenH3" name="ordenH3"></h4>
                   <input type="hidden" name="numDoc" id="numDoc" class="form-control"></input>
 
               </div> 
@@ -187,7 +187,7 @@ $cli = $clientes->get_Cliente();
                   <div class="modal-content">
                       <div class="modal-header">
                           <h5 class="modal-title">Agregar empleado al servicio</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                          <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                           </button>
                       </div>
                   

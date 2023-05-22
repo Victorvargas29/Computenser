@@ -114,7 +114,7 @@ function init(){
 				type:'pie'
 			},
 			title:{
-				text:'Ordenes Nro de Orden'
+				text:'Ordenes Sin Procesar / Facturado'
 			},
 			series:[{
 				data: chartData(tablaO)
@@ -126,7 +126,7 @@ function init(){
 		});
 		function chartData(tablaO){
 			var filasAfectadas = {};
-			tablaO.column(0,{search:'applied'}).data().each(function(val){
+			tablaO.column(2,{search:'applied'}).data().each(function(val){
 				if(filasAfectadas[val]){
 					filasAfectadas[val] += 1;
 				}else{

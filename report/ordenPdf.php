@@ -156,9 +156,9 @@ label{
         <label id="">
           <?php
             if($orden[0]["estatus"]==1){
-              echo "TERMINADO";
+              echo "Facturado";
             }else{
-              echo "EN PROCESO";
+              echo "Sin procesar";
             }
              
           ?></label>

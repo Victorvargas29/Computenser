@@ -39,15 +39,15 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
-      
-    <div class="container">
-        <h4>Modelos</h4>
+      <h4>Modelos</h4>
+    
+        
         <div class="row">
             <div class="col-lg-12">            
             <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#modeloModal">Nuevo Modelo</button>    
             </div>    
         </div>    
-    </div>    
+      
     <br>  
     <div class="content-wrapper">        
         <!-- Main content -->

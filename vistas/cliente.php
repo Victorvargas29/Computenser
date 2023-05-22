@@ -6,6 +6,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
+                <h4>Clientes</h4>
                 <div class="ml-auto text-right">
                     <!--
                     <nav aria-label="breadcrumb">
@@ -26,14 +27,12 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
-        <h4>Clientes</h4>
-    <div class="container">
         <div class="row">
             <div class="col-lg-12">            
-            <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#clienteModal">Nuevo Cliente</button>    
+                <button id="btnNuevo" type="button" onClick="limpiar()" class="btn btn-success" data-toggle="modal" data-target="#clienteModal">Nuevo Cliente</button>    
             </div>    
         </div>    
-    </div>    
+     
     <br>  
     <div class="content-wrapper">        
         <!-- Main content -->
