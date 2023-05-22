@@ -528,6 +528,8 @@ Mas Del otro proyecto -->
 
         <!-- toogle button -->
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        <!-- highchart para graficos con datatables -->
+        <script src="https://code.highcharts.com/highcharts.js"></script>
 
 <?php  
    require_once("modal/perfil-user.php");
