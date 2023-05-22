@@ -32,18 +32,7 @@
             <h4>Consultar Facturas</h4>    
             </div>   
             <div class="col-lg-4">
-<!--                 <h3>
-                <?php
 
-             /*        require_once("../modelos/ventas.php");
-                    $venta = new Ventas();
-
-                    $tipo = $venta->consulta_estado(); */
-                        
-                    ?>
-                    <input type="button" id="estado" name="estado" onClick="cambiar_moneda('<?php //echo $tipo[0]["tipo"]?>')" label="Moneda">
-               
-                </h3> -->
             </div>
            
         </div>  
@@ -59,22 +48,6 @@
         <div class="content-wrapper">        
             <!-- Main content -->
             <section class="content">
-        
-            
-                <!--
-                <div class="row pt-2 pb-2">
-                    <div class="col-lg-3">
-                        <label>Seleccione modena:</label>      
-                    </div>   
-                    <div class="col-lg-2">
-                        <input type="radio" id="dol" name="moneda" value="dol" checked>
-                        <label for="dol">Reporte en $</label>
-                    </div>
-                    <div class="col-lg-2">
-                        <input type="radio" id="bs" name="moneda" value="bs">
-                        <label for="bs">Reporte en Bs.</label>
-                    </div>
-                </div>   -->
                 
                     <div class="row">
                         <div class="col-md-12">
@@ -86,8 +59,8 @@
                                             <tr>
                                                 <th width="10%">Nro Factura</th>
                                                 <th>Cliente</th>
-                                                <th width="20%">Cedula</th>
-                                                <th width="10%">Tipo Moneda</th>
+                                                <th width="20%">Placa</th>
+                                                <th width="20%">Fecha</th>
                                                 <th width="10%">Ver Factura</th>
                                                 <th width="10%">Anular</th>
                                             </tr>

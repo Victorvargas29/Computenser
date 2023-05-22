@@ -104,7 +104,7 @@ break;
         if ($row["idFactura"]>1) {
           $sub_array = array();
 
-          $est = '';
+ /*          $est = '';
           $atrib = "";
           $atrib_icon = "";
           $titulo="";
@@ -118,7 +118,7 @@ break;
          else{ $est = 'Dolares';
           $atrib = "btn boton-verde btn-md estado";
           $atrib_icon = "fas fa-dollar-sign";
-         }
+         } */
 
 
          $tip = "";
@@ -139,9 +139,9 @@ break;
          
 
         $sub_array[] = '<span>'.$row["idFactura"].'</span> ';
-        $sub_array[] = $row["nombre"];
-        $sub_array[] = $row["cedula"];  //onClick=mostrarFactura('.$row["idFactura"].','.$moneda.')
-        $sub_array[] = '<button title="'.$est.'" type="button" onClick="tipomoneda('.$row["idFactura"].','.$row["tipo_moneda"].');" name="tipo_moneda" id="'.$row["idFactura"].'" class="'.$atrib.'"><i class="'.$atrib_icon.'"></i>'.$titulo.'</button>';
+        $sub_array[] = $row["cedula"]."-".$row["nombre"]." ".$row["apellido"];
+        $sub_array[] = $row["placa"];
+        $sub_array[] = $row["fecha"];
         $sub_array[] = '<button title="Ver" type="button" onClick=mostrarFactura('.$row["idFactura"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';
         $sub_array[] = '<button title="'.$tip.'" type="button" onClick="anulacion('.$row["idFactura"].','.$row["anulado"].')"  id="'.$row["idFactura"].'" class="'.$atrib_clases.'"><i class="'.$atrib_icono.'" aria-hidden="true"></i>'.$titulo2.'</button>';
         

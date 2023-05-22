@@ -1,12 +1,13 @@
 
 
 var tabla;
+var tablaLFact;
 var subTotales =document.getElementById("subTotales");
 
 //funcion q se ejecuta al inicio
 function init(){
 	tasa_dia();	
-	
+	listarfacturas();
 	$("#idVehiculo").selectpicker();
 	$("#form_ventas").on("submit", function(e){
 		registrar(e);
@@ -287,10 +288,10 @@ function actualizarOrden(idOrden){
 
 }
 
-
+//listar facturas
 function listarfacturas(){
 
-	tabla=$('#factura_data').dataTable({  //#usuario_data este es el id de la tabla
+	tablaLFact=$('#factura_data').dataTable({  //#usuario_data este es el id de la tabla
 		"aProcessing":true,//Activamos el procesamiento del datatables
 		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
 		
@@ -347,28 +348,19 @@ function listarfacturas(){
 		}//cierra language
 
 	}).DataTable();
-}//fin funcion listar
+}//fin funcion listar facturas
 
 
 function mostrarFactura(idFactura){
 	$.ajax({
-		
-
 		success:function(data){
 			console.log(idFactura);
-			//window.open("http://demos.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
-
-			
-			window.open("http://projecteg.test/report/facturaPdf.php?idFactura="+idFactura);
-		//	window.open("http://merilara.computenser.com/report/facturaPdf.php?idFactura="+idFactura);
+			window.open("http://teg.test/report/factura.php?idFactura="+idFactura);
 		}
 	});
 
-	$.post("../report/facturaPdf.php",{idFactura : idFactura});
+	$.post("../report/factura.php",{idFactura : idFactura});
 }//fin funcion mostrar
-
-
-
 
 function anulacion(idFactura, anulado){
 if(anulado!=1){
@@ -405,6 +397,5 @@ if(anulado!=1){
 
 }
 }//fin cambiar estado
-
 
 init();

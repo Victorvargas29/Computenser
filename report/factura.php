@@ -202,7 +202,7 @@ label{
                     echo " Bs.";
                   ?></label>
                   <label style="float:right; margin-top: 3.5%" class="" id="subtotal"><?php
-                        echo $subtotal;
+                        echo bcdiv($subtotal,'1',2);
                         ?></label>
               </div>  
           </div>
@@ -247,12 +247,19 @@ $pdf = new DOMPDF($options);
 $pdf->set_paper("letter", "portrait");
 //$pdf->set_paper(array(0,0,104,250));
 
+
 //Fondo o Marca de agua
 $canvas = $pdf->getCanvas();
 $w = $canvas->get_width();
 $h = $canvas->get_height();
 //$imagenUrl = '../public/images/perfil-avatar-mujer-icono-redondo_24640-14042.jpg';
-$imagenUrl = 'formato.png';
+if($factura[0]["anulado"]==1){
+  // Marca de agua anulado
+  $imagenUrl = 'formatoA.png';
+}else{
+  $imagenUrl = 'formato.png';
+}
+
 $imgwidth = 612;
 $imgHeight = 792;
 

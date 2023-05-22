@@ -169,7 +169,11 @@
           
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql = "select * from factura AS f inner join cliente AS c ON f.cedula= c.cedula";
+          $sql = "select f.idFactura, f.fecha, f.anulado, f.numDoc, o.placa, c.cedula, c.nombre, c.apellido 
+           from factura AS f
+           inner join orden AS o ON f.numDoc=o.numDoc
+           join vehiculo as v ON o.placa=v.placa
+           join cliente as c ON v.cedula=c.cedula";
           $sql=$conectar->prepare($sql);
           $sql->execute();
           return $resultado=$sql->fetchAll();
