@@ -184,7 +184,7 @@ label{
                     <tr style="font-size:10pt" class="even_row">
                       <td style="text-align:left"><div><span class=""><?php echo $detalles[$i]["servicio_n"]."--".$detalles[$i]["descripcion"];?></span></div></td>
                       <!-- <td style="text-align:center"><div><span class=""> <?php // echo $orden[$i]["e_nombre"];?></span></div></td> -->
-                      <td style="text-align:center"><div ><span class=""><?php echo $detalles[$i]["precio"];?></span></div></td>
+                      <td style="text-align:right"><div ><span class=""><?php echo $detalles[$i]["precio"];?></span></div></td>
                       
                     </tr>
 
@@ -213,13 +213,13 @@ label{
                         }
                     ?>
                        
-          <div style="float:left">
+     <!--      <div style="float:left">
             <label >A SOLO EFECTO DE LO PREVISTO EN EL ARTICULO 25<BR>
               DE LA LEY DE IMPUESTO DE VALOR AGREGADO SE<BR>
             EXPRESAN LOS MONTOS DE LA ORDEN EN BsS.<BR>
             CALCULADO A LA TASA DE CAMBIO POR BCV DE<BR>
           1 USD POR BsS.</label>
-          </div>
+          </div> -->
 
 
           <div class="">  
@@ -227,7 +227,7 @@ label{
                   <label style="text-align:left" class="Estilo2">TOTAL<?php 
                     echo " Bs.";
                   ?></label>
-                  <label style="float:right; margin-top: 7%" class="" id="subtotal"><?php
+                  <label style="text-align:right; margin-top: 7%" class="" id="subtotal"><?php
                         echo $subtotal;
                         ?></label>
               </div>  
@@ -245,8 +245,6 @@ use Dompdf\Options;
 use Dompdf\FontMetrics;
 // Introducimos HTML de prueba
   
- //$html=file_get_contents_curl("http://computenser.test/computenser/report/factura.php");
-
 $options = new Options();
 $options->set('isPhpEnable','true');
  
@@ -261,8 +259,8 @@ $pdf->set_paper("letter", "portrait");
 $canvas = $pdf->getCanvas();
 $w = $canvas->get_width();
 $h = $canvas->get_height();
-//$imagenUrl = '../public/images/perfil-avatar-mujer-icono-redondo_24640-14042.jpg';
-$imagenUrl = 'formato.png';
+
+$imagenUrl = 'formato_orden.png';
 $imgwidth = 612;
 $imgHeight = 792;
 

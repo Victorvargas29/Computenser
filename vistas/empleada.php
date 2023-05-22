@@ -32,7 +32,7 @@
         
             <div class="row">
                 <div class="col-lg-12">
-            <button class="btn btn-primary" id="add_button" onClick="limpiar()" data-toggle="modal" data-target="#empleadaModal"><i class="fa fa-plus" aria-hidde="true"></i> Nueva Empleada</button>
+            <button class="btn btn-primary" id="add_button" onClick="limpiar()" data-toggle="modal" data-target="#empleadaModal"><i class="fa fa-plus" aria-hidde="true"></i> Nuevo Empleado</button>
             </div>
             </div>
   
