@@ -15,7 +15,16 @@
                     <div class="col-lg-6">
                       <h1 class="col-lg-6 ml-3">Facturación</h1>
                     </div>
+                    <div class="col-lg-3">
+
+                    </div>
+                    <div class="col-lg-3">  
+                        <h4 class="ml-1" id="facturaH3" name="facturaH3"></h4>
+                        <input type="hidden" name="idFactura" id="idFactura" class="form-control"></input>
+
+                    </div> 
                   </div>
+
                   <div class="row"> 
                     <div class="row"> 
                     
@@ -122,8 +131,7 @@
 
                     </div>
                     <div class="col-lg-1">  
-                    <input type="text" name="idFactura" id="idFactura" placeholder="idFactura" class="form-control"></input>
-
+                   
                     </div> 
                   
                     <div class="col-lg-8">

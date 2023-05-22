@@ -16,10 +16,10 @@ function init(){
 		$("#cedula").selectpicker();
 	});
 	$.post("../ajax/ventas.php?op=max",function(data){
-		
-		var idFac='000'+data;
-		idFac=idFac.replace(" ", "");
-		$("#idFactura").val(idFac);
+		var num=data;
+		num=num.replace(" ", "");
+		$("#idFactura").val(num);
+		$("#facturaH3").text("N° Factura: 000"+num);
 		
 	});
 	$.post("../ajax/Servicio.php?op=selectServicio",function(re){
