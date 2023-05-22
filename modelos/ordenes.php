@@ -67,7 +67,18 @@
           $conectar=parent::conectar();
    	    	
 
-          $sql="select * from orden"; 
+          $sql = "select o.numDoc, o.placa, o.estatus, o.fecha,
+          c.cedula, c.nombre AS cliente_nom, c.apellido,  c.direccion, c.telefono,
+          v.placa, v.cedula, v.idColor, v.anno, v.idModelo,
+          mo.idModelo, mo.nombre as modelo_nom, mo.idMarca,
+          ma.idMarca, ma.nombre as marca_nom,
+          co.idColor, co.nombre AS color_nom
+          from orden o
+          JOIN vehiculo v ON v.placa=o.placa
+          INNER JOIN cliente c ON v.cedula=c.cedula
+          INNER JOIN  modelo mo ON v.idModelo=mo.idModelo
+          INNER JOIN marca ma ON ma.idMarca=mo.idMarca
+          INNER JOIN color co ON co.idColor=v.idColor"; 
 
           $sql=$conectar->prepare($sql);
           $sql->execute();

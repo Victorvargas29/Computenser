@@ -31,8 +31,18 @@
             <div class="col-lg-3">
                 <h4>Consultar Ordenes</h4>    
             </div>   
-            <div class="col-lg-4">
+            <div class="col-lg-5">
             </div> 
+            <div class="col-lg-3">
+                <select class="form-control font-weight-bold"  data-width="26rem" required data-live-search="true" data-tokens id="idOpcion" name="idOpcion">
+                    <option value="3"  >Ordenes por Estatus</option>
+                    <option value="1"  >Ordenes por Cliente</option>
+                    <option value="2"  >Ordenes por Vehiculo</option>
+                </select>
+            </div>
+            <div class="col-lg-1">
+                
+            </div>
         </div>   
     </div>
     <div id="content_grafic" class="shadow-lg p-3 mb-5 bg-white">
@@ -42,9 +52,7 @@
         <br>  
         <div class="content-wrapper">        
             <!-- Main content -->
-            <section class="content">
-        
-                
+            <section class="content">              
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box">
@@ -54,6 +62,7 @@
                                         <thead class="text-light" style="background-color: #0e9670;">
                                             <tr>
                                                 <th width="10%">Nro Orden</th>
+                                                <th width="10%">Cliente</th>
                                                 <th width="10%">Placa</th>
                                                 <th width="10%">Estado</th>
                                                 <th width="10%">Ver PDF Orden</th>

@@ -98,6 +98,51 @@ function init(){
 			});
         });
     });
+	$(document).ready(function(){
+        $("#idOpcion").change(function(){
+            $("#idOpcion option:selected").each(function(){
+                idOpcion= $(this).val();
+				tex=$(this).text();
+				$(document).ready(function(){
+					var container = $("#content_grafic");
+					var chart = Highcharts.chart(container[0],{
+						chart:{
+							type:'pie'
+						},
+						title:{
+							text:tex
+						},
+						series:[{
+							data: chartData(tablaO)
+						}]
+					});
+			
+					tablaO.on('draw',function(){
+						chart.series[0].setData(chartData(tablaO));
+					});
+					function chartData(tablaO){
+						var filasAfectadas = {};
+						tablaO.column(idOpcion,{search:'applied'}).data().each(function(val){
+							if(filasAfectadas[val]){
+								filasAfectadas[val] += 1;
+							}else{
+								filasAfectadas[val]= 1;
+							}
+						});
+			
+						return $.map(filasAfectadas, function (cantidad,clave){
+							return{
+								name:clave,
+								y:cantidad
+							};
+						});
+					}
+			
+				});
+				
+			});
+        });
+    });
 	$.post("../ajax/Orden.php?op=max",function(data){
 		var num=data;
 		num=num.replace(" ", "");
@@ -107,42 +152,7 @@ function init(){
 	});
 
 	//grafica de pizza
-	$(document).ready(function(){
-		var container = $("#content_grafic");
-		var chart = Highcharts.chart(container[0],{
-			chart:{
-				type:'pie'
-			},
-			title:{
-				text:'Ordenes Sin Procesar / Facturado'
-			},
-			series:[{
-				data: chartData(tablaO)
-			}]
-		});
-
-		tablaO.on('draw',function(){
-			chart.series[0].setData(chartData(tablaO));
-		});
-		function chartData(tablaO){
-			var filasAfectadas = {};
-			tablaO.column(2,{search:'applied'}).data().each(function(val){
-				if(filasAfectadas[val]){
-					filasAfectadas[val] += 1;
-				}else{
-					filasAfectadas[val]= 1;
-				}
-			});
-
-			return $.map(filasAfectadas, function (cantidad,clave){
-				return{
-					name:clave,
-					y:cantidad
-				};
-			});
-		}
-
-	});
+	
 }
 
 function registrar(event,formu){

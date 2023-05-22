@@ -275,6 +275,7 @@
       foreach ($datos as $row) {
         $sub_array=array();
         $sub_array[] = $row["numDoc"];
+        $sub_array[] = $row["cedula"];
         $sub_array[] = $row["placa"];
         if($row["estatus"]==0){
           $estado="Sin procesar";
