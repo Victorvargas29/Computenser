@@ -247,7 +247,7 @@ function LlenarDetalles(objDetalles){
 
 
 function registrar(e){
-	e.preventDefault();
+	//e.preventDefault();
 	//e.preventDefault(); //No se activará la acción predeterminada del evento
 	var formData = new FormData($("#form_ventas")[0]);
 	//console.log("registrarrrrrr",formData);

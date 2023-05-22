@@ -7,46 +7,46 @@
   <section class="content">
     <section class="formulario-ventas">
     
-          <form action="http://teg.test/report/facturaPdf.php" method="post" class="form-horizontal" id="form_ventas">
+          <form action="http://teg.test/report/factura.php" target="_blank" method="post" class="form-horizontal" id="form_ventas">
             <!--  <form action="http://merilara.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">    
             <form action="http://demos.computenser.com/report/facturaPdf.php" target="_blank" method="post" class="form-horizontal" id="form_compra">-->
-              <div class="container"> <!--container-->
+            <div class="container"> <!--container-->
                   <div class="row pb-1 pt-3">
                     <div class="col-lg-6">
                       <h1 class="col-lg-6 ml-3">Facturación</h1>
                     </div>
                   </div>
                   <div class="row"> 
-                  <div class="row"> 
+                    <div class="row"> 
                     
-                    <div class="row">               
-                      <div class="col">
-                        <div class="row">               
-                            <div class="col-lg-2 ">
-                              <label class="col-form-label ml-4">Cedula:</label>
+                      <div class="row">               
+                        <div class="col">
+                          <div class="row">               
+                              <div class="col-lg-2 ">
+                                <label class="col-form-label ml-4">Cedula:</label>
+                              </div>
+                              <div class="col-lg-10">
+
+                                <select class="form-control font-weight-bold" placeholder="Descripcion" data-width="26rem" required data-live-search="true" data-tokens id="cedula" name="cedula">
+                                
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        <div class="col">
+                          <div class="row">               
+                            <div class="col-lg-2">
+                              <label class="col-form-label ml-3">Vehiculo:</label>
                             </div>
                             <div class="col-lg-10">
-
-                              <select class="form-control font-weight-bold" placeholder="Descripcion" data-width="26rem" required data-live-search="true" data-tokens id="cedula" name="cedula">
-                              
+                                <select class="form-control font-weight-bold"  data-width="26rem" required data-live-search="true" data-tokens id="idVehiculo" name="idVehiculo">
+                                <option value=""  selected disabled>Ingrese la placa </option>
                               </select>
                             </div>
                           </div>
                         </div>
-                      <div class="col">
-                        <div class="row">               
-                          <div class="col-lg-2">
-                            <label class="col-form-label ml-3">Vehiculo:</label>
-                          </div>
-                          <div class="col-lg-10">
-                              <select class="form-control font-weight-bold"  data-width="26rem" required data-live-search="true" data-tokens id="idVehiculo" name="idVehiculo">
-                              <option value=""  selected disabled>Ingrese la placa </option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                  </div>  
-                </div>
+                    </div>  
+                  </div>
               
                 <div class="container">
 
@@ -105,7 +105,7 @@
                                 </table>  
                             </div>
                       
-                        <!--Fin centro -->
+                            <!--Fin centro -->
                         </div><!-- /.box -->
                     </div><!-- /.col -->
                   </div><!-- /.row -->
@@ -127,7 +127,7 @@
                     </div> 
                   
                     <div class="col-lg-8">
-                      <div class="box lg-6">
+                        <div class="box lg-6">
                           <div class="panel-body table-responsive">
                             
                               <table  id="ta" class="table table-striped nowrap" width="100%" id="sub">
@@ -149,17 +149,19 @@
                                   
                                 </tbody>
                               </table>
-                            <div class="boton_registrar">
+                              <div class="boton_registrar">
 
-                              <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Factura</button>
-                          
-                            </div>
+                                <button type="submit" class="btn btn-primary col-lg-offset-10 col-xs-offset-3 "  id="btn_enviar"><i class="" aria-hidden="true"></i>Registrar Factura</button>
+                            
+                              </div>
                       
                           </div> <!-- /.box-body -->
                         </div> <!-- /.box -->            
                     </div> <!-- /col-lg-8 -->
                   </div><!-- /.container -->
-              </div><!-- /container-lg-5 -->
+                </div><!-- /container-lg-5 -->
+            </div><!-- /container-lg-5 -->
+
           </form>
             
     </section>           <!--section formulario ventas-->

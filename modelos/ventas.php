@@ -136,15 +136,32 @@
           return $resultado=$sql->fetchAll();
         }
         
-        public function get_venta_idfactura($idFactura){
+        public function reporte_factura($idFactura){
           
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="select * from factura where idFactura=?";
+          $sql="select f.idFactura, f.fecha, f.tasa,f.anulado,f.numDoc,o.placa, c.cedula,c.nombre,c.apellido,c.direccion,c.telefono
+          from factura f 
+          INNER JOIN orden o ON o.numDoc=f.numDoc 
+          JOIN vehiculo v ON v.placa=o.placa
+          JOIN cliente c ON c.cedula=v.cedula WHERE f.idFactura=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idFactura);
           $sql->execute();
-          return $resultado=$sql->fetchAll();
+          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+
+   	    }
+         public function detalles_reporte_factura($numDoc){
+          
+          $conectar=parent::conectar();
+          //parent::set_names();
+          $sql="select * FROM  ordenservicios os 
+          INNER JOIN servicio s ON os.codeServicio=s.codeServicio 
+          WHERE os.numDoc=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $numDoc);
+          $sql->execute();
+          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 
    	    }
 

@@ -99,10 +99,10 @@ function init(){
         });
     });
 	$.post("../ajax/Orden.php?op=max",function(data){
-		var num='000'+data;
+		var num=data;
 		num=num.replace(" ", "");
 		$("#numDoc").val(num);
-		$("#ordenH3").text("N° Orden: "+num);
+		$("#ordenH3").text("N° Orden: 000"+num);
 		
 	});
 }

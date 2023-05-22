@@ -1,23 +1,23 @@
 <?php
 
 //require_once("../modelos/Clientes.php");
-require_once("../modelos/ordenes.php");
-require_once("../modelos/Servicios.php");
+require_once("../modelos/ventas.php");
+
 
 
 
 //$client = new CLientes();
-$ordenes = new Ordenes();
+$fac = new Ventas();
 //$tipo = $sold->consulta_estado();
 
-if(isset($_POST['numDoc'])){
-  $orden=$ordenes->reporte_orden($_POST["numDoc"]);
-  $detalles=$ordenes->detalles_reporte_orden($_POST["numDoc"]);
-  $numDoc=$_POST["numDoc"];
+if(isset($_POST['idFactura'])){
+  $factura=$fac->reporte_factura($_POST["idFactura"]);
+  $detalles=$fac->detalles_reporte_factura($factura[0]["numDoc"]);
+  $idFactura=$_POST["idFactura"];
 }else{
-  $orden=$ordenes->reporte_orden($_GET["numDoc"]);
-  $detalles=$ordenes->detalles_reporte_orden($_GET["numDoc"]);
-  $numDoc=$_GET["numDoc"];
+  $factura=$fac->reporte_factura($_GET["idFactura"]);
+  $detalles=$fac->detalles_reporte_factura($factura[0]["numDoc"]);
+  $idFactura=$_GET["idFactura"];
 }
 
 $subtotal=0;
@@ -100,25 +100,25 @@ label{
 
   <div > 
             <div class="margen">
-              <label class="Estilo2">Orden N°:</label>
-              <label class="EstiloFactura" id="i"><?php echo "000".$numDoc;?></label>
+              <label class="Estilo2">Factura N°:</label>
+              <label class="EstiloFactura" id="i"><?php echo "000".$idFactura;?></label>
             </div>
 
             <div>
               <div class="" style="display: inline-block">
                 <label class="Estilo3" style="margin-top: 50%">NOMBRE O RAZON SOCIAL:</label>
-                <label id=""><?php echo $orden[0]["cliente_nom"]." ".$orden[0]["apellido"];?></label>
+                <label id=""><?php echo $factura[0]["nombre"]." ".$factura[0]["apellido"];?></label>
               </div>
               <div style="display: inline-block">
                 <label class="Estilo3" style="margin-top: 50%">RIF / CI:</label>
-                <label id=""><?php echo $orden[0]["cedula"]?></label>
+                <label id=""><?php echo $factura[0]["cedula"]?></label>
               </div>
             </div>
             
             <div>
               <div style="display: inline-block">
                 <label class="Estilo3">DOMICILIO FISCAL:</label>
-                <label id=""><?php echo $orden[0]["direccion"]?></label>
+                <label id=""><?php echo $factura[0]["direccion"]?></label>
               </div>
               
             </div>
@@ -126,14 +126,14 @@ label{
             <div>
               <div style="display: inline-block">
                 <label class="Estilo3" style="margin-top: 50%">TELEFONO:</label>
-                <label id=""><?php echo $orden[0]["telefono"]?></label>
+                <label id=""><?php echo $factura[0]["telefono"]?></label>
                 <br/>
               </div>
               <div style="display: inline-block">
                 <label class="Estilo3" style="margin-top: 50%">FECHA:</label>
                 <label id="">
                   <?php
-                    $date = new DateTime($orden[0]["fecha"]);
+                    $date = new DateTime($factura[0]["fecha"]);
                     echo $date->format('d-m-Y h:i a');
                   ?>
                 </label>
@@ -142,49 +142,28 @@ label{
             </div>
             
     </div>
-    <div > 
-      <div class="" style="display: inline-block">
-        <label class="Estilo3" style="margin-top: 50%">PLACA:</label>
-        <label id=""><?php echo $orden[0]["placa"];?></label>
-      </div>
-      <div class="" style="display: inline-block">
-        <label class="Estilo3" style="margin-top: 50%">Vehiculo:</label>
-        <label id=""><?php echo $orden[0]["marca_nom"]." ".$orden[0]["modelo_nom"]." - ".$orden[0]["color_nom"];?></label>
-      </div>
-      <div style="display: inline-block">
-        <label class="Estilo3" style="margin-top: 50%"> Estado de Orden:</label>
-        <label id="">
-          <?php
-            if($orden[0]["estatus"]==1){
-              echo "TERMINADO";
-            }else{
-              echo "EN PROCESO";
-            }
-             
-          ?></label>
-      </div>            
-    </div>
-   
-<table  class="" width="100%" id="">
+    <table  class="" width="100%" id="">
                       <thead>
                         <tr class="Estilo2">
                           
-                          <th class="text-izquierda">CONCEPTO O DESCRIPCION</th>
-                         <!--  <th class="text-derecha">Empleado</th> -->
-                          <th class="text-derecha">PRECIO</th>
+                          <th class="text-izquierda"  width="50%">CONCEPTO O DESCRIPCION</th>
+                          <th class="text-derecha"  width="25%">PRECIO $$</th>
+                          <th class="text-derecha" width="25%">PRECIO Bs</th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php
                       
                       for($i=0;$i<sizeof($detalles);$i++){
-
+                        $subtotal=$subtotal+ (bcdiv($detalles[$i]["precio"]*$factura[0]["tasa"],'1',2));
+                        
                     ?>
 
                     <tr style="font-size:10pt" class="even_row">
-                      <td style="text-align:left"><div><span class=""><?php echo $detalles[$i]["servicio_n"]."--".$detalles[$i]["descripcion"];?></span></div></td>
+                      <td style="text-align:left"><div><span class=""><?php echo $detalles[$i]["nombre"]."--".$detalles[$i]["descripcion"];?></span></div></td>
                       <!-- <td style="text-align:center"><div><span class=""> <?php // echo $orden[$i]["e_nombre"];?></span></div></td> -->
-                      <td style="text-align:right"><div ><span class=""><?php echo $detalles[$i]["precio"];?></span></div></td>
+                      <td style="text-align:right"><div ><span class=""><?php echo bcdiv($detalles[$i]["precio"],'1',2);?></span></div></td>
+                      <td style="text-align:right"><div ><span class=""><?php echo bcdiv($detalles[$i]["precio"]*$factura[0]["tasa"],'1',2);?></span></div></td>
                       
                     </tr>
 
@@ -206,31 +185,42 @@ label{
   </table>
    
 
-                      <?php
-                        for($i=0;$i<sizeof($detalles);$i++){
-
-                          $subtotal=$detalles[$i]["precio"]+$subtotal;
-                        }
-                    ?>
+                      
                        
-     <!--      <div style="float:left">
+          <div style="float:left">
             <label >A SOLO EFECTO DE LO PREVISTO EN EL ARTICULO 25<BR>
               DE LA LEY DE IMPUESTO DE VALOR AGREGADO SE<BR>
             EXPRESAN LOS MONTOS DE LA ORDEN EN BsS.<BR>
             CALCULADO A LA TASA DE CAMBIO POR BCV DE<BR>
           1 USD POR BsS.</label>
-          </div> -->
+          </div>
 
 
-          <div class="totales"  style="position:absolute; top:670; left:110;">  
-             
-            <label style="text-align:left" class="Estilo2">TOTAL<?php 
-              echo " Bs.";
-            ?></label>
-            <label style="text-align:right; margin-top: 2%" class="" id="subtotal">
-              <?php echo $subtotal;?>
-            </label>
-              
+          <div class="">  
+              <div class="totales">
+                  <label style="text-align:left" class="Estilo2">SUB-TOTAL<?php 
+                    echo " Bs.";
+                  ?></label>
+                  <label style="float:right; margin-top: 3.5%" class="" id="subtotal"><?php
+                        echo $subtotal;
+                        ?></label>
+              </div>  
+          </div>
+
+          <div class="totales">
+                <label style="text-align:left" class="Estilo2">IVA 16%</label>
+                <label style="float:right; margin-top: 3.5%" class="" id="iva">
+                  <?php echo bcdiv($subtotal*0.16,'1',2); ?>
+                </label>
+              </div>
+
+              <div class="totales">
+                <label style="text-align:left" class="Estilo2 Estilo3">TOTAL A PAGAR</label>
+                <label style="float:right; margin-top: 3.5%" class="" id="total">
+                <?php echo bcdiv($subtotal*1.16,'1',2);?>
+
+               </label>
+              </div>
           </div>
 
 <?php
@@ -245,6 +235,8 @@ use Dompdf\Options;
 use Dompdf\FontMetrics;
 // Introducimos HTML de prueba
   
+ //$html=file_get_contents_curl("http://computenser.test/computenser/report/factura.php");
+
 $options = new Options();
 $options->set('isPhpEnable','true');
  
@@ -259,8 +251,8 @@ $pdf->set_paper("letter", "portrait");
 $canvas = $pdf->getCanvas();
 $w = $canvas->get_width();
 $h = $canvas->get_height();
-
-$imagenUrl = 'formato_orden.png';
+//$imagenUrl = '../public/images/perfil-avatar-mujer-icono-redondo_24640-14042.jpg';
+$imagenUrl = 'formato.png';
 $imgwidth = 612;
 $imgHeight = 792;
 
@@ -279,6 +271,6 @@ $pdf->load_html($salida_html);;
 $pdf->render();
 
 // Enviamos el fichero PDF al navegador.
-$pdf->stream('Orden000'.$numDoc.'.pdf',array("Attachment"=>0));
+$pdf->stream('Orden000'.$idFactura.'.pdf',array("Attachment"=>0));
 
 ?>
