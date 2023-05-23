@@ -236,7 +236,7 @@
                         </li>
                         <!-- <li class="sidebar-item"> <a id="servi_prestado" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Servicio Prestado</span></a></li> -->
                                                
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Servicios </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Control de Servicios </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item pl-3"><a id="servi" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Servicios </span></a></li>
                             </ul>
@@ -245,7 +245,7 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="empleadas_p" aria-expanded="false"><i class="fas fa-address-card"></i><span class="hide-menu">Empleados</span></a></li>
                         
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" id="clientess" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Clientes</span></a></li>   
-                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Gestion de Vehiculos </span></a>
+                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Control de Vehiculos </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
                             <li class="sidebar-item pl-3"><a id="vehiculo" class="sidebar-link waves-effect waves-dark sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Vehiculos </span></a></li>
                             <li class="sidebar-item pl-3"> <a id="marca" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Marcas</span></a></li>

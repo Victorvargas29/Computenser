@@ -552,6 +552,11 @@ function listarordenes(){
                 target: 6,
                
             },
+			{
+                target: 7,
+                visible: true,
+                searchable: true,
+            },
 
         ],
 		buttons:[
@@ -646,8 +651,40 @@ function listarordenesAnulados(){
 		
 
 	}).DataTable();
-}//fi
+}//fin
 
+function cancelar(numDoc){
+		swal.fire({
+			title: "¿Esta seguro(a) de cancelar la Orden N°: 00"+numDoc+" ...? ¡esta acción es irreversible!",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonText: "Cancelar Orden",
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#ca5939",
+			cancelButtonText: "Cerrar"
+		})
+		.then(result => {
+			 if (result.value) {
+				   $.ajax({
+					url:"../ajax/Orden.php?op=cancelar",
+					method:"POST",
+					data:{numDoc:numDoc},
+	
+					success:function(data){
+				//		$("#resultados_ajax").html(data);
+						$("#orden_data").DataTable().ajax.reload();
+					}
+				});
+	
+			swal.fire(
+			  "Se ha cancelado la Orden N°: "+numDoc,
+	
+			  "¡Aviso!",
+			  "success"
+			);
+		  }
+		});
+	}//cancelar Orden
 
 
 

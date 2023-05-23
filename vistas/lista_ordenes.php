@@ -64,14 +64,14 @@
                                     <table id="orden_data" class="table table-striped table-condensed table-bordered nowrap display" width="100%">
                                         <thead class="text-light" style="background-color: #0e9670;">
                                             <tr>
-                                                <th width="10%">Nro Orden</th>
+                                                <th width="5%">Nro Orden</th>
                                                 <th width="10%">Fecha</th>
                                                 <th width="10%">Fecha Mes</th>
                                                 <th width="10%">Cliente</th>
                                                 <th width="10%">Placa</th>
                                                 <th width="10%">Estado</th>
-                                                <th width="10%">Ver PDF Orden</th>
-                                                
+                                                <th width="5%">Ver PDF</th>
+                                                <th width="5%">Cancelar</th>
                                             </tr>
                                         </thead>
                                         <tbody >       

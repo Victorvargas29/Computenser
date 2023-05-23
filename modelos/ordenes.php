@@ -255,6 +255,15 @@
           // echo intval($sql);
           return $resultado= $sql->fetch(PDO::FETCH_ASSOC);
         }
+        //cancelar orden
+        public function cancelar($numDoc){
+          $conectar = parent::conectar(); 
+
+          $sql="update orden set estatus='2' where numDoc=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$numDoc);
+          $sql->execute();
+        }
         
    }
    

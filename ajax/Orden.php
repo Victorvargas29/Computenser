@@ -279,14 +279,33 @@
         $sub_array[] = $row["fechaM"];
         $sub_array[] = $row["cedula"];
         $sub_array[] = $row["placa"];
+
+        $atrib_icono="";
+        $tip = "";
+        $titulo2="Cancelar";
+        $atrib_clases = "";
+        $disable="";
+
         if($row["estatus"]==0){
+          $tip = "¿Cancelar orden?";
+          $atrib_clases = "btn btn-danger btn-md estado";
           $estado="Sin procesar";
+        }else if($row["estatus"]==1){
+          $tip = "Esta orden se facturo";
+         // $titulo2="Facturada";
+         $disable='disabled="disabled"';
+          $atrib_clases = "btn btn-success disabled btn-md estado";
+          $estado="Facturada";
         }else{
-          $estado="Facturado";
+          $disable='disabled="disabled"';
+          $atrib_clases = "btn btn-success disabled btn-md estado";
+          //$titulo2="Orden Cancelada";
+          $estado="Cancelada";
         }
+        
         $sub_array[] = $estado;
         $sub_array[] = '<button title="Ver" type="button" onClick=mostrarOrden('.$row["numDoc"].') id="" class="btn btn-success btn-md"><i class="fas fa-eye" aria-hidden="true"></i></button>';  
-        
+        $sub_array[] = '<button '.$disable.' title="'.$tip.'" type="button" onClick="cancelar('.$row["numDoc"].')"  id="'.$row["numDoc"].'" class="'.$atrib_clases.'"><i class="'.$atrib_icono.'" aria-hidden="true"></i>'.$titulo2.'</button>';
         $data[]=$sub_array;    
       }
         $results=array(
@@ -302,5 +321,10 @@
   
             $rr=$ordenes->cambiarEstado($_POST["idOrden"]);
             echo $rr;
+      break;
+      
+      case "cancelar":
+  
+        $rr=$ordenes->cancelar($_POST["numDoc"]);
       break;
 }
