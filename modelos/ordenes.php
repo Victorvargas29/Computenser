@@ -220,18 +220,28 @@
           $sql->execute();
           return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }
-        public function detalles_reporte_orden($numDoc){
 
+        public function detalles_reporte_orden($numDoc){
           $conectar = parent::conectar();      
- /*   INNER JOIN empleadoservicios es ON os.ordenServicio=es.ordenServicio
-          INNER JOIN empleada e ON es.cedula=e.cedula */
           $sql = "select os.ordenServicio, os.codeServicio, os.descripcion, os.precio,
           s.codeServicio, s.nombre as servicio_n
-          from ordenservicios os     
+          from ordenservicios os
           INNER JOIN servicio s ON os.codeServicio=s.codeServicio
           WHERE os.numDoc=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $numDoc);
+          $sql->execute();
+          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        public function empleados_por_servicios($ordenServicio){
+          $conectar = parent::conectar();      
+          $sql = "select es.cedula, e.nombre as e_nombre
+          from empleadoservicios es
+          INNER JOIN empleada e ON e.cedula=es.cedula
+          WHERE es.ordenServicio=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $ordenServicio);
           $sql->execute();
           return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }

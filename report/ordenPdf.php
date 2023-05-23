@@ -104,6 +104,8 @@ label{
               <label class="EstiloFactura" id="i"><?php echo "000".$numDoc;?></label>
             </div>
 
+            <div></div>
+
             <div>
               <div class="" style="display: inline-block">
                 <label class="Estilo3" style="margin-top: 50%">NOMBRE O RAZON SOCIAL:</label>
@@ -134,7 +136,7 @@ label{
                 <label id="">
                   <?php
                     $date = new DateTime($orden[0]["fecha"]);
-                    echo $date->format('d-m-Y h:i a');
+                    echo $date->format('d-m-Y - h:i a');
                   ?>
                 </label>
               </div>
@@ -149,16 +151,18 @@ label{
       </div>
       <div class="" style="display: inline-block">
         <label class="Estilo3" style="margin-top: 50%">Vehiculo:</label>
-        <label id=""><?php echo $orden[0]["marca_nom"]." ".$orden[0]["modelo_nom"]." - ".$orden[0]["color_nom"];?></label>
+        <label id=""><?php echo $orden[0]["marca_nom"]." - ".$orden[0]["modelo_nom"]." - ".$orden[0]["color_nom"];?></label>
       </div>
       <div style="display: inline-block">
         <label class="Estilo3" style="margin-top: 50%"> Estado de Orden:</label>
         <label id="">
           <?php
             if($orden[0]["estatus"]==1){
-              echo "Facturado";
-            }else{
+              echo "Facturada";
+            }else if($orden[0]["estatus"]==0){
               echo "Sin procesar";
+            }else{
+              echo "Cancelada";
             }
              
           ?></label>
@@ -171,7 +175,7 @@ label{
                           
                           <th class="text-izquierda">CONCEPTO O DESCRIPCION</th>
                          <!--  <th class="text-derecha">Empleado</th> -->
-                          <th class="text-derecha">PRECIO</th>
+                          <th class="text-derecha">PRECIO $</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -182,9 +186,22 @@ label{
                     ?>
 
                     <tr style="font-size:10pt" class="even_row">
-                      <td style="text-align:left"><div><span class=""><?php echo $detalles[$i]["servicio_n"]."--".$detalles[$i]["descripcion"];?></span></div></td>
-                      <!-- <td style="text-align:center"><div><span class=""> <?php // echo $orden[$i]["e_nombre"];?></span></div></td> -->
-                      <td style="text-align:right"><div ><span class=""><?php echo $detalles[$i]["precio"];?></span></div></td>
+                      <td style="text-align:left"><div><span class=""><?php echo $detalles[$i]["servicio_n"]." - ".$detalles[$i]["descripcion"];?></span></div></td>
+                    
+                      <?php
+                    $empleados=$ordenes->empleados_por_servicios($detalles[$i]["ordenServicio"]); 
+                    for($i=0;$i<sizeof($empleados);$i++){
+                    ?>
+                    <tr style="font-size:10pt" class="even_row">
+
+                    <td style="text-align:center"><div><span class=""> <?php
+                       
+                      
+                       echo $empleados[$i]["e_nombre"];?></span></div></td>
+                    <?php } ?>
+                    </tr>
+
+                      <td style="text-align:right"><div ><span class=""><?php echo bcdiv($detalles[$i]["precio"],'1',2);?></span></div></td>
                       
                     </tr>
 
@@ -224,11 +241,9 @@ label{
 
           <div class="totales"  style="position:absolute; top:670; left:110;">  
              
-            <label style="text-align:left" class="Estilo2">TOTAL<?php 
-              echo " Bs.";
-            ?></label>
+            <label style="text-align:left" class="Estilo2">TOTAL $:</label>
             <label style="text-align:right; margin-top: 2%" class="" id="subtotal">
-              <?php echo $subtotal;?>
+              <?php echo bcdiv($subtotal,'1',2);?>
             </label>
               
           </div>

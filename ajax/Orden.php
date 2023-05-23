@@ -275,7 +275,8 @@
       foreach ($datos as $row) {
         $sub_array=array();
         $sub_array[] = $row["numDoc"];
-        $sub_array[] = $row["fecha"];
+        $date = new DateTime($row["fecha"]);
+        $sub_array[] =$date->format('d-m-Y - h:i a');
         $sub_array[] = $row["fechaM"];
         $sub_array[] = $row["cedula"];
         $sub_array[] = $row["placa"];
@@ -291,7 +292,7 @@
           $atrib_clases = "btn btn-danger btn-md estado";
           $estado="Sin procesar";
         }else if($row["estatus"]==1){
-          $tip = "Esta orden se facturo";
+          $tip = "Esta orden se facturó";
          // $titulo2="Facturada";
          $disable='disabled="disabled"';
           $atrib_clases = "btn btn-success disabled btn-md estado";
@@ -299,6 +300,7 @@
         }else{
           $disable='disabled="disabled"';
           $atrib_clases = "btn btn-success disabled btn-md estado";
+          $tip = "Esta orden se cancelo";
           //$titulo2="Orden Cancelada";
           $estado="Cancelada";
         }
