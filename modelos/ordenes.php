@@ -67,7 +67,7 @@
           $conectar=parent::conectar();
    	    	
 
-          $sql = "select o.numDoc, o.placa, o.estatus, o.fecha,
+          $sql = "select o.numDoc, o.placa, o.estatus, MONTHNAME(o.fecha) AS fechaM, o.fecha,
           c.cedula, c.nombre AS cliente_nom, c.apellido,  c.direccion, c.telefono,
           v.placa, v.cedula, v.idColor, v.anno, v.idModelo,
           mo.idModelo, mo.nombre as modelo_nom, mo.idMarca,

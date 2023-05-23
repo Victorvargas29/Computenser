@@ -102,44 +102,8 @@ function init(){
         $("#idOpcion").change(function(){
             $("#idOpcion option:selected").each(function(){
                 idOpcion= $(this).val();
-				tex=$(this).text();
-				$(document).ready(function(){
-					var container = $("#content_grafic");
-					var chart = Highcharts.chart(container[0],{
-						chart:{
-							type:'pie'
-						},
-						title:{
-							text:tex
-						},
-						series:[{
-							data: chartData(tablaO)
-						}]
-					});
-			
-					tablaO.on('draw',function(){
-						chart.series[0].setData(chartData(tablaO));
-					});
-					function chartData(tablaO){
-						var filasAfectadas = {};
-						tablaO.column(idOpcion,{search:'applied'}).data().each(function(val){
-							if(filasAfectadas[val]){
-								filasAfectadas[val] += 1;
-							}else{
-								filasAfectadas[val]= 1;
-							}
-						});
-			
-						return $.map(filasAfectadas, function (cantidad,clave){
-							return{
-								name:clave,
-								y:cantidad
-							};
-						});
-					}
-			
-				});
-				
+				text=$(this).text();
+				grafica(idOpcion,text);
 			});
         });
     });
@@ -153,6 +117,45 @@ function init(){
 
 	//grafica de pizza
 	
+}
+function grafica(idOpcion,text) {
+
+	$(document).ready(function(){
+		var container = $("#content_grafic");
+		var chart = Highcharts.chart(container[0],{
+			chart:{
+				type:'pie'
+			},
+			title:{
+				text:text
+			},
+			series:[{
+				data: chartData(tablaO)
+			}]
+		});
+
+		tablaO.on('draw',function(){
+			chart.series[0].setData(chartData(tablaO));
+		});
+		function chartData(tablaO){
+			var filasAfectadas = {};
+			tablaO.column(idOpcion,{search:'applied'}).data().each(function(val){
+				if(filasAfectadas[val]){
+					filasAfectadas[val] += 1;
+				}else{
+					filasAfectadas[val]= 1;
+				}
+			});
+
+			return $.map(filasAfectadas, function (cantidad,clave){
+				return{
+					name:clave,
+					y:cantidad
+				};
+			});
+		}
+
+	});	
 }
 
 function registrar(event,formu){
@@ -514,10 +517,43 @@ function cancelarOrden() {
 function listarordenes(){
 
 	tablaO=$('#orden_data').dataTable({  
-		"aProcessing":true,//Activamos el procesamiento del datatables
-		"aServerSide":true,//Paginacion y filtrado realizados por el servidor
+		
 		
 		dom:'Bfrtilp',//Definimos los elementos del control de tabla
+		columns: [
+            {
+                target: 0,
+                visible: true,
+                searchable: true,
+            },
+            {
+                target: 1,
+                visible: true,
+            },
+			{
+                target: 2,
+                visible: false,
+                searchable: false,
+            },
+            {
+                target: 3,
+                visible: true,
+            },
+			{
+                target: 4,
+                visible: true,
+            },
+			{
+                target: 5,
+                visible: true,
+                searchable: true,
+            },
+            {
+                target: 6,
+               
+            },
+
+        ],
 		buttons:[
 	    	//Botón para PDF
 	    	{
@@ -529,8 +565,10 @@ function listarordenes(){
 	        className: 'btn btn-danger'
 	      	}
 		],
+		
 		"ajax":
 		{
+			
 			url:'../ajax/Orden.php?op=listarordenes',
 			type: "get",
 			datatype: "json",
@@ -538,39 +576,77 @@ function listarordenes(){
 				console.log(e.responseText);
 			}
 		},
-		"bDestroy":true,
-		"responsive":true,
-		"bInfo":true,
-		"iDisplayLength":10,//por cada 10 reg hace una paginacion
-		"order":[[0,"desc"]],//Ordenar(Columna, Orden)
-
-		"language":{
-			"sProcessing": "Procesando...",
-			"sLengthMenu": "Mostrar _MENU_ registro",
-			"sZeroRecords": "No se encontraron resultados",
-			"sEmptyTable": "Ningun dato disponible en esta tabla",
-			"sInfo": "Mostrando un total de _TOTAL_ registros",
-			"sInfoEmpty": "Mostrando un total de 0 registros",
-			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix": "",
-			"sSearch": "Buscar",
-			"sUrl": "",
-			"sInfoThousands": "",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate":{
-				"sFirst": "Primero",
-				"sLast": "Ultimo",
-				"sNext": "Siguiente",
-				"sPrevious": "Anterior"
-			},
-			"oAria":{
-				"sSortAscending": ": Activar para ordenar la columna",
-				"sSortDescending": ": Activar para ordenar la columna"
-			}
-		}//cierra language
+		
 
 	}).DataTable();
 }//fin funcion listar
+
+function listarordenesAnulados(){
+
+	tablaO=$('#orden_data').dataTable({  
+		
+		
+		dom:'Bfrtilp',//Definimos los elementos del control de tabla
+		columns: [
+            {
+                target: 0,
+                visible: true,
+                searchable: true,
+            },
+            {
+                target: 1,
+                visible: true,
+            },
+			{
+                target: 2,
+                visible: false,
+                searchable: false,
+            },
+            {
+                target: 3,
+                visible: true,
+            },
+			{
+                target: 4,
+                visible: true,
+            },
+			{
+                target: 5,
+                visible: true,
+                searchable: true,
+            },
+            {
+                target: 6,
+               
+            },
+
+        ],
+		buttons:[
+	    	//Botón para PDF
+	    	{
+	        extend: 'pdfHtml5',
+	        //footer: true,
+	       	text:'<i class="fas fa-file-pdf"></i>',
+	        titleAttr: 'Exportar a PDF',
+	        //filename: 'Export_File_pdf',
+	        className: 'btn btn-danger'
+	      	}
+		],
+		
+		"ajax":
+		{
+			
+			url:'../ajax/Orden.php?op=listarordenes',
+			type: "get",
+			datatype: "json",
+			error: function(e){
+				console.log(e.responseText);
+			}
+		},
+		
+
+	}).DataTable();
+}//fi
 
 
 

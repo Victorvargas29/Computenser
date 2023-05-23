@@ -275,6 +275,8 @@
       foreach ($datos as $row) {
         $sub_array=array();
         $sub_array[] = $row["numDoc"];
+        $sub_array[] = $row["fecha"];
+        $sub_array[] = $row["fechaM"];
         $sub_array[] = $row["cedula"];
         $sub_array[] = $row["placa"];
         if($row["estatus"]==0){

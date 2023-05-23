@@ -35,9 +35,12 @@
             </div> 
             <div class="col-lg-3">
                 <select class="form-control font-weight-bold"  data-width="26rem" required data-live-search="true" data-tokens id="idOpcion" name="idOpcion">
-                    <option value="3"  >Ordenes por Estatus</option>
-                    <option value="1"  >Ordenes por Cliente</option>
-                    <option value="2"  >Ordenes por Vehiculo</option>
+                    <option value="2"  >Buscar por Mes</option>
+                    <option value="3"  >Buscar por Cliente</option>
+                    <option value="4"  >Buscar por Vehiculo</option>
+                    <option value="5"  >Buscar por Estatus</option>
+
+                    
                 </select>
             </div>
             <div class="col-lg-1">
@@ -58,10 +61,12 @@
                             <div class="box">
                                 <div class="panel-body table-responsive">   
                                <!--  <form action="" target="" method="post" class="form-horizontal" id="form_orden">  -->    
-                                    <table id="orden_data" class="table table-striped table-condensed table-bordered nowrap" width="100%">
+                                    <table id="orden_data" class="table table-striped table-condensed table-bordered nowrap display" width="100%">
                                         <thead class="text-light" style="background-color: #0e9670;">
                                             <tr>
                                                 <th width="10%">Nro Orden</th>
+                                                <th width="10%">Fecha</th>
+                                                <th width="10%">Fecha Mes</th>
                                                 <th width="10%">Cliente</th>
                                                 <th width="10%">Placa</th>
                                                 <th width="10%">Estado</th>
