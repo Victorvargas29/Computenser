@@ -134,7 +134,7 @@ label{
                 <label id="">
                   <?php
                     $date = new DateTime($factura[0]["fecha"]);
-                    echo $date->format('d-m-Y h:i a');
+                    echo $date->format('d-m-Y - h:i a');
                   ?>
                 </label>
               </div>
@@ -142,12 +142,23 @@ label{
             </div>
             
     </div>
+    <div > 
+      <div class="" style="display: inline-block">
+        <label class="Estilo3" style="margin-top: 50%">PLACA:</label>
+        <label id=""><?php echo $factura[0]["placa"];?></label>
+      </div>
+      <div class="" style="display: inline-block">
+        <label class="Estilo3" style="margin-top: 50%">Vehiculo:</label>
+        <label id=""><?php echo $factura[0]["marca_nom"]." - ".$factura[0]["modelo_nom"]." - ".$factura[0]["color_nom"];?></label>
+      </div>
+          
+  </div>
     <table  class="" width="100%" id="">
                       <thead>
                         <tr class="Estilo2">
                           
                           <th class="text-izquierda"  width="50%">CONCEPTO O DESCRIPCION</th>
-                          <th class="text-derecha"  width="25%">PRECIO $$</th>
+                         <!--  <th class="text-derecha"  width="25%">PRECIO $$</th> -->
                           <th class="text-derecha" width="25%">PRECIO Bs</th>
                         </tr>
                       </thead>
@@ -160,10 +171,14 @@ label{
                     ?>
 
                     <tr style="font-size:10pt" class="even_row">
-                      <td style="text-align:left"><div><span class=""><?php echo $detalles[$i]["nombre"]."--".$detalles[$i]["descripcion"];?></span></div></td>
+                      <td style="text-align:left"><div><span class=""><?php echo $detalles[$i]["nombre"]." - ".$detalles[$i]["descripcion"];?></span></div></td>
                       <!-- <td style="text-align:center"><div><span class=""> <?php // echo $orden[$i]["e_nombre"];?></span></div></td> -->
-                      <td style="text-align:right"><div ><span class=""><?php echo bcdiv($detalles[$i]["precio"],'1',2);?></span></div></td>
-                      <td style="text-align:right"><div ><span class=""><?php echo bcdiv($detalles[$i]["precio"]*$factura[0]["tasa"],'1',2);?></span></div></td>
+                    <!--   <td style="text-align:right"><div ><span class=""><?php // echo bcdiv($detalles[$i]["precio"],'1',2);?></span></div></td> -->
+                      <td style="text-align:right"><div ><span class=""><?php 
+                      //echo bcdiv($detalles[$i]["precio"]*$factura[0]["tasa"],'1',2);
+                      echo number_format(bcdiv($detalles[$i]["precio"]*$factura[0]["tasa"],'1',2),2,",", "."); 
+                      //number_format($numero, 2, ",", ".") number format ejemplo
+                      ?></span></div></td>
                       
                     </tr>
 
@@ -190,7 +205,7 @@ label{
           <div style="float:left">
             <label >A SOLO EFECTO DE LO PREVISTO EN EL ARTICULO 25<BR>
               DE LA LEY DE IMPUESTO DE VALOR AGREGADO SE<BR>
-            EXPRESAN LOS MONTOS DE LA ORDEN EN BsS.<BR>
+            EXPRESAN LOS MONTOS DE LA FACTURA EN BsS.<BR>
             CALCULADO A LA TASA DE CAMBIO POR BCV DE<BR>
           1 USD POR BsS.</label>
           </div>
@@ -202,7 +217,7 @@ label{
                     echo " Bs.";
                   ?></label>
                   <label style="float:right; margin-top: 3.5%" class="" id="subtotal"><?php
-                        echo bcdiv($subtotal,'1',2);
+                        echo number_format(bcdiv($subtotal,'1',2),2,",", ".");
                         ?></label>
               </div>  
           </div>
@@ -210,14 +225,14 @@ label{
           <div class="totales">
                 <label style="text-align:left" class="Estilo2">IVA 16%</label>
                 <label style="float:right; margin-top: 3.5%" class="" id="iva">
-                  <?php echo bcdiv($subtotal*0.16,'1',2); ?>
+                  <?php echo number_format(bcdiv($subtotal*0.16,'1',2),2,",", "."); ?>
                 </label>
               </div>
 
               <div class="totales">
                 <label style="text-align:left" class="Estilo2 Estilo3">TOTAL A PAGAR</label>
                 <label style="float:right; margin-top: 3.5%" class="" id="total">
-                <?php echo bcdiv($subtotal*1.16,'1',2);?>
+                <?php echo number_format(bcdiv($subtotal*1.16,'1',2),2,",", ".");?>
 
                </label>
               </div>

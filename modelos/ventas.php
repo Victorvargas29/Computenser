@@ -140,10 +140,18 @@
           
           $conectar=parent::conectar();
           //parent::set_names();
-          $sql="select f.idFactura, f.fecha, f.tasa,f.anulado,f.numDoc,o.placa, c.cedula,c.nombre,c.apellido,c.direccion,c.telefono
+          $sql="select f.idFactura, f.fecha, f.tasa,f.anulado,f.numDoc,
+          o.placa, c.cedula,c.nombre,c.apellido,c.direccion,c.telefono,
+          v.placa, v.cedula, v.idColor, v.anno, v.idModelo,
+          mo.idModelo, mo.nombre as modelo_nom, mo.idMarca,
+          ma.idMarca, ma.nombre as marca_nom,
+          co.idColor, co.nombre AS color_nom
           from factura f 
-          INNER JOIN orden o ON o.numDoc=f.numDoc 
+          INNER JOIN orden o ON o.numDoc=f.numDoc
           JOIN vehiculo v ON v.placa=o.placa
+          INNER JOIN  modelo mo ON v.idModelo=mo.idModelo
+          INNER JOIN marca ma ON ma.idMarca=mo.idMarca
+          INNER JOIN color co ON co.idColor=v.idColor 
           JOIN cliente c ON c.cedula=v.cedula WHERE f.idFactura=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $idFactura);
