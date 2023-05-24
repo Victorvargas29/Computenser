@@ -179,47 +179,57 @@ label{
                         </tr>
                       </thead>
                       <tbody>
+                        <?php
+                        
+                          for($i=0;$i<sizeof($detalles);$i++){
+
+                        ?>
+
+                          <tr style="font-size:10pt" class="even_row">
+                            <td style="text-align:left"><div><span class=""><?php echo $detalles[$i]["servicio_n"]." - ".$detalles[$i]["descripcion"];?></span></div></td>
+                            <td style="text-align:right; font-size:12px"><div ><span class=""><?php echo bcdiv($detalles[$i]["precio"],'1',2);?></span></div></td>
+                            <tr style="font-size:10pt" class="even_row">
+                             <td style="text-align:letf">
+                             
+                          <?php
+                              echo "Empleado: ";
+                              $empleados=$ordenes->empleados_por_servicios($detalles[$i]["ordenServicio"]); 
+                              for($j=0;$j<sizeof($empleados);$j++){
+                          ?>
+                               
+                                    <?php
+                                    if ($j==0) {
+                                      echo $empleados[$j]["e_nombre"];
+                                    } else {
+                                      echo ", ".$empleados[$j]["e_nombre"];
+                                    }
+ 
+                                    ?>
+                                 
+                          <?php 
+                            } 
+                          ?>
+                         </td>
+                        </tr>
+
+                          
+                        </tr>
+
+                          <?php
+                            }
+                        for($i=0;$i<20-sizeof($detalles);$i++){
+                        ?>
+
+                          <tr style="" >
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          </tr>
                       <?php
-                      
-                      for($i=0;$i<sizeof($detalles);$i++){
-
-                    ?>
-
-                    <tr style="font-size:10pt" class="even_row">
-                      <td style="text-align:left"><div><span class=""><?php echo $detalles[$i]["servicio_n"]." - ".$detalles[$i]["descripcion"];?></span></div></td>
-                    
-                      <?php
-                    $empleados=$ordenes->empleados_por_servicios($detalles[$i]["ordenServicio"]); 
-                    for($i=0;$i<sizeof($empleados);$i++){
-                    ?>
-                    <tr style="font-size:10pt" class="even_row">
-
-                    <td style="text-align:center"><div><span class=""> <?php
-                       
-                      
-                       echo $empleados[$i]["e_nombre"];?></span></div></td>
-                    <?php } ?>
-                    </tr>
-
-                      <td style="text-align:right"><div ><span class=""><?php echo bcdiv($detalles[$i]["precio"],'1',2);?></span></div></td>
-                      
-                    </tr>
-
-                    <?php
-                      }
-                   for($i=0;$i<20-sizeof($detalles);$i++){
-                   ?>
-
-                    <tr style="" >
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                    </tr>
-                <?php
-                   }
-                ?>
-                      </tbody>
+                        }
+                      ?>
+                    </tbody>
   </table>
    
 
