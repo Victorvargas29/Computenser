@@ -113,6 +113,54 @@ require_once("../modelos/Servicios.php");
             }
 
    		    break;
+
+			   case "listarservicios":
+      
+				$datos = $servicio->listarservicios();
+				$data = array();
+				foreach ($datos as $row) {
+				  $sub_array=array();
+				  $sub_array[]=$row["nombre"];
+				  $sub_array[]=$row["precio"];
+				  $sub_array[]=$row["Mes"];
+				  $sub_array[]=$row["cedula"].''.$row["nombreE"];
+				  
+
+		  
+				 $data[]=$sub_array;    
+				}
+				  $results=array(
+					"sEcho"=>1,
+					"iTotalRecords"=>count($data),
+					"iTotalDisplayRecords"=>count($data),
+					"aaData"=>$data
+					);
+				  echo json_encode($results);
+			  break;
+
+			  case "listarserviciosO":
+      
+				$datos = $servicio->listarserviciosO();
+				$data = array();
+				foreach ($datos as $row) {
+				  $sub_array=array();
+				  $sub_array[]=$row["nombre"];
+				  $sub_array[]=$row["precio"];
+				  $sub_array[]=$row["Mes"];
+				  $sub_array[]=$row["cedula"].''.$row["nombreE"];
+				  
+
+		  
+				 $data[]=$sub_array;    
+				}
+				  $results=array(
+					"sEcho"=>1,
+					"iTotalRecords"=>count($data),
+					"iTotalDisplayRecords"=>count($data),
+					"aaData"=>$data
+					);
+				  echo json_encode($results);
+			  break;
    	}
 
  ?>

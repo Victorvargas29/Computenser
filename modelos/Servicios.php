@@ -16,12 +16,46 @@
 
             return $sql->rowCount();
 		}
-
+    
 		public function get_servicio(){
 
         	$conectar = parent::conectar();
        
        		$sql = "select s.codeServicio, s.nombre as nombre, s.precio from servicio s";
+
+        	$sql=$conectar->prepare($sql);
+
+        	$sql->execute();
+
+        	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        public function listarservicios(){
+
+        	$conectar = parent::conectar();
+       
+       		$sql = "select s.codeServicio, s.nombre, s.precio, e.cedula, e.nombre AS nombreE, MONTHNAME(o.fecha) AS Mes
+           FROM ordenservicios os INNER JOIN servicio s ON os.codeServicio=s.codeServicio INNER JOIN empleadoservicios es ON es.ordenServicio=os.ordenServicio INNER JOIN empleada e ON es.cedula=e.cedula INNER JOIN  orden o ON o.numDoc=os.numDoc  WHERE o.estatus='1'
+           
+           ORDER BY Mes DESC
+           LIMIT 0 ,509";
+
+        	$sql=$conectar->prepare($sql);
+
+        	$sql->execute();
+
+        	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function listarserviciosO(){
+
+        	$conectar = parent::conectar();
+       
+       		$sql = "select s.codeServicio, s.nombre, s.precio, e.cedula, e.nombre AS nombreE, MONTHNAME(o.fecha) AS Mes
+           FROM ordenservicios os INNER JOIN servicio s ON os.codeServicio=s.codeServicio INNER JOIN empleadoservicios es ON es.ordenServicio=os.ordenServicio INNER JOIN empleada e ON es.cedula=e.cedula INNER JOIN  orden o ON o.numDoc=os.numDoc
+           
+           ORDER BY Mes DESC
+           LIMIT 0 ,509";
 
         	$sql=$conectar->prepare($sql);
 
