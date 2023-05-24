@@ -205,9 +205,9 @@ $(document).ready(function(){
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
 		});
 	});
-	$("#reportes_presupuestos").click(function(){
+	$("#reportes_servicio").click(function(){
 		$.ajax({
-		url:'../vistas/lista_presupuestos.php',
+		url:'../vistas/lista_servicio_prestado.php',
 		method: "POST",
 		success: function(res){ $("#seccion1").html(res); },
 		error: function(err){ $("#seccion1").html("pagina vista/cursos.php no found");}
